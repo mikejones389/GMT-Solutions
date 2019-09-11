@@ -1,5 +1,5 @@
 package principal;
-	
+//ANdrÃ© passou por aqui. 	
 import java.awt.Button;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -36,7 +36,7 @@ import javax.swing.JTextField;
 		
 		
 		
-		//Método CadastroLivros
+		//Mï¿½todo CadastroLivros
 		public CadastroLivroView() {
 			//Titulo da Janela
 			super("Cadastro de Livros");
@@ -46,7 +46,7 @@ import javax.swing.JTextField;
 			
 			//Funcao criarFormulario
 			private void criarFormulario() {
-				//Configuração da estrutura do layout
+				//Configuraï¿½ï¿½o da estrutura do layout
 				setLayout(new GridBagLayout());
 				GridBagConstraints gbc = new GridBagConstraints();
 				gbc.weightx=0.1;
@@ -62,7 +62,7 @@ import javax.swing.JTextField;
 				gbc.anchor = GridBagConstraints.NORTH;
 				add(titulo,gbc);
 				
-				JLabel cdFornecedorLabel = new JLabel ("Código do Fornecedor");
+				JLabel cdFornecedorLabel = new JLabel ("Cï¿½digo do Fornecedor");
 				cdFornecedorLabel.setFont(new Font("Arial", Font.BOLD, 16));
 				gbc.gridx=0;
 				gbc.gridy=1;
@@ -131,7 +131,7 @@ import javax.swing.JTextField;
 				gbc.anchor = GridBagConstraints.LINE_START;
 				add(editoraField, gbc);
 				
-				JLabel generoLabel = new JLabel ("Gênero");
+				JLabel generoLabel = new JLabel ("Gï¿½nero");
 				generoLabel.setFont(new Font("Arial", Font.BOLD, 16));
 				gbc.gridx=0;
 				gbc.gridy=5;
@@ -148,7 +148,7 @@ import javax.swing.JTextField;
 				gbc.anchor = GridBagConstraints.LINE_START;
 				add(generoField, gbc);
 				
-				JLabel anoLabel = new JLabel ("Ano de Lançamento");
+				JLabel anoLabel = new JLabel ("Ano de Lanï¿½amento");
 				anoLabel.setFont(new Font("Arial", Font.BOLD, 16));
 				gbc.gridx=0;
 				gbc.gridy=6;
@@ -165,7 +165,7 @@ import javax.swing.JTextField;
 				gbc.anchor = GridBagConstraints.LINE_START;
 				add(anoField, gbc);
 				
-				JLabel edicaoLabel = new JLabel ("Edição");
+				JLabel edicaoLabel = new JLabel ("Ediï¿½ï¿½o");
 				edicaoLabel.setFont(new Font("Arial", Font.BOLD, 16));
 				gbc.gridx=0;
 				gbc.gridy=7;
@@ -182,7 +182,7 @@ import javax.swing.JTextField;
 				gbc.anchor = GridBagConstraints.LINE_START;
 				add(edicaoField, gbc);
 				
-				JLabel precoVendaLabel = new JLabel ("Preço de Venda");
+				JLabel precoVendaLabel = new JLabel ("Preï¿½o de Venda");
 				precoVendaLabel.setFont(new Font("Arial", Font.BOLD, 16));
 				gbc.gridx=0;
 				gbc.gridy=8;
@@ -239,19 +239,19 @@ import javax.swing.JTextField;
 				System.out.print("Editora: ");
 				System.out.println(editora);
 				genero = generoField.getText();
-				System.out.print("Gênero: ");
+				System.out.print("Gï¿½nero: ");
 				System.out.println(genero);
 				//anoLivro = anoField.get();
 				System.out.print("Ano: ");
 				System.out.println(anoLivro);
 				//edicao = edicaoField.get();
-				System.out.print("Edição: ");
+				System.out.print("Ediï¿½ï¿½o: ");
 				System.out.println(edicao);
 				//precoVenda = precoVendaField.get();
-				System.out.print("Preço de Venda: ");
+				System.out.print("Preï¿½o de Venda: ");
 				System.out.println(precoVenda);
 				//cdFornecedor = cdFornecedorField.get();
-				System.out.print("Código do Fornecedor: ");
+				System.out.print("Cï¿½digo do Fornecedor: ");
 				System.out.println(cdFornecedor);
 				
 				nomeLivroField.setText(" ");
