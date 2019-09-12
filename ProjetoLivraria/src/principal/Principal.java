@@ -15,8 +15,8 @@ public class Principal extends JFrame{
 		bdd.conectar();
 		if(bdd.estaConectado()) {
 			System.out.println("CONECTADO");
-			bdd.listarContatos();
-			//bdd.inserirLivro(1,"ddddd", "dsafdsa", "dasfadsf", "dsagasgs", 2002, 1, 10.00, 10, 3, "hp10.jpg");
+			//bdd.listarContatos();
+			bdd.inserirLivro(1,"ddddd", "dsafdsa", "dasfadsf", "dsagasgs", 2002, 1, 10.00, 10, 3, "hp10.jpg");
 			
 			
 			//bdd.desconectar();
