@@ -144,6 +144,9 @@ insert into livro values(00011,'Harry Potter e as Relíquias da Morte ', 'J.K Ro
 insert into livro values(00012,'Como eu era antes de você ', 'Joye moes', 'Rocco', 'Romance',2011, 1,129.99, 200,3,'romance1.jpg');
 insert into livro values(00013,'A culpa é das Estrelas', 'John Green', 'Rocco', 'Romance',2015, 1, 99.99, 200,3,'stars.jpg'); 
 
+use projeto_livraria;
+INSERT INTO livro( nm_livro, autor, editora, genero, ano_livro, edicao, preco_venda, qnt_livro, cd_fornecedor, link_img) VALUES ('ddddd','dsafdsa', 'dasfadsf' ,'dsagasgs', '2002', '1', '10.0' ,'10' ,'3', 'hp10.jpg');
+
 
 
 

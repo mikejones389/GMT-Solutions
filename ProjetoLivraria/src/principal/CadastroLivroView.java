@@ -1,6 +1,4 @@
 package principal;
-//ANdré passou por aqui. 	
-import java.awt.Button;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -24,16 +22,20 @@ import javax.swing.JTextField;
 		private JTextField precoVendaField;
 		private JTextField cdFornecedorField;
 		private JTextField psEstoqueField;
+		private JTextField qntLivroField;
+		private JTextField imgLinkField;
+
 		
 		private String nomeLivro;
 		private String nomeAutor;
 		private String editora;
 		private String genero;
-		private int anoLivro;
-		private int edicao;
-		private double precoVenda;
-		private int cdFornecedor;
-		
+		private String anoLivro;
+		private String edicao;
+		private String precoVenda;
+		private String cdFornecedor;
+		private String qntLivro;
+		private String imgLink;
 		
 		
 		//M�todo CadastroLivros
@@ -199,6 +201,41 @@ import javax.swing.JTextField;
 				gbc.anchor = GridBagConstraints.LINE_START;
 				add(precoVendaField, gbc);
 				
+				JLabel qntLivroLabel = new JLabel ("Quantidade");
+				qntLivroLabel.setFont(new Font("Arial", Font.BOLD, 16));
+				gbc.gridx=0;
+				gbc.gridy=9;
+				gbc.insets= new Insets(10,0,0,5);
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.anchor = GridBagConstraints.LINE_END;
+				add(qntLivroLabel, gbc);
+				
+				qntLivroField = new JTextField(30);
+				gbc.gridx=1;
+				gbc.gridy=9;
+				gbc.insets= new Insets(10,0,0,5);
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.anchor = GridBagConstraints.LINE_START;
+				add(qntLivroField, gbc);
+				
+				JLabel imgLinkLabel = new JLabel ("Link Imagem");
+				imgLinkLabel.setFont(new Font("Arial", Font.BOLD, 16));
+				gbc.gridx=0;
+				gbc.gridy=10;
+				gbc.insets= new Insets(10,0,0,5);
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.anchor = GridBagConstraints.LINE_END;
+				add(imgLinkLabel, gbc);
+				
+				imgLinkField = new JTextField(30);
+				gbc.gridx=1;
+				gbc.gridy=10;
+				gbc.insets= new Insets(10,0,0,5);
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.anchor = GridBagConstraints.LINE_START;
+				add(imgLinkField, gbc);
+				
+				
 				
 				
 				ActionSalvar actionSalvar = new ActionSalvar();
@@ -210,14 +247,14 @@ import javax.swing.JTextField;
 				botaoSair.addActionListener(actionSair);
 				
 				gbc.gridx=1;
-				gbc.gridy=10;
+				gbc.gridy=12;
 				gbc.fill = GridBagConstraints.NONE;
 				gbc.insets=new Insets(10,0,0,5);
 				gbc.anchor = GridBagConstraints.LINE_START;
 				add(botaoSalvar, gbc);
 				
 				gbc.gridx=1;
-				gbc.gridy=10;
+				gbc.gridy=12;
 				gbc.fill = GridBagConstraints.NONE;
 				gbc.insets=new Insets(10,135,0,5);
 				gbc.anchor = GridBagConstraints.LINE_START;
@@ -230,29 +267,40 @@ import javax.swing.JTextField;
 
 			public void actionPerformed(ActionEvent Event) {
 				nomeLivro = nomeLivroField.getText();
-				System.out.print("Nome do Livro: ");
-				System.out.println(nomeLivro);
+				//System.out.print("Nome do Livro: ");
+				//System.out.println(nomeLivro);
 				nomeAutor = nomeAutorField.getText();
-				System.out.print("Nome do Autor: ");
-				System.out.println(nomeAutor);
+				//System.out.print("Nome do Autor: ");
+				//System.out.println(nomeAutor);
 				editora = editoraField.getText();
-				System.out.print("Editora: ");
-				System.out.println(editora);
+				//System.out.print("Editora: ");
+				//System.out.println(editora);
 				genero = generoField.getText();
-				System.out.print("G�nero: ");
-				System.out.println(genero);
-				//anoLivro = anoField.get();
-				System.out.print("Ano: ");
-				System.out.println(anoLivro);
-				//edicao = edicaoField.get();
-				System.out.print("Edi��o: ");
-				System.out.println(edicao);
-				//precoVenda = precoVendaField.get();
-				System.out.print("Pre�o de Venda: ");
-				System.out.println(precoVenda);
-				//cdFornecedor = cdFornecedorField.get();
-				System.out.print("C�digo do Fornecedor: ");
-				System.out.println(cdFornecedor);
+				//System.out.print("G�nero: ");
+				//System.out.println(genero);
+				anoLivro = anoField.getText();
+				//System.out.print("Ano: ");
+				//System.out.println(anoLivro);
+				edicao = edicaoField.getText();
+				//System.out.print("Edi��o: ");
+				//System.out.println(edicao);
+				precoVenda = precoVendaField.getText();
+				//System.out.print("Pre�o de Venda: ");
+				//System.out.println(precoVenda);
+				cdFornecedor = cdFornecedorField.getText();
+				//System.out.print("C�digo do Fornecedor: ");
+				//System.out.println(cdFornecedor);
+				qntLivro = qntLivroField.getText();
+				//System.out.print("Quantidade: ");
+				//System.out.println(qntLivro);
+				imgLink = imgLinkField.getText();
+				//System.out.print("Link Imagem: ");
+				//System.out.println(imgLink);
+				
+				BancoDeDados bdd = new BancoDeDados();
+				bdd.inserirLivro(nomeLivro, nomeAutor , editora, genero, anoLivro, edicao, precoVenda, qntLivro, cdFornecedor, imgLink);
+
+				
 				
 				nomeLivroField.setText(" ");
 				nomeAutorField.setText(" ");
