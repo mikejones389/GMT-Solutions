@@ -1,0 +1,284 @@
+package principal;
+	
+import java.awt.Button;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+	public class CadastroLivroView extends JFrame{
+
+		private JTextField nomeLivroField;
+		private JTextField nomeAutorField;
+		private JTextField editoraField;
+		private JTextField generoField;
+		private JTextField anoField;
+		private JTextField edicaoField;
+		private JTextField precoVendaField;
+		private JTextField cdFornecedorField;
+		private JTextField psEstoqueField;
+		
+		private String nomeLivro;
+		private String nomeAutor;
+		private String editora;
+		private String genero;
+		private int anoLivro;
+		private int edicao;
+		private double precoVenda;
+		private int cdFornecedor;
+		
+		
+		
+		//Método CadastroLivros
+		public CadastroLivroView() {
+			//Titulo da Janela
+			super("Cadastro de Livros");
+			
+			criarFormulario();
+		}
+			
+			//Funcao criarFormulario
+			private void criarFormulario() {
+				//Configuração da estrutura do layout
+				setLayout(new GridBagLayout());
+				GridBagConstraints gbc = new GridBagConstraints();
+				gbc.weightx=0.1;
+				gbc.weighty=0.1;
+				
+				JLabel titulo = new JLabel("Cadastro de Livros");
+				titulo.setFont(new Font("Arial", Font.CENTER_BASELINE, 40));
+								
+				gbc.gridx=0;
+				gbc.gridy=0;
+				gbc.gridwidth = GridBagConstraints.REMAINDER;
+				gbc.fill = GridBagConstraints.LINE_START;
+				gbc.anchor = GridBagConstraints.NORTH;
+				add(titulo,gbc);
+				
+				JLabel cdFornecedorLabel = new JLabel ("Código do Fornecedor");
+				cdFornecedorLabel.setFont(new Font("Arial", Font.BOLD, 16));
+				gbc.gridx=0;
+				gbc.gridy=1;
+				gbc.insets= new Insets(10,0,0,5);
+				gbc.gridwidth = GridBagConstraints.RELATIVE;
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.anchor = GridBagConstraints.LINE_END;
+				add(cdFornecedorLabel, gbc);
+				
+				cdFornecedorField = new JTextField(30);
+				gbc.gridx=1;
+				gbc.insets= new Insets(10,0,0,5);
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.anchor = GridBagConstraints.LINE_START;
+				add(cdFornecedorField, gbc);
+				
+				
+				JLabel nomeLivroLabel = new JLabel("Nome ");
+				nomeLivroLabel.setFont(new Font("Arial", Font.BOLD, 16));
+				gbc.gridx=0;
+				gbc.gridy=2;
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.anchor=GridBagConstraints.LINE_END;
+				gbc.insets= new Insets(5,0,0,5);
+				add(nomeLivroLabel, gbc); 	
+				
+				nomeLivroField = new JTextField(30);
+				gbc.gridx=1;
+				gbc.gridy=2;
+				gbc.insets= new Insets(10,0,0,5);
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.anchor = GridBagConstraints.LINE_START;
+				add(nomeLivroField, gbc);
+				
+				JLabel nomeAutorLabel = new JLabel("Autor ");
+				nomeAutorLabel.setFont(new Font("Arial", Font.BOLD, 16));
+				gbc.gridx=0;
+				gbc.gridy=3;
+				gbc.insets= new Insets(10,0,0,5);
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.anchor = GridBagConstraints.LINE_END;
+				add(nomeAutorLabel, gbc);
+				
+				nomeAutorField = new JTextField(30);
+				gbc.gridx=1;
+				gbc.gridy=3;
+				gbc.insets= new Insets(10,0,0,5);
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.anchor = GridBagConstraints.LINE_START;
+				add(nomeAutorField, gbc);
+				
+				JLabel editoraLabel = new JLabel ("Editora");
+				editoraLabel.setFont(new Font("Arial", Font.BOLD, 16));
+				gbc.gridx=0;
+				gbc.gridy=4;
+				gbc.insets= new Insets(10,0,0,5);
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.anchor = GridBagConstraints.LINE_END;
+				add(editoraLabel, gbc);
+				
+				editoraField = new JTextField(30);
+				gbc.gridx=1;
+				gbc.gridy=4;
+				gbc.insets= new Insets(10,0,0,5);
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.anchor = GridBagConstraints.LINE_START;
+				add(editoraField, gbc);
+				
+				JLabel generoLabel = new JLabel ("Gênero");
+				generoLabel.setFont(new Font("Arial", Font.BOLD, 16));
+				gbc.gridx=0;
+				gbc.gridy=5;
+				gbc.insets= new Insets(10,0,0,5);
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.anchor = GridBagConstraints.LINE_END;
+				add(generoLabel, gbc);
+				
+				generoField = new JTextField(30);
+				gbc.gridx=1;
+				gbc.gridy=5;
+				gbc.insets= new Insets(10,0,0,5);
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.anchor = GridBagConstraints.LINE_START;
+				add(generoField, gbc);
+				
+				JLabel anoLabel = new JLabel ("Ano de Lançamento");
+				anoLabel.setFont(new Font("Arial", Font.BOLD, 16));
+				gbc.gridx=0;
+				gbc.gridy=6;
+				gbc.insets= new Insets(10,0,0,5);
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.anchor = GridBagConstraints.LINE_END;
+				add(anoLabel, gbc);
+				
+				anoField = new JTextField(30);
+				gbc.gridx=1;
+				gbc.gridy=6;
+				gbc.insets= new Insets(10,0,0,5);
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.anchor = GridBagConstraints.LINE_START;
+				add(anoField, gbc);
+				
+				JLabel edicaoLabel = new JLabel ("Edição");
+				edicaoLabel.setFont(new Font("Arial", Font.BOLD, 16));
+				gbc.gridx=0;
+				gbc.gridy=7;
+				gbc.insets= new Insets(10,0,0,5);
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.anchor = GridBagConstraints.LINE_END;
+				add(edicaoLabel, gbc);
+				
+				edicaoField = new JTextField(30);
+				gbc.gridx=1;
+				gbc.gridy=7;
+				gbc.insets= new Insets(10,0,0,5);
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.anchor = GridBagConstraints.LINE_START;
+				add(edicaoField, gbc);
+				
+				JLabel precoVendaLabel = new JLabel ("Preço de Venda");
+				precoVendaLabel.setFont(new Font("Arial", Font.BOLD, 16));
+				gbc.gridx=0;
+				gbc.gridy=8;
+				gbc.insets= new Insets(10,0,0,5);
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.anchor = GridBagConstraints.LINE_END;
+				add(precoVendaLabel, gbc);
+				
+				precoVendaField = new JTextField(30);
+				gbc.gridx=1;
+				gbc.gridy=8;
+				gbc.insets= new Insets(10,0,0,5);
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.anchor = GridBagConstraints.LINE_START;
+				add(precoVendaField, gbc);
+				
+				
+				
+				ActionSalvar actionSalvar = new ActionSalvar();
+				ActionSair actionSair = new ActionSair();
+				
+				JButton botaoSalvar = new JButton("Salvar");
+				botaoSalvar.addActionListener(actionSalvar);
+				JButton botaoSair = new JButton("Sair");
+				botaoSair.addActionListener(actionSair);
+				
+				gbc.gridx=1;
+				gbc.gridy=10;
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.insets=new Insets(10,0,0,5);
+				gbc.anchor = GridBagConstraints.LINE_START;
+				add(botaoSalvar, gbc);
+				
+				gbc.gridx=1;
+				gbc.gridy=10;
+				gbc.fill = GridBagConstraints.NONE;
+				gbc.insets=new Insets(10,135,0,5);
+				gbc.anchor = GridBagConstraints.LINE_START;
+				add(botaoSair, gbc);
+			
+					
+			}
+		
+		private class ActionSalvar implements ActionListener{
+
+			public void actionPerformed(ActionEvent Event) {
+				nomeLivro = nomeLivroField.getText();
+				System.out.print("Nome do Livro: ");
+				System.out.println(nomeLivro);
+				nomeAutor = nomeAutorField.getText();
+				System.out.print("Nome do Autor: ");
+				System.out.println(nomeAutor);
+				editora = editoraField.getText();
+				System.out.print("Editora: ");
+				System.out.println(editora);
+				genero = generoField.getText();
+				System.out.print("Gênero: ");
+				System.out.println(genero);
+				//anoLivro = anoField.get();
+				System.out.print("Ano: ");
+				System.out.println(anoLivro);
+				//edicao = edicaoField.get();
+				System.out.print("Edição: ");
+				System.out.println(edicao);
+				//precoVenda = precoVendaField.get();
+				System.out.print("Preço de Venda: ");
+				System.out.println(precoVenda);
+				//cdFornecedor = cdFornecedorField.get();
+				System.out.print("Código do Fornecedor: ");
+				System.out.println(cdFornecedor);
+				
+				nomeLivroField.setText(" ");
+				nomeAutorField.setText(" ");
+				editoraField.setText(" ");
+				generoField.setText(" ");
+				anoField.setText(" ");
+				edicaoField.setText(" ");
+				precoVendaField.setText(" ");
+				cdFornecedorField.setText(" ");
+				
+			}
+
+			
+		}
+		private class ActionSair implements ActionListener{
+
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+				
+			}
+			
+		}
+			
+	
+	}
+	
+	
+
+
