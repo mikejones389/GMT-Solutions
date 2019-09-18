@@ -46,11 +46,11 @@ public class BancoDeDados {
 	
 	}
 	
-	public void inserirLivro(String nm_livro, String autor, String editora, String genero, int ano_livro, int edicao, double preco_venda, int qnt_livro, int cd_fornecedor, String link_img) {
+	public void inserirLivro(String nm_livro, String autor, String editora, String genero, String ano_livro, String edicao, String preco_venda, String qnt_livro, String cd_fornecedor, String link_img) {
 	//public void inserirLivro(String nm_livro, String autor) {
 
-		System.out.println("inserirLivro"+ nm_livro);
-		System.out.println("inserirAutor"+ autor);
+		//System.out.println("inserirLivro"+ nm_livro);
+		//System.out.println("inserirAutor"+ autor);
 		try {
 			String query = "INSERT INTO livro(nm_livro, autor, editora, genero, ano_livro, edicao, preco_venda, qnt_livro, cd_fornecedor, link_img) VALUES ('" + nm_livro +"', '" + autor +"', '" + editora +"', '" + genero + "', '" + ano_livro + "' ,'" + edicao + "','" + preco_venda+"' ,'" + qnt_livro + "', '" + cd_fornecedor + "' ,'" + link_img + "');";
 			System.out.println("inserirQuery"+ query);

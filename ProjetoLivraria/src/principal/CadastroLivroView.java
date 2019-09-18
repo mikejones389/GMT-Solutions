@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import model.Livro;
+
 	public class CadastroLivroView extends JFrame{
 
 		private JTextField nomeLivroField;
@@ -26,16 +28,7 @@ import javax.swing.JTextField;
 		private JTextField imgLinkField;
 
 		
-		private String nomeLivro;
-		private String nomeAutor;
-		private String editora;
-		private String genero;
-		private String anoLivro;
-		private String edicao;
-		private String precoVenda;
-		private String cdFornecedor;
-		private String qntLivro;
-		private String imgLink;
+		private Livro livro;
 		
 		
 		//Mï¿½todo CadastroLivros
@@ -266,7 +259,8 @@ import javax.swing.JTextField;
 		private class ActionSalvar implements ActionListener{
 
 			public void actionPerformed(ActionEvent Event) {
-				nomeLivro = nomeLivroField.getText();
+				livro = new Livro();
+				livro.setNomeLivro(nomeLivroField.getText());
 				//System.out.print("Nome do Livro: ");
 				//System.out.println(nomeLivro);
 				nomeAutor = nomeAutorField.getText();
@@ -281,7 +275,7 @@ import javax.swing.JTextField;
 				anoLivro = anoField.getText();
 				//System.out.print("Ano: ");
 				//System.out.println(anoLivro);
-				edicao = edicaoField.getText();
+				edicao = Integer.parseInt(edicaoField.getText());
 				//System.out.print("Ediï¿½ï¿½o: ");
 				//System.out.println(edicao);
 				precoVenda = precoVendaField.getText();
@@ -298,7 +292,19 @@ import javax.swing.JTextField;
 				//System.out.println(imgLink);
 				
 				BancoDeDados bdd = new BancoDeDados();
-				bdd.inserirLivro(nomeLivro, nomeAutor , editora, genero, anoLivro, edicao, precoVenda, qntLivro, cdFornecedor, imgLink);
+				bdd.conectar();
+				if(bdd.estaConectado()) {
+					//System.out.println("CONECTADO");
+					//bdd.listarContatos();
+					//bdd.inserirLivro("As Crônicas de Gelo e o Fogo", "George R R Martin", "Atlas ", "Aventura", 2014, 1, 250.00, 10, 3, "about-02.jpg");
+					
+					bdd.inserirLivro(nomeLivro, nomeAutor , editora, genero, anoLivro, edicao, precoVenda, qntLivro, cdFornecedor, imgLink);
+					//bdd.desconectar();
+				
+				}else {
+					System.out.println("Não foi possível conectar com o Banco de Dados");
+				}
+				
 
 				
 				
@@ -310,6 +316,7 @@ import javax.swing.JTextField;
 				edicaoField.setText(" ");
 				precoVendaField.setText(" ");
 				cdFornecedorField.setText(" ");
+				
 				
 			}
 
