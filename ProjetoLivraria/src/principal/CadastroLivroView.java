@@ -263,42 +263,42 @@ import model.Livro;
 				livro.setNomeLivro(nomeLivroField.getText());
 				//System.out.print("Nome do Livro: ");
 				//System.out.println(nomeLivro);
-				nomeAutor = nomeAutorField.getText();
+				livro.setAutorLivro(nomeAutorField.getText());
 				//System.out.print("Nome do Autor: ");
 				//System.out.println(nomeAutor);
-				editora = editoraField.getText();
+				livro.setEditoraLivro(editoraField.getText());
 				//System.out.print("Editora: ");
 				//System.out.println(editora);
-				genero = generoField.getText();
+				livro.setGeneroLivro(generoField.getText());
 				//System.out.print("Gï¿½nero: ");
 				//System.out.println(genero);
-				anoLivro = anoField.getText();
+				livro.setAnoLivro(Integer.parseInt(anoField.getText()));
 				//System.out.print("Ano: ");
 				//System.out.println(anoLivro);
-				edicao = Integer.parseInt(edicaoField.getText());
+				livro.setEdicaoLivro(Integer.parseInt(edicaoField.getText()));
 				//System.out.print("Ediï¿½ï¿½o: ");
 				//System.out.println(edicao);
-				precoVenda = precoVendaField.getText();
+				livro.setPrecoVenda(Integer.parseInt(precoVendaField.getText()));
 				//System.out.print("Preï¿½o de Venda: ");
 				//System.out.println(precoVenda);
-				cdFornecedor = cdFornecedorField.getText();
+				livro.getCdFornecedor(Integer.parseInt(cdFornecedorField.getText()));
 				//System.out.print("Cï¿½digo do Fornecedor: ");
 				//System.out.println(cdFornecedor);
-				qntLivro = qntLivroField.getText();
+				livro.setQntLivro(Integer.parseInt(qntLivroField.getText()));
 				//System.out.print("Quantidade: ");
 				//System.out.println(qntLivro);
-				imgLink = imgLinkField.getText();
+				livro.getLinkImg(imgLinkField.getText());
 				//System.out.print("Link Imagem: ");
 				//System.out.println(imgLink);
 				
 				BancoDeDados bdd = new BancoDeDados();
 				bdd.conectar();
 				if(bdd.estaConectado()) {
-					//System.out.println("CONECTADO");
-					//bdd.listarContatos();
+					System.out.println("CONECTADO");
+					bdd.listarContatos();
 					//bdd.inserirLivro("As Crônicas de Gelo e o Fogo", "George R R Martin", "Atlas ", "Aventura", 2014, 1, 250.00, 10, 3, "about-02.jpg");
 					
-					bdd.inserirLivro(nomeLivro, nomeAutor , editora, genero, anoLivro, edicao, precoVenda, qntLivro, cdFornecedor, imgLink);
+					//bdd.inserirLivro(livro.getNomeLivro(),livro.getAutorLivro(), livro.getEditoraLivro(), livro.getGeneroLivro(), livro.getAnoLivro(), livro.getEdicaoLivro(), livro.getPrecoVenda(), livro.getQntLivro(), livro.setCdFornecedor(), livro.setLinkImg());
 					//bdd.desconectar();
 				
 				}else {

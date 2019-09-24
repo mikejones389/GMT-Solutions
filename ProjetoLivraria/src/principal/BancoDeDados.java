@@ -12,7 +12,7 @@ public class BancoDeDados {
 	private ResultSet resultSet = null;
 	
 	public void conectar(){
-		String servidor = "jdbc:mysql://localhost:3307/projeto_livraria";
+		String servidor = "jdbc:mysql://localhost:3306/projeto_livraria";
 		String usuario = "root";
 		String senha = "";
 		String driver = "com.mysql.jdbc.Driver";
@@ -46,7 +46,7 @@ public class BancoDeDados {
 	
 	}
 	
-	public void inserirLivro(String nm_livro, String autor, String editora, String genero, String ano_livro, String edicao, String preco_venda, String qnt_livro, String cd_fornecedor, String link_img) {
+	public void inserirLivro(String nm_livro, String autor, String editora, String genero, int ano_livro, int edicao, double preco_venda, int qnt_livro, int cd_fornecedor, String link_img) {
 	//public void inserirLivro(String nm_livro, String autor) {
 
 		//System.out.println("inserirLivro"+ nm_livro);
