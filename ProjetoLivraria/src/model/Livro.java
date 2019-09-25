@@ -22,14 +22,14 @@ public class Livro {
 	 }
 	 
 	 public void setNomeLivro(String nome) {
-	        this.nmLivro = nmLivro;
+	        this.nmLivro = nome;
 	    }
 	 
 	 public String getAutorLivro() {
 		 return autorLivro;
 	 }
 	 
-	 public void setAutorLivro(String autor) {
+	 public void setAutorLivro(String autorLivro) {
 		 this.autorLivro = autorLivro;
 	 }
 	 
@@ -37,7 +37,7 @@ public class Livro {
 		 return editoraLivro;
 	 }
 	 
-	 public void setEditoraLivro(String editora) {
+	 public void setEditoraLivro(String editoraLivro) {
 		 this.editoraLivro = editoraLivro;
 	 }
 	 
@@ -45,7 +45,7 @@ public class Livro {
 		 return generoLivro;
 	 }
 	
-	 public void setGeneroLivro(String genero) {
+	 public void setGeneroLivro(String generoLivro) {
 		 this.generoLivro = generoLivro;
 	 }
 	 
@@ -53,7 +53,7 @@ public class Livro {
 		 return anoLivro;
 	 }
 	 
-	 public void setAnoLivro(int ano) {
+	 public void setAnoLivro(int anoLivro) {
 		 this.anoLivro = anoLivro;
 	 }
 	 
@@ -61,7 +61,7 @@ public class Livro {
 		 return edicaoLivro;
 	 }
 	 
-	 public void setEdicaoLivro(int edicao) {
+	 public void setEdicaoLivro(int edicaoLivro) {
 		 this.edicaoLivro = edicaoLivro;
 	 }
 
@@ -69,7 +69,7 @@ public class Livro {
 		 return precoVenda;
 	 }
 	 
-	 public void setPrecoVenda(double preco) {
+	 public void setPrecoVenda(double precoLivro) {
 		 this.precoVenda=precoVenda;
 	 }
 	
@@ -77,23 +77,23 @@ public class Livro {
 		 return qntLivro;
 	 }
 	 
-	 public void setQntLivro(int qnt) {
+	 public void setQntLivro(int qntLivro) {
 		 this.qntLivro=qntLivro;
 	 }
 
-	 public int setCdFornecedor() {
+	 public int getCdFornecedor() {
 		 return cdFornecedor;
 	 }
 	 
-	 public void getCdFornecedor(int fornecedor) {
+	 public void setCdFornecedor(int cdFornecedor) {
 		 this.cdFornecedor=cdFornecedor;
 	 }
 
-	 public String setLinkImg() {
+	 public String getLinkImg() {
 		 return linkImg;
 	 }
 	 
-	 public void getLinkImg(String link) {
+	 public void setLinkImg(String linkImg) {
 		 this.linkImg=linkImg;
 	 }
 }

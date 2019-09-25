@@ -259,10 +259,10 @@ import model.Livro;
 		private class ActionSalvar implements ActionListener{
 
 			public void actionPerformed(ActionEvent Event) {
-				livro = new Livro();
+				Livro livro = new Livro();
 				livro.setNomeLivro(nomeLivroField.getText());
-				//System.out.print("Nome do Livro: ");
-				//System.out.println(nomeLivro);
+				System.out.print("Nome do Livro: ");
+				System.out.println(livro.getNomeLivro());
 				livro.setAutorLivro(nomeAutorField.getText());
 				//System.out.print("Nome do Autor: ");
 				//System.out.println(nomeAutor);
@@ -281,24 +281,26 @@ import model.Livro;
 				livro.setPrecoVenda(Integer.parseInt(precoVendaField.getText()));
 				//System.out.print("Preï¿½o de Venda: ");
 				//System.out.println(precoVenda);
-				livro.getCdFornecedor(Integer.parseInt(cdFornecedorField.getText()));
+				livro.setCdFornecedor(Integer.parseInt(cdFornecedorField.getText()));
 				//System.out.print("Cï¿½digo do Fornecedor: ");
 				//System.out.println(cdFornecedor);
 				livro.setQntLivro(Integer.parseInt(qntLivroField.getText()));
 				//System.out.print("Quantidade: ");
 				//System.out.println(qntLivro);
-				livro.getLinkImg(imgLinkField.getText());
+				livro.setLinkImg(imgLinkField.getText());
 				//System.out.print("Link Imagem: ");
 				//System.out.println(imgLink);
+				
 				
 				BancoDeDados bdd = new BancoDeDados();
 				bdd.conectar();
 				if(bdd.estaConectado()) {
 					System.out.println("CONECTADO");
-					bdd.listarContatos();
+					//bdd.listarLivros();
 					//bdd.inserirLivro("As Crônicas de Gelo e o Fogo", "George R R Martin", "Atlas ", "Aventura", 2014, 1, 250.00, 10, 3, "about-02.jpg");
 					
-					//bdd.inserirLivro(livro.getNomeLivro(),livro.getAutorLivro(), livro.getEditoraLivro(), livro.getGeneroLivro(), livro.getAnoLivro(), livro.getEdicaoLivro(), livro.getPrecoVenda(), livro.getQntLivro(), livro.setCdFornecedor(), livro.setLinkImg());
+					bdd.inserirLivro(livro.getNomeLivro(),livro.getAutorLivro(), livro.getEditoraLivro(), livro.getGeneroLivro(), livro.getAnoLivro(), livro.getEdicaoLivro(), livro.getPrecoVenda(), livro.getQntLivro(), livro.getCdFornecedor(), livro.getLinkImg());
+					//bdd.inserirObjetoLivro(livro);
 					//bdd.desconectar();
 				
 				}else {
