@@ -1,4 +1,4 @@
-package principal;
+package view;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import model.Livro;
+import bdd.BancoDeDados;
 
 	public class CadastroLivroView extends JFrame{
 

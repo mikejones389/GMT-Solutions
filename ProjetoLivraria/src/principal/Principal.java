@@ -2,6 +2,10 @@ package principal;
 
 import javax.swing.JFrame;
 
+import bdd.BancoDeDados;
+
+import view.CadastroLivroView;
+
 public class Principal extends JFrame{
 
 	public static void main(String[] args) {

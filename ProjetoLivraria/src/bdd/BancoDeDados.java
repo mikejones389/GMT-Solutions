@@ -1,4 +1,4 @@
-package principal;
+package bdd;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
