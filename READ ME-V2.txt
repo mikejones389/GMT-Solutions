@@ -1,0 +1,14 @@
+READ ME
+
+Siga as intruções a seguir:
+
+1. Faça o download dos arquivos do GitHub para o seu computador, na unidade C:;
+
+2. Verifique os arquivos baixados. Importe o SQL "ProjetoLIvraria" da pasta "BancoDeDados" para o WORKBENCH. Não se esqueça de utilizar o XAMPP;
+
+3. No Eclipse vá em File-->Open Projects From File System-->Diretório-->Localize e selecione a pasta que contém o código-->Finish 
+Essa sequência de ações trará a pasta "ProjetoLivraria" ao IDE Eclipse;
+
+4. Com o Arquivo já no Eclipse, vá na subpasta "JRE System Library [JavaSE-1.8], clique com o botão direito do mouse sobre essa pasta, vá em "Build Path" e, depois, em "Configure Build Path...". Localize e selecione "mysql-connector-java-5.1.15-bin.jar..." e no menu ao lado direito clique no botão "Add External JARs..." Localize o arquivo "mysql-connector-java-5.1.15-bin", depois, na tela do eclipse, clique no botão "Apply and Close"
+ 
+5. Execute o código.
