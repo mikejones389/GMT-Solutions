@@ -14,7 +14,7 @@ public class BancoDeDados {
 	private ResultSet resultSet = null;
 	
 	public void conectar(){
-		String servidor = "jdbc:mysql://localhost:3307/projeto_livraria";
+		String servidor = "jdbc:mysql://localhost:3306/projeto_livraria";
 		String usuario = "root";
 		String senha = "";
 		String driver = "com.mysql.jdbc.Driver";
