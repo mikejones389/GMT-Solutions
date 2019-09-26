@@ -33,7 +33,7 @@ public class BancoDeDados {
 			return false;
 		}
 	}
-	//SALVAR COMO LIVRO (listarLivros)
+	
 	public void listarLivros() {
 		try {
 			String query = "SELECT * FROM livro ORDER BY nm_livro";
@@ -49,46 +49,16 @@ public class BancoDeDados {
 	}
 	
 	public void inserirLivro(String nm_livro, String autor, String editora, String genero, int ano_livro, int edicao, double preco_venda, int qnt_livro, int cdFornecedor, String linkImg) {
-	//public void inserirLivro(String nm_livro, String autor) {
-
-		//System.out.println("inserirLivro"+ nm_livro);
-		//System.out.println("inserirAutor"+ autor);
+		
 		try {
 			String query = "INSERT INTO livro(nm_livro, autor, editora, genero, ano_livro, edicao, preco_venda, qnt_livro, cd_fornecedor, link_img) VALUES ('" + nm_livro +"', '" + autor +"', '" + editora +"', '" + genero + "', '" + ano_livro + "' ,'" + edicao + "','" + preco_venda+"' ,'" + qnt_livro + "', '" + cdFornecedor + "' ,'" + linkImg + "');";
 			System.out.println("inserirQuery"+ query);
-			//String query = "insert into livro values(56,'Harry Potter e as Relíquias da Morte ', 'J.K Rolling', 'Rocco', 'Ficção',2010, 1, 27.99, 200,3,'hp8.jpg');";
-
 
 			this.statement.executeUpdate(query);
 		}catch(Exception e){
 			System.out.println("ERRO: "+ e.getMessage());
 		}
 	}
-	
-	
-	
-	public void inserirObjetoLivro(Livro livro) {
-		
-		System.out.println("Livro: " + livro.getNomeLivro());
-		
-		
-		//public void inserirLivro(String nm_livro, String autor) {
-
-			//System.out.println("inserirLivro"+ nm_livro);
-			//System.out.println("inserirAutor"+ autor);
-			try {
-				//String query = "INSERT INTO livro(nm_livro, autor, editora, genero, ano_livro, edicao, preco_venda, qnt_livro, cd_fornecedor, link_img) VALUES ('" + nm_livro +"', '" + autor +"', '" + editora +"', '" + genero + "', '" + ano_livro + "' ,'" + edicao + "','" + preco_venda+"' ,'" + qnt_livro + "', '" + cdFornecedor + "' ,'" + linkImg + "');";
-				//System.out.println("inserirQuery"+ query);
-				//String query = "insert into livro values(56,'Harry Potter e as Relíquias da Morte ', 'J.K Rolling', 'Rocco', 'Ficção',2010, 1, 27.99, 200,3,'hp8.jpg');";
-
-
-				//this.statement.executeUpdate(query);
-			}catch(Exception e){
-				System.out.println("ERRO: "+ e.getMessage());
-			}
-		}
-	
-	
 	
 	
 }
