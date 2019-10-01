@@ -60,5 +60,17 @@ public class BancoDeDados {
 		}
 	}
 	
+public void inserirFornecedor(String nm_fornecedor, String nm_fantasia, String rz_social, int cnpj, String email, int telefone, int celular) {
+		
+		try {
+			String query = "INSERT INTO fornecedor(nm_fornecedor, nm_fantasia, rz_social, cnpj, email, telefone, celular) VALUES ('" + nm_fornecedor +"', '" + nm_fantasia +"', '" + rz_social +"', '" + cnpj + "', '" + email + "' ,'" + telefone + "','" + celular +"');";
+			System.out.println("inserirQuery"+ query);
+
+			this.statement.executeUpdate(query);
+		}catch(Exception e){
+			System.out.println("ERRO: "+ e.getMessage());
+		}
+	}
+	
 	
 }
