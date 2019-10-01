@@ -1,0 +1,30 @@
+SCRIPT
+
+1. Download pelo GitHub;
+2. cmd: git clone + link
+3. Eclipse: file/Open Projects from file System/ Directory/ C: Aluno / Usuário/ GMT-Solutions / ProjetoLivraria
+4. Eclipse: JRE.../Build Path / Configure Build Path / Remove e depois Add External JARS...
+5. Sequência MVC
+
+==============================================
+
+Para subir pro GitHub
+
+cmd
+cd GMT-Solutions
+
+git config --global user.email "xxx@xxxxx.com"
+git config --global user.name "your Name"
+
+git add .
+
+git commit -m "versão001"
+
+git pull origin master  //ocasional
+git push origin master
+
+git status
+
+==============================================
+
+
