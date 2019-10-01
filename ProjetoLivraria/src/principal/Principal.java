@@ -2,8 +2,7 @@ package principal;
 
 import javax.swing.JFrame;
 
-import bdd.BancoDeDados;
-
+import view.CadastroFornecedorView;
 import view.CadastroLivroView;
 
 public class Principal extends JFrame{
@@ -14,8 +13,15 @@ public class Principal extends JFrame{
 		cadastroLivroView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		cadastroLivroView.setSize(800,500);
 		cadastroLivroView.setVisible(true);
-				
+		
+		
+		CadastroFornecedorView cadastroFornecedorView = new CadastroFornecedorView();
+		
+		cadastroFornecedorView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		cadastroFornecedorView.setSize(800,500);
+		cadastroFornecedorView.setVisible(true);
 		
 	}
+	
 
 }
