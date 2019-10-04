@@ -58,7 +58,7 @@ import controller.LivroController;
 			gbc.anchor = GridBagConstraints.NORTH;
 			add(titulo,gbc);
 			
-			JLabel cdFornecedorLabel = new JLabel ("Cï¿½digo do Fornecedor");
+			JLabel cdFornecedorLabel = new JLabel ("Código do Fornecedor");
 			cdFornecedorLabel.setFont(new Font("Arial", Font.BOLD, 16));
 			gbc.gridx=0;
 			gbc.gridy=1;
@@ -127,7 +127,7 @@ import controller.LivroController;
 			gbc.anchor = GridBagConstraints.LINE_START;
 			add(editoraField, gbc);
 			
-			JLabel generoLabel = new JLabel ("Gï¿½nero");
+			JLabel generoLabel = new JLabel ("Gênero");
 			generoLabel.setFont(new Font("Arial", Font.BOLD, 16));
 			gbc.gridx=0;
 			gbc.gridy=5;
@@ -144,7 +144,7 @@ import controller.LivroController;
 			gbc.anchor = GridBagConstraints.LINE_START;
 			add(generoField, gbc);
 			
-			JLabel anoLabel = new JLabel ("Ano de Lanï¿½amento");
+			JLabel anoLabel = new JLabel ("Ano de Lançamento");
 			anoLabel.setFont(new Font("Arial", Font.BOLD, 16));
 			gbc.gridx=0;
 			gbc.gridy=6;
@@ -161,7 +161,7 @@ import controller.LivroController;
 			gbc.anchor = GridBagConstraints.LINE_START;
 			add(anoField, gbc);
 			
-			JLabel edicaoLabel = new JLabel ("Ediï¿½ï¿½o");
+			JLabel edicaoLabel = new JLabel ("Edição");
 			edicaoLabel.setFont(new Font("Arial", Font.BOLD, 16));
 			gbc.gridx=0;
 			gbc.gridy=7;
@@ -178,7 +178,7 @@ import controller.LivroController;
 			gbc.anchor = GridBagConstraints.LINE_START;
 			add(edicaoField, gbc);
 			
-			JLabel precoVendaLabel = new JLabel ("Preï¿½o de Venda");
+			JLabel precoVendaLabel = new JLabel ("Preço de Venda");
 			precoVendaLabel.setFont(new Font("Arial", Font.BOLD, 16));
 			gbc.gridx=0;
 			gbc.gridy=8;

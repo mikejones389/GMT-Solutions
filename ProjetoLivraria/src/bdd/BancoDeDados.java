@@ -38,7 +38,7 @@ public class BancoDeDados {
 		}
 	}
 	
-	public static boolean listarLivros() {
+	/*public static boolean listarLivros() {
 		try {
 			String query = "SELECT * FROM livro ORDER BY nm_livro";
 			this.resultSet = this.statement.executeQuery(query);
@@ -51,7 +51,7 @@ public class BancoDeDados {
 		}
 	
 	}
-	
+	*/
 	public static boolean inserirLivro(String nm_livro, String autor, String editora, String genero, int ano_livro, int edicao, double preco_venda, int qnt_livro, int cdFornecedor, String linkImg) {
 		
 		try {
@@ -62,19 +62,19 @@ public class BancoDeDados {
 		}catch(Exception e){
 			System.out.println("ERRO: "+ e.getMessage());
 		}
+		return false;
 	}
-	
-public static boolean inserirFornecedor(String nm_fornecedor, String nm_fantasia, String rz_social, int cnpj, String email, int telefone, int celular) {
-		
+	public static boolean inserirFornecedor(String nm_fornecedor, String nm_fantasia, String rz_social, int cnpj, String email, int telefone, int celular) {
+			
 		try {
 			String query = "INSERT INTO fornecedor(nm_fornecedor, nm_fantasia, rz_social, cnpj, email, telefone, celular) VALUES ('" + nm_fornecedor +"', '" + nm_fantasia +"', '" + rz_social +"', '" + cnpj + "', '" + email + "' ,'" + telefone + "','" + celular +"');";
 			System.out.println("inserirQuery"+ query);
-
-			this.statement.executeUpdate(query);
+				//statement.executeUpdate(query);
 		}catch(Exception e){
 			System.out.println("ERRO: "+ e.getMessage());
 		}
+		return false;
 	}
-	
-	
+		
+		
 }
