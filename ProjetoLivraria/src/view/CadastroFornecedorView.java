@@ -9,10 +9,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import bdd.BancoDeDados;
+import controller.FornecedorController;
 import model.Fornecedor;
 
 
@@ -208,6 +209,20 @@ public class CadastroFornecedorView extends JPanel{
 			fornecedor.setCelular(Integer.parseInt(celularField.getText()));
 			
 			
+			FornecedorController fornecedorController = new FornecedorController();
+			if(fornecedorController.cadastro(fornecedor)) {
+				JOptionPane.showMessageDialog(null, "Cadastro do fornecedor realizado com sucesso");
+				nmFornecedorField.setText(" ");
+				nmFantasiaField.setText(" ");
+				rzSocialField.setText(" ");
+				cnpjField.setText(" ");
+				emailField.setText(" ");
+				telefoneField.setText(" ");
+				celularField.setText(" ");
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Problema ao realizar cadastro do fornecedor!");
+			}
 			
 
 			

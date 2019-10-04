@@ -10,7 +10,7 @@ import model.Livro;
 
 public class BancoDeDados {
 	private static Connection connection = null;
-	private Statement statement = null;
+	private static Statement statement = null;
 	private ResultSet resultSet = null;
 	
 	public static Connection conectar(){
@@ -58,7 +58,7 @@ public class BancoDeDados {
 			String query = "INSERT INTO livro(nm_livro, autor, editora, genero, ano_livro, edicao, preco_venda, qnt_livro, cd_fornecedor, link_img) VALUES ('" + nm_livro +"', '" + autor +"', '" + editora +"', '" + genero + "', '" + ano_livro + "' ,'" + edicao + "','" + preco_venda+"' ,'" + qnt_livro + "', '" + cdFornecedor + "' ,'" + linkImg + "');";
 			System.out.println("inserirQuery"+ query);
 
-			//this.statement.executeUpdate(query);
+			statement.executeUpdate(query);
 		}catch(Exception e){
 			System.out.println("ERRO: "+ e.getMessage());
 		}
@@ -69,7 +69,7 @@ public class BancoDeDados {
 		try {
 			String query = "INSERT INTO fornecedor(nm_fornecedor, nm_fantasia, rz_social, cnpj, email, telefone, celular) VALUES ('" + nm_fornecedor +"', '" + nm_fantasia +"', '" + rz_social +"', '" + cnpj + "', '" + email + "' ,'" + telefone + "','" + celular +"');";
 			System.out.println("inserirQuery"+ query);
-				//statement.executeUpdate(query);
+				statement.executeUpdate(query);
 		}catch(Exception e){
 			System.out.println("ERRO: "+ e.getMessage());
 		}
