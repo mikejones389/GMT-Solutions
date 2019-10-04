@@ -8,15 +8,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import bdd.BancoDeDados;
 import model.Fornecedor;
 
 
-public class CadastroFornecedorView extends JFrame{
+public class CadastroFornecedorView extends JPanel{
 	
 	private JTextField nmFornecedorField;
 	private JTextField nmFantasiaField;
@@ -31,8 +31,6 @@ public class CadastroFornecedorView extends JFrame{
 	private Fornecedor fornecedor;
 	
 	public CadastroFornecedorView() {
-		super("Cadastro de Fornecedores");
-		
 		criarFormulario();
 	}
 	
@@ -53,10 +51,10 @@ public class CadastroFornecedorView extends JFrame{
 		gbc.anchor = GridBagConstraints.NORTH;
 		add(titulo,gbc);
 		
-		JLabel nmFornecedorLabel = new JLabel ("Cï¿½digo do Fornecedor");
+		JLabel nmFornecedorLabel = new JLabel ("Nome do Fornecedor");
 		nmFornecedorLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		gbc.gridx=0;
-		gbc.gridy=1;
+		gbc.gridy=1; 
 		gbc.insets= new Insets(10,0,0,5);
 		gbc.gridwidth = GridBagConstraints.RELATIVE;
 		gbc.fill = GridBagConstraints.NONE;
@@ -70,27 +68,27 @@ public class CadastroFornecedorView extends JFrame{
 		gbc.anchor = GridBagConstraints.LINE_START;
 		add(nmFornecedorField, gbc);
 		
-		JLabel nmFantasiaLabel = new JLabel ("Cï¿½digo do Fornecedor");
+		JLabel nmFantasiaLabel = new JLabel ("Nome Fantasia");
 		nmFantasiaLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		gbc.gridx=0;
-		gbc.gridy=1;
+		gbc.gridy=2;
 		gbc.insets= new Insets(10,0,0,5);
 		gbc.gridwidth = GridBagConstraints.RELATIVE;
 		gbc.fill = GridBagConstraints.NONE;
 		gbc.anchor = GridBagConstraints.LINE_END;
 		add(nmFantasiaLabel, gbc);
 		
-		nmFornecedorField = new JTextField(30);
+		nmFantasiaField = new JTextField(30);
 		gbc.gridx=1;
 		gbc.insets= new Insets(10,0,0,5);
 		gbc.fill = GridBagConstraints.NONE;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		add(nmFantasiaField, gbc);
 		
-		JLabel rzSocialLabel = new JLabel ("Cï¿½digo do Fornecedor");
+		JLabel rzSocialLabel = new JLabel ("razão Social");
 		rzSocialLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		gbc.gridx=0;
-		gbc.gridy=1;
+		gbc.gridy=3;
 		gbc.insets= new Insets(10,0,0,5);
 		gbc.gridwidth = GridBagConstraints.RELATIVE;
 		gbc.fill = GridBagConstraints.NONE;
@@ -104,10 +102,10 @@ public class CadastroFornecedorView extends JFrame{
 		gbc.anchor = GridBagConstraints.LINE_START;
 		add(rzSocialField, gbc);
 		
-		JLabel cnpjLabel = new JLabel ("Cï¿½digo do Fornecedor");
+		JLabel cnpjLabel = new JLabel ("CNPJ");
 		cnpjLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		gbc.gridx=0;
-		gbc.gridy=1;
+		gbc.gridy=4;
 		gbc.insets= new Insets(10,0,0,5);
 		gbc.gridwidth = GridBagConstraints.RELATIVE;
 		gbc.fill = GridBagConstraints.NONE;
@@ -121,10 +119,10 @@ public class CadastroFornecedorView extends JFrame{
 		gbc.anchor = GridBagConstraints.LINE_START;
 		add(cnpjField, gbc);
 		
-		JLabel emailLabel = new JLabel ("Cï¿½digo do Fornecedor");
+		JLabel emailLabel = new JLabel ("Email");
 		emailLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		gbc.gridx=0;
-		gbc.gridy=1;
+		gbc.gridy=5;
 		gbc.insets= new Insets(10,0,0,5);
 		gbc.gridwidth = GridBagConstraints.RELATIVE;
 		gbc.fill = GridBagConstraints.NONE;
@@ -138,10 +136,10 @@ public class CadastroFornecedorView extends JFrame{
 		gbc.anchor = GridBagConstraints.LINE_START;
 		add(emailField, gbc);
 		
-		JLabel telefoneLabel = new JLabel ("Cï¿½digo do Fornecedor");
+		JLabel telefoneLabel = new JLabel ("Telefone");
 		telefoneLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		gbc.gridx=0;
-		gbc.gridy=1;
+		gbc.gridy=6;
 		gbc.insets= new Insets(10,0,0,5);
 		gbc.gridwidth = GridBagConstraints.RELATIVE;
 		gbc.fill = GridBagConstraints.NONE;
@@ -155,10 +153,10 @@ public class CadastroFornecedorView extends JFrame{
 		gbc.anchor = GridBagConstraints.LINE_START;
 		add(telefoneField, gbc);
 		
-		JLabel celularLabel = new JLabel ("Cï¿½digo do Fornecedor");
+		JLabel celularLabel = new JLabel ("Celular");
 		celularLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		gbc.gridx=0;
-		gbc.gridy=1;
+		gbc.gridy=7;
 		gbc.insets= new Insets(10,0,0,5);
 		gbc.gridwidth = GridBagConstraints.RELATIVE;
 		gbc.fill = GridBagConstraints.NONE;
@@ -213,7 +211,7 @@ public class CadastroFornecedorView extends JFrame{
 			
 
 			
-			BancoDeDados bdd = new BancoDeDados();
+			/*BancoDeDados bdd = new BancoDeDados();
 			bdd.conectar();
 			if(bdd.estaConectado()) {
 				System.out.println("CONECTADO");
@@ -226,7 +224,7 @@ public class CadastroFornecedorView extends JFrame{
 			
 			}else {
 				System.out.println("Não foi possível conectar com o Banco de Dados");
-			}
+			}*/
 		}
 			
 	}		
