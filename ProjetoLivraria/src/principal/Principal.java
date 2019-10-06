@@ -22,6 +22,9 @@ public class Principal extends JFrame{
 		cadastroFornecedorView.setSize(800,500);
 		cadastroFornecedorView.setVisible(true);*/
 		
+		
+		
+		
 		MenuView menu = new MenuView();
 		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menu.setSize(800,500);
