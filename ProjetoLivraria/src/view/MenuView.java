@@ -10,8 +10,8 @@ import javax.swing.JMenuItem;
 
 public class MenuView extends JFrame implements ActionListener{
 		JMenuBar menuBar;
-		JMenu menu;
-		JMenuItem itemLivro, itemFornecedor;
+		JMenu menuCadastro, menuCompra;
+		JMenuItem itemLivro, itemFornecedor, itemCompra;
 		
 		public MenuView() {
 			this.inicializar();
@@ -25,7 +25,8 @@ public class MenuView extends JFrame implements ActionListener{
 		
 		public void inicializar() {
 			menuBar = new JMenuBar();
-			menu = new JMenu("Cadastro");
+			menuCadastro = new JMenu("Cadastro");
+			menuCompra = new JMenu("Compras");
 			itemLivro = new JMenuItem("Cadastrar Livro");
 			itemLivro.addActionListener(this);
 			itemLivro.setActionCommand("cadastrarLivro");
@@ -33,13 +34,20 @@ public class MenuView extends JFrame implements ActionListener{
 			itemFornecedor = new JMenuItem("Cadastrar Fornecedor");
 			itemFornecedor.addActionListener(this);
 			itemFornecedor.setActionCommand("cadastrarFornecedor");
+			
+			itemCompra = new JMenuItem("Gerar Compra");
+			itemCompra.addActionListener(this);
+			itemCompra.setActionCommand("gerarCompra");
 						
 		}
 		
 		public void construir() {
-			menu.add(itemLivro);
-			menu.add(itemFornecedor);
-			menuBar.add(menu);
+			menuCadastro.add(itemLivro);
+			menuCadastro.add(itemFornecedor);
+			menuBar.add(menuCadastro);
+			menuCompra.add(itemCompra);
+			menuBar.add(menuCompra);
+			
 		}
 		
 		@Override
@@ -55,6 +63,15 @@ public class MenuView extends JFrame implements ActionListener{
 			}
 			else if(e.getActionCommand().equals("cadastrarFornecedor")) {
 				CadastroFornecedorView cfv = new CadastroFornecedorView();
+				cfv.setVisible(true);
+				this.getContentPane().removeAll();
+				this.getContentPane().add(cfv);
+				this.revalidate();
+				this.repaint();
+			}
+			
+			else if(e.getActionCommand().equals("gerarCompra")) {
+				GerarCompraView cfv = new GerarCompraView();
 				cfv.setVisible(true);
 				this.getContentPane().removeAll();
 				this.getContentPane().add(cfv);

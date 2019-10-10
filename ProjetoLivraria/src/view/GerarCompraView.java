@@ -64,7 +64,7 @@ public class GerarCompraView extends JPanel {
 		JLabel dtEntregaLabel = new JLabel ("Data de Entrega");
 		dtEntregaLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		gbc.gridx=0;
-		gbc.gridy=1;
+		gbc.gridy=2;
 		gbc.insets= new Insets(10,0,0,5);
 		gbc.gridwidth = GridBagConstraints.RELATIVE;
 		gbc.fill = GridBagConstraints.NONE;
@@ -83,19 +83,13 @@ public class GerarCompraView extends JPanel {
 		JLabel cdFornecedorLabel = new JLabel ("Código do Fornecedor");
 		dtEntregaLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		gbc.gridx=0;
-		gbc.gridy=1;
+		gbc.gridy=3;
 		gbc.insets= new Insets(10,0,0,5);
 		gbc.gridwidth = GridBagConstraints.RELATIVE;
 		gbc.fill = GridBagConstraints.NONE;
 		gbc.anchor = GridBagConstraints.LINE_END;
 		add(cdFornecedorLabel, gbc);
 		
-		cdFornecedorField = new JTextField(30);
-		gbc.gridx=1;
-		gbc.insets= new Insets(10,0,0,5);
-		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.LINE_START;
-		add(cdFornecedorField, gbc);
 		
 	}
 }
