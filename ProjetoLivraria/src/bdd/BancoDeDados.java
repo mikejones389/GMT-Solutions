@@ -4,14 +4,12 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 
 import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
-
-import model.Livro;
+import com.mysql.jdbc.PreparedStatement;
 
 public class BancoDeDados {
 	private static Connection connection = null;
-	private static Statement statement = null;
-	private ResultSet resultSet = null;
+	private static PreparedStatement statement = null;
+	private static ResultSet resultSet = null;
 	
 	public static Connection conectar(){
 		//String servidor = "jdbc:mysql://localhost:3307/projeto_livraria";
@@ -40,20 +38,34 @@ public class BancoDeDados {
 		}
 	}
 	
-	/*public static boolean listarLivros() {
+	public static boolean listarLivros() {
+		System.out.println("ENTROU");
 		try {
-			String query = "SELECT * FROM livro ORDER BY nm_livro";
-			this.resultSet = this.statement.executeQuery(query);
-			while(this.resultSet.next()) {
-				System.out.println("ID: " + this.resultSet.getString("cd_livro") + " - NOME: " + this.resultSet.getString("nm_livro"));
+			System.out.println("ENTROU2");
+//			String query = "SELECT * FROM livro ORDER BY nm_livro";
+//			resultSet = statement.executeQuery(query);
+//			while(resultSet.next()) {
+//				System.out.println("ENTROU3");
+//				System.out.println("ID: " + resultSet.getString("cd_livro") + " - NOME: " + resultSet.getString("nm_livro"));
+//				
+//			}
+			ResultSet st = null;
+			
+			st = (ResultSet) connection.prepareStatement( "SELECT * FROM livro ORDER BY nm_livro");
+			((PreparedStatement) st).executeQuery();
+			while(st.next()) {
+				System.out.println("ENTROU3");
+				System.out.println("ID: " + resultSet.getString("cd_livro") + " - NOME: " + resultSet.getString("nm_livro"));
 				
 			}
+			
 		}catch(Exception e) {
 			System.out.println("ERRO: " + e.getMessage());
 		}
+		return false;
 	
 	}
-	*/
+	
 	public static boolean inserirLivro(String nm_livro, String autor, String editora, String genero, int ano_livro, int edicao, double preco_venda, int qnt_livro, int cdFornecedor, String linkImg) {
 		
 		try {
@@ -66,14 +78,15 @@ public class BancoDeDados {
 		}
 		return false;
 	}
-	public static boolean inserirFornecedor(String nm_fornecedor, String nm_fantasia, String rz_social, int cnpj, String email, int telefone, int celular) {
+	public static boolean inserirFornecedor(int cd_fornecedor, String nm_fornecedor, String nm_fantasia, String rz_social, int cnpj, String email, int telefone, int celular ) {
 			System.out.println( "Cheguei no inserir");
-			System.out.println( nm_fornecedor +  nm_fantasia + rz_social + cnpj + email + telefone + celular);
+			System.out.println( cd_fornecedor + nm_fornecedor +  nm_fantasia + rz_social + cnpj + email + telefone + celular );
 		try {
-			String query = "INSERT INTO fornecedor(nm_fornecedor, nm_fantasia, rz_social, cnpj, email, telefone, celular) VALUES ('" + nm_fornecedor +"', '" + nm_fantasia +"', '" + rz_social +"', '" + cnpj + "', '" + email + "' ,'" + telefone + "','" + celular +"');";
+			String query = "INSERT INTO fornecedor(  cd_fornecedor ,nm_fornecedor, nm_fantasia, rz_social, cnpj, email, telefone, celular) VALUES ('" + cd_fornecedor +"' , '" + nm_fornecedor +"', '" + nm_fantasia +"', '" + rz_social +"', '" + cnpj + "', '" + email + "' ,'" + telefone + "','" + celular +"');";
 			System.out.println("inserirQuery"+ query);
 				statement.executeUpdate(query);
 		}catch(Exception e){
+			System.out.println( cd_fornecedor + nm_fornecedor +  nm_fantasia + rz_social + cnpj + email + telefone + celular );
 			System.out.println("ERRO: "+ e.getMessage());
 		}
 		return false;

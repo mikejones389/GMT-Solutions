@@ -3,9 +3,11 @@ package view;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.HeadlessException;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -26,6 +28,7 @@ public class CadastroFornecedorView extends JPanel{
 	private JTextField emailField;
 	private JTextField telefoneField;
 	private JTextField celularField;
+	private JTextField cdFornecedorField;
 	
 	
 	
@@ -171,6 +174,23 @@ public class CadastroFornecedorView extends JPanel{
 		gbc.anchor = GridBagConstraints.LINE_START;
 		add(celularField, gbc);
 		
+		JLabel cdFornecedorLabel = new JLabel ("Cd fornec");
+		cdFornecedorLabel.setFont(new Font("Arial", Font.BOLD, 16));
+		gbc.gridx=0;
+		gbc.gridy=8;
+		gbc.insets= new Insets(10,0,0,5);
+		gbc.gridwidth = GridBagConstraints.RELATIVE;
+		gbc.fill = GridBagConstraints.NONE;
+		gbc.anchor = GridBagConstraints.LINE_END;
+		add(cdFornecedorLabel, gbc);
+		
+		cdFornecedorField = new JTextField(30);
+		gbc.gridx=1;
+		gbc.insets= new Insets(10,0,0,5);
+		gbc.fill = GridBagConstraints.NONE;
+		gbc.anchor = GridBagConstraints.LINE_START;
+		add(cdFornecedorField, gbc);
+		
 		ActionSalvar actionSalvar = new ActionSalvar();
 		ActionSair actionSair = new ActionSair();
 		
@@ -208,21 +228,32 @@ public class CadastroFornecedorView extends JPanel{
 			fornecedor.setEmail(emailField.getText());
 			fornecedor.setTelefone(Integer.parseInt(telefoneField.getText()));
 			fornecedor.setCelular(Integer.parseInt(celularField.getText()));
+			fornecedor.setCdFornecedor(Integer.parseInt(cdFornecedorField.getText()));
+			
 			
 			
 			FornecedorController fornecedorController = new FornecedorController();
-			if(fornecedorController.cadastro(fornecedor)) {
-				JOptionPane.showMessageDialog(null, "Cadastro do fornecedor realizado com sucesso");
-				nmFornecedorField.setText(" ");
-				nmFantasiaField.setText(" ");
-				rzSocialField.setText(" ");
-				cnpjField.setText(" ");
-				emailField.setText(" ");
-				telefoneField.setText(" ");
-				celularField.setText(" ");
-			}
-			else {
-				JOptionPane.showMessageDialog(null, "Problema ao realizar cadastro do fornecedor!");
+			try {
+				if(fornecedorController.cadastro(fornecedor)) {
+					JOptionPane.showMessageDialog(null, "Cadastro do fornecedor realizado com sucesso");
+					nmFornecedorField.setText(" ");
+					nmFantasiaField.setText(" ");
+					rzSocialField.setText(" ");
+					cnpjField.setText(" ");
+					emailField.setText(" ");
+					telefoneField.setText(" ");
+					celularField.setText(" ");
+					cdFornecedorField.setText(" ");
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Problema ao realizar cadastro do fornecedor!");
+				}
+			} catch (HeadlessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
 
