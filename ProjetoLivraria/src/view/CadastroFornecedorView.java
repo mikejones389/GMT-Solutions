@@ -199,6 +199,7 @@ public class CadastroFornecedorView extends JPanel{
 	private class ActionSalvar implements ActionListener{
 
 		public void actionPerformed(ActionEvent Event) {
+			System.out.println(" Cliquei no botão salvar {view}");
 			Fornecedor fornecedor = new Fornecedor();
 			fornecedor.setNmFornecedor(nmFornecedorField.getText());
 			fornecedor.setNmFantasia(nmFantasiaField.getText());

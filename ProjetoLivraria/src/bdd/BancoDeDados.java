@@ -14,10 +14,12 @@ public class BancoDeDados {
 	private ResultSet resultSet = null;
 	
 	public static Connection conectar(){
-		String servidor = "jdbc:mysql://localhost:3307/projeto_livraria";
+		//String servidor = "jdbc:mysql://localhost:3307/projeto_livraria";
+		String servidor = "jdbc:mysql://35.198.9.166:3306/projeto_livraria";
 		String usuario = "root";
-		String senha = "";
+		String senha = "@gmtifsp";
 		String driver = "com.mysql.jdbc.Driver";
+		System.out.println(" Cliquei na conexão BD ");
 		try {
 			Class.forName(driver);
 			connection = (Connection) DriverManager.getConnection(servidor, usuario, senha);
@@ -65,7 +67,8 @@ public class BancoDeDados {
 		return false;
 	}
 	public static boolean inserirFornecedor(String nm_fornecedor, String nm_fantasia, String rz_social, int cnpj, String email, int telefone, int celular) {
-			
+			System.out.println( "Cheguei no inserir");
+			System.out.println( nm_fornecedor +  nm_fantasia + rz_social + cnpj + email + telefone + celular);
 		try {
 			String query = "INSERT INTO fornecedor(nm_fornecedor, nm_fantasia, rz_social, cnpj, email, telefone, celular) VALUES ('" + nm_fornecedor +"', '" + nm_fantasia +"', '" + rz_social +"', '" + cnpj + "', '" + email + "' ,'" + telefone + "','" + celular +"');";
 			System.out.println("inserirQuery"+ query);

@@ -10,7 +10,7 @@ public class Fornecedor {
 	private int celular;
 	
 	public Fornecedor(){
-		System.out.println("Construtor do fornecedor");
+		System.out.println("Construtor do fornecedor {model}");
 	}
 	
 	public String getNmFornecedor() {
