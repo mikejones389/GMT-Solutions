@@ -1,6 +1,8 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import com.mysql.jdbc.PreparedStatement;
 
@@ -9,44 +11,51 @@ import model.Fornecedor;
 
 public class FornecedorDAO {
 	//static Connection connection = null;
-	static PreparedStatement statement = null;
+	private static PreparedStatement statement = null;
+	private static ResultSet resultSet = null;
 	
 	
-	public static boolean inserir(Fornecedor fornecedor) {
+	public void inserir(Fornecedor fornecedor) throws SQLException {
 		Connection bdd = BancoDeDados.conectar();
 		System.out.println(bdd);
-		if(BancoDeDados.estaConectado()) {
-			System.out.println("CONECTADO fornecedorDAO");
+		System.out.println("CONECTADO fornecedorDAO");
 			
-			
-			/*private static void inserirFornecedor(int cdFornecedor, String nmFornecedor, String nmFantasia, String rzSocial,
-					int cnpj, String email, int telefone, int celular) {
-				System.out.println( "Cheguei no inserir");
-				System.out.println( cd_fornecedor + nm_fornecedor +  nm_fantasia + rz_social + cnpj + email + telefone + celular );
-			try {
-				String query = "INSERT INTO fornecedor(  cd_fornecedor ,nm_fornecedor, nm_fantasia, rz_social, cnpj, email, telefone, celular) VALUES ('" + cd_fornecedor +"' , '" + nm_fornecedor +"', '" + nm_fantasia +"', '" + rz_social +"', '" + cnpj + "', '" + email + "' ,'" + telefone + "','" + celular +"');";
-				System.out.println("inserirQuery"+ query);
-				statement.executeUpdate(query);
-			}catch(Exception e){
-				System.out.println("ERRO: "+ e.getMessage());
-			}
-			return false;
-			*/
-			BancoDeDados.listarLivros();
-			/*bdd.inserirLivro("As Crônicas de Gelo e o Fogo", "George R R Martin", "Atlas ", "Aventura", 2014, 1, 250.00, 10, 3, "about-02.jpg");*/
-			
-			//BancoDeDados.inserirFornecedor(fornecedor.getCdFornecedor(), fornecedor.getNmFornecedor(),fornecedor.getNmFantasia(), fornecedor.getRzSocial(), fornecedor.getCnpj(), fornecedor.getEmail(), fornecedor.getTelefone(), fornecedor.getCelular());
-			
-			//bdd.inserirObjetoLivro(livro);
-			//bdd.desconectar();
-			/*return true;
-			}*/
-		}else {
-			return false;
-		}
-		return false;
+		String sql = "INSERT INTO fornecedor(nm_fornecedor, nm_fantasia, rz_social, cnpj, email, telefone, celular) VALUES (?,?,?,?,?,?,?);";
+		
+		PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
+		
+		smt.setString(1, fornecedor.getNmFornecedor());
+		smt.setString(2, fornecedor.getNmFantasia());
+		smt.setString(3, fornecedor.getRzSocial());
+		smt.setInt(4, fornecedor.getCnpj());
+		smt.setString(5, fornecedor.getEmail());
+		smt.setInt(6, fornecedor.getTelefone());
+		smt.setInt(7, fornecedor.getCelular());
+		
+		smt.executeUpdate();
+
 	}
+	
+	public void Listar() {
+		Connection bdd = BancoDeDados.conectar();
+		
+		System.out.println("ENTROU no ListarDAO");
+		try {
 
-
+			String sql = "SELECT * FROM fornecedor ORDER BY cd_fornecedor";
+			
+			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
+			ResultSet rs = smt.executeQuery();
+			
+			while(rs.next()) {
+				System.out.println("ENTROU4");
+				System.out.println("ID: " + rs.getString("cd_fornecedor") + " - NOME: " + rs.getString("nm_fornecedor"));
+				
+			}
+			
+		}catch(Exception e) {
+			System.out.println("ERRO: " + e.getMessage());
+		}
+	}
 	
 }

@@ -2,9 +2,11 @@ package view;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.HeadlessException;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -292,19 +294,24 @@ import controller.LivroController;
 				
 				
 				LivroController livroController = new LivroController();
-				if(livroController.cadastro(livro)) {
-					JOptionPane.showMessageDialog(null, "Cadastro de livro realizado com sucesso");
-					nomeLivroField.setText(" ");
-					nomeAutorField.setText(" ");
-					editoraField.setText(" ");
-					generoField.setText(" ");
-					anoField.setText(" ");
-					edicaoField.setText(" ");
-					precoVendaField.setText(" ");
-					cdFornecedorField.setText(" ");
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "Problema ao realizar cadastro de livro!");
+				try {
+					if(livroController.cadastro(livro)) {
+						JOptionPane.showMessageDialog(null, "Cadastro de livro realizado com sucesso");
+						nomeLivroField.setText(" ");
+						nomeAutorField.setText(" ");
+						editoraField.setText(" ");
+						generoField.setText(" ");
+						anoField.setText(" ");
+						edicaoField.setText(" ");
+						precoVendaField.setText(" ");
+						cdFornecedorField.setText(" ");
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Problema ao realizar cadastro de livro!");
+					}
+				} catch (HeadlessException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 				
 				

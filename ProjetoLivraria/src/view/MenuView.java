@@ -8,10 +8,13 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import controller.FornecedorController;
+import controller.LivroController;
+
 public class MenuView extends JFrame implements ActionListener{
 		JMenuBar menuBar;
-		JMenu menuCadastro, menuCompra;
-		JMenuItem itemLivro, itemFornecedor, itemCompra;
+		JMenu menuCadastro, menuCompra,menuListar;
+		JMenuItem itemLivro, itemFornecedor, itemCompra, itemListarLivro, itemListarFornecedor;
 		
 		public MenuView() {
 			this.inicializar();
@@ -27,6 +30,7 @@ public class MenuView extends JFrame implements ActionListener{
 			menuBar = new JMenuBar();
 			menuCadastro = new JMenu("Cadastro");
 			menuCompra = new JMenu("Compras");
+			menuListar = new JMenu("Listar");
 			itemLivro = new JMenuItem("Cadastrar Livro");
 			itemLivro.addActionListener(this);
 			itemLivro.setActionCommand("cadastrarLivro");
@@ -38,6 +42,14 @@ public class MenuView extends JFrame implements ActionListener{
 			itemCompra = new JMenuItem("Gerar Compra");
 			itemCompra.addActionListener(this);
 			itemCompra.setActionCommand("gerarCompra");
+			
+			itemListarLivro = new JMenuItem("Listar Livros");
+			itemListarLivro.addActionListener(this);
+			itemListarLivro.setActionCommand("listarLivro");
+			
+			itemListarFornecedor = new JMenuItem("Listar Fornecedor");
+			itemListarFornecedor.addActionListener(this);
+			itemListarFornecedor.setActionCommand("listarFornecedor");
 						
 		}
 		
@@ -47,6 +59,9 @@ public class MenuView extends JFrame implements ActionListener{
 			menuBar.add(menuCadastro);
 			menuCompra.add(itemCompra);
 			menuBar.add(menuCompra);
+			menuListar.add(itemListarLivro);
+			menuListar.add(itemListarFornecedor);
+			menuBar.add(menuListar);
 			
 		}
 		
@@ -75,6 +90,30 @@ public class MenuView extends JFrame implements ActionListener{
 				cfv.setVisible(true);
 				this.getContentPane().removeAll();
 				this.getContentPane().add(cfv);
+				this.revalidate();
+				this.repaint();
+			}
+			
+			else if(e.getActionCommand().equals("listarLivro")) {
+				System.out.println("Cliquei no listar livros");
+				LivroController lc = new LivroController(); 
+				lc.ListarLivros();
+				//ListarLivroView llv = new ListarLivroView();
+				//llv.setVisible(true);
+				this.getContentPane().removeAll();
+				//this.getContentPane().add(llv);
+				this.revalidate();
+				this.repaint();
+			}
+			
+			else if(e.getActionCommand().equals("listarFornecedor")) {
+				System.out.println("Cliquei no listar Fornecedor");
+				FornecedorController lc = new FornecedorController(); 
+				lc.ListarFornecedor();
+				//ListarLivroView llv = new ListarLivroView();
+				//llv.setVisible(true);
+				this.getContentPane().removeAll();
+				//this.getContentPane().add(llv);
 				this.revalidate();
 				this.repaint();
 			}

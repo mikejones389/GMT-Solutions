@@ -174,23 +174,6 @@ public class CadastroFornecedorView extends JPanel{
 		gbc.anchor = GridBagConstraints.LINE_START;
 		add(celularField, gbc);
 		
-		JLabel cdFornecedorLabel = new JLabel ("Cd fornec");
-		cdFornecedorLabel.setFont(new Font("Arial", Font.BOLD, 16));
-		gbc.gridx=0;
-		gbc.gridy=8;
-		gbc.insets= new Insets(10,0,0,5);
-		gbc.gridwidth = GridBagConstraints.RELATIVE;
-		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.LINE_END;
-		add(cdFornecedorLabel, gbc);
-		
-		cdFornecedorField = new JTextField(30);
-		gbc.gridx=1;
-		gbc.insets= new Insets(10,0,0,5);
-		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.LINE_START;
-		add(cdFornecedorField, gbc);
-		
 		ActionSalvar actionSalvar = new ActionSalvar();
 		ActionSair actionSair = new ActionSair();
 		

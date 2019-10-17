@@ -1,5 +1,6 @@
-/view/
 /bdd/
 /controller/
-/model/
 /dao/
+/model/
+/principal/
+/view/
