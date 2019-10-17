@@ -89,7 +89,7 @@ public class CadastroFornecedorView extends JPanel{
 		gbc.anchor = GridBagConstraints.LINE_START;
 		add(nmFantasiaField, gbc);
 		
-		JLabel rzSocialLabel = new JLabel ("razão Social");
+		JLabel rzSocialLabel = new JLabel ("razÃ£o Social");
 		rzSocialLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		gbc.gridx=0;
 		gbc.gridy=3;
@@ -202,7 +202,7 @@ public class CadastroFornecedorView extends JPanel{
 	private class ActionSalvar implements ActionListener{
 
 		public void actionPerformed(ActionEvent Event) {
-			System.out.println(" Cliquei no botão salvar {view}");
+			System.out.println(" Cliquei no botï¿½o salvar {view}");
 			Fornecedor fornecedor = new Fornecedor();
 			fornecedor.setNmFornecedor(nmFornecedorField.getText());
 			fornecedor.setNmFantasia(nmFantasiaField.getText());
@@ -211,7 +211,7 @@ public class CadastroFornecedorView extends JPanel{
 			fornecedor.setEmail(emailField.getText());
 			fornecedor.setTelefone(Integer.parseInt(telefoneField.getText()));
 			fornecedor.setCelular(Integer.parseInt(celularField.getText()));
-			fornecedor.setCdFornecedor(Integer.parseInt(cdFornecedorField.getText()));
+			//fornecedor.setCdFornecedor(Integer.parseInt(cdFornecedorField.getText()));
 			
 			
 			
@@ -246,14 +246,14 @@ public class CadastroFornecedorView extends JPanel{
 			if(bdd.estaConectado()) {
 				System.out.println("CONECTADO");
 				//bdd.listarLivros();
-				//bdd.inserirLivro("As Crônicas de Gelo e o Fogo", "George R R Martin", "Atlas ", "Aventura", 2014, 1, 250.00, 10, 3, "about-02.jpg");
+				//bdd.inserirLivro("As Crï¿½nicas de Gelo e o Fogo", "George R R Martin", "Atlas ", "Aventura", 2014, 1, 250.00, 10, 3, "about-02.jpg");
 				
 				bdd.inserirFornecedor(fornecedor.getNmFornecedor(),fornecedor.getNmFantasia(),fornecedor.getRzSocial(), fornecedor.getCnpj(), fornecedor.getEmail(), fornecedor.getTelefone(), fornecedor.getCelular());
 				//bdd.inserirObjetoLivro(livro);
 				//bdd.desconectar();
 			
 			}else {
-				System.out.println("Não foi possível conectar com o Banco de Dados");
+				System.out.println("Nï¿½o foi possï¿½vel conectar com o Banco de Dados");
 			}*/
 		}
 			
