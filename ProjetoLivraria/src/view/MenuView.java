@@ -3,7 +3,9 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -12,13 +14,18 @@ import controller.FornecedorController;
 import controller.LivroController;
 
 public class MenuView extends JFrame implements ActionListener{
-		JMenuBar menuBar;
+	
+	JMenuBar menuBar;
 		JMenu menuCadastro, menuCompra,menuListar;
 		JMenuItem itemLivro, itemFornecedor, itemCompra, itemListarLivro, itemListarFornecedor;
 		
-		public MenuView() {
+		ImageIcon imagem1 = new ImageIcon(getClass().getResource("Logo2.png"));
+		JLabel imagem = new JLabel(imagem1);
+		
+		public MenuView(){
 			this.inicializar();
 			this.construir();
+			add(imagem);
 			this.setJMenuBar(menuBar);
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			this.setSize(800,600);
@@ -64,6 +71,59 @@ public class MenuView extends JFrame implements ActionListener{
 			menuBar.add(menuListar);
 			
 		}
+		
+		//public void formulario() {
+			
+			
+			/*setLayout(new GridLayout(3,4));
+			GridBagLayout gbl = new GridBagLayout();
+			gbl.getLayoutDimensions();
+						
+			JLabel titulo = new JLabel("GMT");
+			titulo.setFont(new Font("Arial",Font.CENTER_BASELINE, 100));
+			
+			JLabel subTitulo = new JLabel("Solutions");
+			subTitulo.setFont(new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT, 20));
+			
+			add(titulo);
+			add(subTitulo);
+			
+			setLayout(new GridBagLayout());
+			GridBagConstraints gbc = new GridBagConstraints();
+			gbc.weightx=0.1;
+			gbc.weighty=0.1;
+			
+			JLabel titulo = new JLabel("GMT");
+			titulo.setFont(new Font("Arial", Font.ITALIC, 240));
+							
+			gbc.gridx=0;
+			gbc.gridy=0;
+			gbc.gridwidth = GridBagConstraints.REMAINDER;
+			gbc.fill = GridBagConstraints.LINE_START;
+			gbc.anchor = GridBagConstraints.NORTH;
+			add(titulo,gbc);
+			
+			JLabel cdFornecedorLabel = new JLabel ("SOLUTIONS");
+			cdFornecedorLabel.setFont(new Font("Arial", Font.BOLD, 40));
+			gbc.gridx=0;
+			gbc.gridy=1;
+			gbc.insets= new Insets(10,0,0,5);
+			//gbc.gridwidth = GridBagConstraints.RELATIVE;
+			gbc.fill = GridBagConstraints.SOUTH;
+			gbc.anchor = GridBagConstraints.CENTER;
+			add(cdFornecedorLabel, gbc);
+			
+			JLabel textoMovimento = new JLabel ("Versão 0.0.1");
+			textoMovimento.setFont(new Font("Arial", Font.BOLD, 40));
+			gbc.gridx=0;
+			gbc.gridy=2;
+			gbc.insets= new Insets(10,0,0,5);
+			//gbc.gridwidth = GridBagConstraints.RELATIVE;
+			gbc.fill = GridBagConstraints.SOUTH;
+			gbc.anchor = GridBagConstraints.CENTER;
+			add(textoMovimento,gbc);
+			*/
+		//}
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {

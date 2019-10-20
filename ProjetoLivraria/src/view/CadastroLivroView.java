@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -37,9 +38,13 @@ import controller.LivroController;
 		private Livro livro;
 		
 		
+		ImageIcon imagem1 = new ImageIcon(getClass().getResource("teste.png"));
+		JLabel imagem = new JLabel(imagem1);
+		
 		//M�todo CadastroLivros
 		public CadastroLivroView() {
 			criarFormulario();
+			add(imagem);
 		}
 			
 		//Funcao criarFormulario
@@ -53,7 +58,7 @@ import controller.LivroController;
 			JLabel titulo = new JLabel("Cadastro de Livros");
 			titulo.setFont(new Font("Arial", Font.CENTER_BASELINE, 40));
 							
-			gbc.gridx=0;
+			gbc.gridx=0; 
 			gbc.gridy=0;
 			gbc.gridwidth = GridBagConstraints.REMAINDER;
 			gbc.fill = GridBagConstraints.LINE_START;
