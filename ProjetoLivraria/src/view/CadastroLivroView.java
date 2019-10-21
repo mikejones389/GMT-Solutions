@@ -44,7 +44,7 @@ import controller.LivroController;
 		//M�todo CadastroLivros
 		public CadastroLivroView() {
 			criarFormulario();
-			add(imagem);
+			//add(imagem);
 		}
 			
 		//Funcao criarFormulario

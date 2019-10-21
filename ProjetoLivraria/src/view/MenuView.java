@@ -72,58 +72,6 @@ public class MenuView extends JFrame implements ActionListener{
 			
 		}
 		
-		//public void formulario() {
-			
-			
-			/*setLayout(new GridLayout(3,4));
-			GridBagLayout gbl = new GridBagLayout();
-			gbl.getLayoutDimensions();
-						
-			JLabel titulo = new JLabel("GMT");
-			titulo.setFont(new Font("Arial",Font.CENTER_BASELINE, 100));
-			
-			JLabel subTitulo = new JLabel("Solutions");
-			subTitulo.setFont(new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT, 20));
-			
-			add(titulo);
-			add(subTitulo);
-			
-			setLayout(new GridBagLayout());
-			GridBagConstraints gbc = new GridBagConstraints();
-			gbc.weightx=0.1;
-			gbc.weighty=0.1;
-			
-			JLabel titulo = new JLabel("GMT");
-			titulo.setFont(new Font("Arial", Font.ITALIC, 240));
-							
-			gbc.gridx=0;
-			gbc.gridy=0;
-			gbc.gridwidth = GridBagConstraints.REMAINDER;
-			gbc.fill = GridBagConstraints.LINE_START;
-			gbc.anchor = GridBagConstraints.NORTH;
-			add(titulo,gbc);
-			
-			JLabel cdFornecedorLabel = new JLabel ("SOLUTIONS");
-			cdFornecedorLabel.setFont(new Font("Arial", Font.BOLD, 40));
-			gbc.gridx=0;
-			gbc.gridy=1;
-			gbc.insets= new Insets(10,0,0,5);
-			//gbc.gridwidth = GridBagConstraints.RELATIVE;
-			gbc.fill = GridBagConstraints.SOUTH;
-			gbc.anchor = GridBagConstraints.CENTER;
-			add(cdFornecedorLabel, gbc);
-			
-			JLabel textoMovimento = new JLabel ("Versão 0.0.1");
-			textoMovimento.setFont(new Font("Arial", Font.BOLD, 40));
-			gbc.gridx=0;
-			gbc.gridy=2;
-			gbc.insets= new Insets(10,0,0,5);
-			//gbc.gridwidth = GridBagConstraints.RELATIVE;
-			gbc.fill = GridBagConstraints.SOUTH;
-			gbc.anchor = GridBagConstraints.CENTER;
-			add(textoMovimento,gbc);
-			*/
-		//}
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -156,12 +104,12 @@ public class MenuView extends JFrame implements ActionListener{
 			
 			else if(e.getActionCommand().equals("listarLivro")) {
 				System.out.println("Cliquei no listar livros");
-				LivroController lc = new LivroController(); 
-				lc.ListarLivros();
-				//ListarLivroView llv = new ListarLivroView();
-				//llv.setVisible(true);
+				//LivroController lc = new LivroController(); 
+				//lc.ListarLivros();
+				ListarLivroView llv = new ListarLivroView();
+				llv.setVisible(true);
 				this.getContentPane().removeAll();
-				//this.getContentPane().add(llv);
+				this.getContentPane().add(llv);
 				this.revalidate();
 				this.repaint();
 			}
