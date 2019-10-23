@@ -9,7 +9,7 @@
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
-						<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+						<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart2" data-notify="0">
 							<i class="zmdi zmdi-favorite-outline"></i>
 						</a>
 					</div>
@@ -34,9 +34,9 @@
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
-				<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti icon-header-noti js-show-cart2" data-notify="0">
 					<i class="zmdi zmdi-favorite-outline"></i>
-				</a>
+				</div>
 			</div>
 
 			<!-- Button show menu -->
@@ -114,7 +114,7 @@
 		<div class="header-cart flex-col-l p-l-65 p-r-25">
 			<div class="header-cart-title flex-w flex-sb-m p-b-8">
 				<span class="mtext-103 cl2">
-					Your Cart
+					Your Cart AAAAAA
 				</span>
 
 				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
@@ -191,6 +191,88 @@
 			</div>
 		</div>
 	</div>
+	<!-- lista de desejo -->
+
+	<div class="wrap-header-cart js-panel-cart2">
+		<div class="s-full js-hide-cart2"></div>
+
+		<div class="header-cart flex-col-l p-l-65 p-r-25">
+			<div class="header-cart-title flex-w flex-sb-m p-b-8">
+				<span class="mtext-103 cl2">
+					Your Cart GGGGGGGG
+				</span>
+
+				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart2">
+					<i class="zmdi zmdi-close"></i>
+				</div>
+			</div>
+			
+			<div class="header-cart-content flex-w js-pscroll">
+				<ul class="header-cart-wrapitem w-full">
+					<?php
+require_once "conexaoBD.php";
+$query = "SELECT * FROM item_desejado i inner join livro l on i.cd_livro=l.cd_livro where i.cd_usuario=".$_SESSION['cd_usuario'];
+$result = mysqli_query($db,$query);
+$total = 0;
+
+
+
+
+$num_results = mysqli_num_rows($result);
+
+for ($i=0; $i <$num_results; $i++)
+{
+
+
+	$row = mysqli_fetch_array($result);
+?>
+
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="images/<?php  echo $row['link_img']; ?>" alt="IMG-PRODUCT">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								<?php  echo $row['nm_livro']; ?>
+							</a>
+
+							<span class="header-cart-item-info">
+								<?php  echo $row['preco_venda']; 
+								$total += $row['preco_venda'];
+								
+								?>
+							</span>
+						</div>
+					</li>
+<?php
+}
+?>
+
+
+
+				</ul>
+				
+				<div class="w-full">
+					<div class="header-cart-total w-full p-tb-40">
+						Total: <?php echo $total; ?> 
+					</div>
+
+					<div class="header-cart-buttons flex-w w-full">
+						<a href="shoping-cart.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+							View Cart
+						</a>
+
+						<a href="shoping-cart.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+							Check Out
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 
 	
 	<!-- Product -->
@@ -216,12 +298,7 @@
 			<div class="row isotope-grid">
 <?php
 
-$db = mysqli_connect('localhost:3307', 'root','', 'projeto_livraria');
-if (!$db)
-{
-echo 'Não deu para conectar ao Banco de Dados';
-exit;
-}
+
 
 
 if ($_GET['genero'] == 0){
@@ -272,6 +349,12 @@ for ($i=0; $i <$num_results; $i++)
 							</div>
 
 							<div class="block2-txt-child2 flex-r p-t-3">
+								<form method="post" action="cadastroDesejo.php"> 
+									<input type="text" name="cdLivro" id="cdLivro" value="<?php echo $row['cd_livro'];?>">
+									<input type="text" name="cd_usuario" id="cd_usuario" value="<?php echo $_SESSION['cd_usuario'];?>">
+									<input type="submit" name="enviar" >
+								
+								 </form>
 								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
 									<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
 									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">

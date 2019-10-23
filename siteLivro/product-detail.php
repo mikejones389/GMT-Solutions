@@ -227,12 +227,9 @@
 	</div>
 	<?php
 
-$db = mysqli_connect('localhost:3307', 'root','', 'projeto_livraria');
-if (!$db)
-{
-echo 'Não deu para conectar ao Banco de Dados';
-exit;
-}
+
+
+require_once "conexaoBD.php";
 
 
 //if ($_GET['livro'] == 0){

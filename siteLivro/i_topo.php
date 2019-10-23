@@ -1,7 +1,16 @@
+<?php
+
+if(! isset($_session)){
+session_start();
+}
+$_SESSION['cd_usuario'] = 1;
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-	<title>Contact</title>
+	<title>Geral</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
