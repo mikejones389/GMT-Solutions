@@ -104,8 +104,8 @@ public class MenuView extends JFrame implements ActionListener{
 			
 			else if(e.getActionCommand().equals("listarLivro")) {
 				System.out.println("Cliquei no listar livros");
-				//LivroController lc = new LivroController(); 
-				//lc.ListarLivros();
+				//LivroController livroController = new LivroController(); 
+				//livroController.ListarLivros();
 				ListarLivroView llv = new ListarLivroView();
 				llv.setVisible(true);
 				this.getContentPane().removeAll();

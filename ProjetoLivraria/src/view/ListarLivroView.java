@@ -7,19 +7,31 @@ import java.awt.GridLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+
+import model.LivroTableModel;
 
 public class ListarLivroView extends JPanel{
 	
+	LivroTableModel tableModel = new LivroTableModel();
+	
 	public ListarLivroView() {
+		//jtLivro.setModel(tableModel);
+		
 		janelaPrincipal();
 		
 		
 	}
 	public void janelaPrincipal(){
+		String rows[][] = { { "A", "a" }, { "B", "b" }, { "E", "e" } };
+	    String headers[] = { "Upper", "Lower" };
+		
 		JPanel panelSuperior = new JPanel();
 		panelSuperior.setLayout(new BorderLayout());
-		panelSuperior.setBackground(Color.BLUE);
+		//panelSuperior.setBackground(Color.BLUE);
 				
 		JLabel titulo = new JLabel("Livros Cadastrados",SwingConstants.CENTER);
 		titulo.setFont(new Font("Arial", Font.BOLD, 40));
@@ -31,17 +43,23 @@ public class ListarLivroView extends JPanel{
 		
 		JLabel cdLivro = new JLabel("Código", SwingConstants.CENTER);
 		cdLivro.setFont(new Font("Arial", Font.BOLD, 30));
-		panelCentral.add(cdLivro);
+		//panelCentral.add(cdLivro);
 		
 		JLabel nmLivro = new JLabel("Título", SwingConstants.HORIZONTAL);
 		nmLivro.setFont(new Font("Arial", Font.BOLD, 30));
-		panelCentral.add(nmLivro);
+		//panelCentral.add(nmLivro);
 		
-		this.setLayout(new GridLayout(10,1));
+		JTable jtLivros = new JTable(new DefaultTableModel(rows, headers));
+		JScrollPane scrollPane = new JScrollPane(jtLivros);
+				
+		this.setLayout(new GridLayout(2,1));
 		this.add(panelSuperior, BorderLayout.NORTH);
+		panelCentral.add(scrollPane,BorderLayout.NORTH);
 		this.add(panelCentral);
 		
-	}	
+		
+	}
+	
 	
 	
 }

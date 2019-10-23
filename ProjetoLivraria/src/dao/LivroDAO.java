@@ -8,6 +8,7 @@ import com.mysql.jdbc.PreparedStatement;
 
 import bdd.BancoDeDados;
 import model.Livro;
+import view.ListarLivroView;
 
 public class LivroDAO {
 	
@@ -37,9 +38,11 @@ public class LivroDAO {
 		smt.executeUpdate();
 
 	}
-	
+	//método para listar os livros
 	public void Listar(){
 		Connection bdd = BancoDeDados.conectar();
+		
+		
 		
 		System.out.println("ENTROU no ListarDAO");
 		try {
@@ -57,7 +60,10 @@ public class LivroDAO {
 			
 			while(rs.next()) {
 				System.out.println("ENTROU3");
-				System.out.println("ID: " + rs.getString("cd_livro") + " - NOME: " + rs.getString("nm_livro"));
+				//System.out.printl   n("ID: " + rs.getString("cd_livro") + " - NOME: " + rs.getString("nm_livro"));
+				ListarLivroView lista = new ListarLivroView();
+				
+				
 				
 			}
 			
