@@ -83,8 +83,10 @@ public class LivroDAO {
 		}
 		
 		return (ArrayList<Livro>) livros;
-	
+		
 	}
+	
+	
 	
 	//método para consultar livro no bd
 

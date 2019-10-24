@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Component;
+
 public class Livro {
 	private int cdLivro;
 	private String nmLivro;

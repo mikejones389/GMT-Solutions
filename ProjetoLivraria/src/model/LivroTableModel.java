@@ -11,20 +11,29 @@ public class LivroTableModel extends AbstractTableModel{
 	private String[] colunas = {"ID", "Titulo"};
 	
 	@Override
+	public String getColumnName(int column) {
+		return colunas[column];
+	}
+	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return colunas.length;
 	}
 	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return dados.size();
 	}
 	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
+	public Object getValueAt(int linha, int coluna) {
+		switch(coluna) {
+		case 0: 
+			return dados.get(linha).getNomeLivro();
+		case 1: 
+			return dados.get(linha).getAutorLivro();
+		}
 		return null;
 	}
-		
+	public void addRow(Livro l) {
+		this.dados.add(l);
+	}
 	
 }

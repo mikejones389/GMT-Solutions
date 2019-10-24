@@ -16,15 +16,18 @@ import javax.swing.table.DefaultTableModel;
 
 import dao.LivroDAO;
 import model.Livro;
+import model.LivroTableModel;
 
 public class ListarLivroView extends JPanel{
 	
-	//LivroTableModel tableModel = new LivroTableModel();
+	LivroTableModel tableModel = new LivroTableModel();
 	LivroDAO ld = new LivroDAO();
-	
+	String rows[][]= {};
+	String headers[] = { "Código do Livro", "Nome Do Livro" };
+	JTable jtLivros = new JTable(new DefaultTableModel(rows, headers));
 	
 	public ListarLivroView() {
-		//jtLivro.setModel(tableModel);
+		jtLivros.setModel(tableModel);
 		
 		janelaPrincipal();
 		
@@ -39,10 +42,17 @@ public class ListarLivroView extends JPanel{
 		List<Livro> livros = new ArrayList<Livro>();
 		
 		livros = (List<Livro>) ld.Listar();
-		
+		Livro l = new Livro();	
+		Livro livro = new Livro();
 		for (int i = 0; i < livros.size(); i++) {
 			System.out.println(livros.get(i).getNomeLivro());
-
+			System.out.println(livros.get(i).getAutorLivro());
+				
+			l.setNomeLivro(livros.get(i).getNomeLivro());
+			l.setAutorLivro(livros.get(i).getAutorLivro());
+			
+			tableModel.addRow(l);
+			
 		}
 		
 		//System.out.println(livro.getNomeLivro());
@@ -54,13 +64,7 @@ public class ListarLivroView extends JPanel{
 		
 		//String nmL = livro.getNomeLivro();
 		//String autorLivro = livro.getAutorLivro();
-		
-		String rows[][]= {};
-//		for(int i=0;i<10;i++) {
-//			rows[0][i]= "Teste";
-//		}
-	    String headers[] = { "Código do Livro", "Nome Do Livro" };
-		
+				
 		JPanel panelSuperior = new JPanel();
 		panelSuperior.setLayout(new BorderLayout());
 		//panelSuperior.setBackground(Color.BLUE);
@@ -75,13 +79,11 @@ public class ListarLivroView extends JPanel{
 		
 		JLabel cdLivro = new JLabel("Código", SwingConstants.CENTER);
 		cdLivro.setFont(new Font("Arial", Font.BOLD, 30));
-		//panelCentral.add(cdLivro);
-		
+				
 		JLabel nmLivro = new JLabel("Título", SwingConstants.HORIZONTAL);
 		nmLivro.setFont(new Font("Arial", Font.BOLD, 30));
-		//panelCentral.add(nmLivro);
-		
-		JTable jtLivros = new JTable(new DefaultTableModel(rows, headers));
+				
+		//JTable jtLivros = new JTable(new DefaultTableModel(rows, headers));
 		JScrollPane scrollPane = new JScrollPane(jtLivros);
 				
 		this.setLayout(new GridLayout(2,1));
