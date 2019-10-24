@@ -3,6 +3,8 @@ package dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.mysql.jdbc.PreparedStatement;
 
@@ -39,10 +41,13 @@ public class LivroDAO {
 
 	}
 	//método para listar os livros
-	public void Listar(){
+	public ArrayList<Livro>  Listar(){
 		Connection bdd = BancoDeDados.conectar();
+		List<Livro> livros = new ArrayList<Livro>();
+		int linha = 0;
+		String texto = null;
 		
-		
+		//Livro livro = new Livro();
 		
 		System.out.println("ENTROU no ListarDAO");
 		try {
@@ -59,20 +64,43 @@ public class LivroDAO {
 			ResultSet rs = smt.executeQuery();
 			
 			while(rs.next()) {
-				System.out.println("ENTROU3");
-				//System.out.printl   n("ID: " + rs.getString("cd_livro") + " - NOME: " + rs.getString("nm_livro"));
-				ListarLivroView lista = new ListarLivroView();
-				
-				
-				
+				//System.out.println("ENTROU3");
+				Livro livro = new Livro();
+				livro.setNomeLivro(rs.getString("nm_Livro"));
+				livro.setAutorLivro(rs.getString("autor"));
+				livros.add(livro);
+//				System.out.println(livro.getNomeLivro());
+//				for (int i = 0; i < livros.size(); i++) {
+//					System.out.println(livros.get(i).getNomeLivro());
+//
+//				}
+//				System.out.println("/////////////////////////////////////");
+//				
 			}
 			
 		}catch(Exception e) {
 			System.out.println("ERRO: " + e.getMessage());
 		}
+		
+		return (ArrayList<Livro>) livros;
 	
 	}
 	
 	//método para consultar livro no bd
 
 }
+
+
+// while testes
+//texto = ("ID: " + rs.getString("cd_livro") + " - NOME: " + rs.getString("nm_livro"));
+//System.out.println(texto);
+//dados[linha] = texto;
+//System.out.println(dados[linha]);
+////dados[linha][1] = rs.getString("nm_livro");
+////System.out.println(rs.getString("cd_livro"));
+//
+////System.out.println(dados[linha][1]);
+//
+//
+////ListarLivroView lista = new ListarLivroView();
+//linha++;

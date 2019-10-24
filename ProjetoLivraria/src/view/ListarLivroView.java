@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,11 +14,14 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import model.LivroTableModel;
+import dao.LivroDAO;
+import model.Livro;
 
 public class ListarLivroView extends JPanel{
 	
-	LivroTableModel tableModel = new LivroTableModel();
+	//LivroTableModel tableModel = new LivroTableModel();
+	LivroDAO ld = new LivroDAO();
+	
 	
 	public ListarLivroView() {
 		//jtLivro.setModel(tableModel);
@@ -26,8 +31,35 @@ public class ListarLivroView extends JPanel{
 		
 	}
 	public void janelaPrincipal(){
-		String rows[][] = { { "A", "a" }, { "B", "b" }, { "E", "e" } };
-	    String headers[] = { "Upper", "Lower" };
+		
+		//String i = ld.Listar();
+		LivroDAO ld = new LivroDAO();
+		
+		
+		List<Livro> livros = new ArrayList<Livro>();
+		
+		livros = (List<Livro>) ld.Listar();
+		
+		for (int i = 0; i < livros.size(); i++) {
+			System.out.println(livros.get(i).getNomeLivro());
+
+		}
+		
+		//System.out.println(livro.getNomeLivro());
+		
+		
+		//String dados[] = ld.Listar();
+		//System.out.println(dados);
+		//String rows[][] = {{teste, "test2"}, {"jsgdljag","dgsgeg"}};
+		
+		//String nmL = livro.getNomeLivro();
+		//String autorLivro = livro.getAutorLivro();
+		
+		String rows[][]= {};
+//		for(int i=0;i<10;i++) {
+//			rows[0][i]= "Teste";
+//		}
+	    String headers[] = { "Código do Livro", "Nome Do Livro" };
 		
 		JPanel panelSuperior = new JPanel();
 		panelSuperior.setLayout(new BorderLayout());
