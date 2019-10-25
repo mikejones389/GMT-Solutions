@@ -67,7 +67,7 @@ public class LivroDAO {
 				//System.out.println("ENTROU3");
 				Livro livro = new Livro();
 				livro.setNomeLivro(rs.getString("nm_Livro"));
-				livro.setAutorLivro(rs.getString("autor"));
+				livro.setPrecoVenda(rs.getDouble("preco_venda"));
 				livros.add(livro);
 //				System.out.println(livro.getNomeLivro());
 //				for (int i = 0; i < livros.size(); i++) {

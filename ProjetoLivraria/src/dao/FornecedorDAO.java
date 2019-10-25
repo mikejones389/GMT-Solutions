@@ -1,8 +1,11 @@
 package dao;
 
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.mysql.jdbc.PreparedStatement;
 
@@ -36,26 +39,32 @@ public class FornecedorDAO {
 
 	}
 	
-	public void Listar() {
+	public ArrayList<Fornecedor> Listar(){
 		Connection bdd = BancoDeDados.conectar();
+		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
+		int linha = 0;
+		String texto = null;
 		
-		System.out.println("ENTROU no ListarDAO");
+		System.out.println("Entrou no ListarDAO Fornecedor");
 		try {
-
 			String sql = "SELECT * FROM fornecedor ORDER BY cd_fornecedor";
-			
 			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
 			ResultSet rs = smt.executeQuery();
 			
 			while(rs.next()) {
-				System.out.println("ENTROU4");
-				System.out.println("ID: " + rs.getString("cd_fornecedor") + " - NOME: " + rs.getString("nm_fornecedor"));
+				Fornecedor fornecedor = new Fornecedor();
+				fornecedor.setNmFornecedor(rs.getString("nm_fornecedor"));
+				fornecedor.setTelefone(rs.getInt("telefone"));
+				fornecedores.add(fornecedor);
 				
 			}
-			
 		}catch(Exception e) {
 			System.out.println("ERRO: " + e.getMessage());
+			
 		}
+		return (ArrayList<Fornecedor>) fornecedores;
+		
+		
 	}
 	
 }

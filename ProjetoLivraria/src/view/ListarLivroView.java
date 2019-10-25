@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,18 +44,14 @@ public class ListarLivroView extends JPanel{
 		
 		livros = (List<Livro>) ld.Listar();
 		Livro l = new Livro();	
-		Livro livro = new Livro();
 		for (int i = 0; i < livros.size(); i++) {
 			System.out.println(livros.get(i).getNomeLivro());
-			System.out.println(livros.get(i).getAutorLivro());
-				
+			System.out.println(livros.get(i).getPrecoVenda());
+					
 			l.setNomeLivro(livros.get(i).getNomeLivro());
-			l.setAutorLivro(livros.get(i).getAutorLivro());
-			
+			l.setPrecoVenda(livros.get(i).getPrecoVenda());
 			tableModel.addRow(l);
-			
 		}
-		
 		//System.out.println(livro.getNomeLivro());
 		
 		

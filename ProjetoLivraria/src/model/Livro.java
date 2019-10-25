@@ -72,7 +72,7 @@ public class Livro {
 	 }
 	 
 	 public void setPrecoVenda(double precoLivro) {
-		 this.precoVenda=precoVenda;
+		 this.precoVenda=precoLivro;
 	 }
 	
 	 public int getQntLivro() {

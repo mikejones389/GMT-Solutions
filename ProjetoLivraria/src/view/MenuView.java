@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import controller.FornecedorController;
 import controller.LivroController;
@@ -16,8 +17,8 @@ import controller.LivroController;
 public class MenuView extends JFrame implements ActionListener{
 	
 	JMenuBar menuBar;
-		JMenu menuCadastro, menuCompra,menuListar;
-		JMenuItem itemLivro, itemFornecedor, itemCompra, itemListarLivro, itemListarFornecedor;
+		JMenu menuCadastro, menuCompra,menuListar, menuOpcoes;
+		JMenuItem itemLivro, itemFornecedor, itemCompra, itemListarLivro, itemListarFornecedor, itemSair;
 		
 		ImageIcon imagem1 = new ImageIcon(getClass().getResource("Logo2.png"));
 		JLabel imagem = new JLabel(imagem1);
@@ -38,6 +39,9 @@ public class MenuView extends JFrame implements ActionListener{
 			menuCadastro = new JMenu("Cadastro");
 			menuCompra = new JMenu("Compras");
 			menuListar = new JMenu("Listar");
+			menuOpcoes = new JMenu("Opcões");
+			
+			
 			itemLivro = new JMenuItem("Cadastrar Livro");
 			itemLivro.addActionListener(this);
 			itemLivro.setActionCommand("cadastrarLivro");
@@ -58,6 +62,9 @@ public class MenuView extends JFrame implements ActionListener{
 			itemListarFornecedor.addActionListener(this);
 			itemListarFornecedor.setActionCommand("listarFornecedor");
 						
+			itemSair = new JMenuItem("Sair");
+			itemSair.addActionListener(this);
+			itemSair.setActionCommand("sair");
 		}
 		
 		public void construir() {
@@ -69,6 +76,8 @@ public class MenuView extends JFrame implements ActionListener{
 			menuListar.add(itemListarLivro);
 			menuListar.add(itemListarFornecedor);
 			menuBar.add(menuListar);
+			menuOpcoes.add(itemSair);
+			menuBar.add(menuOpcoes);
 			
 		}
 		
@@ -116,14 +125,18 @@ public class MenuView extends JFrame implements ActionListener{
 			
 			else if(e.getActionCommand().equals("listarFornecedor")) {
 				System.out.println("Cliquei no listar Fornecedor");
-				FornecedorController lc = new FornecedorController(); 
-				lc.ListarFornecedor();
-				//ListarLivroView llv = new ListarLivroView();
-				//llv.setVisible(true);
+				//FornecedorController lc = new FornecedorController(); 
+				//lc.ListarFornecedor();
+				ListarFornecedorView lfv = new ListarFornecedorView();
+				lfv.setVisible(true);
 				this.getContentPane().removeAll();
-				//this.getContentPane().add(llv);
+				this.getContentPane().add(lfv);
 				this.revalidate();
 				this.repaint();
+			}
+			else if(e.getActionCommand().equals("sair")) {
+				JOptionPane.showMessageDialog(null, "Clique em 'OK' para finalizar o programa");
+				System.exit(0);
 			}
 		}
 		

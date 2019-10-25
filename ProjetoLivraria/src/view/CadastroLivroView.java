@@ -284,7 +284,7 @@ import controller.LivroController;
 				livro.setEdicaoLivro(Integer.parseInt(edicaoField.getText()));
 				//System.out.print("Edi��o: ");
 				//System.out.println(edicao);
-				livro.setPrecoVenda(Integer.parseInt(precoVendaField.getText()));
+				livro.setPrecoVenda(Double.parseDouble(precoVendaField.getText()));
 				//System.out.print("Pre�o de Venda: ");
 				//System.out.println(precoVenda);
 				livro.setCdFornecedor(Integer.parseInt(cdFornecedorField.getText()));
