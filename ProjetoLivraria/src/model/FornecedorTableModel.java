@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.SwingConstants;
+import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 public class FornecedorTableModel extends AbstractTableModel{

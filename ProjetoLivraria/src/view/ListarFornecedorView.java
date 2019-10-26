@@ -33,10 +33,10 @@ public class ListarFornecedorView extends JPanel {
 	}
 	
 	public void janelaPrincipal() {
-		FornecedorDAO ld = new FornecedorDAO();
+		FornecedorDAO fd = new FornecedorDAO();
 		
 		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
-		fornecedores = (List<Fornecedor>) ld.Listar();
+		fornecedores = (List<Fornecedor>) fd.Listar();
 		Fornecedor f = new Fornecedor();
 				
 		for (int i = 0; i < fornecedores.size(); i++) {

@@ -2,11 +2,14 @@ package view;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -14,11 +17,17 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
-import model.Livro;
-import bdd.BancoDeDados;
 import controller.LivroController;
+import dao.FornecedorDAO;
+import model.Fornecedor;
+import model.FornecedorTableModel;
+import model.Livro;
 
 	public class CadastroLivroView extends JPanel{
 
@@ -344,11 +353,55 @@ import controller.LivroController;
 		}
 		
 		private class ActionListar implements ActionListener{
-
+			String rows[][]= {};
+			String headers[]= {};
+			JTable jtFornecedor = new JTable(new DefaultTableModel(rows, headers));
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				FornecedorTableModel tableModel = new FornecedorTableModel();
+				
+				jtFornecedor.setModel(tableModel);
+				
+				JFrame frameList = new JFrame();
+				frameList.setVisible(true);
+				frameList.setSize(300,450);
+				frameList.setResizable(false);
+				frameList.setLocationRelativeTo(cdFornecedorField);
+				frameList.setLayout(new GridLayout(3,1));
+				JPanel panelTitulo = new JPanel();
+				panelTitulo.setLayout(new GridLayout(1,1));
+				JLabel titulo = new JLabel("Selecione o Fornecedor", SwingConstants.CENTER);
+				titulo.setFont(new Font("Arial", Font.BOLD, 18));
+				
+				panelTitulo.add(titulo);
+				frameList.add(panelTitulo);
+				
+				List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
+				FornecedorDAO fd = new FornecedorDAO();
+				fornecedores = (List<Fornecedor>) fd.Listar();
+				Fornecedor f = new Fornecedor();
+						
+				for (int i = 0; i < fornecedores.size(); i++) {
+					System.out.println(fornecedores.get(i).getNmFornecedor());
+					System.out.println(fornecedores.get(i).getTelefone());
+					
+					f.setNmFornecedor(fornecedores.get(i).getNmFornecedor());
+					f.setTelefone(fornecedores.get(i).getTelefone());
+					tableModel.addROw(f);
+					
+					
+				}
+				
+				JScrollPane scrollPane = new JScrollPane(jtFornecedor);
+				frameList.add(scrollPane);
+				//jTableMouseClicked();
 				
 				
+			}
+			public void jTableMouseClicked(java.awt.event.MouseEvent evt) {
+				int indice = jtFornecedor.getSelectedRow(); 
+				cdFornecedorField.setText(jtFornecedor.getValueAt(indice, 0).toString());
+				System.out.println(indice);
 			}
 			
 		}
