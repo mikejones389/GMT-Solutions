@@ -82,6 +82,16 @@ import controller.LivroController;
 			gbc.anchor = GridBagConstraints.LINE_START;
 			add(cdFornecedorField, gbc);
 			
+			ActionListar actionListar = new ActionListar();
+			JButton botaoFornecedor= new JButton("Selecionar");
+			botaoFornecedor.addActionListener(actionListar);
+			gbc.gridx=1;
+			gbc.gridy=1;
+			gbc.fill = GridBagConstraints.RELATIVE;
+			gbc.insets=new Insets(10,0,0,45);
+			gbc.anchor = GridBagConstraints.LINE_END;
+			add(botaoFornecedor, gbc);
+			
 			
 			JLabel nomeLivroLabel = new JLabel("Nome ");
 			nomeLivroLabel.setFont(new Font("Arial", Font.BOLD, 16));
@@ -332,6 +342,17 @@ import controller.LivroController;
 			}
 			
 		}
+		
+		private class ActionListar implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+			
+		}
+		
 			
 	
 	}

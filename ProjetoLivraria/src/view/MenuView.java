@@ -16,7 +16,7 @@ import controller.LivroController;
 
 public class MenuView extends JFrame implements ActionListener{
 	
-	JMenuBar menuBar;
+		JMenuBar menuBar;
 		JMenu menuCadastro, menuCompra,menuListar, menuOpcoes;
 		JMenuItem itemLivro, itemFornecedor, itemCompra, itemListarLivro, itemListarFornecedor, itemSair;
 		

@@ -28,6 +28,7 @@ public class Principal extends JFrame{
 		MenuView menu = new MenuView();
 		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menu.setSize(800,500);
+		menu.setResizable(false);
 		menu.setVisible(true);
 	}
 	
