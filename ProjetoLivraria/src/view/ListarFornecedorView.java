@@ -43,9 +43,7 @@ public class ListarFornecedorView extends JPanel {
 			System.out.println(fornecedores.get(i).getNmFornecedor());
 			System.out.println(fornecedores.get(i).getTelefone());
 			
-			f.setNmFornecedor(fornecedores.get(i).getNmFornecedor());
-			f.setTelefone(fornecedores.get(i).getTelefone());
-			tableModel.addROw(f);
+			tableModel.addROw(fornecedores.get(i));
 			
 			
 		}
@@ -61,10 +59,10 @@ public class ListarFornecedorView extends JPanel {
 		panelCentral.setLayout(new GridLayout(1,2));
 		panelCentral.setBackground(Color.BLACK);
 		
-		JLabel cdLivro = new JLabel("Código", SwingConstants.CENTER);
+		JLabel cdLivro = new JLabel("Cï¿½digo", SwingConstants.CENTER);
 		cdLivro.setFont(new Font("Arial", Font.BOLD, 30));
 				
-		JLabel nmLivro = new JLabel("Título", SwingConstants.HORIZONTAL);
+		JLabel nmLivro = new JLabel("Tï¿½tulo", SwingConstants.HORIZONTAL);
 		nmLivro.setFont(new Font("Arial", Font.BOLD, 30));
 				
 		//JTable jtLivros = new JTable(new DefaultTableModel(rows, headers));

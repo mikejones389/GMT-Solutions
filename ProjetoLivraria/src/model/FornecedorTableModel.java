@@ -40,5 +40,10 @@ public class FornecedorTableModel extends AbstractTableModel{
 	public void addROw(Fornecedor f) {
 		this.dados.add(f);
 	}
+
+	public int getSelectRow() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 }

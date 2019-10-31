@@ -16,7 +16,7 @@ public class Livro {
 	private String linkImg;
 	
 	 public Livro(){
-	        System.out.println("Construtor do Livro\n");
+	        //System.out.println("Construtor do Livro\n");
 	 }
 	 
 	 public String getNomeLivro() {

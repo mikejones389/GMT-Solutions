@@ -24,7 +24,7 @@ public class ListarLivroView extends JPanel{
 	LivroTableModel tableModel = new LivroTableModel();
 	LivroDAO ld = new LivroDAO();
 	String rows[][]= {};
-	String headers[] = { "Código do Livro", "Nome Do Livro" };
+	String headers[] = { "Cï¿½digo do Livro", "Nome Do Livro" };
 	JTable jtLivros = new JTable(new DefaultTableModel(rows, headers));
 	
 	public ListarLivroView() {
@@ -42,15 +42,15 @@ public class ListarLivroView extends JPanel{
 		
 		List<Livro> livros = new ArrayList<Livro>();
 		
-		livros = (List<Livro>) ld.Listar();
-		Livro l = new Livro();	
+		livros = (ArrayList<Livro>) ld.Listar();
+		//Livro l = new Livro();	
+		System.out.println("Listar livro view");
 		for (int i = 0; i < livros.size(); i++) {
 			System.out.println(livros.get(i).getNomeLivro());
 			System.out.println(livros.get(i).getPrecoVenda());
 					
-			l.setNomeLivro(livros.get(i).getNomeLivro());
-			l.setPrecoVenda(livros.get(i).getPrecoVenda());
-			tableModel.addRow(l);
+			
+			tableModel.addRow(livros.get(i));
 		}
 		//System.out.println(livro.getNomeLivro());
 		
@@ -74,10 +74,10 @@ public class ListarLivroView extends JPanel{
 		panelCentral.setLayout(new GridLayout(1,2));
 		panelCentral.setBackground(Color.BLACK);
 		
-		JLabel cdLivro = new JLabel("Código", SwingConstants.CENTER);
+		JLabel cdLivro = new JLabel("Cï¿½digo", SwingConstants.CENTER);
 		cdLivro.setFont(new Font("Arial", Font.BOLD, 30));
 				
-		JLabel nmLivro = new JLabel("Título", SwingConstants.HORIZONTAL);
+		JLabel nmLivro = new JLabel("Tï¿½tulo", SwingConstants.HORIZONTAL);
 		nmLivro.setFont(new Font("Arial", Font.BOLD, 30));
 				
 		//JTable jtLivros = new JTable(new DefaultTableModel(rows, headers));
@@ -88,7 +88,7 @@ public class ListarLivroView extends JPanel{
 		panelCentral.add(scrollPane,BorderLayout.NORTH);
 		this.add(panelCentral);
 		
-		
+		//int linhaSel = jtLivros.getSelectedRow(); int colunaSel = jtLivros.getSelectedColumn();
 	}
 	
 	

@@ -17,7 +17,7 @@ public class LivroDAO {
 	private static PreparedStatement statement = null;
 	private static ResultSet resultSet = null;
 	
-	//método para inserir livro no bd
+	//mï¿½todo para inserir livro no bd
 	public void inserir(Livro livro) throws SQLException {
 		Connection bdd = BancoDeDados.conectar();
 		System.out.println("ENTROU no InserirDAO");
@@ -40,7 +40,7 @@ public class LivroDAO {
 		smt.executeUpdate();
 
 	}
-	//método para listar os livros
+	//mï¿½todo para listar os livros
 	public ArrayList<Livro>  Listar(){
 		Connection bdd = BancoDeDados.conectar();
 		List<Livro> livros = new ArrayList<Livro>();
@@ -69,7 +69,7 @@ public class LivroDAO {
 				livro.setNomeLivro(rs.getString("nm_Livro"));
 				livro.setPrecoVenda(rs.getDouble("preco_venda"));
 				livros.add(livro);
-//				System.out.println(livro.getNomeLivro());
+				//System.out.println(livro.getNomeLivro());
 //				for (int i = 0; i < livros.size(); i++) {
 //					System.out.println(livros.get(i).getNomeLivro());
 //
@@ -77,7 +77,12 @@ public class LivroDAO {
 //				System.out.println("/////////////////////////////////////");
 //				
 			}
-			
+//			System.out.println("Listagem dentro do livro Dao");
+//			for (int i = 0; i < livros.size(); i++) {
+//				System.out.println(livros.get(i).getNomeLivro());
+//
+//			}
+//			
 		}catch(Exception e) {
 			System.out.println("ERRO: " + e.getMessage());
 		}
@@ -88,7 +93,7 @@ public class LivroDAO {
 	
 	
 	
-	//método para consultar livro no bd
+	//mï¿½todo para consultar livro no bd
 
 }
 

@@ -7,6 +7,8 @@ import java.awt.HeadlessException;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import controller.LivroController;
@@ -49,7 +52,7 @@ import model.Livro;
 		
 		ImageIcon imagem1 = new ImageIcon(getClass().getResource("teste.png"));
 		JLabel imagem = new JLabel(imagem1);
-		
+		FornecedorTableModel tableModel = new FornecedorTableModel();
 		//M�todo CadastroLivros
 		public CadastroLivroView() {
 			criarFormulario();
@@ -153,7 +156,7 @@ import model.Livro;
 			gbc.anchor = GridBagConstraints.LINE_START;
 			add(editoraField, gbc);
 			
-			JLabel generoLabel = new JLabel ("G�nero");
+			JLabel generoLabel = new JLabel ("Gênero");
 			generoLabel.setFont(new Font("Arial", Font.BOLD, 16));
 			gbc.gridx=0;
 			gbc.gridy=5;
@@ -170,7 +173,7 @@ import model.Livro;
 			gbc.anchor = GridBagConstraints.LINE_START;
 			add(generoField, gbc);
 			
-			JLabel anoLabel = new JLabel ("Ano de Lan�amento");
+			JLabel anoLabel = new JLabel ("Ano de Lançamento");
 			anoLabel.setFont(new Font("Arial", Font.BOLD, 16));
 			gbc.gridx=0;
 			gbc.gridy=6;
@@ -187,7 +190,7 @@ import model.Livro;
 			gbc.anchor = GridBagConstraints.LINE_START;
 			add(anoField, gbc);
 			
-			JLabel edicaoLabel = new JLabel ("Edi��o");
+			JLabel edicaoLabel = new JLabel ("Edição");
 			edicaoLabel.setFont(new Font("Arial", Font.BOLD, 16));
 			gbc.gridx=0;
 			gbc.gridy=7;
@@ -204,7 +207,7 @@ import model.Livro;
 			gbc.anchor = GridBagConstraints.LINE_START;
 			add(edicaoField, gbc);
 			
-			JLabel precoVendaLabel = new JLabel ("Pre�o de Venda");
+			JLabel precoVendaLabel = new JLabel ("Preço de Venda");
 			precoVendaLabel.setFont(new Font("Arial", Font.BOLD, 16));
 			gbc.gridx=0;
 			gbc.gridy=8;
@@ -353,12 +356,12 @@ import model.Livro;
 		}
 		
 		private class ActionListar implements ActionListener{
-			String rows[][]= {};
-			String headers[]= {};
+			int rows;
+			int headers;
 			JTable jtFornecedor = new JTable(new DefaultTableModel(rows, headers));
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FornecedorTableModel tableModel = new FornecedorTableModel();
+				
 				
 				jtFornecedor.setModel(tableModel);
 				
@@ -379,31 +382,63 @@ import model.Livro;
 				List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 				FornecedorDAO fd = new FornecedorDAO();
 				fornecedores = (List<Fornecedor>) fd.Listar();
-				Fornecedor f = new Fornecedor();
+				
 						
 				for (int i = 0; i < fornecedores.size(); i++) {
 					System.out.println(fornecedores.get(i).getNmFornecedor());
 					System.out.println(fornecedores.get(i).getTelefone());
 					
-					f.setNmFornecedor(fornecedores.get(i).getNmFornecedor());
-					f.setTelefone(fornecedores.get(i).getTelefone());
-					tableModel.addROw(f);
+					tableModel.addROw(fornecedores.get(i));
 					
 					
 				}
 				
+				jtFornecedor.addMouseListener(new MouseAdapter() {
+
+					@Override
+					public void mousePressed(MouseEvent e) {
+					int row = jtFornecedor.rowAtPoint(e.getPoint());
+
+					jtFornecedor.getSelectionModel().setSelectionInterval(row, row);
+					System.out.println("Cheguei no add mouse listener");
+					System.out.println(row);
+					if(e.getButton() == MouseEvent.BUTTON3) {
+					//popup.show(jtFornecedor, e.getX(), e.getY());
+					}
+					}
+					});
+
+				
 				JScrollPane scrollPane = new JScrollPane(jtFornecedor);
 				frameList.add(scrollPane);
-				//jTableMouseClicked();
+				//jTFornecedoresMouseClicked();
 				
+				//selecionar linha da tabela
+				MouseEvent evt = null;
+				tableModelMouseClicked(evt);	
+				//Fornecedor fornecedor = ((List<Fornecedor>) jtFornecedor).get(rows);
+				//cdFornecedorField.setText(fornecedor.getNmFantasia());
 				
-			}
-			public void jTableMouseClicked(java.awt.event.MouseEvent evt) {
-				int indice = jtFornecedor.getSelectedRow(); 
-				cdFornecedorField.setText(jtFornecedor.getValueAt(indice, 0).toString());
-				System.out.println(indice);
 			}
 			
+			
+			public void jTFornecedoresMouseClicked(java.awt.event.MouseEvent evt) {
+				System.out.println("entrei na classe jtFornecedores");
+				if(jtFornecedor.getSelectedRow()!= -1) { 
+					
+					cdFornecedorField.setText(jtFornecedor.getValueAt(jtFornecedor.getSelectedRow(), 0).toString());
+					System.out.println(jtFornecedor.getSelectedRow());
+					
+				}
+				
+			}
+			private void tableModelMouseClicked(java.awt.event.MouseEvent evt) {
+				System.out.println("Teste");
+				int i = jtFornecedor.getSelectedRow();
+				TableModelListener[] model = tableModel.getTableModelListeners();
+				cdFornecedorField.setText(jtFornecedor.getValueAt(i, 0).toString());
+				System.out.println(i);
+			}
 		}
 		
 			
