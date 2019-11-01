@@ -2,6 +2,7 @@ package model;
 
 public class Fornecedor {
 //	private int cdFornecedor;
+	private int codigo;
 	private String nmFornecedor;
 	private String nmFantasia;
 	private String rzSocial;
@@ -62,6 +63,15 @@ public class Fornecedor {
 	public void setCelular(int celular) {
 		this.celular=celular;
 	}
+
+	public int getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+	
 //	public int getCdFornecedor() {
 //		return cdFornecedor;
 //	}

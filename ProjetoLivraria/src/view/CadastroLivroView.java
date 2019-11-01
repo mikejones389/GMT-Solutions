@@ -88,6 +88,7 @@ import model.Livro;
 			add(cdFornecedorLabel, gbc);
 			
 			cdFornecedorField = new JTextField(30);
+			cdFornecedorField.setEditable(false);
 			gbc.gridx=1;
 			gbc.insets= new Insets(10,0,0,5);
 			gbc.fill = GridBagConstraints.NONE;
@@ -365,6 +366,7 @@ import model.Livro;
 				
 				jtFornecedor.setModel(tableModel);
 				
+				
 				JFrame frameList = new JFrame();
 				frameList.setVisible(true);
 				frameList.setSize(300,450);
@@ -384,6 +386,7 @@ import model.Livro;
 				fornecedores = (List<Fornecedor>) fd.Listar();
 				
 						
+				tableModel.removeAll();
 				for (int i = 0; i < fornecedores.size(); i++) {
 					System.out.println(fornecedores.get(i).getNmFornecedor());
 					System.out.println(fornecedores.get(i).getTelefone());
@@ -398,9 +401,13 @@ import model.Livro;
 					@Override
 					public void mousePressed(MouseEvent e) {
 					int row = jtFornecedor.rowAtPoint(e.getPoint());
+					
+					row = jtFornecedor.getSelectedRow();
 
 					jtFornecedor.getSelectionModel().setSelectionInterval(row, row);
-					System.out.println("Cheguei no add mouse listener");
+					System.out.println("Cheguei no add mouse listener e linha = " + tableModel.getSelectRow(row));
+					cdFornecedorField.setText(""+tableModel.getSelectRow(row));
+					cdFornecedorField.setEditable(false);
 					System.out.println(row);
 					if(e.getButton() == MouseEvent.BUTTON3) {
 					//popup.show(jtFornecedor, e.getX(), e.getY());

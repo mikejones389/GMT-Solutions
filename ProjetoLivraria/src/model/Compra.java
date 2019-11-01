@@ -12,6 +12,7 @@ public class Compra {
 	public Compra(){
 		System.out.println("Construtor de Compra");
 	}
+	
 	public int getCdCompra() {
 		 return cdCompra;
 	}
@@ -36,8 +37,6 @@ public class Compra {
 	public void setCdFornecedora(int cdFornecedor) {
 		 this.cdFornecedor = cdFornecedor;
 	}
-	
-	
-	
+
 }
 

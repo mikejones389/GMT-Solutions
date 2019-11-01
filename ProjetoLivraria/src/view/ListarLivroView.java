@@ -24,7 +24,7 @@ public class ListarLivroView extends JPanel{
 	LivroTableModel tableModel = new LivroTableModel();
 	LivroDAO ld = new LivroDAO();
 	String rows[][]= {};
-	String headers[] = { "C�digo do Livro", "Nome Do Livro" };
+	String headers[] = {};
 	JTable jtLivros = new JTable(new DefaultTableModel(rows, headers));
 	
 	public ListarLivroView() {

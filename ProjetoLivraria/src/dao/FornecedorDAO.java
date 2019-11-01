@@ -53,6 +53,7 @@ public class FornecedorDAO {
 			
 			while(rs.next()) {
 				Fornecedor fornecedor = new Fornecedor();
+				fornecedor.setCodigo(rs.getInt("cd_fornecedor"));
 				fornecedor.setNmFornecedor(rs.getString("nm_fornecedor"));
 				fornecedor.setTelefone(rs.getInt("telefone"));
 				fornecedores.add(fornecedor);

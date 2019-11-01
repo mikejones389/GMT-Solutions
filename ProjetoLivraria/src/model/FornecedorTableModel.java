@@ -9,7 +9,7 @@ import javax.swing.table.AbstractTableModel;
 public class FornecedorTableModel extends AbstractTableModel{
 	
 	private List<Fornecedor> dados = new ArrayList<Fornecedor>();
-	private String[] colunas = {"Nome Fornecedor", "Telefone"};	
+	private String[] colunas = {"ID", "Nome Fornecedor", "Telefone"};	
 	
 	@Override
 	public String getColumnName(int column) {
@@ -28,10 +28,12 @@ public class FornecedorTableModel extends AbstractTableModel{
 
 	@Override
 	public Object getValueAt(int linha, int coluna) {
-		switch(coluna) {	
+		switch(coluna) {
 		case 0:
-			return dados.get(linha).getNmFornecedor();
+			return dados.get(linha ).getCodigo();
 		case 1:
+			return dados.get(linha).getNmFornecedor();
+		case 2:
 			return dados.get(linha).getTelefone();
 		}
 		return null;
@@ -41,9 +43,13 @@ public class FornecedorTableModel extends AbstractTableModel{
 		this.dados.add(f);
 	}
 
-	public int getSelectRow() {
+	public int getSelectRow(int linha) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dados.get(linha).getCodigo();
+	}
+	
+	public void removeAll() {
+		this.dados.clear();
 	}
 	
 }

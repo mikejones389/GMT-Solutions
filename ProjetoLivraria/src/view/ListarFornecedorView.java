@@ -19,6 +19,10 @@ import model.Fornecedor;
 import model.FornecedorTableModel;
 
 public class ListarFornecedorView extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	FornecedorTableModel tableModel = new FornecedorTableModel();
 	FornecedorDAO fd = new FornecedorDAO();
 	String rows[][]= {};
