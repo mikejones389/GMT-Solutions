@@ -21,7 +21,7 @@
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->		
 			<div class="logo-mobile">
-				<a href="index.php"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+				<a href="index.php"><img src="images/icons/logo-01.jpg" alt="IMG-LOGO"></a>
 			</div>
 
 			<!-- Icon header -->
@@ -211,6 +211,14 @@
 				<ul class="header-cart-wrapitem w-full">
 					<?php
 require_once "conexaoBD.php";
+
+$listaItensDesejosSelecionados = array();
+
+
+
+
+
+
 $query = "SELECT * FROM item_desejado i inner join livro l on i.cd_livro=l.cd_livro where i.cd_usuario=".$_SESSION['cd_usuario'];
 $result = mysqli_query($db,$query);
 $total = 0;
@@ -225,6 +233,9 @@ for ($i=0; $i <$num_results; $i++)
 
 
 	$row = mysqli_fetch_array($result);
+
+
+	array_push($listaItensDesejosSelecionados, $row['cd_livro']);
 ?>
 
 					<li class="header-cart-item flex-w flex-t m-b-12">
@@ -247,6 +258,8 @@ for ($i=0; $i <$num_results; $i++)
 					</li>
 <?php
 }
+
+
 ?>
 
 
@@ -299,15 +312,23 @@ for ($i=0; $i <$num_results; $i++)
 <?php
 
 
+if (empty($_GET['genero'] )){
+	$genero = 0;
+}
+else{
+
+	$genero = $_GET['genero'] ;
+}
 
 
-if ($_GET['genero'] == 0){
+
+if ($genero == 0){
 	$query = "select * from livro ";
 }
-else if ($_GET['genero'] == 1){
+else if ($genero == 1){
 	$query = "select * from livro where genero like '%Fic%' ";
 }
-else if ($_GET['genero'] == 2){
+else if ($genero == 2){
 	$query = "select * from livro where genero like '%Romance%' ";
 }
 
@@ -349,16 +370,29 @@ for ($i=0; $i <$num_results; $i++)
 							</div>
 
 							<div class="block2-txt-child2 flex-r p-t-3">
-								<form method="post" action="cadastroDesejo.php"> 
-									<input type="text" name="cdLivro" id="cdLivro" value="<?php echo $row['cd_livro'];?>">
-									<input type="text" name="cd_usuario" id="cd_usuario" value="<?php echo $_SESSION['cd_usuario'];?>">
-									<input type="submit" name="enviar" >
+								<form method="post" action="cadastroDesejo.php" name="frmListaDesejo" id="frmListaDesejo"> 
+									<input type="hidden" name="cdLivro" id="cdLivro" value="<?php echo $row['cd_livro'];?>">
+									<input type="hidden" name="cd_usuario" id="cd_usuario" value="<?php echo $_SESSION['cd_usuario'];?>">
+									<?php	
+										if(in_array($row['cd_livro'],$listaItensDesejosSelecionados)){
+											?>
+											<input type="hidden" name="acao" id="acao" value="deletar">
+											<button type="submit" name="enviar" >  <img src="images/icons/icon-heart-02.png"></button>
+											<?php
+										}else{
+											?>
+											<input type="hidden" name="acao" id="acao" value="adcionar">
+											<button type="submit" name="enviar" > <img src="images/icons/icon-heart-01.png"></button>
+											<?php
+										}
+
+
+									?>
+									
+								
 								
 								 </form>
-								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-									<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
-									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
-								</a>
+								
 							</div>
 						</div>
 					</div>
@@ -649,11 +683,27 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 		$('.js-addwish-b2').each(function(){
 			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+			
+			
+			
+			
+			
 			$(this).on('click', function(){
+
+				
+
 				swal(nameProduct, "is added to wishlist !", "success");
+
+
+				
 
 				$(this).addClass('js-addedwish-b2');
 				$(this).off('click');
+
+				
+
+
+
 			});
 		});
 
