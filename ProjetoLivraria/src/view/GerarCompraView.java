@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -11,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -23,6 +25,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+
+import com.toedter.calendar.JDateChooser;
 
 import dao.FornecedorDAO;
 import model.Compra;
@@ -61,23 +65,42 @@ public class GerarCompraView extends JPanel {
 		gbc.weighty= 0.1;
 		gbc.insets= new Insets(10,0,0,5);
 		
+		JLabel espaco1 = new JLabel("");
+		espaco1.setFont(new Font("Arial", Font.BOLD, 16));
 		gbc.gridx=0;
+		gbc.gridy=0;
+		panelCentral.add(espaco1, gbc);
+		
+		gbc.gridx=1;
 		gbc.gridy=0;
 		JLabel dtCompraLabel = new JLabel ("Data da Compra");
 		dtCompraLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		panelCentral.add(dtCompraLabel,gbc);
 		
-		gbc.gridx=1;
-		dtCompraField = new JTextField(30);
-		panelCentral.add(dtCompraField, gbc);
-	
+		gbc.gridx=2;
+		JDateChooser dataCompra;
+		dataCompra = new JDateChooser("dd/MM/yyyy", "##/##/####", '_');
+		dataCompra.setFont(new Font("Arial", Font.BOLD, 16));
+		dataCompra.setPreferredSize(new Dimension(150,20));
+		dataCompra.setDate(new Date());
+		
+		panelCentral.add(dataCompra, gbc);
+		
 		JLabel dtEntregaLabel = new JLabel ("Data de Entrega");
 		dtEntregaLabel.setFont(new Font("Arial", Font.BOLD, 16));
-		gbc.gridx=0;
+		gbc.gridx=1;
 		gbc.gridy=1;
 		panelCentral.add(dtEntregaLabel, gbc);
 		
-		dtEntregaField = new JTextField(30);
+		JDateChooser dataEntrega;
+		dataEntrega = new JDateChooser("dd/MM/yyyy", "##/##/####", '_');
+		dataEntrega.setFont(new Font("Arial", Font.BOLD, 16));
+		dataEntrega.setPreferredSize(new Dimension(150,20));
+		dataEntrega.setDate(new Date());
+		gbc.gridx=2;
+		
+		panelCentral.add(dataEntrega, gbc);
+		
 		
 		this.add(panelCentral, BorderLayout.CENTER);
 //		
@@ -97,6 +120,27 @@ public class GerarCompraView extends JPanel {
 		botaoFornecedor.addActionListener(actionListar);
 		
 		//add(botaoFornecedor);
+		
+		JLabel espaco2 = new JLabel("");
+		espaco2.setFont(new Font("Arial", Font.BOLD, 16));
+		gbc.gridx=3;
+		gbc.gridy=0;
+		panelCentral.add(espaco2, gbc);
+//		
+//		JDateChooser data;
+//		
+//		data = new JDateChooser("dd/MM/yyyy", "##/##/####", '_');
+//		data.setFont(new Font("Arial", Font.BOLD, 16));
+//		//data.setSize(new Dimension(10,200));
+//		//data.setBounds(200, 200, 100, 20);
+//		
+//		data.setPreferredSize(new Dimension(150,20));
+//		data.setDate(new Date());
+//		gbc.gridx=1;
+//		
+//		panelCentral.add(data, gbc);
+		
+		
 		
 	}
 	
