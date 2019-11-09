@@ -20,6 +20,7 @@ public class LivroDAO {
 	//m�todo para inserir livro no bd
 	public void inserir(Livro livro) throws SQLException {
 		Connection bdd = BancoDeDados.conectar();
+		
 		System.out.println("ENTROU no InserirDAO");
 		
 		String sql = "INSERT INTO livro(nm_livro, autor, editora, genero, ano_livro, edicao, preco_venda, qnt_livro, cd_fornecedor, link_img) VALUES (?,?,?,?,?,?,?,?,?,?);";

@@ -11,14 +11,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-import controller.FornecedorController;
-import controller.LivroController;
-
 public class MenuView extends JFrame implements ActionListener{
 	
 		JMenuBar menuBar;
 		JMenu menuCadastro, menuCompra,menuListar, menuOpcoes;
-		JMenuItem itemLivro, itemFornecedor, itemCompra, itemListarLivro, itemListarFornecedor, itemSair;
+		JMenuItem itemLivro, itemFornecedor, itemCompra, itemListarLivro, itemListarFornecedor, itemSair, itemListarCliente;
 		
 		ImageIcon imagem1 = new ImageIcon(getClass().getResource("Logo2.png"));
 		JLabel imagem = new JLabel(imagem1);
@@ -61,7 +58,11 @@ public class MenuView extends JFrame implements ActionListener{
 			itemListarFornecedor = new JMenuItem("Listar Fornecedor");
 			itemListarFornecedor.addActionListener(this);
 			itemListarFornecedor.setActionCommand("listarFornecedor");
-						
+			
+			itemListarCliente = new JMenuItem("Listar Clientes");
+			itemListarCliente.addActionListener(this);
+			itemListarCliente.setActionCommand("listarCliente");
+			
 			itemSair = new JMenuItem("Sair");
 			itemSair.addActionListener(this);
 			itemSair.setActionCommand("sair");
@@ -75,9 +76,11 @@ public class MenuView extends JFrame implements ActionListener{
 			menuBar.add(menuCompra);
 			menuListar.add(itemListarLivro);
 			menuListar.add(itemListarFornecedor);
+			menuListar.add(itemListarCliente);
 			menuBar.add(menuListar);
 			menuOpcoes.add(itemSair);
 			menuBar.add(menuOpcoes);
+			
 			
 		}
 		
@@ -137,6 +140,18 @@ public class MenuView extends JFrame implements ActionListener{
 				lfv.setVisible(true);
 				this.getContentPane().removeAll();
 				this.getContentPane().add(lfv);
+				this.revalidate();
+				this.repaint();
+			}
+			
+			else if(e.getActionCommand().equals("listarCliente")) {
+				System.out.println("Cliquei no listar clientes");
+				//LivroController livroController = new LivroController(); 
+				//livroController.ListarLivros();
+				ListarClienteView lcv = new ListarClienteView();
+				lcv.setVisible(true);
+				this.getContentPane().removeAll();
+				this.getContentPane().add(lcv);
 				this.revalidate();
 				this.repaint();
 			}
