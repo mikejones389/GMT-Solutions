@@ -4,6 +4,8 @@ if(! isset($_SESSION)){
 session_start();
 }
 
+//echo substr(md5("369"),0,15);
+//exit;
 
 
 
@@ -62,7 +64,7 @@ session_start();
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
+						<a target="_blank" href="FAQ.pdf" class="flex-c-m trans-04 p-lr-25">
 							Help & FAQs
 						</a>
 
