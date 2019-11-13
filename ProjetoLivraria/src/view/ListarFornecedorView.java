@@ -53,15 +53,15 @@ public class ListarFornecedorView extends JPanel {
 		}
 		
 		JPanel panelSuperior = new JPanel();
-		panelSuperior.setLayout(new BorderLayout());
+//		panelSuperior.setLayout(new BorderLayout());
 		
 		JLabel titulo = new JLabel ("Fornecedores Cadastrados", SwingConstants.CENTER);
 		titulo.setFont(new Font("Arial", Font.BOLD, 40));
 		panelSuperior.add(titulo);
 		
 		JPanel panelCentral = new JPanel();
-		panelCentral.setLayout(new GridLayout(1,2));
-		panelCentral.setBackground(Color.BLACK);
+//		panelCentral.setLayout(new GridLayout(1,2));
+//		panelCentral.setBackground(Color.BLACK);
 		
 		JLabel cdLivro = new JLabel("C�digo", SwingConstants.CENTER);
 		cdLivro.setFont(new Font("Arial", Font.BOLD, 30));
@@ -72,10 +72,11 @@ public class ListarFornecedorView extends JPanel {
 		//JTable jtLivros = new JTable(new DefaultTableModel(rows, headers));
 		JScrollPane scrollPane = new JScrollPane(jtFornecedor);
 				
-		this.setLayout(new GridLayout(2,1));
+		this.setLayout(new BorderLayout());
 		this.add(panelSuperior, BorderLayout.NORTH);
 		panelCentral.add(scrollPane,BorderLayout.NORTH);
-		this.add(panelCentral);
+		this.add(panelCentral, BorderLayout.CENTER);
+		
 		
 		
 		

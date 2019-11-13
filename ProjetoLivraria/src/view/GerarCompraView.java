@@ -40,6 +40,8 @@ public class GerarCompraView extends JPanel {
 	private JTextField cdFornecedorField;
 	private JTextField cdLivroField;
 	
+	JFrame frameList = new JFrame();
+	
 	private Compra compra;
 	FornecedorTableModel tableModel = new FornecedorTableModel();
 	int rows;
@@ -184,6 +186,7 @@ public class GerarCompraView extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			FinalizarCompraView fcv= new FinalizarCompraView();
 			fcv.setVisible(true);
+			fcv.repaint();
 			
 		}
 		
@@ -198,14 +201,14 @@ public class GerarCompraView extends JPanel {
 			
 			
 			
-			JFrame frameList = new JFrame();
+			
 			frameList.setVisible(true);
 			frameList.setSize(300,450);
 			frameList.setResizable(false);
 			frameList.setLocationRelativeTo(cdFornecedorField);
-			frameList.setLayout(new GridLayout(3,1));
+			frameList.setLayout(new BorderLayout());
 			JPanel panelTitulo = new JPanel();
-			panelTitulo.setLayout(new GridLayout(1,1));
+			//panelTitulo.setLayout(new GridLayout(1,1));
 			JLabel titulo = new JLabel("Selecione o Fornecedor", SwingConstants.CENTER);
 			titulo.setFont(new Font("Arial", Font.BOLD, 18));
 			
@@ -223,8 +226,6 @@ public class GerarCompraView extends JPanel {
 				System.out.println(fornecedores.get(i).getTelefone());
 				
 				tableModel.addROw(fornecedores.get(i));
-				
-				
 			}
 			
 			jtFornecedor.addMouseListener(new MouseAdapter() {
@@ -245,11 +246,25 @@ public class GerarCompraView extends JPanel {
 				}
 				});
 
+			JButton botaoConcluido = new JButton("Concluir");
+			ActionConcluir concluir= new ActionConcluir();
+			botaoConcluido.addActionListener(concluir);
+		
+			
 			
 			JScrollPane scrollPane = new JScrollPane(jtFornecedor);
-			frameList.add(scrollPane);
+			//frameList.add(scrollPane);
 			MouseEvent evt = null;
-			tableModelMouseClicked(evt);			
+			tableModelMouseClicked(evt);	
+			
+			frameList.add(botaoConcluido);
+		}
+	}
+	
+	private class ActionConcluir implements ActionListener{
+		@Override 
+		public void actionPerformed(ActionEvent e) {
+			frameList.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		}
 	}
 	

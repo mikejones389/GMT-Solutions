@@ -30,7 +30,7 @@ public class UsuarioDAO {
 				usuario.setNmUsuario(rs.getString("nm_usuario"));
 				usuario.setCpfUsuario(rs.getInt("cpf_usuario"));
 				usuario.setCelular(rs.getInt("celular"));
-				
+				usuarios.add(usuario);
 			}			
 		}catch(Exception e) {
 			System.out.println("ERRO: " + e.getMessage());
