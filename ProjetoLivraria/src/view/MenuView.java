@@ -106,16 +106,16 @@ public class MenuView extends JFrame implements ActionListener{
 			}
 			
 			else if(e.getActionCommand().equals("gerarCompra")) {
-				GerarCompraView cfv = new GerarCompraView();
-				cfv.setVisible(true);
+				GerarCompraView gcv = new GerarCompraView();
+				gcv.setVisible(true);
 				this.getContentPane().removeAll();
-				this.getContentPane().add(cfv);
+				this.getContentPane().add(gcv);
 				this.revalidate();
 				this.repaint();
-//				FinalizarCompraView fcv = new FinalizarCompraView();
+//				FinalizarCompraView gcv = new FinalizarCompraView();
 //				fcv.setVisible(true);
 //				this.getContentPane().removeAll();
-//				this.getContentPane().add(fcv);
+//				this.getContentPane().add(gcv);
 //				this.revalidate();
 //				this.repaint();
 			}

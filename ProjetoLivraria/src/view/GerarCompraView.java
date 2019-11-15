@@ -106,9 +106,9 @@ public class GerarCompraView extends JPanel {
 		gbc.anchor = GridBagConstraints.CENTER;
 		panelCentral.add(cdLivroField, gbc);
 		
-		ActionListarLivro actionListarLivro = new ActionListarLivro();
+		//ActionListarLivro actionListarLivro = new ActionListarLivro();
 		JButton botaoLivro = new JButton("Selecionar");
-		botaoFornecedor.addActionListener(actionListarLivro);
+		//botaoFornecedor.addActionListener(actionListarLivro);
 		gbc.gridx=3;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		panelCentral.add(botaoLivro, gbc);
@@ -157,9 +157,9 @@ public class GerarCompraView extends JPanel {
 		gbc.anchor = GridBagConstraints.LINE_END;
 		panelCentral.add(botaoSalvar, gbc);
 		
-		ActionCancelar actionCancelar = new ActionCancelar();
+		ActionSair actionSair = new ActionSair();
 		JButton botaoCancelar = new JButton("Cancelar");
-		botaoCancelar.addActionListener(actionCancelar);
+		botaoCancelar.addActionListener(actionSair);
 		gbc.gridx=2;
 		gbc.anchor= GridBagConstraints.LINE_END;
 		panelCentral.add(botaoCancelar,gbc);
@@ -173,7 +173,7 @@ public class GerarCompraView extends JPanel {
 
 	}
 	
-	private class ActionCancelar implements ActionListener{
+	private class ActionSair implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			FinalizarCompraView fcv = new FinalizarCompraView();
@@ -193,91 +193,18 @@ public class GerarCompraView extends JPanel {
 	}
 	private class ActionListarFornecedor implements ActionListener{
 	
+		int rows;
+		int headers;
+		JTable jtFornecedor = new JTable(new DefaultTableModel(rows, headers));
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
 			
 			jtFornecedor.setModel(tableModel);
-			
-			
-			
-			
-			frameList.setVisible(true);
-			frameList.setSize(300,450);
-			frameList.setResizable(false);
-			frameList.setLocationRelativeTo(cdFornecedorField);
-			frameList.setLayout(new BorderLayout());
-			JPanel panelTitulo = new JPanel();
-			//panelTitulo.setLayout(new GridLayout(1,1));
-			JLabel titulo = new JLabel("Selecione o Fornecedor", SwingConstants.CENTER);
-			titulo.setFont(new Font("Arial", Font.BOLD, 18));
-			
-			panelTitulo.add(titulo);
-			frameList.add(panelTitulo);
-			
-			List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
-			FornecedorDAO fd = new FornecedorDAO();
-			fornecedores = (List<Fornecedor>) fd.Listar();
-			
-					
-			tableModel.removeAll();
-			for (int i = 0; i < fornecedores.size(); i++) {
-				System.out.println(fornecedores.get(i).getNmFornecedor());
-				System.out.println(fornecedores.get(i).getTelefone());
-				
-				tableModel.addROw(fornecedores.get(i));
-			}
-			
-			jtFornecedor.addMouseListener(new MouseAdapter() {
-
-				@Override
-				public void mousePressed(MouseEvent e) {
-				int row = jtFornecedor.rowAtPoint(e.getPoint());
-				
-				row = jtFornecedor.getSelectedRow();
-
-				jtFornecedor.getSelectionModel().setSelectionInterval(row, row);
-				System.out.println("Cheguei no add mouse listener e linha = " + tableModel.getSelectRow(row));
-				cdFornecedorField.setText(""+tableModel.getSelectRow(row));
-				cdFornecedorField.setEditable(false);
-				System.out.println(row);
-				if(e.getButton() == MouseEvent.BUTTON3) {
-				}
-				}
-				});
-
-			JButton botaoConcluido = new JButton("Concluir");
-			ActionConcluir concluir= new ActionConcluir();
-			botaoConcluido.addActionListener(concluir);
-		
-			
-			
-			JScrollPane scrollPane = new JScrollPane(jtFornecedor);
-			//frameList.add(scrollPane);
-			MouseEvent evt = null;
-			tableModelMouseClicked(evt);	
-			
-			frameList.add(botaoConcluido);
-		}
-	}
-	
-	private class ActionConcluir implements ActionListener{
-		@Override 
-		public void actionPerformed(ActionEvent e) {
-			frameList.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		}
-	}
-	
-	private class ActionListarLivro implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			
-			jtFornecedor.setModel(tableModel);
-			
 			
 			
 			JFrame frameList = new JFrame();
+			frameList.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frameList.setVisible(true);
 			frameList.setSize(300,450);
 			frameList.setResizable(false);
@@ -320,6 +247,7 @@ public class GerarCompraView extends JPanel {
 				cdFornecedorField.setEditable(false);
 				System.out.println(row);
 				if(e.getButton() == MouseEvent.BUTTON3) {
+				//popup.show(jtFornecedor, e.getX(), e.getY());
 				}
 				}
 				});
@@ -327,11 +255,119 @@ public class GerarCompraView extends JPanel {
 			
 			JScrollPane scrollPane = new JScrollPane(jtFornecedor);
 			frameList.add(scrollPane);
+			//jTFornecedoresMouseClicked();
+			JPanel panelInferior = new JPanel();
+			//panelInferior.setBackground(Color.cyan);
+			panelInferior.setLayout(new GridBagLayout());
+			GridBagConstraints gbc = new GridBagConstraints();
+			
+			gbc.gridx=0;
+			gbc.gridy=0;
+			gbc.insets = new Insets(10,0,10,10);
+			ActionConcluir actionConcluir = new ActionConcluir();
+			JButton jbConcluir= new JButton("Concluir");
+			jbConcluir.addActionListener(actionConcluir);
+			JButton jbCancelar= new JButton("Cancelar");
+			//ADICIONAR OS EVENTOS AOS BOTOES CONCLUIR E CANCELAR 
+			
+			panelInferior.add(jbConcluir, gbc);
+			gbc.gridx=1;
+			panelInferior.add(jbCancelar, gbc);
+			frameList.add(panelInferior);
+			
+			//selecionar linha da tabela
 			MouseEvent evt = null;
-			tableModelMouseClicked(evt);			
+			tableModelMouseClicked(evt);	
+			//Fornecedor fornecedor = ((List<Fornecedor>) jtFornecedor).get(rows);
+			//cdFornecedorField.setText(fornecedor.getNmFantasia());
+			
+			
+			
+		}
+	}
+//	
+	private class ActionConcluir implements ActionListener{
+		@Override 
+		public void actionPerformed(ActionEvent e) {
+			frameList.dispose();
+			//ACHAR METÓDO PARA FECHAR A FRAME
+			//ENTENDER O JFRAMELIST.DISPOSE (UMA POSSIBILIDADE)
 		}
 	}
 	
+	private class ActionCancelar implements ActionListener{
+		@Override 
+		public void actionPerformed(ActionEvent e) {
+			System.exit(0);
+			//ACHAR METÓDO PARA FECHAR A FRAME
+			//ENTENDER O JFRAMELIST.DISPOSE (UMA POSSIBILIDADE)
+		}
+	}
+	
+//	private class ActionListarLivro implements ActionListener{
+//		@Override
+//		public void actionPerformed(ActionEvent e) {
+//			
+//			
+//			jtFornecedor.setModel(tableModel);
+//			
+//			
+//			
+//			JFrame frameList = new JFrame();
+//			frameList.setVisible(true);
+//			frameList.setSize(300,450);
+//			frameList.setResizable(false);
+//			frameList.setLocationRelativeTo(cdFornecedorField);
+//			frameList.setLayout(new GridLayout(3,1));
+//			JPanel panelTitulo = new JPanel();
+//			panelTitulo.setLayout(new GridLayout(1,1));
+//			JLabel titulo = new JLabel("Selecione o Fornecedor", SwingConstants.CENTER);
+//			titulo.setFont(new Font("Arial", Font.BOLD, 18));
+//			
+//			panelTitulo.add(titulo);
+//			frameList.add(panelTitulo);
+//			
+//			List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
+//			FornecedorDAO fd = new FornecedorDAO();
+//			fornecedores = (List<Fornecedor>) fd.Listar();
+//			
+//					
+//			tableModel.removeAll();
+//			for (int i = 0; i < fornecedores.size(); i++) {
+//				System.out.println(fornecedores.get(i).getNmFornecedor());
+//				System.out.println(fornecedores.get(i).getTelefone());
+//				
+//				tableModel.addROw(fornecedores.get(i));
+//				
+//				
+//			}
+//			
+//			jtFornecedor.addMouseListener(new MouseAdapter() {
+//
+//				@Override
+//				public void mousePressed(MouseEvent e) {
+//				int row = jtFornecedor.rowAtPoint(e.getPoint());
+//				
+//				row = jtFornecedor.getSelectedRow();
+//
+//				jtFornecedor.getSelectionModel().setSelectionInterval(row, row);
+//				System.out.println("Cheguei no add mouse listener e linha = " + tableModel.getSelectRow(row));
+//				cdFornecedorField.setText(""+tableModel.getSelectRow(row));
+//				cdFornecedorField.setEditable(false);
+//				System.out.println(row);
+//				if(e.getButton() == MouseEvent.BUTTON3) {
+//				}
+//				}
+//				});
+//
+//			
+//			JScrollPane scrollPane = new JScrollPane(jtFornecedor);
+//			frameList.add(scrollPane);
+//			MouseEvent evt = null;
+//			tableModelMouseClicked(evt);			
+//		}
+//	}
+//	
 	private void tableModelMouseClicked(java.awt.event.MouseEvent evt) {
 		System.out.println("Teste");
 		int i = jtFornecedor.getSelectedRow();

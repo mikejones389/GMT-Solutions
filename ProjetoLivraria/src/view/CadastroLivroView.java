@@ -1,4 +1,5 @@
 package view;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -419,6 +420,27 @@ import model.Livro;
 				JScrollPane scrollPane = new JScrollPane(jtFornecedor);
 				frameList.add(scrollPane);
 				//jTFornecedoresMouseClicked();
+				JPanel panelInferior = new JPanel();
+				//panelInferior.setBackground(Color.cyan);
+				panelInferior.setLayout(new GridBagLayout());
+				GridBagConstraints gbc = new GridBagConstraints();
+				
+				gbc.gridx=0;
+				gbc.gridy=0;
+				gbc.insets = new Insets(10,0,10,10);
+				ActionConcluir actionConcluir = new ActionConcluir();
+				JButton jbConcluir= new JButton("Concluir");
+				jbConcluir.addActionListener(actionConcluir);
+				
+				ActionCancelar actionCancelar = new ActionCancelar();
+				JButton jbCancelar= new JButton("Cancelar");
+				jbCancelar.addActionListener(actionCancelar);
+				
+				
+				panelInferior.add(jbConcluir, gbc);
+				gbc.gridx=1;
+				panelInferior.add(jbCancelar, gbc);
+				frameList.add(panelInferior);
 				
 				//selecionar linha da tabela
 				MouseEvent evt = null;
@@ -426,8 +448,9 @@ import model.Livro;
 				//Fornecedor fornecedor = ((List<Fornecedor>) jtFornecedor).get(rows);
 				//cdFornecedorField.setText(fornecedor.getNmFantasia());
 				
+				
+				
 			}
-			
 			
 			public void jTFornecedoresMouseClicked(java.awt.event.MouseEvent evt) {
 				System.out.println("entrei na classe jtFornecedores");
@@ -445,6 +468,23 @@ import model.Livro;
 				TableModelListener[] model = tableModel.getTableModelListeners();
 				cdFornecedorField.setText(jtFornecedor.getValueAt(i, 0).toString());
 				System.out.println(i);
+			}
+			
+			private class ActionConcluir implements ActionListener{
+				@Override 
+				public void actionPerformed(ActionEvent e) {
+					System.exit(0);
+					//ACHAR METÓDO PARA FECHAR A FRAME
+					//ENTENDER O JFRAMELIST.DISPOSE (UMA POSSIBILIDADE)
+				}
+			}
+			private class ActionCancelar implements ActionListener{
+				@Override 
+				public void actionPerformed(ActionEvent e) {
+					System.exit(0);
+					//ACHAR METÓDO PARA FECHAR A FRAME
+					//ENTENDER O JFRAMELIST.DISPOSE (UMA POSSIBILIDADE)
+				}
 			}
 		}
 		
