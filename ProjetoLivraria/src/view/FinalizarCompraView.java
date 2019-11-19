@@ -4,9 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.HeadlessException;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -14,13 +16,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import controller.CompraController;
+import model.Compra;
+
 public class FinalizarCompraView extends JPanel{
 	public FinalizarCompraView(){
 		criarFormulario();
 		
 		
 	}
-	private void criarFormulario() {
+	public void criarFormulario() {
 		this.setLayout(new BorderLayout());
 		
 		JLabel espacoLabel = new JLabel("");
@@ -104,6 +109,13 @@ public class FinalizarCompraView extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
+			Compra compra = new Compra();
+			CompraController compraController = new CompraController();
+			try {
+
+			}catch(HeadlessException /* | SQLException*/ e) {
+				//e.printStackTrace();
+			}
 			
 		}
 		
