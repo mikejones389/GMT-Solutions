@@ -87,7 +87,7 @@
 				</li>
 
 				<li>
-					<a href="shoping-cart.php" class="label1 rs1" data-label1="hot">Features</a>
+					<a href="shoping-cart.php" class="label1 rs1" data-label1="hot">Carrihno</a>
 				</li>
 
 				<li>

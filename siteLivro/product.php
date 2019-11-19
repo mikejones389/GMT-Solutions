@@ -17,7 +17,8 @@
 					<a href="product.php?genero=1" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> Ficção </a>
 					&nbsp;&nbsp;&nbsp;
 					<a href="product.php?genero=2" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> Romance </a>
-
+					&nbsp;&nbsp;&nbsp;
+					<a href="product.php?genero=3" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> Documentário </a>
 
 
 
@@ -49,6 +50,9 @@ else if ($genero == 1){
 else if ($genero == 2){
 	$query = "select * from livro where genero like '%Romance%' ";
 }
+else if ($genero == 3){
+	$query = "select * from livro where genero like '%Docu%' ";
+}
 
 
 $result = mysqli_query($db,$query);
@@ -71,8 +75,8 @@ for ($i=0; $i <$num_results; $i++)
 						<div class="block2-pic hov-img0">
 							<img src="images/<?php  echo $row['link_img']; ?>" alt="IMG-PRODUCT">
 
-							<a href="product-detail.php?livro=<?php echo $row['cd_livro'];?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
-							Ver Mais
+							<a href="shoping-cart.php?livro=<?php echo $row['cd_livro'];?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+								Add to cart
 							</a>
 						</div>
 
@@ -96,7 +100,7 @@ for ($i=0; $i <$num_results; $i++)
 											?>
 											<input type="hidden" name="acao" id="acao" value="deletar">
 											<button type="submit" name="enviar" >  <img src="images/icons/icon-heart-02.png"></button>
-											<button type="submit" name="enviar" >  <img src="images/icons/icon-cart-01.png"></button>
+											<!--<button type="submit" name="enviar" >  <img src="images/icons/icon-cart-01.png"></button>-->
 											<?php
 										}else{
 											?>
