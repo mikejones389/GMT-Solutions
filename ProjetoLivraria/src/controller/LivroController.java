@@ -15,7 +15,7 @@ public class LivroController {
 		livroDAO.inserir(livro);
 		
 		
-		return false;
+		return true;
 		
 //		if(true) {
 //			LivroDAO livroDAO = new LivroDAO();
