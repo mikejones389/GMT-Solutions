@@ -12,7 +12,7 @@ public class FornecedorController {
 			FornecedorDAO fornecedorDAO = new FornecedorDAO();
 			fornecedorDAO.inserir(fornecedor);			
 			
-			return false;
+			return true;
 		}
 		
 		public void ListarFornecedor(){
