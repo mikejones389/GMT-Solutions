@@ -1,12 +1,10 @@
-<?php require_once "i_topo.php"; ?>
-
-					
-
-		
+<?php require_once "i_topo.php";
 
 
-		
+$lista = array();
+$lista = $_SESSION['listaItensCarrinhoSelecionados'];
 
+?>
 	
 
 	<!-- breadcrumb -->
@@ -40,6 +38,38 @@
 									<th class="column-5">Total</th>
 								</tr>
 
+<?php
+
+$codigos = "";
+foreach ($lista as $item) {
+	$codigos = $codigos .  $item. ", ";
+}
+
+$codigos = substr($codigos,0, -2);
+
+$query = "select * from livro where cd_livro in (".$codigos.")";
+
+
+
+$result = mysqli_query($db,$query);
+
+
+
+
+$num_results = mysqli_num_rows($result);
+
+for ($i=0; $i <$num_results; $i++)
+{
+
+
+	$row = mysqli_fetch_array($result);
+
+
+?>
+
+
+
+
 								<tr class="table_row">
 									<td class="column-1">
 										<div class="how-itemcart1">
@@ -63,6 +93,15 @@
 									</td>
 									<td class="column-5"><?php  echo $row['preco_venda']; ?></td>
 								</tr>
+
+<?php
+}
+?>
+
+
+
+
+
 
 							</table>
 						</div>

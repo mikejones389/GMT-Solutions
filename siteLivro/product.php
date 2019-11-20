@@ -75,7 +75,7 @@ for ($i=0; $i <$num_results; $i++)
 						<div class="block2-pic hov-img0">
 							<img src="images/<?php  echo $row['link_img']; ?>" alt="IMG-PRODUCT">
 
-							<a href="shoping-cart.php?livro=<?php echo $row['cd_livro'];?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+							<a href="montarCarrinho.php?livro=<?php echo $row['cd_livro'];?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 								Add to cart
 							</a>
 						</div>
