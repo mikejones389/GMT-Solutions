@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -20,7 +21,10 @@ import controller.CompraController;
 import model.Compra;
 
 public class FinalizarCompraView extends JPanel{
+
+	
 	public FinalizarCompraView(){
+		
 		criarFormulario();
 		
 		
@@ -102,6 +106,7 @@ public class FinalizarCompraView extends JPanel{
 		
 		
 		this.add(panelCentral, BorderLayout.CENTER);
+
 	}
 	
 	private class ActionConcluir implements ActionListener{

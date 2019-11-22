@@ -47,7 +47,7 @@ import model.Livro;
 		private JTextField qntLivroField;
 		private JTextField imgLinkField;
 
-		
+		JFrame frameList;
 		private Livro livro;
 		
 		
@@ -368,7 +368,7 @@ import model.Livro;
 				jtFornecedor.setModel(tableModel);
 				
 				
-				JFrame frameList = new JFrame();
+				frameList = new JFrame();
 				frameList.setVisible(true);
 				frameList.setSize(300,450);
 				frameList.setResizable(false);
@@ -473,7 +473,8 @@ import model.Livro;
 			private class ActionConcluir implements ActionListener{
 				@Override 
 				public void actionPerformed(ActionEvent e) {
-					System.exit(0);
+					frameList.setVisible(false);
+					frameList.dispose();
 					//ACHAR METÓDO PARA FECHAR A FRAME
 					//ENTENDER O JFRAMELIST.DISPOSE (UMA POSSIBILIDADE)
 				}
@@ -481,7 +482,9 @@ import model.Livro;
 			private class ActionCancelar implements ActionListener{
 				@Override 
 				public void actionPerformed(ActionEvent e) {
-					System.exit(0);
+					cdFornecedorField.setText(" ");
+					frameList.setVisible(false);
+					frameList.dispose();
 					//ACHAR METÓDO PARA FECHAR A FRAME
 					//ENTENDER O JFRAMELIST.DISPOSE (UMA POSSIBILIDADE)
 				}

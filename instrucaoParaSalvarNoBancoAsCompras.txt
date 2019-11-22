@@ -1,0 +1,10 @@
+COMPRA 
+- cd_fornecedor
+- dt_compra
+- dt_entrega
+
+ITEM-COMPRA
+- cd_livro (apresentar o nome do livro(não editavel))
+- cd_compra (COMPRA cd_compra(auto incremente))
+- quantidade 
+- preco_unitario

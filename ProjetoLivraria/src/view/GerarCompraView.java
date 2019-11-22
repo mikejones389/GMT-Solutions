@@ -18,6 +18,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -33,12 +34,13 @@ import model.Compra;
 import model.Fornecedor;
 import model.FornecedorTableModel;
 
-public class GerarCompraView extends JPanel {
+public class GerarCompraView extends JPanel implements ActionListener{
 	
 	private JTextField dtCompraField;
 	private JTextField dtEntregaField;
 	private JTextField cdFornecedorField;
 	private JTextField cdLivroField;
+	private JFrame frame;
 	
 	JFrame frameList = new JFrame();
 	
@@ -49,8 +51,8 @@ public class GerarCompraView extends JPanel {
 	JTable jtFornecedor = new JTable(new DefaultTableModel(rows, headers));
 	
 	//M�todo Gerar Compra	
-	public GerarCompraView () {
-		
+	public GerarCompraView (JFrame principal) {
+		this.frame = principal;
 		criarFormulario();
 	}
 	
@@ -138,7 +140,7 @@ public class GerarCompraView extends JPanel {
 		panelCentral.add(dtEntregaLabel, gbc);
 		
 		JDateChooser dataEntrega;
-		dataEntrega = new JDateChooser("dd/MM/yyyy", "##/##/####", '_');
+		dataEntrega = new JDateChooser("yyyy/mm/dd", "####/##/##", '_');
 		dataEntrega.setFont(new Font("Arial", Font.BOLD, 16));
 		dataEntrega.setPreferredSize(new Dimension(200,20));
 		dataEntrega.setDate(new Date());
@@ -149,9 +151,12 @@ public class GerarCompraView extends JPanel {
 		
 		this.add(panelCentral, BorderLayout.CENTER);
 		
-		ActionSalvar actionSalvar = new ActionSalvar();
+		//ActionSalvar actionSalvar = new ActionSalvar();
 		JButton botaoSalvar = new JButton("Salvar");
-		botaoSalvar.addActionListener(actionSalvar);
+		//botaoSalvar.addActionListener(actionSalvar);
+		botaoSalvar.addActionListener(this);
+		botaoSalvar.setActionCommand("salvar");
+		
 		gbc.gridx=1;
 		gbc.gridy=4;
 		gbc.anchor = GridBagConstraints.LINE_END;
@@ -164,6 +169,8 @@ public class GerarCompraView extends JPanel {
 		gbc.anchor= GridBagConstraints.LINE_END;
 		panelCentral.add(botaoCancelar,gbc);
 		
+	
+		
 	}
 	
 	private class ActionSair implements ActionListener{
@@ -173,17 +180,22 @@ public class GerarCompraView extends JPanel {
 		}
 	}
 	
-	private class ActionSalvar implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			//Metodo para chamar outra vieew
+	public void acaoSalvar() {
+			//Metodo para chamar outra vieew                        
+	
 			FinalizarCompraView fcv = new FinalizarCompraView();
 			fcv.criarFormulario();
-			//achar metodo
-		}
+			fcv.setVisible(true);
+			this.frame.getContentPane().removeAll();
+			this.frame.getContentPane().add(fcv);
+			this.frame.revalidate();
+			this.frame.repaint();
+			
+			//achar metodo	
 		
 	}
+	
+	
 	private class ActionListarFornecedor implements ActionListener{
 	
 		int rows;
@@ -297,6 +309,10 @@ public class GerarCompraView extends JPanel {
 		}
 	}
 	
+	//public void acaoListarLivro(){
+	
+	//}
+	
 	private class ActionListarLivro implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -387,5 +403,17 @@ public class GerarCompraView extends JPanel {
 		TableModelListener[] model = tableModel.getTableModelListeners();
 		cdFornecedorField.setText(jtFornecedor.getValueAt(i, 0).toString());
 		System.out.println(i);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getActionCommand().equals("salvar")) {
+			
+			acaoSalvar();
+		}
+		else if(e.getActionCommand().equals("listar")){
+			//acaoListarLivro();
+		}
+		
 	}
 }
