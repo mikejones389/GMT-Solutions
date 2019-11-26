@@ -67,8 +67,9 @@ public class LivroDAO {
 			while(rs.next()) {
 				//System.out.println("ENTROU3");
 				Livro livro = new Livro();
+				livro.setCdLivro(rs.getInt("cd_Livro"));
 				livro.setNomeLivro(rs.getString("nm_Livro"));
-				livro.setPrecoVenda(rs.getDouble("preco_venda"));
+				livro.setQntLivro(rs.getInt("qnt_livro"));
 				livros.add(livro);
 				//System.out.println(livro.getNomeLivro());
 //				for (int i = 0; i < livros.size(); i++) {

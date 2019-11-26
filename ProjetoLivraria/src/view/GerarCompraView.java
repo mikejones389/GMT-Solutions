@@ -18,7 +18,6 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -30,390 +29,387 @@ import javax.swing.table.DefaultTableModel;
 import com.toedter.calendar.JDateChooser;
 
 import dao.FornecedorDAO;
+import dao.LivroDAO;
 import model.Compra;
 import model.Fornecedor;
 import model.FornecedorTableModel;
+import model.Livro;
+import model.LivroTableModel;
 
-public class GerarCompraView extends JPanel implements ActionListener{
-	
+public class GerarCompraView extends JPanel implements ActionListener {
+
 	private JTextField dtCompraField;
 	private JTextField dtEntregaField;
 	private JTextField cdFornecedorField;
 	private JTextField cdLivroField;
 	private JFrame frame;
+	public static String codLivro;
 	
 	JFrame frameList = new JFrame();
-	
+
 	private Compra compra;
-	FornecedorTableModel tableModel = new FornecedorTableModel();
+	LivroTableModel tableModelLivro = new LivroTableModel();
+	FornecedorTableModel tableModelFornecedor = new FornecedorTableModel();
 	int rows;
 	int headers;
 	JTable jtFornecedor = new JTable(new DefaultTableModel(rows, headers));
-	
-	//Mï¿½todo Gerar Compra	
-	public GerarCompraView (JFrame principal) {
+	JTable jtLivro = new JTable(new DefaultTableModel(rows, headers));
+
+	// Mï¿½todo Gerar Compra
+	public GerarCompraView(JFrame principal) {
 		this.frame = principal;
 		criarFormulario();
 	}
-	
-	private void criarFormulario() {
-			
+
+	public void criarFormulario() {
+
 		this.setLayout(new BorderLayout());
-		JLabel titulo = new JLabel("Compra",SwingConstants.CENTER);
+		JLabel titulo = new JLabel("Compra", SwingConstants.CENTER);
 		titulo.setFont(new Font("Arial", Font.CENTER_BASELINE, 40));
 		this.add(titulo, BorderLayout.NORTH);
-		
+
 		JPanel panelCentral = new JPanel();
 		panelCentral.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.weightx= 0.1;
-		gbc.weighty= 0.1;
-		gbc.insets= new Insets(10,0,0,5);
+		gbc.weightx = 0.1;
+		gbc.weighty = 0.1;
+		gbc.insets = new Insets(10, 0, 0, 5);
 		gbc.anchor = GridBagConstraints.LINE_END;
 		JLabel espaco1 = new JLabel("");
 		espaco1.setFont(new Font("Arial", Font.BOLD, 16));
-		gbc.gridx=0;
-		gbc.gridy=0;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
 		panelCentral.add(espaco1, gbc);
-		
+
 		JLabel cdFornecedor = new JLabel("Código do Fornecedor");
 		cdFornecedor.setFont(new Font("Arial", Font.BOLD, 16));
-		gbc.gridx=1;
-		gbc.gridy=0;
-		panelCentral.add(cdFornecedor,gbc);
-		
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		panelCentral.add(cdFornecedor, gbc);
+
 		cdFornecedorField = new JTextField(20);
 		cdFornecedorField.setEditable(false);
-		gbc.gridx=2;
+		gbc.gridx = 2;
 		gbc.anchor = GridBagConstraints.CENTER;
 		panelCentral.add(cdFornecedorField, gbc);
-		
-		ActionListarFornecedor actionListarFornecedor = new ActionListarFornecedor();
-		JButton botaoFornecedor= new JButton("Selecionar");
-		botaoFornecedor.addActionListener(actionListarFornecedor);
-		gbc.gridx=3;
+
+		JButton botaoFornecedor = new JButton("Selecionar");
+		botaoFornecedor.addActionListener(this);
+		botaoFornecedor.setActionCommand("listarFornecedor");
+		gbc.gridx = 3;
 		gbc.anchor = GridBagConstraints.LINE_START;
-		panelCentral.add(botaoFornecedor,gbc);
-		
+		panelCentral.add(botaoFornecedor, gbc);
+
 		JLabel cdLivro = new JLabel("Código do Livro");
 		cdLivro.setFont(new Font("Arial", Font.BOLD, 16));
-		gbc.gridx=1;
-		gbc.gridy=1;
+		gbc.gridx = 1;
+		gbc.gridy = 1;
 		gbc.anchor = GridBagConstraints.LINE_END;
-		panelCentral.add(cdLivro,gbc);
-		
+		panelCentral.add(cdLivro, gbc);
+
 		cdLivroField = new JTextField(20);
 		cdLivroField.setEditable(false);
-		gbc.gridx=2;
+		gbc.gridx = 2;
 		gbc.anchor = GridBagConstraints.CENTER;
 		panelCentral.add(cdLivroField, gbc);
+
 		
-		ActionListarLivro actionListarLivro = new ActionListarLivro();
 		JButton botaoLivro = new JButton("Selecionar");
-		botaoFornecedor.addActionListener(actionListarLivro);
-		gbc.gridx=3;
+		botaoLivro.addActionListener(this);
+		botaoLivro.setActionCommand("listarLivro");
+		gbc.gridx = 3;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		panelCentral.add(botaoLivro, gbc);
-		
-		
-		gbc.gridx=1;
-		gbc.gridy=2;
+
+		gbc.gridx = 1;
+		gbc.gridy = 2;
 		gbc.anchor = GridBagConstraints.LINE_END;
-		JLabel dtCompraLabel = new JLabel ("Data da Compra");
+		JLabel dtCompraLabel = new JLabel("Data da Compra");
 		dtCompraLabel.setFont(new Font("Arial", Font.BOLD, 16));
-		panelCentral.add(dtCompraLabel,gbc);
-		
-		gbc.gridx=2;
+		panelCentral.add(dtCompraLabel, gbc);
+
+		gbc.gridx = 2;
 		JDateChooser dataCompra;
 		dataCompra = new JDateChooser("dd/MM/yyyy", "##/##/####", '_');
 		dataCompra.setFont(new Font("Arial", Font.BOLD, 16));
-		dataCompra.setPreferredSize(new Dimension(200,20));
+		dataCompra.setPreferredSize(new Dimension(200, 20));
 		dataCompra.setDate(new Date());
 		gbc.anchor = GridBagConstraints.CENTER;
 		panelCentral.add(dataCompra, gbc);
-		
-		JLabel dtEntregaLabel = new JLabel ("Data de Entrega");
+
+		JLabel dtEntregaLabel = new JLabel("Data de Entrega");
 		dtEntregaLabel.setFont(new Font("Arial", Font.BOLD, 16));
-		gbc.gridx=1;
-		gbc.gridy=3;
+		gbc.gridx = 1;
+		gbc.gridy = 3;
 		gbc.anchor = GridBagConstraints.LINE_END;
 		panelCentral.add(dtEntregaLabel, gbc);
-		
+
 		JDateChooser dataEntrega;
-		dataEntrega = new JDateChooser("yyyy/mm/dd", "####/##/##", '_');
+		dataEntrega = new JDateChooser("dd/MM/yyyy", "##/##/####", '_');
 		dataEntrega.setFont(new Font("Arial", Font.BOLD, 16));
-		dataEntrega.setPreferredSize(new Dimension(200,20));
+		dataEntrega.setPreferredSize(new Dimension(200, 20));
 		dataEntrega.setDate(new Date());
-		gbc.gridx=2;
+		gbc.gridx = 2;
 		gbc.anchor = GridBagConstraints.CENTER;
 		panelCentral.add(dataEntrega, gbc);
-		
-		
+
 		this.add(panelCentral, BorderLayout.CENTER);
-		
-		//ActionSalvar actionSalvar = new ActionSalvar();
+
 		JButton botaoSalvar = new JButton("Salvar");
-		//botaoSalvar.addActionListener(actionSalvar);
 		botaoSalvar.addActionListener(this);
 		botaoSalvar.setActionCommand("salvar");
-		
-		gbc.gridx=1;
-		gbc.gridy=4;
+
+		gbc.gridx = 1;
+		gbc.gridy = 4;
 		gbc.anchor = GridBagConstraints.LINE_END;
 		panelCentral.add(botaoSalvar, gbc);
+
 		
-		ActionSair actionSair = new ActionSair();
-		JButton botaoCancelar = new JButton("Cancelar");
-		botaoCancelar.addActionListener(actionSair);
-		gbc.gridx=2;
-		gbc.anchor= GridBagConstraints.LINE_END;
-		panelCentral.add(botaoCancelar,gbc);
+		JButton botaoSair = new JButton("Sair");
+		botaoSair.addActionListener(this);
+		botaoSair.setActionCommand("sair");
+		gbc.gridx = 2;
+		gbc.anchor = GridBagConstraints.LINE_END;
+		panelCentral.add(botaoSair, gbc);
+
+	}
 		
-	
+	public void acaoSair() {
+		FinalizarCompraView fcv = new FinalizarCompraView();
 		
 	}
-	
-	private class ActionSair implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			FinalizarCompraView fcv = new FinalizarCompraView();
-		}
-	}
-	
+
 	public void acaoSalvar() {
-			//Metodo para chamar outra vieew                        
+		codLivro = cdLivroField.getText();
+		FinalizarCompraView fcv = new FinalizarCompraView();
+		fcv.criarFormulario();
+		fcv.setVisible(true);
+		this.frame.getContentPane().removeAll();
+		this.frame.getContentPane().add(fcv);
+		this.frame.revalidate();
+		this.frame.repaint();
 	
-			FinalizarCompraView fcv = new FinalizarCompraView();
-			fcv.criarFormulario();
-			fcv.setVisible(true);
-			this.frame.getContentPane().removeAll();
-			this.frame.getContentPane().add(fcv);
-			this.frame.revalidate();
-			this.frame.repaint();
-			
-			//achar metodo	
+	}
+
+	public void acaoListarFornecedor() {
+
+		jtFornecedor.setModel(tableModelFornecedor);
+
+		frameList = new JFrame();
+		frameList.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameList.setVisible(true);
+		frameList.setSize(300, 450);
+		frameList.setResizable(false);
+		frameList.setLocationRelativeTo(cdFornecedorField);
+		frameList.setLayout(new GridLayout(3, 1));
+		JPanel panelTitulo = new JPanel();
+		panelTitulo.setLayout(new GridLayout(1, 1));
+		JLabel titulo = new JLabel("Selecione o Fornecedor", SwingConstants.CENTER);
+		titulo.setFont(new Font("Arial", Font.BOLD, 18));
+
+		panelTitulo.add(titulo);
+		frameList.add(panelTitulo);
+
+		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
+		FornecedorDAO fd = new FornecedorDAO();
+		fornecedores = (List<Fornecedor>) fd.Listar();
+
+		tableModelFornecedor.removeAll();
+		for (int i = 0; i < fornecedores.size(); i++) {
+			System.out.println(fornecedores.get(i).getNmFornecedor());
+			System.out.println(fornecedores.get(i).getTelefone());
+
+			tableModelFornecedor.addROw(fornecedores.get(i));
+
+		}
+
+		jtFornecedor.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				int row = jtFornecedor.rowAtPoint(e.getPoint());
+
+				row = jtFornecedor.getSelectedRow();
+
+				jtFornecedor.getSelectionModel().setSelectionInterval(row, row);
+				System.out.println("Cheguei no add mouse listener e linha = " + tableModelFornecedor.getSelectRow(row));
+				cdFornecedorField.setText("" + tableModelFornecedor.getSelectRow(row));
+				cdFornecedorField.setEditable(false);
+				System.out.println(row);
+				if (e.getButton() == MouseEvent.BUTTON3) {
+					// popup.show(jtFornecedor, e.getX(), e.getY());
+				}
+			}
+		});
+
+		JScrollPane scrollPane = new JScrollPane(jtFornecedor);
+		frameList.add(scrollPane);
+		// jTFornecedoresMouseClicked();
+		JPanel panelInferior = new JPanel();
+		// panelInferior.setBackground(Color.cyan);
+		panelInferior.setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.insets = new Insets(10, 0, 10, 10);
+
+		JButton jbConcluir = new JButton("Concluir");
+		jbConcluir.addActionListener(this);
+		jbConcluir.setActionCommand("concluir");
+		
+		JButton jbCancelar = new JButton("Cancelar");
+		jbCancelar.addActionListener(this);
+		jbCancelar.setActionCommand("cancelarFornecedor");
+
+
+		panelInferior.add(jbConcluir, gbc);
+		gbc.gridx = 1;
+		panelInferior.add(jbCancelar, gbc);
+		frameList.add(panelInferior);
+
+		// selecionar linha da tabela
+		MouseEvent evt = null;
+		tableModelMouseClickedFornecedor(evt);
+		// Fornecedor fornecedor = ((List<Fornecedor>) jtFornecedor).get(rows);
+		// cdFornecedorField.setText(fornecedor.getNmFantasia());
+
 		
 	}
 	
-	
-	private class ActionListarFornecedor implements ActionListener{
-	
-		int rows;
-		int headers;
-		JTable jtFornecedor = new JTable(new DefaultTableModel(rows, headers));
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			
-			jtFornecedor.setModel(tableModel);
-			
-			
-			JFrame frameList = new JFrame();
-			frameList.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frameList.setVisible(true);
-			frameList.setSize(300,450);
-			frameList.setResizable(false);
-			frameList.setLocationRelativeTo(cdFornecedorField);
-			frameList.setLayout(new GridLayout(3,1));
-			JPanel panelTitulo = new JPanel();
-			panelTitulo.setLayout(new GridLayout(1,1));
-			JLabel titulo = new JLabel("Selecione o Fornecedor", SwingConstants.CENTER);
-			titulo.setFont(new Font("Arial", Font.BOLD, 18));
-			
-			panelTitulo.add(titulo);
-			frameList.add(panelTitulo);
-			
-			List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
-			FornecedorDAO fd = new FornecedorDAO();
-			fornecedores = (List<Fornecedor>) fd.Listar();
-			
-					
-			tableModel.removeAll();
-			for (int i = 0; i < fornecedores.size(); i++) {
-				System.out.println(fornecedores.get(i).getNmFornecedor());
-				System.out.println(fornecedores.get(i).getTelefone());
-				
-				tableModel.addROw(fornecedores.get(i));
-				
-				
-			}
-			
-			jtFornecedor.addMouseListener(new MouseAdapter() {
+	public void acaoConcluir(){
+		frameList.setVisible(false);
+		frameList.dispose();
+		
+	}
 
-				@Override
-				public void mousePressed(MouseEvent e) {
-				int row = jtFornecedor.rowAtPoint(e.getPoint());
-				
-				row = jtFornecedor.getSelectedRow();
+	public void acaoCancelarFornecedor() {
+		cdFornecedorField.setText("");
+		frameList.setVisible(false);
+		frameList.dispose();
+	
+	}
 
-				jtFornecedor.getSelectionModel().setSelectionInterval(row, row);
-				System.out.println("Cheguei no add mouse listener e linha = " + tableModel.getSelectRow(row));
-				cdFornecedorField.setText(""+tableModel.getSelectRow(row));
-				cdFornecedorField.setEditable(false);
+	public void acaoCancelarLivro() {
+		cdLivroField.setText("");
+		frameList.setVisible(false);
+		frameList.dispose();
+	
+	}
+	
+	public void acaoListarLivro(){
+		System.out.println("cheguei aqui no listar");
+		jtLivro.setModel(tableModelLivro);
+
+		frameList = new JFrame();
+		frameList.setVisible(true);
+		frameList.setSize(300, 450);
+		frameList.setResizable(false);
+		frameList.setLocationRelativeTo(cdLivroField);
+		frameList.setLayout(new GridLayout(3, 1));
+		JPanel panelTitulo = new JPanel();
+		panelTitulo.setLayout(new GridLayout(1, 1));
+		JLabel titulo = new JLabel("Selecione o Livro", SwingConstants.CENTER);
+		titulo.setFont(new Font("Arial", Font.BOLD, 18));
+
+		panelTitulo.add(titulo);
+		frameList.add(panelTitulo);
+
+		List<Livro> livros = new ArrayList<Livro>();
+		LivroDAO ld = new LivroDAO();
+		livros = (List<Livro>) ld.Listar();
+
+		tableModelLivro.removeAll();
+		for (int i = 0; i < livros.size(); i++) {
+			tableModelLivro.addRow(livros.get(i));
+		}
+
+		jtLivro.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				int row = jtLivro.rowAtPoint(e.getPoint());
+
+				row = jtLivro.getSelectedRow();
+
+				jtLivro.getSelectionModel().setSelectionInterval(row, row);
+				System.out.println("Cheguei no add mouse listener e linha = " + tableModelLivro.getSelectRow(row));
+				cdLivroField.setText("" + tableModelLivro.getSelectRow(row));
+				cdLivroField.setEditable(false);
 				System.out.println(row);
-				if(e.getButton() == MouseEvent.BUTTON3) {
-				//popup.show(jtFornecedor, e.getX(), e.getY());
+				if (e.getButton() == MouseEvent.BUTTON3) {
 				}
-				}
-				});
-
-			
-			JScrollPane scrollPane = new JScrollPane(jtFornecedor);
-			frameList.add(scrollPane);
-			//jTFornecedoresMouseClicked();
-			JPanel panelInferior = new JPanel();
-			//panelInferior.setBackground(Color.cyan);
-			panelInferior.setLayout(new GridBagLayout());
-			GridBagConstraints gbc = new GridBagConstraints();
-			
-			gbc.gridx=0;
-			gbc.gridy=0;
-			gbc.insets = new Insets(10,0,10,10);
-			ActionConcluir actionConcluir = new ActionConcluir();
-			JButton jbConcluir= new JButton("Concluir");
-			jbConcluir.addActionListener(actionConcluir);
-			JButton jbCancelar= new JButton("Cancelar");
-			//ADICIONAR OS EVENTOS AOS BOTOES CONCLUIR E CANCELAR 
-			
-			panelInferior.add(jbConcluir, gbc);
-			gbc.gridx=1;
-			panelInferior.add(jbCancelar, gbc);
-			frameList.add(panelInferior);
-			
-			//selecionar linha da tabela
-			MouseEvent evt = null;
-			tableModelMouseClicked(evt);	
-			//Fornecedor fornecedor = ((List<Fornecedor>) jtFornecedor).get(rows);
-			//cdFornecedorField.setText(fornecedor.getNmFantasia());
-			
-			
-			
-		}
-	}
-//	
-	private class ActionConcluir implements ActionListener{
-		@Override 
-		public void actionPerformed(ActionEvent e) {
-			frameList.dispose();
-			//ACHAR METÓDO PARA FECHAR A FRAME
-			//ENTENDER O JFRAMELIST.DISPOSE (UMA POSSIBILIDADE)
-		}
-	}
-	
-	private class ActionCancelar implements ActionListener{
-		@Override 
-		public void actionPerformed(ActionEvent e) {
-			System.exit(0);
-			//ACHAR METÓDO PARA FECHAR A FRAME
-			//ENTENDER O JFRAMELIST.DISPOSE (UMA POSSIBILIDADE)
-		}
-	}
-	
-	//public void acaoListarLivro(){
-	
-	//}
-	
-	private class ActionListarLivro implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			
-			jtFornecedor.setModel(tableModel);
-			
-			
-			
-			JFrame frameList = new JFrame();
-			frameList.setVisible(true);
-			frameList.setSize(300,450);
-			frameList.setResizable(false);
-			frameList.setLocationRelativeTo(cdFornecedorField);
-			frameList.setLayout(new GridLayout(3,1));
-			JPanel panelTitulo = new JPanel();
-			panelTitulo.setLayout(new GridLayout(1,1));
-			JLabel titulo = new JLabel("Selecione o Fornecedor", SwingConstants.CENTER);
-			titulo.setFont(new Font("Arial", Font.BOLD, 18));
-			
-			panelTitulo.add(titulo);
-			frameList.add(panelTitulo);
-			
-			List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
-			FornecedorDAO fd = new FornecedorDAO();
-			fornecedores = (List<Fornecedor>) fd.Listar();
-			
-					
-			tableModel.removeAll();
-			for (int i = 0; i < fornecedores.size(); i++) {
-				System.out.println(fornecedores.get(i).getNmFornecedor());
-				System.out.println(fornecedores.get(i).getTelefone());
-				
-				tableModel.addROw(fornecedores.get(i));
-				
-				
 			}
-			
-			jtFornecedor.addMouseListener(new MouseAdapter() {
+		});
 
-				@Override
-				public void mousePressed(MouseEvent e) {
-				int row = jtFornecedor.rowAtPoint(e.getPoint());
-				
-				row = jtFornecedor.getSelectedRow();
+		JScrollPane scrollPane = new JScrollPane(jtLivro);
+		frameList.add(scrollPane);
 
-				jtFornecedor.getSelectionModel().setSelectionInterval(row, row);
-				System.out.println("Cheguei no add mouse listener e linha = " + tableModel.getSelectRow(row));
-				cdFornecedorField.setText(""+tableModel.getSelectRow(row));
-				cdFornecedorField.setEditable(false);
-				System.out.println(row);
-				if(e.getButton() == MouseEvent.BUTTON3) {
-				}
-				}
-				});
+		JPanel panelInferior = new JPanel();
+		// panelInferior.setBackground(Color.cyan);
+		panelInferior.setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
 
-			
-			JScrollPane scrollPane = new JScrollPane(jtFornecedor);
-			frameList.add(scrollPane);
-			MouseEvent evt = null;
-			tableModelMouseClicked(evt);	
-			
-			JPanel panelInferior = new JPanel();
-			//panelInferior.setBackground(Color.cyan);
-			panelInferior.setLayout(new GridBagLayout());
-			GridBagConstraints gbc = new GridBagConstraints();
-			
-			gbc.gridx=0;
-			gbc.gridy=0;
-			gbc.insets = new Insets(10,0,10,10);
-			ActionConcluir actionConcluir = new ActionConcluir();
-			JButton jbConcluir= new JButton("Concluir");
-			jbConcluir.addActionListener(actionConcluir);
-			JButton jbCancelar= new JButton("Cancelar");
-			//ADICIONAR OS EVENTOS AOS BOTOES CONCLUIR E CANCELAR 
-			
-			panelInferior.add(jbConcluir, gbc);
-			gbc.gridx=1;
-			panelInferior.add(jbCancelar, gbc);
-			frameList.add(panelInferior);
-			
-		}
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.insets = new Insets(10, 0, 10, 10);
+		JButton jbConcluir = new JButton("Concluir");
+		jbConcluir.addActionListener(this);
+		jbConcluir.setActionCommand("concluir");
+
+		JButton jbCancelar = new JButton("Cancelar");
+		jbCancelar.addActionListener(this);
+		jbCancelar.setActionCommand("cancelarLivro");
+
+		panelInferior.add(jbConcluir, gbc);
+		gbc.gridx = 1;
+		panelInferior.add(jbCancelar, gbc);
+		frameList.add(panelInferior);
+
+		MouseEvent evt = null;
+		tableModelMouseClickedLivro(evt);
+
 	}
-	
-	private void tableModelMouseClicked(java.awt.event.MouseEvent evt) {
+
+	private void tableModelMouseClickedFornecedor(java.awt.event.MouseEvent evt) {
 		System.out.println("Teste");
 		int i = jtFornecedor.getSelectedRow();
-		TableModelListener[] model = tableModel.getTableModelListeners();
+		TableModelListener[] model = tableModelFornecedor.getTableModelListeners();
 		cdFornecedorField.setText(jtFornecedor.getValueAt(i, 0).toString());
+		System.out.println(i);
+	}
+	
+	private void tableModelMouseClickedLivro(java.awt.event.MouseEvent evt) {
+		System.out.println("Teste");
+		int i = jtLivro.getSelectedRow();
+		TableModelListener[] model = tableModelLivro.getTableModelListeners();
+		cdLivroField.setText(jtLivro.getValueAt(i, 0).toString());
 		System.out.println(i);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("salvar")) {
-			
+		if (e.getActionCommand().equals("salvar")) {
 			acaoSalvar();
+		} 
+		else if (e.getActionCommand().equals("listarLivro")) {
+			 acaoListarLivro();
 		}
-		else if(e.getActionCommand().equals("listar")){
-			//acaoListarLivro();
+		else if (e.getActionCommand().equals("listarFornecedor")) {
+			acaoListarFornecedor();
 		}
-		
+		else if (e.getActionCommand().equals("sair")) {
+			acaoSair();
+		}
+		else if (e.getActionCommand().equals("concluir")) {
+			acaoConcluir();
+		}
+		else if (e.getActionCommand().equals("cancelarFornecedor")) {
+			acaoCancelarFornecedor();
+		}
+		else if (e.getActionCommand().equals("cancelarLivro")) {
+			acaoCancelarLivro();
+		}
+
 	}
 }

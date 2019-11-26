@@ -18,6 +18,12 @@ public class Livro {
 	 public Livro(){
 	        //System.out.println("Construtor do Livro\n");
 	 }
+	 public int getCdLivro() {
+		 return cdLivro;
+	 }
+	 public void setCdLivro(int cdLivro) {
+		 this.cdLivro = cdLivro;
+	 }
 	 
 	 public String getNomeLivro() {
 	        return nmLivro;
