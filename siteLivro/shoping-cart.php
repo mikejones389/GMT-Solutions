@@ -2,8 +2,12 @@
 
 
 $lista = array();
-$lista = $_SESSION['listaItensCarrinhoSelecionados'];
 
+
+if (!empty($_SESSION['listaItensCarrinhoSelecionados']) ){
+	$lista = $_SESSION['listaItensCarrinhoSelecionados'];
+
+}
 ?>
 	
 
@@ -45,7 +49,16 @@ foreach ($lista as $item) {
 	$codigos = $codigos .  $item. ", ";
 }
 
+
 $codigos = substr($codigos,0, -2);
+
+
+if (empty($codigos) ){
+	$codigos=0;
+
+}
+
+
 
 $query = "select * from livro where cd_livro in (".$codigos.")";
 
@@ -84,14 +97,14 @@ for ($i=0; $i <$num_results; $i++)
 												<i class="fs-16 zmdi zmdi-minus"></i>
 											</div>
 
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="1">
+											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" id="num-product1" value="1">
 
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" onclick="carrinhoValor(<?php  echo $row['cd_livro']; ?>,<?php  echo $row['preco_venda']; ?>);">
 												<i class="fs-16 zmdi zmdi-plus"></i>
 											</div>
 										</div>
 									</td>
-									<td class="column-5"><?php  echo $row['preco_venda']; ?></td>
+									<td class="column-5" id="valor<?php  echo $row['cd_livro']; ?>"></td>
 								</tr>
 
 <?php
@@ -403,6 +416,20 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
+
+	<script>
+		function carrinhoValor(codigo,valor){
+				alert('teste'+codigo);
+				qtd=document.getElementById("num-product1").value;
+				soma= valor*qtd;
+				document.getElementById("valor")
+
+
+		}
+
+
+
+	</script>
 
 </body>
 </html>
