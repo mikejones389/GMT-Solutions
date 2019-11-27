@@ -1,5 +1,6 @@
 <?php require_once "i_topo.php";
 
+$_SESSION['sessaoTotal'] = 0;
 
 $lista = array();
 
@@ -211,9 +212,7 @@ for ($i=0; $i <$num_results; $i++)
 							</div>
 
 							<div class="size-209 p-t-1">
-								<span class="mtext-110 cl2" id="somaTotal">
-									
-								</span>
+										<input type="text" readonly="readonly"  id="somaTotal"value="0">
 							</div>
 						</div>
 
@@ -422,6 +421,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="js/main.js"></script>
 
 	<script>
+
+
 		function carrinhoValor(codigo,valor, acao){
 				input= "num-product"+codigo;
 				qtd=document.getElementById(input).value;
@@ -433,15 +434,28 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 						qtd--;
 					
 				}
-				
 
 				soma= valor*qtd;
-				teste= "valor"+codigo;
-				document.getElementById(teste).innerHTML=soma;
+				codigoSoma= "valor"+codigo;
+				document.getElementById(codigoSoma).innerHTML=soma;
 
+				calculaTotal(valor,qtd, soma);
+				
 
-				document.getElementById("somaTotal").innerHTML=soma;
+		}
 
+		function calculaTotal(valor,qtd, soma){
+				temp = document.getElementById("somaTotal").value;
+
+				if (qtd > 1){
+					total = parseFloat(temp) - (qtd-1 * valor);
+					
+				}else{
+					total = parseFloat(soma) + parseFloat(temp);
+				}
+
+				
+				document.getElementById("somaTotal").value=total;
 		}
 
 
