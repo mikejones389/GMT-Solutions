@@ -93,13 +93,17 @@ for ($i=0; $i <$num_results; $i++)
 									<!--<td class="column-3">?php  echo $row['preco_venda']; ?></td>-->
 									<td class="column-4">
 										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" onclick="carrinhoValor(<?php  echo $row['cd_livro']; ?>,<?php  echo $row['preco_venda']; ?>,'diminuir');">
 												<i class="fs-16 zmdi zmdi-minus"></i>
 											</div>
 
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" id="num-product1" value="1">
+											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product<?php  echo $row['cd_livro']; ?>" id="num-product<?php  echo $row['cd_livro']; ?>" value="0">
+												<?php 
 
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" onclick="carrinhoValor(<?php  echo $row['cd_livro']; ?>,<?php  echo $row['preco_venda']; ?>);">
+													$codigoFinal="valor".$row['cd_livro'];
+
+																		?>
+											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" onclick="carrinhoValor(<?php  echo $row['cd_livro']; ?>,<?php  echo $row['preco_venda']; ?>,'somar');">
 												<i class="fs-16 zmdi zmdi-plus"></i>
 											</div>
 										</div>
@@ -207,8 +211,8 @@ for ($i=0; $i <$num_results; $i++)
 							</div>
 
 							<div class="size-209 p-t-1">
-								<span class="mtext-110 cl2">
-									$79.65
+								<span class="mtext-110 cl2" id="somaTotal">
+									
 								</span>
 							</div>
 						</div>
@@ -418,12 +422,25 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="js/main.js"></script>
 
 	<script>
-		function carrinhoValor(codigo,valor){
-				alert('teste'+codigo);
-				qtd=document.getElementById("num-product1").value;
-				soma= valor*qtd;
-				document.getElementById("valor")
+		function carrinhoValor(codigo,valor, acao){
+				input= "num-product"+codigo;
+				qtd=document.getElementById(input).value;
+				
+				if (acao == "somar"){
+					qtd++;
+				}else{
+					
+						qtd--;
+					
+				}
+				
 
+				soma= valor*qtd;
+				teste= "valor"+codigo;
+				document.getElementById(teste).innerHTML=soma;
+
+
+				document.getElementById("somaTotal").innerHTML=soma;
 
 		}
 
