@@ -11,10 +11,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -44,14 +46,19 @@ public class GerarCompraView extends JPanel implements ActionListener {
 	private JTextField cdLivroField;
 	private JFrame frame;
 	public static String codLivro;
+	public static String codFornecedor;
+	public static String dtCompra;
+	public static String dtEntrega;
+	JDateChooser dataCompra;
+	JDateChooser dataEntrega;
 	
 	JFrame frameList = new JFrame();
-
-	private Compra compra;
+	
 	LivroTableModel tableModelLivro = new LivroTableModel();
 	FornecedorTableModel tableModelFornecedor = new FornecedorTableModel();
 	int rows;
 	int headers;
+	private Compra compra;
 	JTable jtFornecedor = new JTable(new DefaultTableModel(rows, headers));
 	JTable jtLivro = new JTable(new DefaultTableModel(rows, headers));
 
@@ -129,7 +136,6 @@ public class GerarCompraView extends JPanel implements ActionListener {
 		panelCentral.add(dtCompraLabel, gbc);
 
 		gbc.gridx = 2;
-		JDateChooser dataCompra;
 		dataCompra = new JDateChooser("dd/MM/yyyy", "##/##/####", '_');
 		dataCompra.setFont(new Font("Arial", Font.BOLD, 16));
 		dataCompra.setPreferredSize(new Dimension(200, 20));
@@ -144,7 +150,7 @@ public class GerarCompraView extends JPanel implements ActionListener {
 		gbc.anchor = GridBagConstraints.LINE_END;
 		panelCentral.add(dtEntregaLabel, gbc);
 
-		JDateChooser dataEntrega;
+		
 		dataEntrega = new JDateChooser("dd/MM/yyyy", "##/##/####", '_');
 		dataEntrega.setFont(new Font("Arial", Font.BOLD, 16));
 		dataEntrega.setPreferredSize(new Dimension(200, 20));
@@ -175,13 +181,34 @@ public class GerarCompraView extends JPanel implements ActionListener {
 	}
 		
 	public void acaoSair() {
-		FinalizarCompraView fcv = new FinalizarCompraView();
 		
 	}
 
 	public void acaoSalvar() {
 		codLivro = cdLivroField.getText();
-		FinalizarCompraView fcv = new FinalizarCompraView();
+//		codFornecedor = cdFornecedorField.getText();
+//		dtCompra = dtCompraField.getText();
+//		dtEntrega = dtEntregaField.getText();
+		
+		compra = new Compra();
+		compra.setCdFornecedora(Integer.parseInt(cdFornecedorField.getText()));
+		compra.setCdLivro(Integer.parseInt(cdLivroField.getText()));
+		
+		Date dtCompra= dataCompra.getDate();
+		String dataCompra= DateFormat.getDateInstance().format(dtCompra);
+		
+		compra.setDtCompra(dataCompra);
+		
+		Date dtEntrega= dataEntrega.getDate();
+		String dataEntrega = DateFormat.getDateInstance().format(dtEntrega);
+		
+		compra.setDtEntrega(dataEntrega);
+		System.out.println("Data" + dataEntrega);
+		System.out.println("Data Compra " + dataCompra);
+
+		System.out.println("Compra " + compra);
+		
+		FinalizarCompraView fcv = new FinalizarCompraView(compra);
 		fcv.criarFormulario();
 		fcv.setVisible(true);
 		this.frame.getContentPane().removeAll();
@@ -390,6 +417,7 @@ public class GerarCompraView extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("salvar")) {
+			System.out.println("Dentro do salvar");
 			acaoSalvar();
 		} 
 		else if (e.getActionCommand().equals("listarLivro")) {

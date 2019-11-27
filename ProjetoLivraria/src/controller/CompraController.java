@@ -7,11 +7,16 @@ import model.Compra;
 
 public class CompraController {
 	
-	public boolean cadastro(Compra compra) throws SQLException{
+	public boolean cadastro(Compra compra) {
 		
 		System.out.println("Cheguei no ControllerCompra");
 		CompraDAO compraDAO = new CompraDAO();
-		compraDAO.gerarCompra(compra);
+		try {
+			compraDAO.gerarCompra(compra);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 }

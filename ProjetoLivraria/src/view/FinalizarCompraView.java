@@ -8,6 +8,7 @@ import java.awt.HeadlessException;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,8 +24,12 @@ import model.Compra;
 public class FinalizarCompraView extends JPanel implements ActionListener {
 	
 	private JFrame frame;
-	public FinalizarCompraView() {
-
+	private JTextField quantidadeField;
+	private JTextField precoField;
+	private Compra compra;
+	
+	public FinalizarCompraView(Compra c) {
+		this.compra = c;
 		criarFormulario();
 
 	}
@@ -48,12 +53,12 @@ public class FinalizarCompraView extends JPanel implements ActionListener {
 		JLabel quantidadeLabel = new JLabel("Quantidade");
 		quantidadeLabel.setFont(new Font("Arial", Font.BOLD, 16));
 
-		JTextField quantidadeField = new JTextField(20);
+		quantidadeField = new JTextField(20);
 
 		JLabel precoLabel = new JLabel("Preço");
 		precoLabel.setFont(new Font("Arial", Font.BOLD, 16));
 
-		JTextField precoField = new JTextField(20);
+		precoField = new JTextField(20);
 
 		JButton concluir = new JButton("Concluir");
 		concluir.addActionListener(this);
@@ -110,12 +115,17 @@ public class FinalizarCompraView extends JPanel implements ActionListener {
 
 	}
 
-	public void acaoConcluir() {
+	public void acaoConcluir(){
 		// TODO Auto-generated method stub
-		Compra compra = new Compra();
+		compra.setQuantidade(Integer.parseInt(quantidadeField.getText()));
+		compra.setPreco(Double.parseDouble(precoField.getText()));
+		
+		
 		CompraController compraController = new CompraController();
 		try {
-
+			if(compraController.cadastro(compra)) {
+				
+			}
 		} catch (HeadlessException /* | SQLException */ e) {
 			// e.printStackTrace();
 		}
