@@ -81,9 +81,9 @@ public class CompraDAO{
 				compra.setCdCompra(rs.getInt("cd_Compra"));
 				compra.setDtCompra(rs.getString("dt_Compra"));
 				compra.setDtEntrega(rs.getString("dt_Entrega"));
-				compra.setCdLivro(rs.getInt("cd_Livro"));
+				//compra.setCdLivro(rs.getInt("cd_Livro"));
 				compra.setCdFornecedora(rs.getInt("cd_Fornecedor"));
-				compra.setPreco(rs.getDouble("preco"));
+				//compra.setPreco(rs.getDouble("preco"));
 				
 			}
 			
