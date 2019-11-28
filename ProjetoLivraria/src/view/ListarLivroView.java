@@ -37,7 +37,7 @@ public class ListarLivroView extends JPanel{
 	public void janelaPrincipal(){
 		
 		//String i = ld.Listar();
-		LivroDAO ld = new LivroDAO();
+		//LivroDAO ld = new LivroDAO();
 		
 		
 		List<Livro> livros = new ArrayList<Livro>();

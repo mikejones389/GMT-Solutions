@@ -12,7 +12,7 @@ public class CompraController {
 		System.out.println("Cheguei no ControllerCompra");
 		CompraDAO compraDAO = new CompraDAO();
 		try {
-			compraDAO.gerarCompra(compra);
+			compraDAO.inserirCompra(compra);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

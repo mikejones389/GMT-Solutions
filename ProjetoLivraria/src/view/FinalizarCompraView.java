@@ -8,7 +8,6 @@ import java.awt.HeadlessException;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -124,7 +123,18 @@ public class FinalizarCompraView extends JPanel implements ActionListener {
 		CompraController compraController = new CompraController();
 		try {
 			if(compraController.cadastro(compra)) {
-				
+				JOptionPane.showMessageDialog(null, "Problema ao Gerar a Compra");
+
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Compra gerada com sucesso");
+//				GerarCompraView gcv = new GerarCompraView(frame);
+//				gcv.criarFormulario();
+//				gcv.setVisible(true);
+//				this.frame.getContentPane().removeAll();
+//				this.frame.getContentPane().add(gcv);
+//				this.frame.revalidate();
+//				this.frame.repaint();
 			}
 		} catch (HeadlessException /* | SQLException */ e) {
 			// e.printStackTrace();
@@ -141,7 +151,7 @@ public class FinalizarCompraView extends JPanel implements ActionListener {
 			acaoConcluir();
 		} else if (e.getActionCommand().equals("cancelar")) {
 			acaoCancelar();
-
+			
 		}
 	}
 

@@ -15,7 +15,7 @@ public class MenuView extends JFrame implements ActionListener{
 	
 		JMenuBar menuBar;
 		JMenu menuCadastro, menuCompra,menuListar, menuOpcoes;
-		JMenuItem itemLivro, itemFornecedor, itemCompra, itemListarLivro, itemListarFornecedor, itemSair, itemListarCliente;
+		JMenuItem itemLivro, itemFornecedor, itemCompra, itemListarLivro, itemListarFornecedor, itemSair, itemListarCliente, itemListarCompra;
 		
 		ImageIcon imagem1 = new ImageIcon(getClass().getResource("Logo2.png"));
 		JLabel imagem = new JLabel(imagem1);
@@ -63,6 +63,10 @@ public class MenuView extends JFrame implements ActionListener{
 			itemListarCliente.addActionListener(this);
 			itemListarCliente.setActionCommand("listarCliente");
 			
+			itemListarCompra = new JMenuItem("Listar Compra");
+			itemListarCompra.addActionListener(this);
+			itemListarCompra.setActionCommand("listarCompra");
+			
 			itemSair = new JMenuItem("Sair");
 			itemSair.addActionListener(this);
 			itemSair.setActionCommand("sair");
@@ -77,6 +81,7 @@ public class MenuView extends JFrame implements ActionListener{
 			menuListar.add(itemListarLivro);
 			menuListar.add(itemListarFornecedor);
 			menuListar.add(itemListarCliente);
+			menuListar.add(itemListarCompra);
 			menuBar.add(menuListar);
 			menuOpcoes.add(itemSair);
 			menuBar.add(menuOpcoes);
@@ -144,6 +149,14 @@ public class MenuView extends JFrame implements ActionListener{
 				//LivroController livroController = new LivroController(); 
 				//livroController.ListarLivros();
 				ListarClienteView lcv = new ListarClienteView();
+				lcv.setVisible(true);
+				this.getContentPane().removeAll();
+				this.getContentPane().add(lcv);
+				this.revalidate();
+				this.repaint();
+			}
+			else if(e.getActionCommand().equals("listarCompra")) {
+				ListarCompraView lcv = new ListarCompraView();
 				lcv.setVisible(true);
 				this.getContentPane().removeAll();
 				this.getContentPane().add(lcv);

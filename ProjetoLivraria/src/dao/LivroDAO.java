@@ -39,7 +39,8 @@ public class LivroDAO {
 		smt.setString(10, livro.getLinkImg());
 		
 		smt.executeUpdate();
-
+		
+		bdd.close();
 	}
 	//m�todo para listar os livros
 	public ArrayList<Livro>  Listar(){

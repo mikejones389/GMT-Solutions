@@ -1,2 +1,6 @@
-/view/
+/bdd/
+/controller/
+/dao/
 /model/
+/principal/
+/view/
