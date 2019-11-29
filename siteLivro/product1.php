@@ -49,115 +49,88 @@
 $busca = $_GET['search'];
 
 
+
 if($busca == null){
-    header("location: index.php");
-    }
-	$query = "select * from livro where nm_livro like '%.$busca.%' ";
-
-
-
-
-if (empty($_GET['genero'] )){
-	$genero = 0;
+    $query = "select * from livro ";
 }
 else{
-
-	$genero = $_GET['genero'] ;
+	$query = "select * from livro where nm_livro like '%".$busca."%' ";
 }
-
-
-
-if ($genero == 0){
-	$query = "select * from livro ";
-}
-else if ($genero == 1){
-	$query = "select * from livro where genero like '%Fic%' ";
-}
-else if ($genero == 2){
-	$query = "select * from livro where genero like '%Romance%' ";
-}
-else if ($genero == 3){
-	$query = "select * from livro where genero like '%Docu%' ";
-}
-else if ($genero == 4){
-	$query = "select * from livro where genero like '%Literatu%' ";
-}
-
-//else ($genero == 5){
-//	$query = "select * from livro where nm_livro like '%%' ";
-//}
-
-
 
 $result = mysqli_query($db,$query);
 
-
-
-
 $num_results = mysqli_num_rows($result);
+
+if($num_results == 0){
+    $query = "select * from livro ";
+
+    $result = mysqli_query($db,$query);
+    $num_results = mysqli_num_rows($result);
+}
 
 for ($i=0; $i <$num_results; $i++)
 {
 
 
-	$row = mysqli_fetch_array($result);
+    $row = mysqli_fetch_array($result);
 ?>
-			
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-					<!-- Block2 -->
-					<div class="block2">
-						<div class="block2-pic hov-img0">
-							<img src="images/<?php  echo $row['link_img']; ?>" alt="IMG-PRODUCT">
+            
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+                    <!-- Block2 -->
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="images/<?php  echo $row['link_img']; ?>" alt="IMG-PRODUCT">
 
-							<a href="montarCarrinho.php?livro=<?php echo $row['cd_livro'];?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-								Add to cart
-							</a>
-						</div>
+                            <a href="montarCarrinho.php?livro=<?php echo $row['cd_livro'];?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                Add to cart
+                            </a>
+                        </div>
 
-						<div class="block2-txt flex-w flex-t p-t-14">
-							<div class="block2-txt-child1 flex-col-l ">
-								<a class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								<?php  echo $row['nm_livro']; ?>
-								</a>
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l ">
+                                <a class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                <?php  echo $row['nm_livro']; ?>
+                                </a>
 
-								<span class="stext-105 cl3">
-								<?php  echo $row['preco_venda']; ?>
-								</span>
-							</div>
+                                <span class="stext-105 cl3">
+                                <?php  echo $row['preco_venda']; ?>
+                                </span>
+                            </div>
 
-							<div class="block2-txt-child2 flex-r p-t-3">
-								<form method="post" action="cadastroDesejo.php" name="frmListaDesejo" id="frmListaDesejo"> 
-									<input type="hidden" name="cdLivro" id="cdLivro" value="<?php echo $row['cd_livro'];?>">
-									<input type="hidden" name="cd_usuario" id="cd_usuario" value="<?php echo $_SESSION['cd_usuario'];?>">
-									<?php	
-										if(in_array($row['cd_livro'],$listaItensDesejosSelecionados)){
-											?>
-											<input type="hidden" name="acao" id="acao" value="deletar">
-											<button type="submit" name="enviar" >  <img src="images/icons/icon-heart-02.png"></button>
-											<!--<button type="submit" name="enviar" >  <img src="images/icons/icon-cart-01.png"></button>-->
-											<?php
-										}else{
-											?>
-											<input type="hidden" name="acao" id="acao" value="adcionar">
-											<button type="submit" name="enviar" > <img src="images/icons/icon-heart-01.png"></button>
-											<?php
-										}
+                            <div class="block2-txt-child2 flex-r p-t-3">
+                                <form method="post" action="cadastroDesejo.php" name="frmListaDesejo" id="frmListaDesejo"> 
+                                    <input type="hidden" name="cdLivro" id="cdLivro" value="<?php echo $row['cd_livro'];?>">
+                                    <input type="hidden" name="cd_usuario" id="cd_usuario" value="<?php echo $_SESSION['cd_usuario'];?>">
+                                    <?php	
+                                        if(in_array($row['cd_livro'],$listaItensDesejosSelecionados)){
+                                            ?>
+                                            <input type="hidden" name="acao" id="acao" value="deletar">
+                                            <button type="submit" name="enviar" >  <img src="images/icons/icon-heart-02.png"></button>
+                                            <!--<button type="submit" name="enviar" >  <img src="images/icons/icon-cart-01.png"></button>-->
+                                            <?php
+                                        }else{
+                                            ?>
+                                            <input type="hidden" name="acao" id="acao" value="adcionar">
+                                            <button type="submit" name="enviar" > <img src="images/icons/icon-heart-01.png"></button>
+                                            <?php
+                                        }
 
-
-									?>
-									
-								
-								
-								 </form>
-								
-							</div>
-						</div>
-					</div>
-				</div>
+                                        
+                                    ?>
+                                    
+                                
+                                
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 <?php 
 
 }
+
 mysqli_close($db);
 
 ?>
@@ -502,6 +475,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			})
 		});
 	</script>
+    
+
+
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
 

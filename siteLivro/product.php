@@ -46,6 +46,7 @@
 			
 <?php
 
+//$busca = $_GET['search'];
 
 if (empty($_GET['genero'] )){
 	$genero = 0;
@@ -72,9 +73,7 @@ else if ($genero == 3){
 else if ($genero == 4){
 	$query = "select * from livro where genero like '%Literatu%' ";
 }
-//else if ($genero == 5){
-//	$query = "select * from livro where nm_livro like '%%' ";
-//}
+
 
 
 
@@ -132,7 +131,7 @@ for ($i=0; $i <$num_results; $i++)
 											<?php
 										}
 
-
+										
 									?>
 									
 								
@@ -143,7 +142,7 @@ for ($i=0; $i <$num_results; $i++)
 						</div>
 					</div>
 				</div>
-
+				
 <?php 
 
 }
