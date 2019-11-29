@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -30,6 +31,7 @@ public class ListarLivroView extends JPanel implements ActionListener{
 	JTable jtLivros = new JTable(new DefaultTableModel(rows, headers));
 	int cdLivro;
 	List<Livro> livros;
+	int n;
 	public ListarLivroView() {
 		jtLivros.setModel(tableModel);
 		
@@ -85,6 +87,10 @@ public class ListarLivroView extends JPanel implements ActionListener{
 		btDeletar.addActionListener(this);
 		btDeletar.setActionCommand("deletar");
 		
+		JButton btGerarArq = new JButton("Gerar Arquivo");
+		btGerarArq.addActionListener(this);
+		btGerarArq.setActionCommand("gerar arquivo");
+		
 		//JTable jtLivros = new JTable(new DefaultTableModel(rows, headers));
 		JScrollPane scrollPane = new JScrollPane(jtLivros);
 		
@@ -93,7 +99,7 @@ public class ListarLivroView extends JPanel implements ActionListener{
 		panelCentral.add(scrollPane,BorderLayout.NORTH);
 		this.add(panelCentral, BorderLayout.CENTER);
 		this.add(btDeletar, BorderLayout.WEST);
-
+		this.add(btGerarArq, BorderLayout.EAST);
 		
 		//int linhaSel = jtLivros.getSelectedRow(); int colunaSel = jtLivros.getSelectedColumn();
 	}
@@ -108,12 +114,31 @@ public class ListarLivroView extends JPanel implements ActionListener{
 		ld.deletar(cd);
 	}
 	
+	public void gerarArq() {
+		LivroDAO ld = new LivroDAO();
+		n++;
+		String arq = "RelatorioDeLivros-"+n+".txt";
+		ArrayList texto = (ArrayList) livros;
+		if(ld.gerarArq(arq, texto)) {
+			JOptionPane.showMessageDialog(null, "Arquivo gerado com Sucesso");	
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Falha ao gerar Arquivo");
+		}
+		
+		
+		
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("deletar")) {
 			deletar();
 			//this.repaint();
 			//this.validate();
+		}
+		else if(e.getActionCommand().equals("gerar arquivo")) {
+			gerarArq();
 		}
 		
 	}

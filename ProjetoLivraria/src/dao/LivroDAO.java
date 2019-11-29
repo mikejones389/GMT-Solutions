@@ -1,6 +1,9 @@
 package dao;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,7 +13,6 @@ import com.mysql.jdbc.PreparedStatement;
 
 import bdd.BancoDeDados;
 import model.Livro;
-import view.ListarLivroView;
 
 public class LivroDAO {
 	
@@ -19,6 +21,7 @@ public class LivroDAO {
 	List<Livro> livros;
 	int linha = 0;
 	int cd;
+	
 	//mï¿½todo para inserir livro no bd
 	public void inserir(Livro livro) throws SQLException {
 		Connection bdd = BancoDeDados.conectar();
@@ -72,22 +75,20 @@ public class LivroDAO {
 				Livro livro = new Livro();
 				livro.setCdLivro(rs.getInt("cd_Livro"));
 				livro.setNomeLivro(rs.getString("nm_Livro"));
+				livro.setAutorLivro(rs.getString("autor"));
+				livro.setEditoraLivro(rs.getString("editora"));
+				livro.setGeneroLivro(rs.getString("genero"));
+				livro.setAnoLivro(rs.getInt("ano_livro"));
+				livro.setEdicaoLivro(rs.getInt("edicao"));
+				livro.setPrecoVenda(rs.getDouble("preco_venda"));
 				livro.setQntLivro(rs.getInt("qnt_livro"));
+				livro.setCdFornecedor(rs.getInt("cd_fornecedor"));
+				livro.setLinkImg(rs.getString("link_img"));
+				
 				livros.add(livro);
-				//System.out.println(livro.getNomeLivro());
-//				for (int i = 0; i < livros.size(); i++) {
-//					System.out.println(livros.get(i).getNomeLivro());
-//
-//				}
-//				System.out.println("/////////////////////////////////////");
-//				
+					
 			}
-//			System.out.println("Listagem dentro do livro Dao");
-//			for (int i = 0; i < livros.size(); i++) {
-//				System.out.println(livros.get(i).getNomeLivro());
-//
-//			}
-//			
+		
 		}catch(Exception e) {
 			System.out.println("ERRO: " + e.getMessage());
 			
@@ -111,7 +112,45 @@ public class LivroDAO {
 		}
 	}
 	
-	
+	public boolean gerarArq( String caminho, List<Livro> livros) {
+		this.livros = livros;
+		Date data = new Date(System.currentTimeMillis());
+		try {
+			FileWriter arq = new FileWriter(caminho);
+			PrintWriter gravarArq = new PrintWriter(arq);
+			gravarArq.println("#RELATÓRIO DOS LIVROS CADASTRADOS GERADO EM "+ data +"#");
+			for (int i = 0; i < livros.size(); i++) {
+				gravarArq.print("ID: ");
+				gravarArq.println(((Livro) livros.get(i)).getCdLivro());
+				gravarArq.print("Título: ");
+				gravarArq.println(((Livro) livros.get(i)).getNomeLivro());
+				gravarArq.print("Autor: ");
+				gravarArq.println(((Livro) livros.get(i)).getAutorLivro());
+				gravarArq.print("Editora: ");
+				gravarArq.println(((Livro) livros.get(i)).getEditoraLivro());
+				gravarArq.print("Gênero: ");
+				gravarArq.println(((Livro) livros.get(i)).getGeneroLivro());
+				gravarArq.print("Ano: ");
+				gravarArq.println(((Livro) livros.get(i)).getAnoLivro());
+				gravarArq.print("Ediçao: ");
+				gravarArq.println(((Livro) livros.get(i)).getEdicaoLivro());
+				gravarArq.print("Preço de Venda");
+				gravarArq.println(((Livro) livros.get(i)).getPrecoVenda());
+				gravarArq.print("Quantidade: ");
+				gravarArq.println(((Livro) livros.get(i)).getQntLivro());
+				gravarArq.print("Código do Fornecedor: ");
+				gravarArq.println(((Livro) livros.get(i)).getCdFornecedor());
+				gravarArq.print("Link Imagem");
+				gravarArq.println(((Livro) livros.get(i)).getLinkImg());
+				gravarArq.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+			}		
+			gravarArq.close();
+			return true;
+		}catch(Exception e) {
+			System.out.println("ERRO: "+ e.getMessage());
+			return false;
+		}
+	}
 	
 	//mï¿½todo para consultar livro no bd
 

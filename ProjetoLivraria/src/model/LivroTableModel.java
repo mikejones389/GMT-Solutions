@@ -31,6 +31,22 @@ public class LivroTableModel extends AbstractTableModel{
 			return dados.get(linha).getNomeLivro();
 		case 2:
 			return dados.get(linha).getQntLivro();
+		case 3: 
+			return dados.get(linha).getPrecoVenda();
+		case 4:
+			return dados.get(linha).getAnoLivro();
+		case 5:
+			return dados.get(linha).getAutorLivro();
+		case 6:
+			return dados.get(linha).getCdFornecedor();
+		case 7: 
+			return dados.get(linha).getEdicaoLivro();
+		case 8:
+			return dados.get(linha).getEditoraLivro();
+		case 9:
+			return dados.get(linha).getGeneroLivro();
+		case 10:
+			return dados.get(linha).getLinkImg();
 		}
 		
 		return null;
