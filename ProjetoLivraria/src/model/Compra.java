@@ -1,18 +1,18 @@
 package model;
 
-import java.util.Date;
-
 public class Compra {
 	
 	private int cdCompra;
 	private String dtCompra;
 	private String dtEntrega;
-	private int cdFornecedor;
-	private int cdLivro;
+	private Fornecedor fornecedor;
+	private Livro livro;
 	private int quantidade;
 	private double preco;
 	
 	public Compra(){
+		livro = new Livro();
+		fornecedor = new Fornecedor();
 		System.out.println("Construtor de Compra");
 	}
 	public int getCdCompra() {
@@ -33,17 +33,17 @@ public class Compra {
 	public void setDtEntrega(String dtEntrega) {
 		 this.dtEntrega = dtEntrega;
 	}
-	public int getCdFornecedor() {
-		 return cdFornecedor;
+	public Fornecedor getFornecedor() {
+		 return fornecedor;
 	}
-	public void setCdFornecedora(int cdFornecedor) {
-		 this.cdFornecedor = cdFornecedor;
+	public void setFornecedor(Fornecedor fornecedor) {
+		 this.fornecedor = fornecedor;
 	}
-	public int getCdLivro() {
-		return cdLivro;
+	public Livro getLivro() {
+		return livro;
 	}
-	public void setCdLivro(int cdLivro) {
-		this.cdLivro = cdLivro;
+	public void setLivro(Livro cdLivro) {
+		this.livro = cdLivro;
 	}
 	public int getQuantidade() {
 		return quantidade;
@@ -57,10 +57,11 @@ public class Compra {
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
+	
 	@Override
 	public String toString() {
 		return "Compra [cdCompra=" + cdCompra + ", dtCompra=" + dtCompra + ", dtEntrega=" + dtEntrega
-				+ ", cdFornecedor=" + cdFornecedor + ", cdLivro=" + cdLivro + ", quantidade=" + quantidade + ", preco="
+				+ ", cdFornecedor=" + fornecedor.getCodigo()+ ", cdLivro=" + livro.getCdLivro() + ", quantidade=" + quantidade + ", preco="
 				+ preco + "]";
 	}
 	

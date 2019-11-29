@@ -191,8 +191,8 @@ public class GerarCompraView extends JPanel implements ActionListener {
 //		dtEntrega = dtEntregaField.getText();
 		
 		compra = new Compra();
-		compra.setCdFornecedora(Integer.parseInt(cdFornecedorField.getText()));
-		compra.setCdLivro(Integer.parseInt(cdLivroField.getText()));
+		compra.getFornecedor().setCodigo(Integer.parseInt(cdFornecedorField.getText()));
+		compra.getLivro().setCdLivro(Integer.parseInt(cdLivroField.getText()));
 		
 		Date dtCompra= dataCompra.getDate();
 		String dataCompra= DateFormat.getDateInstance().format(dtCompra);

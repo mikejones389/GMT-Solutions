@@ -36,17 +36,17 @@ public class ListarCompraView extends JPanel {
 		JLabel titulo = new JLabel("Histórico de Compras", SwingConstants.CENTER);
 		titulo.setFont(new Font("Arial", Font.BOLD, 40));
 		
-		List<Compra> compras = new ArrayList<Compra>();
+		ArrayList<Compra> compras = new ArrayList<Compra>();
 		compras = (ArrayList<Compra>) cd.Listar();
-		System.out.println("Listar compra view");
+		System.out.println("Listar compra view " + compras.size());
 		for (int i = 0; i < compras.size(); i++) {
 			System.out.println("Entrei no For");
 			System.out.println(compras.get(i).getCdCompra());
 			System.out.println(compras.get(i).getDtCompra());
 			System.out.println(compras.get(i).getDtEntrega());
-			//System.out.println(compras.get(i).getCdLivro());
-			System.out.println(compras.get(i).getCdFornecedor());
-			//System.out.println(compras.get(i).getPreco());
+			System.out.println(compras.get(i).getLivro().getCdLivro());
+			System.out.println(compras.get(i).getFornecedor().getCodigo());
+			System.out.println(compras.get(i).getPreco());
 			
 			tableModel.addRow(compras.get(i));
 		}

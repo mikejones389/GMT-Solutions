@@ -8,8 +8,8 @@ import javax.swing.table.AbstractTableModel;
 public class CompraTableModel extends AbstractTableModel{
 	
 	private List<Compra> dados = new ArrayList<Compra>();
-	private String[] colunas = {"ID da Compra", "Dt de Compra", "Dt de Entrega", "Fornecedor"};
-		
+	private String[] colunas = {"ID da Compra", "Dt de Compra", "Dt de Entrega", "Livro","Fornecedor", "Preço"};
+		 
 	@Override 
 	public String getColumnName(int column) {
 		return colunas[column];
@@ -34,12 +34,12 @@ public class CompraTableModel extends AbstractTableModel{
 			return dados.get(linha).getDtCompra();
 		case 2:
 			return dados.get(linha).getDtEntrega();
-		//case 3:
-		//	return dados.get(linha).getCdLivro();
+		case 3:
+			return dados.get(linha).getLivro().getNomeLivro();
 		case 4:
-			return dados.get(linha).getCdFornecedor();
-		///case 5:
-			//return dados.get(linha).getPreco();
+			return dados.get(linha).getFornecedor().getNmFornecedor();
+		case 5:
+			return dados.get(linha).getPreco();
 				
 		}
 		return null;

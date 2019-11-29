@@ -44,7 +44,7 @@ public class CompraDAO{
 //		System.out.println("Data 3 " + dataSql);
 		smt.setDate(1, dataSql);
 		smt.setDate(2, dataSql2);
-		smt.setInt(3, compra.getCdFornecedor());
+		smt.setInt(3, compra.getFornecedor().getCodigo());
 		smt.executeUpdate();
 		final ResultSet rs1 = smt.getGeneratedKeys();
 		 int lastId = 0;
@@ -56,7 +56,7 @@ public class CompraDAO{
 		String sql2 = "insert into item_compra (cd_livro, cd_compra, quantidade, preco_unitario) values (?,?,?,?)";
 		
 		PreparedStatement smt2 = (PreparedStatement) bdd.prepareStatement(sql2);
-		smt2.setInt(1, compra.getCdLivro());
+		smt2.setInt(1, compra.getLivro().getCdLivro());
 		smt2.setInt(2, lastId);
 		smt2.setInt(3, compra.getQuantidade());
 		smt2.setDouble(4, compra.getPreco());
@@ -66,12 +66,12 @@ public class CompraDAO{
 	
 	public ArrayList<Compra> Listar(){
 		Connection bdd = BancoDeDados.conectar();
-		List<Compra> compras = new ArrayList<Compra>();
+		ArrayList<Compra> compras = new ArrayList<Compra>();
 		int linha = 0;
 		String texto = null;
 		System.out.println("Entrou no CompraDAO");
 		try {
-			String sql = "SELECT *FROM compra ORDER BY cd_Compra";
+			String sql = "SELECT * FROM compra as c JOIN item_compra as ic JOIN livro as l JOIN fornecedor as f ON f.cd_fornecedor = c.cd_fornecedor and ic.cd_compra = c.cd_compra and l.cd_livro = ic.cd_livro ORDER BY c.cd_compra;";
 			
 			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
 			ResultSet rs = smt.executeQuery();
@@ -81,9 +81,11 @@ public class CompraDAO{
 				compra.setCdCompra(rs.getInt("cd_Compra"));
 				compra.setDtCompra(rs.getString("dt_Compra"));
 				compra.setDtEntrega(rs.getString("dt_Entrega"));
-				//compra.setCdLivro(rs.getInt("cd_Livro"));
-				compra.setCdFornecedora(rs.getInt("cd_Fornecedor"));
-				//compra.setPreco(rs.getDouble("preco"));
+				compra.getLivro().setNomeLivro(rs.getString("nm_Livro"));
+				compra.getFornecedor().setNmFornecedor(rs.getString("nm_Fornecedor"));
+				compra.setPreco(rs.getDouble("preco_unitario"));
+				
+				compras.add(compra);
 				
 			}
 			
@@ -91,7 +93,7 @@ public class CompraDAO{
 			System.out.println("ERRO: " + e.getMessage());
 		}
 		
-		return (ArrayList<Compra>) compras;
+		return compras;
 		
 	}
 	

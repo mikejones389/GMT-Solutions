@@ -16,7 +16,9 @@ public class LivroDAO {
 	
 	private static PreparedStatement statement = null;
 	private static ResultSet resultSet = null;
-	
+	List<Livro> livros;
+	int linha = 0;
+	int cd;
 	//m�todo para inserir livro no bd
 	public void inserir(Livro livro) throws SQLException {
 		Connection bdd = BancoDeDados.conectar();
@@ -45,8 +47,8 @@ public class LivroDAO {
 	//m�todo para listar os livros
 	public ArrayList<Livro>  Listar(){
 		Connection bdd = BancoDeDados.conectar();
-		List<Livro> livros = new ArrayList<Livro>();
-		int linha = 0;
+		livros = new ArrayList<Livro>();
+		
 		String texto = null;
 		
 		//Livro livro = new Livro();
@@ -92,6 +94,16 @@ public class LivroDAO {
 		
 		return (ArrayList<Livro>) livros;
 		
+	}
+	
+	public void deletar(int cd) {
+		Connection bdd = BancoDeDados.conectar();
+		this.cd = cd;
+		try {
+			String sql = "delete from livro where cd_livro = "+ cd +" ;";
+		}catch(Exception e){
+			System.out.println("ERRO: " + e.getMessage());
+		}
 	}
 	
 	
