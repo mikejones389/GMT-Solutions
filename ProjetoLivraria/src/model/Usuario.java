@@ -9,10 +9,18 @@ public class Usuario {
 	private int celular;
 	private String perfil;
 	private String login;
-	private String senha;	
+	private String senha;
+	private int cdUsuario;
 	
 	public Usuario() {
 		System.out.println("Construtor do Usuario");
+	}
+	
+	public int getCdUsuario() {
+		return cdUsuario;
+	}
+	public void setCdUsuario(int cdUsuario) {
+		this.cdUsuario=cdUsuario;
 	}
 	
 	public String getNmUsuario(){

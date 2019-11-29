@@ -16,7 +16,7 @@ public class FornecedorDAO {
 	//static Connection connection = null;
 	private static PreparedStatement statement = null;
 	private static ResultSet resultSet = null;
-	
+	int cd;
 	
 	public void inserir(Fornecedor fornecedor) throws SQLException {
 		Connection bdd = BancoDeDados.conectar();
@@ -63,9 +63,18 @@ public class FornecedorDAO {
 			System.out.println("ERRO: " + e.getMessage());
 			
 		}
-		return (ArrayList<Fornecedor>) fornecedores;
-		
-		
+		return (ArrayList<Fornecedor>) fornecedores;	
 	}
-	
+	public void deletar(int cd) {
+		Connection  bdd = BancoDeDados.conectar();
+		this.cd = cd;
+		try {
+			System.out.println("cd "+ cd);
+			String sql = "delete from fornecedor where cd_fornecedor = " + cd + " " ;
+			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
+			smt.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("ERRO: "+ e.getMessage());
+		}
+	}
 }

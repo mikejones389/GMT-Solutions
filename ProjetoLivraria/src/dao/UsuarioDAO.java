@@ -11,6 +11,7 @@ import bdd.BancoDeDados;
 import model.Usuario;
 
 public class UsuarioDAO {
+	int cd;
 	public ArrayList<Usuario> Listar(){
 		Connection bdd = BancoDeDados.conectar();
 		System.out.println("ENTROU no InserirDAO");
@@ -27,6 +28,7 @@ public class UsuarioDAO {
 			
 			while(rs.next()) {
 				Usuario usuario = new Usuario();
+				usuario.setCdUsuario(rs.getInt("cd_usuario"));
 				usuario.setNmUsuario(rs.getString("nm_usuario"));
 				usuario.setCpfUsuario(rs.getInt("cpf_usuario"));
 				usuario.setCelular(rs.getInt("celular"));
@@ -39,6 +41,21 @@ public class UsuarioDAO {
 		
 		return (ArrayList<Usuario>) usuarios;
 		
+	}
+	
+	public void deletar(int cd) {
+		Connection bdd = BancoDeDados.conectar();
+		this.cd = cd;
+		try {
+			System.out.println("cd "+ cd);
+			String sql = "delete from usuario where cd_usuario = "+ cd + " ";
+			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
+			smt.executeUpdate();
+			
+		}catch(Exception e ) {
+			System.out.println("ERRO: "+ e.getMessage());
+			
+		}
 	}
 
 }

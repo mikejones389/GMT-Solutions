@@ -1,24 +1,27 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import dao.FornecedorDAO;
 import model.Fornecedor;
 import model.FornecedorTableModel;
 
-public class ListarFornecedorView extends JPanel {
+public class ListarFornecedorView extends JPanel implements ActionListener {
 	/**
 	 * 
 	 */
@@ -28,8 +31,8 @@ public class ListarFornecedorView extends JPanel {
 	String rows[][]= {};
 	String headers[]= {};
 	JTable jtFornecedor = new JTable(new DefaultTableModel(rows, headers));
-	
-	
+	int cdFornecedor;
+	List<Fornecedor> fornecedores;
 	public ListarFornecedorView() {
 		jtFornecedor.setModel(tableModel);
 		
@@ -39,7 +42,7 @@ public class ListarFornecedorView extends JPanel {
 	public void janelaPrincipal() {
 		FornecedorDAO fd = new FornecedorDAO();
 		
-		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
+		
 		fornecedores = (List<Fornecedor>) fd.Listar();
 		Fornecedor f = new Fornecedor();
 				
@@ -72,13 +75,39 @@ public class ListarFornecedorView extends JPanel {
 		//JTable jtLivros = new JTable(new DefaultTableModel(rows, headers));
 		JScrollPane scrollPane = new JScrollPane(jtFornecedor);
 				
+		JButton jbDeletar = new JButton("Deletar");
+		jbDeletar.addActionListener(this);
+		jbDeletar.setActionCommand("deletar");
+	
 		this.setLayout(new BorderLayout());
 		this.add(panelSuperior, BorderLayout.NORTH);
 		panelCentral.add(scrollPane,BorderLayout.NORTH);
 		this.add(panelCentral, BorderLayout.CENTER);
+		this.add(jbDeletar, BorderLayout.WEST);
 		
-		
-		
-		
+	}
+	
+	public void deletar() {
+		MouseEvent evt = null;
+		tableModelMouseClicked(evt);
+		int cd = fornecedores.get(jtFornecedor.getSelectedRow()).getCodigo();
+		FornecedorDAO fd = new FornecedorDAO();
+		fd.deletar(cd);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getActionCommand().equals("deletar")) {
+			deletar();
+			ListarFornecedorView lfv = new ListarFornecedorView();
+			lfv.repaint();
+			lfv.validate();
+		}
+	}
+	
+	private void tableModelMouseClicked(java.awt.event.MouseEvent evt) {
+		cdFornecedor = jtFornecedor.getSelectedRow();
+		TableModelListener[] model = tableModel.getTableModelListeners();
+		System.out.println(cdFornecedor);
 	}
 }

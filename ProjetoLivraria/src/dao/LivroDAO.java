@@ -90,6 +90,7 @@ public class LivroDAO {
 //			
 		}catch(Exception e) {
 			System.out.println("ERRO: " + e.getMessage());
+			
 		}
 		
 		return (ArrayList<Livro>) livros;
@@ -100,7 +101,11 @@ public class LivroDAO {
 		Connection bdd = BancoDeDados.conectar();
 		this.cd = cd;
 		try {
+			System.out.println("cd "+ cd);
 			String sql = "delete from livro where cd_livro = "+ cd +" ;";
+			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
+			smt.executeUpdate();
+			
 		}catch(Exception e){
 			System.out.println("ERRO: " + e.getMessage());
 		}

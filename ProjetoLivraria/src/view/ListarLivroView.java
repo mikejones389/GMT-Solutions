@@ -104,6 +104,7 @@ public class ListarLivroView extends JPanel implements ActionListener{
 		tableModelMouseClicked(evt);
 		int cd = livros.get(jtLivros.getSelectedRow()).getCdLivro();
 		LivroDAO ld = new LivroDAO();
+		
 		ld.deletar(cd);
 	}
 	
@@ -111,6 +112,8 @@ public class ListarLivroView extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("deletar")) {
 			deletar();
+			//this.repaint();
+			//this.validate();
 		}
 		
 	}
