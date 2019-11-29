@@ -30,9 +30,9 @@
 					<input type="text" name="pesquisar" class="plh3"  placeholder="Search...">
     				<input type="submit" value="ENVIAR" <i class="zmdi zmdi-search">
 				</form>-->
-				<form method="GET" action="product1.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+				<form method="GET"  class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 				
-					<input class="plh3" type="text" name="search" id='search' placeholder="Search..."   >
+					<input class="plh3" type="text" name="search" id="search" placeholder="Search..."   >
 						<button >
 							<i class="zmdi zmdi-search" ></i>
 							</a>
@@ -45,6 +45,16 @@
 			<div class="row isotope-grid">
 			
 <?php
+
+$busca = $_GET['search'];
+
+
+if($busca == null){
+    header("location: index.php");
+    }
+	$query = "select * from livro where nm_livro like '%.$busca.%' ";
+
+
 
 
 if (empty($_GET['genero'] )){
@@ -72,7 +82,8 @@ else if ($genero == 3){
 else if ($genero == 4){
 	$query = "select * from livro where genero like '%Literatu%' ";
 }
-//else if ($genero == 5){
+
+//else ($genero == 5){
 //	$query = "select * from livro where nm_livro like '%%' ";
 //}
 

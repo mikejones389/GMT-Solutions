@@ -8,25 +8,42 @@
 	
 	<!-- Product -->
 	<div class="bg0 m-t-23 p-b-140">
+	
 		<div class="container">
+		
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-
 					<a href="product.php?genero=0" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> Todos os produtos </a>
 					&nbsp;&nbsp;&nbsp;
 					<a href="product.php?genero=1" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> Ficção </a>
 					&nbsp;&nbsp;&nbsp;
 					<a href="product.php?genero=2" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> Romance </a>
-
-
-
-
-
+					&nbsp;&nbsp;&nbsp;
+					<a href="product.php?genero=3" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> Documentário </a>
+					&nbsp;&nbsp;&nbsp;
+					<a href="product.php?genero=4" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> Literatura brasileira </a>
+					
 				</div>
+				<!--<form method="POST" action="product.php?genero=5">
+   					
+					   
+					<input type="text" name="pesquisar" class="plh3"  placeholder="Search...">
+    				<input type="submit" value="ENVIAR" <i class="zmdi zmdi-search">
+				</form>-->
+				<form method="GET" action="product1.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+				
+					<input class="plh3" type="text" name="search" id='search' placeholder="Search..."   >
+						<button >
+							<i class="zmdi zmdi-search" ></i>
+							</a>
+						</button>
+											
+				</form>
 
-							
 			</div>
+			
 			<div class="row isotope-grid">
+			
 <?php
 
 
@@ -49,6 +66,16 @@ else if ($genero == 1){
 else if ($genero == 2){
 	$query = "select * from livro where genero like '%Romance%' ";
 }
+else if ($genero == 3){
+	$query = "select * from livro where genero like '%Docu%' ";
+}
+else if ($genero == 4){
+	$query = "select * from livro where genero like '%Literatu%' ";
+}
+//else if ($genero == 5){
+//	$query = "select * from livro where nm_livro like '%%' ";
+//}
+
 
 
 $result = mysqli_query($db,$query);
@@ -71,8 +98,8 @@ for ($i=0; $i <$num_results; $i++)
 						<div class="block2-pic hov-img0">
 							<img src="images/<?php  echo $row['link_img']; ?>" alt="IMG-PRODUCT">
 
-							<a href="product-detail.php?livro=<?php echo $row['cd_livro'];?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
-							Ver Mais
+							<a href="montarCarrinho.php?livro=<?php echo $row['cd_livro'];?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+								Add to cart
 							</a>
 						</div>
 
@@ -96,7 +123,7 @@ for ($i=0; $i <$num_results; $i++)
 											?>
 											<input type="hidden" name="acao" id="acao" value="deletar">
 											<button type="submit" name="enviar" >  <img src="images/icons/icon-heart-02.png"></button>
-											<button type="submit" name="enviar" >  <img src="images/icons/icon-cart-01.png"></button>
+											<!--<button type="submit" name="enviar" >  <img src="images/icons/icon-cart-01.png"></button>-->
 											<?php
 										}else{
 											?>
