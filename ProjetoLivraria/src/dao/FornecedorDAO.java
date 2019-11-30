@@ -1,7 +1,9 @@
 package dao;
 
-import java.lang.reflect.Array;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ public class FornecedorDAO {
 	private static PreparedStatement statement = null;
 	private static ResultSet resultSet = null;
 	int cd;
+	List<Fornecedor> fornecedores;
 	
 	public void inserir(Fornecedor fornecedor) throws SQLException {
 		Connection bdd = BancoDeDados.conectar();
@@ -41,7 +44,7 @@ public class FornecedorDAO {
 	
 	public ArrayList<Fornecedor> Listar(){
 		Connection bdd = BancoDeDados.conectar();
-		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
+		fornecedores = new ArrayList<Fornecedor>();
 		int linha = 0;
 		String texto = null;
 		
@@ -55,7 +58,12 @@ public class FornecedorDAO {
 				Fornecedor fornecedor = new Fornecedor();
 				fornecedor.setCodigo(rs.getInt("cd_fornecedor"));
 				fornecedor.setNmFornecedor(rs.getString("nm_fornecedor"));
+				fornecedor.setNmFantasia(rs.getString("nm_fantasia"));
+				fornecedor.setRzSocial(rs.getString("rz_social"));
+				fornecedor.setCnpj(rs.getInt("cnpj"));
+				fornecedor.setEmail(rs.getString("email"));
 				fornecedor.setTelefone(rs.getInt("telefone"));
+				fornecedor.setCelular(rs.getInt("celular"));
 				fornecedores.add(fornecedor);
 				
 			}
@@ -75,6 +83,39 @@ public class FornecedorDAO {
 			smt.executeUpdate();
 		}catch(Exception e) {
 			System.out.println("ERRO: "+ e.getMessage());
+		}
+	}
+	public boolean gerarArq(String caminho, List<Fornecedor> fornecedores) {
+		this.fornecedores= fornecedores;
+		Date data = new Date(System.currentTimeMillis());
+		try {
+			FileWriter arq = new FileWriter(caminho);
+			PrintWriter gravarArq = new PrintWriter(arq);
+			gravarArq.println("# RELATÓRIO DOS FORNECEDORES CADASTRADOS GERADO EM "+ data + " #");
+			for(int i = 0; i<fornecedores.size(); i++) {
+				gravarArq.print("ID: ");
+				gravarArq.println(((Fornecedor) fornecedores.get(i)).getCodigo());
+				gravarArq.print("Nome: ");
+				gravarArq.println(((Fornecedor) fornecedores.get(i)).getNmFornecedor());
+				gravarArq.print("Nome Fantasia: ");
+				gravarArq.println(((Fornecedor) fornecedores.get(i)).getNmFantasia());
+				gravarArq.print("Razão Social: ");
+				gravarArq.println(((Fornecedor) fornecedores.get(i)).getRzSocial());
+				gravarArq.print("CNPJ: ");
+				gravarArq.println(((Fornecedor) fornecedores.get(i)).getCnpj());
+				gravarArq.print("E-mail: ");
+				gravarArq.println(((Fornecedor) fornecedores.get(i)).getEmail());
+				gravarArq.print("Telefone: ");
+				gravarArq.println(((Fornecedor) fornecedores.get(i)).getTelefone());
+				gravarArq.print("Celular: ");
+				gravarArq.println(((Fornecedor) fornecedores.get(i)).getCelular());
+				gravarArq.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+			}
+			gravarArq.close();
+			return true;
+		}catch(Exception e) {
+			System.out.println("ERRO: "+ e.getMessage());
+			return false;
 		}
 	}
 }

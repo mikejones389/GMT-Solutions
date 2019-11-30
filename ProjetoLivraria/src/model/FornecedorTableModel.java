@@ -9,7 +9,7 @@ import javax.swing.table.AbstractTableModel;
 public class FornecedorTableModel extends AbstractTableModel{
 	
 	private List<Fornecedor> dados = new ArrayList<Fornecedor>();
-	private String[] colunas = {"ID", "Nome Fornecedor", "Telefone"};	
+	private String[] colunas = {"ID", "Nome Fornecedor", "Telefone", "E-mail"};	
 	
 	@Override
 	public String getColumnName(int column) {
@@ -35,6 +35,18 @@ public class FornecedorTableModel extends AbstractTableModel{
 			return dados.get(linha).getNmFornecedor();
 		case 2:
 			return dados.get(linha).getTelefone();
+		case 3:
+			return dados.get(linha).getEmail();
+		case 4:
+			return dados.get(linha).getNmFantasia();
+		case 5:
+			return dados.get(linha).getRzSocial();
+		case 6:
+			return dados.get(linha).getCnpj();
+		
+		
+		case 7:
+			return dados.get(linha).getCelular();
 		}
 		return null;
 	}
