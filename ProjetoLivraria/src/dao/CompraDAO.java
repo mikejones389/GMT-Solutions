@@ -1,6 +1,9 @@
 package dao;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -18,7 +21,7 @@ public class CompraDAO{
 	
 	private static PreparedStatement st = null;
 	private static ResultSet rs = null;
-	
+	List<Compra> compras;
 	public void inserirCompra(Compra compra) throws SQLException{
 		Connection bdd = BancoDeDados.conectar();
 		System.out.println("Entrou no gerarCompraDAO");
@@ -66,7 +69,7 @@ public class CompraDAO{
 	
 	public ArrayList<Compra> Listar(){
 		Connection bdd = BancoDeDados.conectar();
-		ArrayList<Compra> compras = new ArrayList<Compra>();
+		compras = new ArrayList<Compra>();
 		int linha = 0;
 		String texto = null;
 		System.out.println("Entrou no CompraDAO");
@@ -84,7 +87,7 @@ public class CompraDAO{
 				compra.getLivro().setNomeLivro(rs.getString("nm_Livro"));
 				compra.getFornecedor().setNmFornecedor(rs.getString("nm_Fornecedor"));
 				compra.setPreco(rs.getDouble("preco_unitario"));
-				
+				compra.setQuantidade(rs.getInt("quantidade"));
 				compras.add(compra);
 				
 			}
@@ -93,8 +96,40 @@ public class CompraDAO{
 			System.out.println("ERRO: " + e.getMessage());
 		}
 		
-		return compras;
+		return (ArrayList<Compra>)compras;
 		
+	}
+	public boolean gerarArq(String caminho, List<Compra> compras) {
+		this.compras= compras;
+		Date data = new Date(System.currentTimeMillis());
+		try {
+			FileWriter arq = new FileWriter(caminho);
+			PrintWriter gravarArq = new PrintWriter(arq);
+			gravarArq.println("# RELATÓRIO DO HISTÓRICO DE COMPRAS GERADO EM "+data+" #");
+			for(int i = 0; i<compras.size(); i++) {
+				gravarArq.print("ID: ");
+				gravarArq.println(((Compra) compras.get(i)).getCdCompra());
+				gravarArq.print("Data de Compra: ");
+				gravarArq.println(((Compra) compras.get(i)).getDtCompra());
+				gravarArq.print("Data de Entrega: ");
+				gravarArq.println(((Compra) compras.get(i)).getDtEntrega());
+				gravarArq.print("Título do Livro: ");
+				gravarArq.println(((Compra) compras.get(i)).getLivro().getNomeLivro());
+				gravarArq.print("Nome do Fornecedor: ");
+				gravarArq.println(((Compra) compras.get(i)).getFornecedor().getNmFornecedor());
+				gravarArq.print("Preço Unitário: ");
+				gravarArq.println(((Compra) compras.get(i)).getPreco());
+				gravarArq.print("Quantidade: ");
+				gravarArq.println(((Compra) compras.get(i)).getQuantidade());
+				gravarArq.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+			}
+			gravarArq.close();
+			return true;
+			
+		}catch(Exception e){
+			System.out.println("ERRO: "+ e.getMessage());
+			return false;
+		}
 	}
 	
 }

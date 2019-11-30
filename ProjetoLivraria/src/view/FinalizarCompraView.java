@@ -54,7 +54,7 @@ public class FinalizarCompraView extends JPanel implements ActionListener {
 
 		quantidadeField = new JTextField(20);
 
-		JLabel precoLabel = new JLabel("Preço");
+		JLabel precoLabel = new JLabel("Preço Unitário");
 		precoLabel.setFont(new Font("Arial", Font.BOLD, 16));
 
 		precoField = new JTextField(20);

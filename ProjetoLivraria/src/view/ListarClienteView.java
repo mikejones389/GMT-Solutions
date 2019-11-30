@@ -5,11 +5,13 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -28,6 +30,7 @@ public class ListarClienteView extends JPanel implements ActionListener{
 	JTable jtUsuarios = new JTable(new DefaultTableModel(rows, headers));
 	int cdCliente;
 	List<Usuario> usuarios;
+	int n;
 	public ListarClienteView() {
 		jtUsuarios.setModel(tableModel);
 		criarFormulario();
@@ -59,11 +62,16 @@ public class ListarClienteView extends JPanel implements ActionListener{
 		jbDeletar.addActionListener(this);
 		jbDeletar.setActionCommand("deletar");
 		
+		JButton jbGerarArq = new JButton("Gerar Arquivo");
+		jbGerarArq.addActionListener(this);
+		jbGerarArq.setActionCommand("gerar arquivo");
+		
 		panelCentral.add(scrollPane);
 		panelSuperior.add(titulo);
 		this.add(jbDeletar, BorderLayout.WEST);
 		this.add(panelSuperior, BorderLayout.NORTH);
 		this.add(panelCentral, BorderLayout.CENTER);	
+		this.add(jbGerarArq, BorderLayout.EAST);
 	}
 	public void deletar() {
 		MouseEvent evt = null;
@@ -72,10 +80,27 @@ public class ListarClienteView extends JPanel implements ActionListener{
 		UsuarioDAO ud = new UsuarioDAO();
 		ud.deletar(cd);
 	}
+	public void gerarArq() {
+		UsuarioDAO ud = new UsuarioDAO();
+		n++;
+		Date data = new Date(System.currentTimeMillis());
+		String arq = ""+n+"RelatórioDeClientes-"+data+".txt";
+		ArrayList texto = (ArrayList) usuarios;
+		if (ud.gerarArq(arq, texto)) {
+			JOptionPane.showMessageDialog(null, "Arquivo gerado com Sucesso");
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Falha ao gerar Arquivo");
+			
+		}
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("deletar")) {
 			deletar();
+		}
+		if(e.getActionCommand().equals("gerar arquivo")) {
+			gerarArq();
 		}
 		
 	}

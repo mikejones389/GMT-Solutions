@@ -35,6 +35,18 @@ public class UsuarioTableModel extends AbstractTableModel{
 			return dados.get(linha).getCpfUsuario();
 		case 3:
 			return dados.get(linha).getCelular();
+		case 4:
+			return dados.get(linha).getSexo();
+		case 5:
+			return dados.get(linha).getDtNascimento();
+		case 6:
+			return dados.get(linha).getEmail();
+		case 7:
+			return dados.get(linha).getPerfil();
+		case 8:
+			return dados.get(linha).getLogin();
+		case 9: 
+			return dados.get(linha).getSenha();	
 		}
 		return null;
 	}
