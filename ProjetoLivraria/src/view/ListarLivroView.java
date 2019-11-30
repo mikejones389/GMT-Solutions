@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,7 +118,8 @@ public class ListarLivroView extends JPanel implements ActionListener{
 	public void gerarArq() {
 		LivroDAO ld = new LivroDAO();
 		n++;
-		String arq = "RelatorioDeLivros-"+n+".txt";
+		Date data = new Date(System.currentTimeMillis());
+		String arq = ""+n+"RelatorioDeLivros-"+data+".txt";
 		ArrayList texto = (ArrayList) livros;
 		if(ld.gerarArq(arq, texto)) {
 			JOptionPane.showMessageDialog(null, "Arquivo gerado com Sucesso");	

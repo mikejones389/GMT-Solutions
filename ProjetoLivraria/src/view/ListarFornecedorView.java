@@ -5,11 +5,13 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -33,6 +35,7 @@ public class ListarFornecedorView extends JPanel implements ActionListener {
 	JTable jtFornecedor = new JTable(new DefaultTableModel(rows, headers));
 	int cdFornecedor;
 	List<Fornecedor> fornecedores;
+	int n;
 	public ListarFornecedorView() {
 		jtFornecedor.setModel(tableModel);
 		
@@ -78,12 +81,17 @@ public class ListarFornecedorView extends JPanel implements ActionListener {
 		JButton jbDeletar = new JButton("Deletar");
 		jbDeletar.addActionListener(this);
 		jbDeletar.setActionCommand("deletar");
-	
+	 
+		JButton jbGerarArq = new JButton("Gerar Arquivo");
+		jbGerarArq.addActionListener(this);
+		jbGerarArq.setActionCommand("gerar arquivo");
+		
 		this.setLayout(new BorderLayout());
 		this.add(panelSuperior, BorderLayout.NORTH);
 		panelCentral.add(scrollPane,BorderLayout.NORTH);
 		this.add(panelCentral, BorderLayout.CENTER);
 		this.add(jbDeletar, BorderLayout.WEST);
+		this.add(jbGerarArq, BorderLayout.EAST);
 		
 	}
 	
@@ -94,6 +102,21 @@ public class ListarFornecedorView extends JPanel implements ActionListener {
 		FornecedorDAO fd = new FornecedorDAO();
 		fd.deletar(cd);
 	}
+	
+	public void gerarArq() {
+		FornecedorDAO fd = new FornecedorDAO();
+		n++;
+		Date data = new Date(System.currentTimeMillis());
+		String arq = ""+n+"RelatórioDeFornecedores-"+data+".txt";
+		ArrayList texto = (ArrayList) fornecedores;
+		if(fd.gerarArq(arq, texto)) {
+			JOptionPane.showMessageDialog(null, "Arquivo gerado com Sucesso");
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Falha ao gerar Arquivo");
+		}
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -103,6 +126,10 @@ public class ListarFornecedorView extends JPanel implements ActionListener {
 			lfv.repaint();
 			lfv.validate();
 		}
+		else if(e.getActionCommand().equals("gerar arquivo")) {
+			gerarArq();
+		}
+		
 	}
 	
 	private void tableModelMouseClicked(java.awt.event.MouseEvent evt) {
