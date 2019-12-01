@@ -8,6 +8,9 @@ import java.awt.HeadlessException;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import controller.CompraController;
+import dao.CompraDAO;
 import model.Compra;
 
 public class FinalizarCompraView extends JPanel implements ActionListener {
@@ -26,7 +30,7 @@ public class FinalizarCompraView extends JPanel implements ActionListener {
 	private JTextField quantidadeField;
 	private JTextField precoField;
 	private Compra compra;
-	
+	int n;
 	public FinalizarCompraView(Compra c) {
 		this.compra = c;
 		criarFormulario();
@@ -128,6 +132,7 @@ public class FinalizarCompraView extends JPanel implements ActionListener {
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "Compra gerada com sucesso");
+		
 //				GerarCompraView gcv = new GerarCompraView(frame);
 //				gcv.criarFormulario();
 //				gcv.setVisible(true);
@@ -139,8 +144,26 @@ public class FinalizarCompraView extends JPanel implements ActionListener {
 		} catch (HeadlessException /* | SQLException */ e) {
 			// e.printStackTrace();
 		}
+		gerarNota();
 	}
-
+	
+	public void gerarNota() {
+		CompraDAO cd = new CompraDAO();
+		n++;
+		Date data = new Date(System.currentTimeMillis());
+		String arq = ""+n+"NotaFiscal-"+data+".txt";
+		int id = compra.getCdCompra();
+		Compra texto = compra;
+		if(cd.gerarNota(arq, texto, id)) {
+			JOptionPane.showMessageDialog(null, "Nota fiscal gerada com sucesso");
+			
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Falha ao gerar nota fiscal");
+		}
+	}
+	
+	
 	public void acaoCancelar() {
 		JOptionPane.showMessageDialog(null, "Impremetar açao para voltar ao GerarCompraView");
 		

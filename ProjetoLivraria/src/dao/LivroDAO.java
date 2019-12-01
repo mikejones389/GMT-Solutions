@@ -47,7 +47,41 @@ public class LivroDAO {
 		
 		bdd.close();
 	}
-	//m�todo para listar os livros
+	
+	public ArrayList<Livro> buscar(int cd){
+		Connection bdd = BancoDeDados.conectar();
+		livros = new ArrayList<Livro>();
+		
+		String texto = null;
+		System.out.println("ENTROU NO buscarDAO livro");
+		try {
+			String sql = "SELECT * FROM livro WHERE cd_livro = "+cd+";";
+			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
+			ResultSet rs = smt.executeQuery();
+			while(rs.next()) {
+				//System.out.println("ENTROU3");
+				Livro livro = new Livro();
+				livro.setCdLivro(rs.getInt("cd_Livro"));
+				livro.setNomeLivro(rs.getString("nm_Livro"));
+				livro.setAutorLivro(rs.getString("autor"));
+				livro.setEditoraLivro(rs.getString("editora"));
+				livro.setGeneroLivro(rs.getString("genero"));
+				livro.setAnoLivro(rs.getInt("ano_livro"));
+				livro.setEdicaoLivro(rs.getInt("edicao"));
+				livro.setPrecoVenda(rs.getDouble("preco_venda"));
+				livro.setQntLivro(rs.getInt("qnt_livro"));
+				livro.setCdFornecedor(rs.getInt("cd_fornecedor"));
+				livro.setLinkImg(rs.getString("link_img"));
+				
+				livros.add(livro);
+					
+			}
+		}catch(Exception e) {
+			System.out.println("ERRO: "+e.getMessage());
+		}
+		return (ArrayList<Livro>) livros;
+	}
+	//m�todo para listar os livros	
 	public ArrayList<Livro>  Listar(){
 		Connection bdd = BancoDeDados.conectar();
 		livros = new ArrayList<Livro>();

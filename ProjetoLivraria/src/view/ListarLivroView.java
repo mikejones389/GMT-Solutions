@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -92,19 +93,28 @@ public class ListarLivroView extends JPanel implements ActionListener{
 		btGerarArq.addActionListener(this);
 		btGerarArq.setActionCommand("gerar arquivo");
 		
+		JButton btAtualizar = new JButton("Atualizar");
+		btAtualizar.addActionListener(this);
+		btAtualizar.setActionCommand("atualizar");
+		
+		
 		//JTable jtLivros = new JTable(new DefaultTableModel(rows, headers));
 		JScrollPane scrollPane = new JScrollPane(jtLivros);
 		
+		JPanel panelWest = new JPanel();
+		panelWest.setLayout(new GridLayout(2,1));
 		this.setLayout(new BorderLayout());
 		this.add(panelSuperior, BorderLayout.NORTH);
 		panelCentral.add(scrollPane,BorderLayout.NORTH);
 		this.add(panelCentral, BorderLayout.CENTER);
-		this.add(btDeletar, BorderLayout.WEST);
+		panelWest.add(btDeletar);
+		panelWest.add(btAtualizar);
+		this.add(panelWest, BorderLayout.WEST);
 		this.add(btGerarArq, BorderLayout.EAST);
 		
 		//int linhaSel = jtLivros.getSelectedRow(); int colunaSel = jtLivros.getSelectedColumn();
 	}
-	
+
 	public void deletar() {
 		
 		MouseEvent evt = null;
@@ -142,7 +152,20 @@ public class ListarLivroView extends JPanel implements ActionListener{
 		else if(e.getActionCommand().equals("gerar arquivo")) {
 			gerarArq();
 		}
-		
+		else if(e.getActionCommand().equals("atualizar")) {
+			if (jtLivros.getSelectedRow() != -1) {
+				MouseEvent evt = null;
+				tableModelMouseClicked(evt);
+				int id = jtLivros.getSelectedRow();
+				AtualizarLivroView alv = new AtualizarLivroView(id);
+				this.add(alv);
+				this.revalidate();	
+				this.repaint();
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Selecione algum livro da tabela");
+			}
+		}
 	}
 	
 	private void tableModelMouseClicked(java.awt.event.MouseEvent evt) {

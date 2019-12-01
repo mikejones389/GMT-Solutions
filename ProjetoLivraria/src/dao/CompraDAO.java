@@ -131,5 +131,36 @@ public class CompraDAO{
 			return false;
 		}
 	}
+	public boolean gerarNota(String caminho, Compra compras, int id) {
+		Date data = new Date(System.currentTimeMillis());
+		try {
+			FileWriter arq = new FileWriter(caminho);
+			PrintWriter gravarArq = new PrintWriter(arq);
+			gravarArq.println("# RELATÓRIO DO HISTÓRICO DE COMPRAS GERADO EM "+data+" #");
+			gravarArq.print("ID: ");
+			gravarArq.println(compras.getCdCompra());
+			gravarArq.print("Data de Compra: ");
+			gravarArq.println(compras.getDtCompra());
+			gravarArq.print("Data de Entrega: ");
+			gravarArq.println(compras.getDtEntrega());
+			gravarArq.print("Título do Livro: ");
+			System.out.println("nomeLivro"+compras.getLivro().getNomeLivro());
+			gravarArq.println(compras.getLivro().getNomeLivro());
+			gravarArq.print("Nome do Fornecedor: ");
+			gravarArq.println(compras.getFornecedor().getNmFornecedor());
+			gravarArq.print("Preço Unitário: ");
+			gravarArq.println(compras.getPreco());
+			gravarArq.print("Quantidade: ");
+			gravarArq.println(compras.getQuantidade());
+			gravarArq.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+			
+			gravarArq.close();
+			return true;
+			
+		}catch(Exception e){
+			System.out.println("ERRO: "+ e.getMessage());
+			return false;
+		}
+	}
 	
 }
