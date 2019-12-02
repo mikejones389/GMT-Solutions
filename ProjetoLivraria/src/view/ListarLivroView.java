@@ -32,6 +32,7 @@ public class ListarLivroView extends JPanel implements ActionListener{
 	String headers[] = {};
 	JTable jtLivros = new JTable(new DefaultTableModel(rows, headers));
 	int cdLivro;
+	Livro l;
 	List<Livro> livros;
 	int n;
 	public ListarLivroView() {
@@ -141,6 +142,21 @@ public class ListarLivroView extends JPanel implements ActionListener{
 		
 		
 	}
+	public void atualizar() {
+		if (jtLivros.getSelectedRow() != -1) {
+			MouseEvent evt = null;
+			tableModelMouseClicked(evt);
+			int id = livros.get(jtLivros.getSelectedRow()).getCdLivro();
+			AtualizarLivroView alv = new AtualizarLivroView(id);
+			this.add(alv);
+			this.revalidate();	
+			this.repaint();
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Selecione algum livro da tabela");
+		}
+	}
+	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -153,18 +169,7 @@ public class ListarLivroView extends JPanel implements ActionListener{
 			gerarArq();
 		}
 		else if(e.getActionCommand().equals("atualizar")) {
-			if (jtLivros.getSelectedRow() != -1) {
-				MouseEvent evt = null;
-				tableModelMouseClicked(evt);
-				int id = jtLivros.getSelectedRow();
-				AtualizarLivroView alv = new AtualizarLivroView(id);
-				this.add(alv);
-				this.revalidate();	
-				this.repaint();
-			}
-			else {
-				JOptionPane.showMessageDialog(null, "Selecione algum livro da tabela");
-			}
+			atualizar();
 		}
 	}
 	

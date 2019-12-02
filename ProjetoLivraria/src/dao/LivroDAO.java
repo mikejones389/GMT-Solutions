@@ -59,7 +59,7 @@ public class LivroDAO {
 			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
 			ResultSet rs = smt.executeQuery();
 			while(rs.next()) {
-				//System.out.println("ENTROU3");
+				System.out.println("ENTROU3");
 				Livro livro = new Livro();
 				livro.setCdLivro(rs.getInt("cd_Livro"));
 				livro.setNomeLivro(rs.getString("nm_Livro"));

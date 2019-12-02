@@ -65,13 +65,16 @@ public class AtualizarLivroView extends JFrame implements ActionListener {
 		this.setVisible(true);
 		this.id=id;
 		construir();
+		
 	}
 	
 	public void construir() {
+		System.out.println("ENTREI NO ATUALIZAR VIEW");
 		LivroDAO ld = new LivroDAO();
 		ld.buscar(id);
 		livros = (ArrayList<Livro>) ld.buscar(id);
 		//Configura��o da estrutura do layout
+		System.out.println("VOLTEI PRO ATUALIZAR VIEW");
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.weightx=0.1;
@@ -99,9 +102,9 @@ public class AtualizarLivroView extends JFrame implements ActionListener {
 		
 		cdFornecedorField = new JTextField(30);
 		cdFornecedorField.setEditable(false);
-		int cdFornecedor = livros.get(id).getCdFornecedor();
-		//cdFornecedorField.setText(cdFornecedor);
-		cdFornecedorField.setEditable(false);
+		//String cdFornecedor = livro.getCdFornecedor();
+		//cdFornecedorField.setText(livro.getCdFornecedor());
+		//cdFornecedorField.setEditable(false);
 		gbc.gridx=1;
 		gbc.insets= new Insets(10,0,0,5);
 		gbc.fill = GridBagConstraints.NONE;
@@ -127,7 +130,8 @@ public class AtualizarLivroView extends JFrame implements ActionListener {
 		gbc.anchor=GridBagConstraints.LINE_END;
 		gbc.insets= new Insets(5,0,0,5);
 		add(nomeLivroLabel, gbc); 	
-		
+		System.out.println(id);
+		System.out.println(livros.get(id).getNomeLivro());
 		nomeLivroField = new JTextField(30);
 		nomeLivroField.setText(livros.get(id).getNomeLivro());
 		gbc.gridx=1;

@@ -153,7 +153,7 @@ public class FinalizarCompraView extends JPanel implements ActionListener {
 		Date data = new Date(System.currentTimeMillis());
 		String arq = ""+n+"NotaFiscal-"+data+".txt";
 		int id = compra.getCdCompra();
-		Compra texto = compra;
+		List<Compra> texto = (List<Compra>) compra;
 		if(cd.gerarNota(arq, texto, id)) {
 			JOptionPane.showMessageDialog(null, "Nota fiscal gerada com sucesso");
 			
@@ -165,7 +165,7 @@ public class FinalizarCompraView extends JPanel implements ActionListener {
 	
 	
 	public void acaoCancelar() {
-		JOptionPane.showMessageDialog(null, "Impremetar açao para voltar ao GerarCompraView");
+		JOptionPane.showMessageDialog(null, "Imprementar açao para voltar ao GerarCompraView");
 		
 	}
 

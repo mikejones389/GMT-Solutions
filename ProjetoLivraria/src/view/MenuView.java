@@ -11,11 +11,13 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import dao.SistemaDAO;
+
 public class MenuView extends JFrame implements ActionListener{
 	
 		JMenuBar menuBar;
 		JMenu menuCadastro, menuCompra,menuListar, menuOpcoes;
-		JMenuItem itemLivro, itemFornecedor, itemCompra, itemListarLivro, itemListarFornecedor, itemSair, itemListarCliente, itemListarCompra;
+		JMenuItem itemLivro, itemFornecedor, itemCompra, itemListarLivro, itemListarFornecedor, itemSair, itemListarCliente, itemListarCompra, itemAjuda;
 		
 		ImageIcon imagem1 = new ImageIcon(getClass().getResource("Logo2.png"));
 		JLabel imagem = new JLabel(imagem1);
@@ -37,7 +39,7 @@ public class MenuView extends JFrame implements ActionListener{
 			menuCompra = new JMenu("Compras");
 			menuListar = new JMenu("Listar");
 			menuOpcoes = new JMenu("Opcões");
-			
+						
 			
 			itemLivro = new JMenuItem("Cadastrar Livro");
 			itemLivro.addActionListener(this);
@@ -70,6 +72,10 @@ public class MenuView extends JFrame implements ActionListener{
 			itemSair = new JMenuItem("Sair");
 			itemSair.addActionListener(this);
 			itemSair.setActionCommand("sair");
+			
+			itemAjuda = new JMenuItem("Ajuda");
+			itemAjuda.addActionListener(this);
+			itemAjuda.setActionCommand("ajuda");
 		}
 		
 		public void construir() {
@@ -84,8 +90,8 @@ public class MenuView extends JFrame implements ActionListener{
 			menuListar.add(itemListarCompra);
 			menuBar.add(menuListar);
 			menuOpcoes.add(itemSair);
+			menuOpcoes.add(itemAjuda);
 			menuBar.add(menuOpcoes);
-			
 			
 		}
 		
@@ -166,6 +172,10 @@ public class MenuView extends JFrame implements ActionListener{
 			else if(e.getActionCommand().equals("sair")) {
 				JOptionPane.showMessageDialog(null, "Clique em 'OK' para finalizar o programa");
 				System.exit(0);
+			}
+			else if(e.getActionCommand().equals("ajuda")) {
+				SistemaDAO sd = new SistemaDAO();
+				
 			}
 		}
 		
