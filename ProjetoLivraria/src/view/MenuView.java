@@ -2,6 +2,8 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -11,6 +13,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import dao.LivroDAO;
 import dao.SistemaDAO;
 
 public class MenuView extends JFrame implements ActionListener{
@@ -175,7 +178,14 @@ public class MenuView extends JFrame implements ActionListener{
 			}
 			else if(e.getActionCommand().equals("ajuda")) {
 				SistemaDAO sd = new SistemaDAO();
-				
+				String arq = "Texto_de_Ajuda.txt";
+				String texto = " ";
+				if(sd.gerarArq(arq, texto)) {
+					JOptionPane.showMessageDialog(null, "Arquivo gerado com Sucesso");	
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Falha ao gerar Arquivo");
+				}
 			}
 		}
 		
