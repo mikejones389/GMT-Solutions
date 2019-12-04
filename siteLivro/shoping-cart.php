@@ -94,7 +94,7 @@ for ($i=0; $i <$num_results; $i++)
 									<!--<td class="column-3">?php  echo $row['preco_venda']; ?></td>-->
 									<td class="column-4">
 										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" onclick="carrinhoValor(<?php  echo $row['cd_livro']; ?>,<?php  echo $row['preco_venda']; ?>,'diminuir');">
+											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" onclick="carrinhoSubValor(<?php  echo $row['cd_livro']; ?>,<?php  echo $row['preco_venda']; ?>);">
 												<i class="fs-16 zmdi zmdi-minus"></i>
 											</div>
 
@@ -104,7 +104,7 @@ for ($i=0; $i <$num_results; $i++)
 													$codigoFinal="valor".$row['cd_livro'];
 
 																		?>
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" onclick="carrinhoValor(<?php  echo $row['cd_livro']; ?>,<?php  echo $row['preco_venda']; ?>,'somar');">
+											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" onclick="carrinhoAdValor(<?php  echo $row['cd_livro']; ?>,<?php  echo $row['preco_venda']; ?>);">
 												<i class="fs-16 zmdi zmdi-plus"></i>
 											</div>
 										</div>
@@ -145,7 +145,6 @@ for ($i=0; $i <$num_results; $i++)
 						<h4 class="mtext-109 cl2 p-b-30">
 							Cart Totals
 						</h4>
-
 						<div class="flex-w flex-t bor12 p-b-13">
 							<div class="size-208">
 								<span class="stext-110 cl2">
@@ -155,54 +154,148 @@ for ($i=0; $i <$num_results; $i++)
 
 							<div class="size-209">
 								<span class="mtext-110 cl2">
-									$79.65
+								<input type="text" readonly="readonly"  id="subTotal"value="0">
 								</span>
 							</div>
 						</div>
 
-						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
-							<div class="size-208 w-full-ssm">
-								<span class="stext-110 cl2">
-									Shipping:
-								</span>
-							</div>
-
-							<div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
-								<p class="stext-111 cl6 p-t-2">
-									There are no shipping methods available. Please double check your address, or contact us if you need any help.
-								</p>
-								
-								<div class="p-t-15">
+						
+						
+						<div class="p-t-15">
 									<span class="stext-112 cl8">
 										Calculate Shipping
 									</span>
-
-									<div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-										<select class="js-select2" name="time">
-											<option>Select a country...</option>
-											<option>USA</option>
-											<option>UK</option>
-										</select>
-										<div class="dropDownSelect2"></div>
-									</div>
-
-									<div class="bor8 bg0 m-b-12">
-										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="State /  country">
-									</div>
-
-									<div class="bor8 bg0 m-b-22">
-										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Postcode / Zip">
+							<div class="bor8 bg0 m-b-22">
+										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" id="cep" name="cep" placeholder="CEP">
 									</div>
 									
+
+
+							<div class="size-208">
+								<span class="stext-110 cl2">
+									Frete: <input type="text" readonly="readonly"  id="frete" name="frete" value="0" >
+								</span>
+							</div>
+					
+							<div class="size-208">
+								<span class="stext-110 cl2">
+									 
+								</span>
+							</div>
+							<div class="size-209">
+								<span class="mtext-110 cl2">
+									&nbsp;
+								</span>
+							</div>
+							
+						</div>
 									<div class="flex-w">
 										<div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
-											Update Totals
-										</div>
+											<a href="#" onClick="calcularFrete();"> Calcular Frete</a>
 									</div>
-										
-								</div>
 							</div>
-						</div>
+						<div class="size-209">
+								<span class="mtext-110 cl2">
+									&nbsp;
+								</span>
+							</div>
+						<div class="panel panel-info">
+                        <h4 class="mtext-109 cl2 p-b-30">
+							Pagamento
+						</h4>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-md-12"><strong>Card Type:</strong></div>
+                                <div class="col-md-12">
+                                    <select id="CreditCardType" name="CreditCardType" class="form-control">
+                                        <option value="5">Visa</option>
+                                        <option value="6">MasterCard</option>
+                                        <option value="7">American Express</option>
+                                        <option value="8">Discover</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12"><strong>Credit Card Number:</strong></div>
+                                <div class="col-md-12"><input type="tel"  class="form-control" id="cc" name="cc" maxlength="19" /></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12"><strong>Card CVV:</strong></div>
+                                <div class="col-md-12"><input type="text" class="form-control" name="car_code" maxlength="3" /></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <strong>Expiration Date</strong>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <select class="form-control" name="">
+                                        <option value="">Month</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                </select>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <select class="form-control" name="">
+                                        <option value="">Year</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <span>Pay secure using your credit card.</span>
+                                </div>
+                                <div class="col-md-12">
+                                    <ul class="cards">
+                                        <li >
+										<a href="#" class="m-all-1">
+						<img src="images/icons/icon-pay-02.png" alt="ICON-PAY">
+					</a>
+										Visa
+										
+										</li>
+                                        <li class="mastercard hand">
+										<a href="#" class="m-all-1">
+						<img src="images/icons/icon-pay-03.png" alt="ICON-PAY">
+					</a>
+										
+										MasterCard</li>
+                                        <li class="amex hand">
+										<a href="#" class="m-all-1">
+						<img src="images/icons/icon-pay-01.png" alt="ICON-PAY">
+					</a>
+										
+										PayPal</li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+						
+
+						
 
 						<div class="flex-w flex-t p-t-27 p-b-33">
 							<div class="size-208">
@@ -226,160 +319,12 @@ for ($i=0; $i <$num_results; $i++)
 	</form>
 		
 	
-		
+	</div>	
 
-	<!-- Footer -->
-	<footer class="bg3 p-t-75 p-b-32">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-6 col-lg-3 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">
-						Categories
-					</h4>
+	<?php
+require_once "i_footer.php";
 
-					<ul>
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Women
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Men
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Shoes
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Watches
-							</a>
-						</li>
-					</ul>
-				</div>
-
-				<div class="col-sm-6 col-lg-3 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">
-						Help
-					</h4>
-
-					<ul>
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Track Order
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Returns 
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Shipping
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								FAQs
-							</a>
-						</li>
-					</ul>
-				</div>
-
-				<div class="col-sm-6 col-lg-3 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">
-						GET IN TOUCH
-					</h4>
-
-					<p class="stext-107 cl7 size-201">
-						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
-					</p>
-
-					<div class="p-t-27">
-						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-facebook"></i>
-						</a>
-
-						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-instagram"></i>
-						</a>
-
-						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-pinterest-p"></i>
-						</a>
-					</div>
-				</div>
-
-				<div class="col-sm-6 col-lg-3 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">
-						Newsletter
-					</h4>
-
-					<form>
-						<div class="wrap-input1 w-full p-b-4">
-							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
-							<div class="focus-input1 trans-04"></div>
-						</div>
-
-						<div class="p-t-18">
-							<button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-								Subscribe
-							</button>
-						</div>
-					</form>
-				</div>
-			</div>
-
-			<div class="p-t-40">
-				<div class="flex-c-m flex-w p-b-18">
-					<a href="#" class="m-all-1">
-						<img src="images/icons/icon-pay-01.png" alt="ICON-PAY">
-					</a>
-
-					<a href="#" class="m-all-1">
-						<img src="images/icons/icon-pay-02.png" alt="ICON-PAY">
-					</a>
-
-					<a href="#" class="m-all-1">
-						<img src="images/icons/icon-pay-03.png" alt="ICON-PAY">
-					</a>
-
-					<a href="#" class="m-all-1">
-						<img src="images/icons/icon-pay-04.png" alt="ICON-PAY">
-					</a>
-
-					<a href="#" class="m-all-1">
-						<img src="images/icons/icon-pay-05.png" alt="ICON-PAY">
-					</a>
-				</div>
-
-				<p class="stext-107 cl6 txt-center">
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-
-				</p>
-			</div>
-		</div>
-	</footer>
-
-
-	<!-- Back to top -->
-	<div class="btn-back-to-top" id="myBtn">
-		<span class="symbol-btn-back-to-top">
-			<i class="zmdi zmdi-chevron-up"></i>
-		</span>
-	</div>
+?>
 
 <!--===============================================================================================-->	
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -423,42 +368,134 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script>
 
 
-		function carrinhoValor(codigo,valor, acao){
+		function calcularFrete(){
+
+				
+				cep=document.getElementById("cep").value;
+
+				valor = 1;
+				if(cep == "13142134"){
+					valor = "10.99";
+				}else if(cep == "13068211") {
+					valor = "15.99";
+				}else{
+					valor = "20.00";
+				}
+
+				document.getElementById("frete").value=valor;
+
+
+				calculaValorTotal(valor);
+
+		}
+
+		function calculaValorTotal(valor){
+
+							
+			subTotal=document.getElementById("subTotal").value;
+
+			total = parseFloat(subTotal) + parseFloat(valor);
+
+
+			document.getElementById("somaTotal").value=total;
+
+
+			}
+
+
+		function carrinhoAdValor(codigo,valor){
 				input= "num-product"+codigo;
 				qtd=document.getElementById(input).value;
 				
-				if (acao == "somar"){
+
 					qtd++;
-				}else{
-					
-						qtd--;
-					
-				}
+				
 
 				soma= valor*qtd;
 				codigoSoma= "valor"+codigo;
 				document.getElementById(codigoSoma).innerHTML=soma;
 
-				calculaTotal(valor,qtd, soma);
+				calculaAdTotal(valor,qtd, soma);
 				
 
 		}
 
-		function calculaTotal(valor,qtd, soma){
-				temp = document.getElementById("somaTotal").value;
+		function carrinhoSubValor(codigo,valor){
+				input= "num-product"+codigo;
+				qtd=document.getElementById(input).value;
+				
 
-				if (qtd > 1){
-					total = parseFloat(temp) - (qtd-1 * valor);
+				
+					if (qtd > 0) {
+						qtd--;
+					}
 					
-				}else{
-					total = parseFloat(soma) + parseFloat(temp);
-				}
-
 				
-				document.getElementById("somaTotal").value=total;
+				soma= valor*qtd;
+				codigoSoma= "valor"+codigo;
+				document.getElementById(codigoSoma).innerHTML=soma;
+
+				calculaSubTotal(valor,qtd, soma);
+				
+
 		}
 
+		function calculaAdTotal(valor,qtd, soma){
+				
+				temp = document.getElementById("subTotal").value;
 
+				if (qtd > 0){
+					qtdLivroAnterior = (qtd - 1) * valor; 
+				}else{
+					qtdLivroAnterior = 0;
+				}	
+
+
+					total = (parseFloat(soma) - qtdLivroAnterior) + parseFloat(temp) ;
+
+				document.getElementById("subTotal").value=total;
+		}
+
+		function calculaSubTotal(valor,qtd, soma){
+				
+				temp = document.getElementById("subTotal").value;
+
+				if (qtd > 0){
+					qtdLivroAnterior = (qtd - 1) * valor; 
+				}else{
+					qtdLivroAnterior = 0;
+				}	
+
+
+					total = parseFloat(temp) - (parseFloat(soma) - qtdLivroAnterior)  ;
+
+				document.getElementById("subTotal").value=total;
+		}
+
+		function mascara(o,f){
+    v_obj=o
+    v_fun=f
+    setTimeout("execmascara()",1)
+}
+function execmascara(){
+    v_obj.value=v_fun(v_obj.value)
+}
+function mcc(v){
+  v = v.replace(/\D/g,""); // Permite apenas dígitos
+  v = v.replace(/(\d{4})/g, "$1."); // Coloca um ponto a cada 4 caracteres
+  v = v.replace(/\.$/, ""); // Remove o ponto se estiver sobrando
+  v = v.substring(0, 19)// Limita o tamanho
+
+  return v;
+}
+function id( el ){
+	return document.getElementById( el );
+}
+window.onload = function(){
+	id('cc').onkeypress = function(){
+		mascara( this, mcc );
+	}
+}
 
 	</script>
 
