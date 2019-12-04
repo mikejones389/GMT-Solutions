@@ -14,7 +14,7 @@ public class SistemaDAO {
 		try {
 			FileWriter arq = new FileWriter(caminho);
 			PrintWriter gravarArq = new PrintWriter(arq);
-			gravarArq.println("# 									 AJUDA	 				 				   #");
+			gravarArq.println("# 									 AJUDA	 				 				    #");
 			gravarArq.println("#                                                                               #");
 			gravarArq.println("#  ESSE PROGRAMA TEM A FUNÇÃO DE DISPONIBILIZAR ACESSO AO BANCO DE DADOS E SUAS #");
 			gravarArq.println("# POSSÍVEIS ALTERAÇÕES. BASEADO NA LINGUAGEM DE PROGRAMAÇÃO JAVA, O SISTEMA TEM #");
@@ -44,7 +44,7 @@ public class SistemaDAO {
 			gravarArq.println("#                                                                               #");
 			gravarArq.println("#  2- COMPRAS                                                                   #");
 			gravarArq.println("#  NESSE TÓPICO, POSSUI APENAS UM SUBTÓPICO, SENDO ELE O GERAR COMPRA, E ESTE,  #");
-			gravarArq.println("# TEM A FUNÇÃO DE INSERIR NO BANCO DE DADOS MA COMPRA REALIZADA. PARA TAL AÇÃO  #");
+			gravarArq.println("# TEM A FUNÇÃO DE INSERIR NO BANCO DE DADOS UMA COMPRA REALIZADA. PARA TAL AÇÃO #");
 			gravarArq.println("# BASTA QUE SEJA SELECIONADO UM FORNECEDOR EXISTENTE E UM LIVRO EXISTENTE. CASO #");
 			gravarArq.println("# NÃO EXISTA NENHUM LIVRO OU FORNECEDOR CADASTRADO NO BANCO, OBRIGATORIAMENTE   #");
 			gravarArq.println("# EXIGE-SE QUE SEJA CADASTRADO UM FORNECEDOR E UM LIVRO RESPECTIVAMENTE, E POR  #");

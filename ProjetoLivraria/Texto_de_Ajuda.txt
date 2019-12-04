@@ -1,0 +1,67 @@
+# 									 AJUDA	 				 				   #
+#                                                                               #
+#  ESSE PROGRAMA TEM A FUNÇÃO DE DISPONIBILIZAR ACESSO AO BANCO DE DADOS E SUAS #
+# POSSÍVEIS ALTERAÇÕES. BASEADO NA LINGUAGEM DE PROGRAMAÇÃO JAVA, O SISTEMA TEM #
+# FUNCIONALIDADES ACESSÍVEIS POR MEIO DA BARRA DE TAREFAS LOCALIZADO NA REGIÃO  #
+# SUPERIOR DA TELA.                                                             #
+#                                                                               #
+#  O MENU:                                                                      #
+#  NO MENU PODEMOS LOCALIZAR QUATRO TÓPICOS DE TRABALHOS, NA QUAL CADA UM DELES #
+# POSSUI SUA DETERMINADA FUNÇÃO. A SEGUIR EXPLICAREMOS A FUNÇÃO DOS TÓPICOS, NA #
+# QUAL ESTÃO DIVIDOS EM:                                                        #
+#                                                                               #
+#  1- CADASTRO                                                                  #
+#  O CADASTRO É UM TÓPICO ESPECÍFICO PARA REALIZAR QUALQUER TIPO DE CADASTRO NO #
+# BANCO DE DADOS. ESTE TÓPICO POSSUI SUBTÓPICOS, SENDO ESTES:                   #
+#                                                                               #
+#  1.1- CADASTRAR LIVRO                                                         #
+#  ESSE TÓPICO REALIZA A FUNÇÃO DE CADASTRAR UM LIVRO NO BANCO DE DADOS. BASTA  #
+# PREENCHER TODOS OS CAMPOS CORRETAMENTES E CLICAR EM CONCLUIR QUE O LIVRO SERÁ #
+# INCLUSO NO BANCO DE DADOS. VALE RESSALTAR QUE PARA O CADASTRO DO LIVRO É      #
+# OBRIGATÓRIO A SELEÇÃO DE UM FORNECEDOR PARA QUE O CADASTRO SEJA CONCLUIDO COM #
+# PERFEIÇÃO.                                                                    #
+#                                                                               #
+#  1.2- CADASTRAR FORNECEDOR                                                    #
+#  ESSE TÓPICO REALIZA A FUNÇÃO DE CADASTRAR UM FORNECEDOR NO BANCO DE DADOS. É #
+# SÓ PREENCHER TODOS OS CAMPOS CORRETAMENTE E CLICAR EM CONCLUIR QUE O TODOS OS #
+# DADOS DO FORNECEDOR SERÃO SALVOS.                                             #
+#                                                                               #
+#  2- COMPRAS                                                                   #
+#  NESSE TÓPICO, POSSUI APENAS UM SUBTÓPICO, SENDO ELE O GERAR COMPRA, E ESTE,  #
+# TEM A FUNÇÃO DE INSERIR NO BANCO DE DADOS MA COMPRA REALIZADA. PARA TAL AÇÃO  #
+# BASTA QUE SEJA SELECIONADO UM FORNECEDOR EXISTENTE E UM LIVRO EXISTENTE. CASO #
+# NÃO EXISTA NENHUM LIVRO OU FORNECEDOR CADASTRADO NO BANCO, OBRIGATORIAMENTE   #
+# EXIGE-SE QUE SEJA CADASTRADO UM FORNECEDOR E UM LIVRO RESPECTIVAMENTE, E POR  #
+# FIM, SEJA GERADO UMA COMPRA.                                                  #
+#  NO FINAL DE UMA COMPRA, É EMITIDO UMA NOTA FISCAL, E ESTE ARQUIVO É SALVO NA #
+# PRÓPRIA PASTA DO PROGRAMA.                                                    #
+#                                                                               #
+#  3-LISTAR                                                                     #
+#  ESSE TÓPICO TEM A FUNÇÃO DE APRESENTAR EM UMA TABELA ALGUMAS INFORMAÇÕES QUE #
+# ESÃO SALVAS NO BANCO DE DADOS REFERENTES A CADA SUBTOPICO, SENDO ELES:        #
+#   - LISTAR LIVROS                                                             #
+#   LISTA TODOS OS LIVROS CADASTRADOS NO BANCO DE DADOS, ORDENADOS PELO CÓDIGO  #
+#  DE IDENTIFICAÇÃO. AS COLUNAS DA TABELA SÃO: CÓDIGO; TÍTULO; QUANTIDADE.      #
+#   ESSA TELA POSSUI TRÊS BOTÕES: DELETAR(APAGA O LIVRO SELECIONADO NA TABELA   #
+#  DO BANCO DE DADOS); ATUALIZAR(ATUALIZA O LIVRO SELECIONADO NA TABELA DO      #
+#  BANCO DE DADOS); E GERAR ARQUIVO(GERA UM ARQUIVO TEXTO, SALVO NA PRÓPRIA     #
+#  PASTA DO PROGRAMA, COM TODAS AS INFORMAÇÕES DE TODOS OS LIVROS CADASTRADOS   #
+#  NO BANCO DE DADOS.                                                           #
+#                                                                               #
+#   - LISTAR FORNECEDOR                                                         #
+#   LISTA TODOS OS FORNECEDORES CADASTRADOS NO BANCO DE DADOS, ORDENADOS PELO   #
+#  CÓDIGO DE IDENTIFICAÇÃO. AS COLUNAS DA TABELA SÃO: ID; NOME FORNECEDOR;      #
+#  TELEFONE; E-MAIL.                                                            #
+#   ESSA TELA POSSUI TRÊS BOTÕES: DELETAR(APAGA O FORNECEDOR SELECIONADO NA     #
+#  TABELA DO BANCO DE DADOS); ATUALIZAR(ATUALIZA O FORNECEDOR SELECIONADO NA    #
+#  TABELA DO BANCO DE DADOS COM AS NOVAS INFORMAÇÕES PASSADAS); E GERAR ARQUIVO #
+#  (GERA UM ARQUIVO TEXTO, SALVO NA PRÓPRIA PASTA DO PROGRAMA, COM TODAS AS     #
+#  INFORMAÇÕES DE TODOS OS FORNECEDORES CADASTRADOS NO BANCO DE DADOS.          #
+#                                                                               #
+#   - LISTAR CLIENTES                                                           #
+#   LISTA TODOS OS CLIENTES CADASTRADOS NO BANCO DE DADOS, ORDENADOS PELO       #
+#  CÓDIGO DE IDENTIFICAÇÃO. AS COLUNAS DA TABELA SÃO: ID; NOME; CPF; CELULAR.   #
+#   ESSA TELA POSSUI DOIS BOTÔES: DELETAR(APAGA O CLIENTE SELECIONADO NA TABELA #
+#  DO BANCO DE DADOS) E GERAR ARQUIVO(GERA UM ARQUIVO TEXTO, SALVO NA PRÓPRIA   #
+#  PASTA DO PROGRAMA, COM TODAS AS INFORMAÇÕES DE TODOS OS CLIENTES CADASTRADOS #
+#  NO BANCO DE DADOS. #
