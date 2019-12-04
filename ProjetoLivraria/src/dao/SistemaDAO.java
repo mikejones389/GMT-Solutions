@@ -14,7 +14,7 @@ public class SistemaDAO {
 		try {
 			FileWriter arq = new FileWriter(caminho);
 			PrintWriter gravarArq = new PrintWriter(arq);
-			gravarArq.println("# 									 AJUDA	 				 				    #");
+			gravarArq.println("# 									 AJUDA	 				 				  #");
 			gravarArq.println("#                                                                               #");
 			gravarArq.println("#  ESSE PROGRAMA TEM A FUNÇÃO DE DISPONIBILIZAR ACESSO AO BANCO DE DADOS E SUAS #");
 			gravarArq.println("# POSSÍVEIS ALTERAÇÕES. BASEADO NA LINGUAGEM DE PROGRAMAÇÃO JAVA, O SISTEMA TEM #");
@@ -80,7 +80,16 @@ public class SistemaDAO {
 			gravarArq.println("#   ESSA TELA POSSUI DOIS BOTÔES: DELETAR(APAGA O CLIENTE SELECIONADO NA TABELA #");
 			gravarArq.println("#  DO BANCO DE DADOS) E GERAR ARQUIVO(GERA UM ARQUIVO TEXTO, SALVO NA PRÓPRIA   #");
 			gravarArq.println("#  PASTA DO PROGRAMA, COM TODAS AS INFORMAÇÕES DE TODOS OS CLIENTES CADASTRADOS #");
-			gravarArq.println("#  NO BANCO DE DADOS. #");
+			gravarArq.println("#  NO BANCO DE DADOS.                                                           #");
+			gravarArq.println("#                                                                               #");
+			gravarArq.println("#   - LISTAR COMPRAS                                                            #");
+			gravarArq.println("#   LISTA TODOS AS COMPRAS CADASTRADAS NO BANCO DE DADOS, ORDENADAS PELO CÓDIGO #");
+			gravarArq.println("#  DE IDENTIFICAÇÃO. AS COLUNAS DA TABELA SÃO: ID DA COMPRA; DT DE COMPRA;      #");
+			gravarArq.println("#  DT DE ENTREGA; LIVRO; FORNECEDOR; PREÇO UNITÁRIO.                            #");
+			gravarArq.println("#   ESSA TELA POSSUI APENAS UM BOTÃO, O GERAR ARQUIVO CUJA FUNÇÃO É GERAR UM    #");
+			gravarArq.println("#  ARQUIVO TEXTO, SALVO NA PRÓPRIA PASTA DO PROGRAMA, COM TODAS AS INFORMAÇÕES  #");
+			gravarArq.println("#  DE TODAS AS COMPRAS CADASTRADAS NO BANCO DE DADOS.                           #");
+			gravarArq.println("#                                                                               #");
 			
 			gravarArq.close();
 			return true;
