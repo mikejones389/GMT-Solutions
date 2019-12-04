@@ -73,6 +73,8 @@ public class AtualizarLivroView extends JFrame implements ActionListener {
 		LivroDAO ld = new LivroDAO();
 		ld.buscar(id);
 		livros = (ArrayList<Livro>) ld.buscar(id);
+		System.out.println(livros);
+		System.out.println(livros.get(0).getNomeLivro());
 		//Configura��o da estrutura do layout
 		System.out.println("VOLTEI PRO ATUALIZAR VIEW");
 		setLayout(new GridBagLayout());
@@ -103,8 +105,9 @@ public class AtualizarLivroView extends JFrame implements ActionListener {
 		cdFornecedorField = new JTextField(30);
 		cdFornecedorField.setEditable(false);
 		//String cdFornecedor = livro.getCdFornecedor();
-		//cdFornecedorField.setText(livro.getCdFornecedor());
-		//cdFornecedorField.setEditable(false);
+		String cdFornecedor = String.valueOf(livros.get(0).getCdFornecedor());
+		cdFornecedorField.setText(cdFornecedor);
+		cdFornecedorField.setEditable(false);
 		gbc.gridx=1;
 		gbc.insets= new Insets(10,0,0,5);
 		gbc.fill = GridBagConstraints.NONE;
@@ -130,10 +133,9 @@ public class AtualizarLivroView extends JFrame implements ActionListener {
 		gbc.anchor=GridBagConstraints.LINE_END;
 		gbc.insets= new Insets(5,0,0,5);
 		add(nomeLivroLabel, gbc); 	
-		System.out.println(id);
-		System.out.println(livros.get(id).getNomeLivro());
+		
 		nomeLivroField = new JTextField(30);
-		nomeLivroField.setText(livros.get(id).getNomeLivro());
+		nomeLivroField.setText(livros.get(0).getNomeLivro());
 		gbc.gridx=1;
 		gbc.gridy=2;
 		gbc.insets= new Insets(10,0,0,5);
@@ -151,6 +153,7 @@ public class AtualizarLivroView extends JFrame implements ActionListener {
 		add(nomeAutorLabel, gbc);
 		
 		nomeAutorField = new JTextField(30);
+		nomeAutorField.setText(livros.get(0).getAutorLivro());
 		gbc.gridx=1;
 		gbc.gridy=3;
 		gbc.insets= new Insets(10,0,0,5);
@@ -168,6 +171,7 @@ public class AtualizarLivroView extends JFrame implements ActionListener {
 		add(editoraLabel, gbc);
 		
 		editoraField = new JTextField(30);
+		editoraField.setText(livros.get(0).getEditoraLivro());
 		gbc.gridx=1;
 		gbc.gridy=4;
 		gbc.insets= new Insets(10,0,0,5);
@@ -185,6 +189,7 @@ public class AtualizarLivroView extends JFrame implements ActionListener {
 		add(generoLabel, gbc);
 		
 		generoField = new JTextField(30);
+		generoField.setText(livros.get(0).getGeneroLivro());
 		gbc.gridx=1;
 		gbc.gridy=5;
 		gbc.insets= new Insets(10,0,0,5);
@@ -202,6 +207,8 @@ public class AtualizarLivroView extends JFrame implements ActionListener {
 		add(anoLabel, gbc);
 		
 		anoField = new JTextField(30);
+		String ano = String.valueOf(livros.get(0).getAnoLivro());
+		anoField.setText(ano);
 		gbc.gridx=1;
 		gbc.gridy=6;
 		gbc.insets= new Insets(10,0,0,5);
@@ -219,6 +226,8 @@ public class AtualizarLivroView extends JFrame implements ActionListener {
 		add(edicaoLabel, gbc);
 		
 		edicaoField = new JTextField(30);
+		String edicao = String.valueOf(livros.get(0).getEdicaoLivro());
+		edicaoField.setText(edicao);
 		gbc.gridx=1;
 		gbc.gridy=7;
 		gbc.insets= new Insets(10,0,0,5);
@@ -236,6 +245,8 @@ public class AtualizarLivroView extends JFrame implements ActionListener {
 		add(precoVendaLabel, gbc);
 		
 		precoVendaField = new JTextField(30);
+		String preco = String.valueOf(livros.get(0).getPrecoVenda());
+		precoVendaField.setText(preco);
 		gbc.gridx=1;
 		gbc.gridy=8;
 		gbc.insets= new Insets(10,0,0,5);
@@ -253,6 +264,8 @@ public class AtualizarLivroView extends JFrame implements ActionListener {
 		add(qntLivroLabel, gbc);
 		
 		qntLivroField = new JTextField(30);
+		String qnt = String.valueOf(livros.get(0).getQntLivro());
+		qntLivroField.setText(qnt);
 		gbc.gridx=1;
 		gbc.gridy=9;
 		gbc.insets= new Insets(10,0,0,5);

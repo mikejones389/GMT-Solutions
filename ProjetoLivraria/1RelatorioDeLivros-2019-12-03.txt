@@ -1,4 +1,4 @@
-#RELATÓRIO DOS LIVROS CADASTRADOS GERADO EM 2019-11-29#
+#RELATÓRIO DOS LIVROS CADASTRADOS GERADO EM 2019-12-03#
 ID: 4
 Título: Harry Potter e a Pedra Filosofal
 Autor: J.K Rolling
@@ -107,15 +107,27 @@ Quantidade: 200
 Código do Fornecedor: 3
 Link Imagemromance1.jpg
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-ID: 13
-Título: A culpa é das Estrelas
-Autor: John Green
-Editora: Rocco
-Gênero: Romance
-Ano: 2015
+ID: 39
+Título: TESTE
+Autor: teste 
+Editora: teste
+Gênero: tesdte
+Ano: 1023
+Ediçao: 2
+Preço de Venda10.0
+Quantidade: 10
+Código do Fornecedor: 16
+Link Imagempinoquio.jpeg
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ID: 40
+Título:  teste2
+Autor:  teste2
+Editora:  teste2
+Gênero:  teste2
+Ano: 1025
 Ediçao: 1
-Preço de Venda99.99
-Quantidade: 200
-Código do Fornecedor: 3
-Link Imagemstars.jpg
+Preço de Venda15.0
+Quantidade: 10
+Código do Fornecedor: 16
+Link Imagempinoquio.jpeg
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
