@@ -122,17 +122,17 @@ public class FinalizarCompraView extends JPanel implements ActionListener {
 		// TODO Auto-generated method stub
 		compra.setQuantidade(Integer.parseInt(quantidadeField.getText()));
 		compra.setPreco(Double.parseDouble(precoField.getText()));
-		
+		int idCompra = 0;
 		
 		CompraController compraController = new CompraController();
 		try {
-			if(compraController.cadastro(compra)) {
+			idCompra = compraController.cadastro(compra);
+			System.out.println(idCompra);
 				JOptionPane.showMessageDialog(null, "Problema ao Gerar a Compra");
 
-			}
-			else {
 				JOptionPane.showMessageDialog(null, "Compra gerada com sucesso");
-		
+				System.out.println(compra.getCdCompra());
+				System.out.println(compra.getDtCompra());
 //				GerarCompraView gcv = new GerarCompraView(frame);
 //				gcv.criarFormulario();
 //				gcv.setVisible(true);
@@ -140,21 +140,22 @@ public class FinalizarCompraView extends JPanel implements ActionListener {
 //				this.frame.getContentPane().add(gcv);
 //				this.frame.revalidate();
 //				this.frame.repaint();
-			}
+				
 		} catch (HeadlessException /* | SQLException */ e) {
 			// e.printStackTrace();
 		}
-		gerarNota();
+		System.out.println(compra.getCdCompra());
+		gerarNota(idCompra);
 	}
 	
-	public void gerarNota() {
+	public void gerarNota(int idCompra) {
 		CompraDAO cd = new CompraDAO();
 		n++;
 		Date data = new Date(System.currentTimeMillis());
 		String arq = ""+n+"NotaFiscal-"+data+".txt";
-		int id = compra.getCdCompra();
-		List<Compra> texto = (List<Compra>) compra;
-		if(cd.gerarNota(arq, texto, id)) {
+		Compra texto = compra;
+		System.out.println("Texto"+texto);
+		if(cd.gerarNota(arq, texto, idCompra)) {
 			JOptionPane.showMessageDialog(null, "Nota fiscal gerada com sucesso");
 			
 		}

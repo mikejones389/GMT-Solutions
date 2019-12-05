@@ -118,4 +118,24 @@ public class FornecedorDAO {
 			return false;
 		}
 	}
+	
+	public Fornecedor getFornecedor(int cd) {
+		Connection bdd = BancoDeDados.conectar();
+		fornecedores = new ArrayList<Fornecedor>();
+		Fornecedor fornecedor = null;
+		String texto = null;
+		try {
+			String sql = "SELECT * FROM fornecedor WHERE cd_fornecedor = "+cd+"; ";
+			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
+			ResultSet rs = smt.executeQuery();
+			while(rs.next()) {
+				fornecedor = new Fornecedor();
+				fornecedor.setNmFornecedor(rs.getString("nm_fornecedor"));
+				System.out.println(fornecedor.getCodigo());
+			}
+		}catch(Exception e) {
+			System.out.println("ERRO: "+ e.getMessage());
+		}
+		return fornecedor;
+	}
 }

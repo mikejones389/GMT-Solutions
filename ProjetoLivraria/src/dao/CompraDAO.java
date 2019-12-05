@@ -16,13 +16,16 @@ import com.mysql.jdbc.Statement;
 
 import bdd.BancoDeDados;
 import model.Compra;
+import model.Fornecedor;
+import model.Livro;
 
 public class CompraDAO{
 	
 	private static PreparedStatement st = null;
 	private static ResultSet rs = null;
 	List<Compra> compras;
-	public void inserirCompra(Compra compra) throws SQLException{
+	
+	public int inserirCompra(Compra compra) throws SQLException{
 		Connection bdd = BancoDeDados.conectar();
 		System.out.println("Entrou no gerarCompraDAO");
 		
@@ -40,8 +43,8 @@ public class CompraDAO{
 		
 		String sql1 = "insert into compra (dt_compra, dt_entrega, cd_fornecedor) values (?,?,?);";
 		
-		//final PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-		PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql1,Statement.RETURN_GENERATED_KEYS);
+		final PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
+		//PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql1,Statement.RETURN_GENERATED_KEYS);
 //		System.out.println("Data 1 " + compra.getDtCompra());
 //		System.out.println("Data 2 " + dataUtil);
 //		System.out.println("Data 3 " + dataSql);
@@ -53,7 +56,7 @@ public class CompraDAO{
 		 int lastId = 0;
 		if (rs1.next()) {
 		   lastId = rs1.getInt(1);
-		    System.out.println(" ID da compra " + lastId);
+		   //System.out.println(" ID da compra " + lastId);
 		}
 				
 		String sql2 = "insert into item_compra (cd_livro, cd_compra, quantidade, preco_unitario) values (?,?,?,?)";
@@ -65,6 +68,9 @@ public class CompraDAO{
 		smt2.setDouble(4, compra.getPreco());
 		
 		smt2.executeUpdate();
+	
+		return lastId;
+		
 	}
 	
 	public ArrayList<Compra> Listar(){
@@ -99,6 +105,7 @@ public class CompraDAO{
 		return (ArrayList<Compra>)compras;
 		
 	}
+	
 	public boolean gerarArq(String caminho, List<Compra> compras) {
 		this.compras= compras;
 		Date data = new Date(System.currentTimeMillis());
@@ -131,34 +138,42 @@ public class CompraDAO{
 			return false;
 		}
 	}
-	public boolean gerarNota(String caminho, List<Compra> compras, int id) {
+	
+	public boolean gerarNota(String caminho, Compra compras, int id) {
 		Date data = new Date(System.currentTimeMillis());
+		LivroDAO ld = new LivroDAO();
+		FornecedorDAO fd = new FornecedorDAO();
 		try {
 			FileWriter arq = new FileWriter(caminho);
 			PrintWriter gravarArq = new PrintWriter(arq);
 			gravarArq.println("# RELATÓRIO DO HISTÓRICO DE COMPRAS GERADO EM "+data+" #");
-			for(int i = 0; i<compras.size(); i++) {
-				if(compras.get(i).equals(id)) {
-					gravarArq.print("ID: ");
+				gravarArq.print("ID: ");			
+				gravarArq.println(id);
+				gravarArq.print("Data de Compra: ");
+				gravarArq.println(compras.getDtCompra());
+				gravarArq.print("Data de Entrega: ");
+				gravarArq.println(compras.getDtEntrega());
 				
-					gravarArq.println(compras.get(id).getCdCompra());
-					gravarArq.print("Data de Compra: ");
-					gravarArq.println(compras.get(id).getDtCompra());
-					gravarArq.print("Data de Entrega: ");
-					gravarArq.println(compras.get(id).getDtEntrega());
-					gravarArq.print("Título do Livro: ");
-					System.out.println("nomeLivro"+((List<Compra>) ((Compra) compras).getLivro()).get(id).getLivro().getNomeLivro());
-					gravarArq.println(((List<Compra>) ((Compra) compras).getLivro()).get(id).getLivro().getNomeLivro());
-					gravarArq.print("Nome do Fornecedor: ");
-					gravarArq.println(((List<Compra>) ((Compra) compras).getFornecedor()).get(id).getFornecedor().getNmFornecedor());
-					gravarArq.print("Preço Unitário: ");
-					gravarArq.println(compras.get(id).getPreco());
-					gravarArq.print("Quantidade: ");
-					gravarArq.println(compras.get(id).getQuantidade());
-					gravarArq.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
-			
-				}
-			}
+				gravarArq.print("Título do Livro: ");
+				int cdLivro = compras.getIdLivro();
+				Livro livro = new Livro();
+				livro = ld.getLivro(cdLivro);
+				gravarArq.println(livro.getNomeLivro());
+				
+				gravarArq.print("Nome do Fornecedor: ");
+				int cdFornecedor = compras.getIdFornecedor();
+				System.out.println("id Fornecedor "+cdFornecedor);
+				Fornecedor fornecedor = new Fornecedor();
+				fornecedor = fd.getFornecedor(cdFornecedor);
+				gravarArq.println(fornecedor.getNmFornecedor());
+	
+				gravarArq.print("Preço Unitário: ");
+				gravarArq.println(compras.getPreco());
+				gravarArq.print("Quantidade: ");
+				gravarArq.println(compras.getQuantidade());
+				gravarArq.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+		
+	
 			gravarArq.close();
 			return true;
 			

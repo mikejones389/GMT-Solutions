@@ -186,6 +186,41 @@ public class LivroDAO {
 		}
 	}
 	
+	public Livro getLivro (int cd){
+		Connection bdd = BancoDeDados.conectar();
+		livros = new ArrayList<Livro>();
+		Livro livro= null;
+		String texto = null;
+		System.out.println("ENTROU NO buscarDAO livro");
+		try {
+			String sql = "SELECT * FROM livro WHERE cd_livro = "+cd+";";
+			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
+			ResultSet rs = smt.executeQuery();
+			while(rs.next()) {
+				System.out.println("ENTROU3");
+				 livro = new Livro();
+				//livro.getCdLivro();
+				livro.setNomeLivro(rs.getString("nm_Livro"));
+				//System.out.println(livro.getNomeLivro());
+//				livro.setAutorLivro(rs.getString("autor"));
+//				livro.setEditoraLivro(rs.getString("editora"));
+//				livro.setGeneroLivro(rs.getString("genero"));
+//				livro.setAnoLivro(rs.getInt("ano_livro"));
+//				livro.setEdicaoLivro(rs.getInt("edicao"));
+//				livro.setPrecoVenda(rs.getDouble("preco_venda"));
+//				livro.setQntLivro(rs.getInt("qnt_livro"));
+//				livro.setCdFornecedor(rs.getInt("cd_fornecedor"));
+//				livro.setLinkImg(rs.getString("link_img"));
+				
+				//livros.add(livro);
+					
+			}
+		}catch(Exception e) {
+			System.out.println("ERRO: "+e.getMessage());
+		}
+		return livro;
+	}
+	
 	//m�todo para consultar livro no bd
 
 }

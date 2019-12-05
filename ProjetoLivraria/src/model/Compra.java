@@ -57,6 +57,12 @@ public class Compra {
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
+	public int getIdLivro() {
+		return livro.getCdLivro();
+	}
+	public int getIdFornecedor() {
+		return fornecedor.getCodigo();
+	}
 	
 	@Override
 	public String toString() {
