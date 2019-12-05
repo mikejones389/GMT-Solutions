@@ -138,4 +138,47 @@ public class FornecedorDAO {
 		}
 		return fornecedor;
 	}
+	
+	public ArrayList<Fornecedor> buscar(int cd){
+		Connection bdd = BancoDeDados.conectar();
+		fornecedores = new ArrayList<Fornecedor>();
+		try {
+			String sql = "SELECT * FROM fornecedor WHERE cd_fornecedor = "+cd+";";
+			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
+			ResultSet rs = smt.executeQuery();
+			while(rs.next()) {
+				Fornecedor f = new Fornecedor();
+				f.setCodigo(rs.getInt("cd_fornecedor"));
+				f.setNmFornecedor(rs.getString("nm_fornecedor"));
+				f.setNmFantasia(rs.getString("nm_fantasia"));
+				f.setRzSocial(rs.getString("rz_social"));
+				f.setCnpj(rs.getInt("cnpj"));
+				f.setEmail(rs.getString("email"));
+				f.setTelefone(rs.getInt("telefone"));
+				f.setCelular(rs.getInt("celualr"));
+				fornecedores.add(f);
+			}
+		}catch(Exception e) {
+			System.out.println("ERRO: "+e.getMessage());
+		}
+		return (ArrayList<Fornecedor>) fornecedores;
+	}
+
+	public void atualizar(Fornecedor fornecedor, int id) throws SQLException{
+		Connection bdd = BancoDeDados.conectar();
+		try {
+			String sql = "UPDATE fornecedor SET nm_fornecedor = ?, nm_fantasia = ?, rz_social = ?, cnpj = ?, email = ?, telefone = ?, celular = ? WHERE cd_fornecedor = "+id+";";
+			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
+			smt.setString(1, fornecedor.getNmFornecedor());
+			smt.setString(2, fornecedor.getNmFantasia());
+			smt.setString(3, fornecedor.getRzSocial());
+			smt.setInt(4, fornecedor.getCnpj());
+			smt.setString(5, fornecedor.getEmail());
+			smt.setInt(6, fornecedor.getTelefone());
+			smt.setInt(7, fornecedor.getCelular());
+		}catch(Exception e) {
+			System.out.println("ERRO: "+e.getMessage());
+		}
+		bdd.close();
+	}
 }

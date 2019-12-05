@@ -41,5 +41,11 @@ public class LivroController {
 		
 	}
 	
+	public boolean atualizar(Livro livro, int id) throws SQLException{
+		LivroDAO ld = new LivroDAO();
+		ld.atualizar(livro, id);
+		
+		return true;
+	}
 }
 

@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -86,11 +87,19 @@ public class ListarFornecedorView extends JPanel implements ActionListener {
 		jbGerarArq.addActionListener(this);
 		jbGerarArq.setActionCommand("gerar arquivo");
 		
+		JButton jbAtualizar = new JButton("Atualizar");
+		jbAtualizar.addActionListener(this);
+		jbAtualizar.setActionCommand("atualizar");
+		
+		JPanel panelWest = new JPanel();
+		panelWest.setLayout(new GridLayout(2,1));
 		this.setLayout(new BorderLayout());
 		this.add(panelSuperior, BorderLayout.NORTH);
 		panelCentral.add(scrollPane,BorderLayout.NORTH);
 		this.add(panelCentral, BorderLayout.CENTER);
-		this.add(jbDeletar, BorderLayout.WEST);
+		panelWest.add(jbDeletar);
+		panelWest.add(jbAtualizar);
+		this.add(panelWest, BorderLayout.WEST);
 		this.add(jbGerarArq, BorderLayout.EAST);
 		
 	}
@@ -117,6 +126,18 @@ public class ListarFornecedorView extends JPanel implements ActionListener {
 		}
 	}
 	
+	public void atualizar() {
+		if(jtFornecedor.getSelectedRow() != -1) {
+			MouseEvent evt = null;
+			tableModelMouseClicked(evt);
+			int id = fornecedores.get(jtFornecedor.getSelectedRow()).getCodigo();
+			AtualizarFornecedorView afv = new AtualizarFornecedorView(id);
+			this.add(afv);
+			this.revalidate();
+			this.repaint();
+		}
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -128,6 +149,9 @@ public class ListarFornecedorView extends JPanel implements ActionListener {
 		}
 		else if(e.getActionCommand().equals("gerar arquivo")) {
 			gerarArq();
+		}
+		else if(e.getActionCommand().equals("atualizar")) {
+			atualizar();
 		}
 		
 	}

@@ -14,7 +14,7 @@ public class SistemaDAO {
 		try {
 			FileWriter arq = new FileWriter(caminho);
 			PrintWriter gravarArq = new PrintWriter(arq);
-			gravarArq.println("# 									 AJUDA	 				 				  #");
+			gravarArq.println("#                                 TEXTO DE AJUDA                                #");
 			gravarArq.println("#                                                                               #");
 			gravarArq.println("#  ESSE PROGRAMA TEM A FUNÇÃO DE DISPONIBILIZAR ACESSO AO BANCO DE DADOS E SUAS #");
 			gravarArq.println("# POSSÍVEIS ALTERAÇÕES. BASEADO NA LINGUAGEM DE PROGRAMAÇÃO JAVA, O SISTEMA TEM #");

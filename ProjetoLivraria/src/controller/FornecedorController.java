@@ -22,6 +22,12 @@ public class FornecedorController {
 			fornecedorDAO.Listar();
 			
 		}
-
+		
+		public boolean atualizar(Fornecedor fornecedor, int id) throws SQLException{
+			FornecedorDAO fd = new FornecedorDAO();
+			fd.atualizar(fornecedor, id);
+			
+			return true;
+		}
 	
 }

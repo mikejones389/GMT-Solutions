@@ -113,18 +113,7 @@ public class AtualizarLivroView extends JFrame implements ActionListener {
 		gbc.fill = GridBagConstraints.NONE;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		add(cdFornecedorField, gbc);
-		
-		JButton botaoFornecedor= new JButton("Selecionar");
-		botaoFornecedor.addActionListener(this);
-		botaoFornecedor.setActionCommand("listar");
-		gbc.gridx=1;
-		gbc.gridy=1;
-		gbc.fill = GridBagConstraints.RELATIVE;
-		gbc.insets=new Insets(10,0,0,45);
-		gbc.anchor = GridBagConstraints.LINE_END;
-		add(botaoFornecedor, gbc);
-		
-		
+			
 		JLabel nomeLivroLabel = new JLabel("Nome ");
 		nomeLivroLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		gbc.gridx=0;
@@ -283,6 +272,7 @@ public class AtualizarLivroView extends JFrame implements ActionListener {
 		add(imgLinkLabel, gbc);
 		
 		imgLinkField = new JTextField(30);
+		imgLinkField.setText(livros.get(0).getLinkImg());
 		gbc.gridx=1;
 		gbc.gridy=10;
 		gbc.insets= new Insets(10,0,0,5);
@@ -314,150 +304,34 @@ public class AtualizarLivroView extends JFrame implements ActionListener {
 		
 		
 	}
-	
-	public void selecionarFornecedor() {
-		int rows = 0;
-		int headers = 0;
-		jtFornecedor = new JTable(new DefaultTableModel(rows, headers));
-		jtFornecedor.setModel(tableModel);
 		
-		
-		frameList = new JFrame();
-		frameList.setVisible(true);
-		frameList.setSize(300,450);
-		frameList.setResizable(false);
-		frameList.setLocationRelativeTo(cdFornecedorField);
-		frameList.setLayout(new GridLayout(3,1));
-		JPanel panelTitulo = new JPanel();
-		panelTitulo.setLayout(new GridLayout(1,1));
-		JLabel titulo = new JLabel("Selecione o Fornecedor", SwingConstants.CENTER);
-		titulo.setFont(new Font("Arial", Font.BOLD, 18));
-		
-		panelTitulo.add(titulo);
-		frameList.add(panelTitulo);
-		
-		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
-		FornecedorDAO fd = new FornecedorDAO();
-		fornecedores = (List<Fornecedor>) fd.Listar();
-		
-				
-		tableModel.removeAll();
-		for (int i = 0; i < fornecedores.size(); i++) {
-			System.out.println(fornecedores.get(i).getNmFornecedor());
-			System.out.println(fornecedores.get(i).getTelefone());
-			
-			tableModel.addROw(fornecedores.get(i));
-			
-			
-		}
-		
-		jtFornecedor.addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-			int row = jtFornecedor.rowAtPoint(e.getPoint());
-			
-			row = jtFornecedor.getSelectedRow();
-
-			jtFornecedor.getSelectionModel().setSelectionInterval(row, row);
-			System.out.println("Cheguei no add mouse listener e linha = " + tableModel.getSelectRow(row));
-			cdFornecedorField.setText(""+tableModel.getSelectRow(row));
-			cdFornecedorField.setEditable(false);
-			System.out.println(row);
-			if(e.getButton() == MouseEvent.BUTTON3) {
-			//popup.show(jtFornecedor, e.getX(), e.getY());
-			}
-			}
-			});
-
-		
-		JScrollPane scrollPane = new JScrollPane(jtFornecedor);
-		frameList.add(scrollPane);
-		//jTFornecedoresMouseClicked();
-		JPanel panelInferior = new JPanel();
-		//panelInferior.setBackground(Color.cyan);
-		panelInferior.setLayout(new GridBagLayout());
-		GridBagConstraints gbc = new GridBagConstraints();
-		
-		gbc.gridx=0;
-		gbc.gridy=0;
-		gbc.insets = new Insets(10,0,10,10);
-		
-		JButton jbConcluir= new JButton("Concluir");
-		jbConcluir.addActionListener(this);
-		jbConcluir.setActionCommand("concluir");
-		
-		JButton jbCancelar= new JButton("Cancelar");
-		jbCancelar.addActionListener(this);
-		jbCancelar.setActionCommand("cancelar");
-		
-		
-		panelInferior.add(jbConcluir, gbc);
-		gbc.gridx=1;
-		panelInferior.add(jbCancelar, gbc);
-		frameList.add(panelInferior);
-		
-		//selecionar linha da tabela
-		MouseEvent evt = null;
-		tableModelMouseClicked(evt);	
-		//Fornecedor fornecedor = ((List<Fornecedor>) jtFornecedor).get(rows);
-		//cdFornecedorField.setText(fornecedor.getNmFantasia());
-		
-		
-		
-		
-	}
-	
 	public void sair() {
-		System.exit(0);
+		this.dispose();
+		this.setVisible(false);
 	}
 	
 	public void salvar() {
 		Livro livro = new Livro();
 		livro.setNomeLivro(nomeLivroField.getText());
-		System.out.print("Nome do Livro: ");
-		System.out.println(livro.getNomeLivro());
 		livro.setAutorLivro(nomeAutorField.getText());
-		//System.out.print("Nome do Autor: ");
-		//System.out.println(nomeAutor);
 		livro.setEditoraLivro(editoraField.getText());
-		//System.out.print("Editora: ");
-		//System.out.println(editora);
 		livro.setGeneroLivro(generoField.getText());
-		//System.out.print("G�nero: ");
-		//System.out.println(genero);
 		livro.setAnoLivro(Integer.parseInt(anoField.getText()));
-		//System.out.print("Ano: ");
-		//System.out.println(anoLivro);
 		livro.setEdicaoLivro(Integer.parseInt(edicaoField.getText()));
-		//System.out.print("Edi��o: ");
-		//System.out.println(edicao);
 		livro.setPrecoVenda(Double.parseDouble(precoVendaField.getText()));
-		//System.out.print("Pre�o de Venda: ");
-		//System.out.println(precoVenda);
 		livro.setCdFornecedor(Integer.parseInt(cdFornecedorField.getText()));
-		//System.out.print("C�digo do Fornecedor: ");
-		//System.out.println(cdFornecedor);
 		livro.setQntLivro(Integer.parseInt(qntLivroField.getText()));
-		//System.out.print("Quantidade: ");
-		//System.out.println(qntLivro);
-		livro.setLinkImg(imgLinkField.getText());
-		//System.out.print("Link Imagem: ");
-		//System.out.println(imgLink);
-		
+		livro.setLinkImg(imgLinkField.getText());		
 		
 		LivroController livroController = new LivroController();
 		try {
-			if(livroController.cadastro(livro)) {
+			if(livroController.atualizar(livro,id)) {
 				JOptionPane.showMessageDialog(null, "Cadastro de livro realizado com sucesso");
-				nomeLivroField.setText(" ");
-				nomeAutorField.setText(" ");
-				editoraField.setText(" ");
-				generoField.setText(" ");
-				anoField.setText(" ");
-				edicaoField.setText(" ");
-				precoVendaField.setText(" ");
-				cdFornecedorField.setText(" ");
+				this.dispose();
+				this.setVisible(false);
+				ListarLivroView llv = new ListarLivroView();
+				llv.revalidate();
+				llv.repaint();
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "Problema ao realizar cadastro de livro!");
@@ -468,34 +342,15 @@ public class AtualizarLivroView extends JFrame implements ActionListener {
 		}
 	}
 	
-	public void concluir() {
-		frameList.setVisible(false);
-		frameList.dispose();
-	}
-	
-	public void cancelar() {
-		cdFornecedorField.setText(" ");
-		frameList.setVisible(false);
-		frameList.dispose();
-	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getActionCommand().equals("listar")) {
-			selecionarFornecedor();
-		}
-		else if(e.getActionCommand().equals("sair")) {
+		if(e.getActionCommand().equals("sair")) {
 			sair();
 		}
 		else if(e.getActionCommand().equals("salvar")) {
 			salvar();
-		}
-		else if(e.getActionCommand().equals("concluir")) {
-			concluir();
-		}
-		else if(e.getActionCommand().equals("cancelar")) {
-			cancelar();
 		}
 	}
 	

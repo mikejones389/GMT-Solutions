@@ -21,8 +21,7 @@ public class LivroDAO {
 	List<Livro> livros;
 	int linha = 0;
 	int cd;
-	
-	//m�todo para inserir livro no bd
+
 	public void inserir(Livro livro) throws SQLException {
 		Connection bdd = BancoDeDados.conectar();
 		
@@ -52,7 +51,6 @@ public class LivroDAO {
 		Connection bdd = BancoDeDados.conectar();
 		livros = new ArrayList<Livro>();
 		
-		String texto = null;
 		System.out.println("ENTROU NO buscarDAO livro");
 		try {
 			String sql = "SELECT * FROM livro WHERE cd_livro = "+cd+";";
@@ -81,7 +79,7 @@ public class LivroDAO {
 		}
 		return (ArrayList<Livro>) livros;
 	}
-	//m�todo para listar os livros	
+		
 	public ArrayList<Livro>  Listar(){
 		Connection bdd = BancoDeDados.conectar();
 		livros = new ArrayList<Livro>();
@@ -221,21 +219,38 @@ public class LivroDAO {
 		return livro;
 	}
 	
-	//m�todo para consultar livro no bd
-
+	public void atualizar(Livro livro, int id) throws SQLException{
+		Connection bdd = BancoDeDados.conectar();
+		System.out.println(id);
+		System.out.println(livro.getNomeLivro());
+		System.out.println(livro.getAutorLivro());
+		System.out.println(livro.getEditoraLivro());
+		System.out.println(livro.getGeneroLivro());
+		System.out.println(livro.getAnoLivro());
+		System.out.println(livro.getEdicaoLivro());
+		System.out.println(livro.getPrecoVenda());
+		System.out.println(livro.getQntLivro());
+		System.out.println(livro.getCdFornecedor());
+		System.out.println(livro.getLinkImg());
+		try {
+			String sql = "UPDATE livro SET nm_livro = ?, autor = ?, editora = ?,genero = ? , ano_livro = ?, edicao = ?,preco_venda = ?,qnt_livro = ?,cd_fornecedor = ?,link_img  = ? WHERE cd_livro = "+id+";";
+			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
+			smt.setString(1, livro.getNomeLivro());
+			smt.setString(2, livro.getAutorLivro());
+			smt.setString(3, livro.getEditoraLivro());
+			smt.setString(4, livro.getGeneroLivro());
+			smt.setInt(5, livro.getAnoLivro());
+			smt.setInt(6, livro.getEdicaoLivro());
+			smt.setDouble(7, livro.getPrecoVenda());
+			smt.setInt(8, livro.getQntLivro());
+			smt.setInt(9, livro.getCdFornecedor());
+			smt.setString(10, livro.getLinkImg());
+			smt.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("ERRO: "+e.getMessage());
+		}
+		
+		bdd.close();
+		
+	}
 }
-
-
-// while testes
-//texto = ("ID: " + rs.getString("cd_livro") + " - NOME: " + rs.getString("nm_livro"));
-//System.out.println(texto);
-//dados[linha] = texto;
-//System.out.println(dados[linha]);
-////dados[linha][1] = rs.getString("nm_livro");
-////System.out.println(rs.getString("cd_livro"));
-//
-////System.out.println(dados[linha][1]);
-//
-//
-////ListarLivroView lista = new ListarLivroView();
-//linha++;
