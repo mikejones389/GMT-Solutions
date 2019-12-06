@@ -1,9 +1,0 @@
-# RELATÓRIO DO HISTÓRICO DE COMPRAS GERADO EM 2019-12-04 #
-ID: 50
-Data de Compra: 01/12/2019
-Data de Entrega: 04/12/2019
-Título do Livro: Harry Potter e a Câmara
-Nome do Fornecedor: Mike Jones 
-Preço Unitário: 15.0
-Quantidade: 12
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

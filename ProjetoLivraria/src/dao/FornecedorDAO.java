@@ -155,7 +155,7 @@ public class FornecedorDAO {
 				f.setCnpj(rs.getInt("cnpj"));
 				f.setEmail(rs.getString("email"));
 				f.setTelefone(rs.getInt("telefone"));
-				f.setCelular(rs.getInt("celualr"));
+				f.setCelular(rs.getInt("celular"));
 				fornecedores.add(f);
 			}
 		}catch(Exception e) {
@@ -176,6 +176,8 @@ public class FornecedorDAO {
 			smt.setString(5, fornecedor.getEmail());
 			smt.setInt(6, fornecedor.getTelefone());
 			smt.setInt(7, fornecedor.getCelular());
+			smt.executeUpdate();
+			
 		}catch(Exception e) {
 			System.out.println("ERRO: "+e.getMessage());
 		}

@@ -146,34 +146,67 @@ public class CompraDAO{
 		try {
 			FileWriter arq = new FileWriter(caminho);
 			PrintWriter gravarArq = new PrintWriter(arq);
-			gravarArq.println("# RELATÓRIO DO HISTÓRICO DE COMPRAS GERADO EM "+data+" #");
-				gravarArq.print("ID: ");			
-				gravarArq.println(id);
-				gravarArq.print("Data de Compra: ");
-				gravarArq.println(compras.getDtCompra());
-				gravarArq.print("Data de Entrega: ");
-				gravarArq.println(compras.getDtEntrega());
-				
-				gravarArq.print("Título do Livro: ");
-				int cdLivro = compras.getIdLivro();
-				Livro livro = new Livro();
-				livro = ld.getLivro(cdLivro);
-				gravarArq.println(livro.getNomeLivro());
-				
-				gravarArq.print("Nome do Fornecedor: ");
-				int cdFornecedor = compras.getIdFornecedor();
-				System.out.println("id Fornecedor "+cdFornecedor);
-				Fornecedor fornecedor = new Fornecedor();
-				fornecedor = fd.getFornecedor(cdFornecedor);
-				gravarArq.println(fornecedor.getNmFornecedor());
-	
-				gravarArq.print("Preço Unitário: ");
-				gravarArq.println(compras.getPreco());
-				gravarArq.print("Quantidade: ");
-				gravarArq.println(compras.getQuantidade());
-				gravarArq.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
-		
-	
+			gravarArq.println("              #NOTA FISCAL - DATA: "+data+" #           ");
+			gravarArq.println(" ESSA NOTA PODE SER USADA COMO UM COMPROVANTE DE COMPRA,");
+			gravarArq.println("JA QUE NELA ESTÃO PRESENTES INFORMAÇÕES SOBRE O PRODUTO ");
+			gravarArq.println("E SOBRE O FORNECEDOR.                                   ");
+			gravarArq.println("                 #INFORMAÇÕES GERAIS#                   ");
+			gravarArq.print("ID: ");			
+			gravarArq.println(id);
+			gravarArq.print("Data de Compra: ");
+			gravarArq.println(compras.getDtCompra());
+			gravarArq.print("Data de Entrega: ");
+			gravarArq.println(compras.getDtEntrega());
+			
+			gravarArq.print("Título do Livro: ");
+			int cdLivro = compras.getIdLivro();
+			Livro livro = new Livro();
+			livro = ld.getLivro(cdLivro);
+			gravarArq.println(livro.getNomeLivro());
+			
+			gravarArq.print("Nome do Fornecedor: ");
+			int cdFornecedor = compras.getIdFornecedor();
+			Fornecedor fornecedor = new Fornecedor();
+			fornecedor = fd.getFornecedor(cdFornecedor);
+			gravarArq.println(fornecedor.getNmFornecedor());
+
+			gravarArq.print("Preço Unitário: ");
+			gravarArq.println(compras.getPreco());
+			gravarArq.print("Quantidade: ");
+			gravarArq.println(compras.getQuantidade());
+			gravarArq.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+			gravarArq.println("                                   VALOR TOTAL: R$"+compras.getPreco()*compras.getQuantidade());
+			gravarArq.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+			gravarArq.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+			gravarArq.println(" DESTAQUE AQUI ..... DESTAQUE AQUI ...... DESTAQUI AQUI ");
+			gravarArq.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+			gravarArq.println("              #NOTA FISCAL - DATA: "+data+" #           ");
+			gravarArq.println(" ESSA NOTA PODE SER USADA COMO UM COMPROVANTE DE COMPRA,");
+			gravarArq.println("JA QUE NELA ESTÃO PRESENTES INFORMAÇÕES SOBRE O PRODUTO ");
+			gravarArq.println("E SOBRE O FORNECEDOR.                                   ");
+			gravarArq.println("                 #INFORMAÇÕES GERAIS#                   ");
+			gravarArq.print("ID: ");			
+			gravarArq.println(id);
+			gravarArq.print("Data de Compra: ");
+			gravarArq.println(compras.getDtCompra());
+			gravarArq.print("Data de Entrega: ");
+			gravarArq.println(compras.getDtEntrega());
+			
+			gravarArq.print("Título do Livro: ");
+			livro = ld.getLivro(cdLivro);
+			gravarArq.println(livro.getNomeLivro());
+			
+			gravarArq.print("Nome do Fornecedor: ");
+			fornecedor = fd.getFornecedor(cdFornecedor);
+			gravarArq.println(fornecedor.getNmFornecedor());
+
+			gravarArq.print("Preço Unitário: ");
+			gravarArq.println(compras.getPreco());
+			gravarArq.print("Quantidade: ");
+			gravarArq.println(compras.getQuantidade());
+			gravarArq.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+			gravarArq.println("                                   VALOR TOTAL: R$"+compras.getPreco()*compras.getQuantidade());
+			gravarArq.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - ");	
 			gravarArq.close();
 			return true;
 			

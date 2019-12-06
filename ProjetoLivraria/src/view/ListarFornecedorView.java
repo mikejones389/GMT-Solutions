@@ -136,6 +136,9 @@ public class ListarFornecedorView extends JPanel implements ActionListener {
 			this.revalidate();
 			this.repaint();
 		}
+		else {
+			JOptionPane.showMessageDialog(null, "Selecione algum fornecedor da tabela");
+		}
 	}
 	
 	@Override

@@ -1,9 +1,0 @@
-# RELATÓRIO DO HISTÓRICO DE COMPRAS GERADO EM 2019-12-05 #
-ID: 51
-Data de Compra: 03/12/2019
-Data de Entrega: 06/12/2019
-Título do Livro:  teste2
-Nome do Fornecedor: Mike Jones 
-Preço Unitário: 32.0
-Quantidade: 13
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

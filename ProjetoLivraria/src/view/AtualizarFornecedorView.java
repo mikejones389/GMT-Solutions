@@ -36,6 +36,7 @@ public class AtualizarFornecedorView  extends JFrame implements ActionListener{
 	private int id;
 	private Fornecedor fornecedor;
 	ArrayList<Fornecedor> fornecedores;
+	
 	public AtualizarFornecedorView(int id) {
 		this.setSize(800,500);
 		this.setResizable(false);
@@ -48,6 +49,7 @@ public class AtualizarFornecedorView  extends JFrame implements ActionListener{
 		FornecedorDAO fd = new FornecedorDAO();
 		fd.buscar(id);
 		fornecedores = (ArrayList<Fornecedor>) fd.buscar(id);
+	
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.weightx=0.1;
@@ -219,7 +221,7 @@ public class AtualizarFornecedorView  extends JFrame implements ActionListener{
 		this.setVisible(false);
 	}
 	
-	public void salvar() throws SQLException {
+	public void salvar() {
 		Fornecedor fornecedor = new Fornecedor();
 		fornecedor.setNmFornecedor(nmFornecedorField.getText());
 		fornecedor.setNmFantasia(nmFantasiaField.getText());
@@ -242,7 +244,7 @@ public class AtualizarFornecedorView  extends JFrame implements ActionListener{
 			else {
 				JOptionPane.showMessageDialog(null, "Problema ao realizar cadastro do fornecedor!");
 			}
-		} catch (HeadlessException e) {
+		} catch (HeadlessException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
@@ -254,12 +256,7 @@ public class AtualizarFornecedorView  extends JFrame implements ActionListener{
 			sair();
 		}
 		else if(e.getActionCommand().equals("salvar")) {
-			try {
-				salvar();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			salvar();
 		}
 	}
 	
