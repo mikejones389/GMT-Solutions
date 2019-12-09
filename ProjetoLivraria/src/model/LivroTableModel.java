@@ -2,11 +2,9 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.table.AbstractTableModel;
 
 public class LivroTableModel extends AbstractTableModel{
-	
 	private List<Livro> dados = new ArrayList<Livro>();
 	private String[] colunas = {"Código", "Título","Quantidade"};
 	
@@ -14,14 +12,17 @@ public class LivroTableModel extends AbstractTableModel{
 	public String getColumnName(int column) {
 		return colunas[column];
 	}
+	
 	@Override
 	public int getColumnCount() {
 		return colunas.length;
 	}
+	
 	@Override
 	public int getRowCount() {
 		return dados.size();
 	}
+	
 	@Override
 	public Object getValueAt(int linha, int coluna) {
 		switch(coluna) {
@@ -48,17 +49,18 @@ public class LivroTableModel extends AbstractTableModel{
 		case 10:
 			return dados.get(linha).getLinkImg();
 		}
-		
 		return null;
 	}
+	
 	public void addRow(Livro l) {
 		this.dados.add(l);
 	}
+	
 	public int getSelectRow(int linha) {
 		return dados.get(linha).getCdLivro();
 	}
+	
 	public void removeAll() {
 		this.dados.clear();
 	}
-	
 }

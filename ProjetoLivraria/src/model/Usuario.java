@@ -13,12 +13,12 @@ public class Usuario {
 	private int cdUsuario;
 	
 	public Usuario() {
-		System.out.println("Construtor do Usuario");
 	}
 	
 	public int getCdUsuario() {
 		return cdUsuario;
 	}
+	
 	public void setCdUsuario(int cdUsuario) {
 		this.cdUsuario=cdUsuario;
 	}
@@ -26,6 +26,7 @@ public class Usuario {
 	public String getNmUsuario(){
 		return nmUsuario;
 	}
+	
 	public void setNmUsuario(String nmUsuario) {
 		this.nmUsuario=nmUsuario;
 	}
@@ -33,6 +34,7 @@ public class Usuario {
 	public int getCpfUsuario() {
 		return cpfUsuario;
 	}
+	
 	public void setCpfUsuario(int cpfUsuario) {
 		this.cpfUsuario=cpfUsuario;
 	}
@@ -40,6 +42,7 @@ public class Usuario {
 	public String getSexo() {
 		return sexo;
 	}
+	
 	public void setSexo(String sexo) {
 		this.sexo=sexo;
 	}
@@ -47,6 +50,7 @@ public class Usuario {
 	public String getDtNascimento(){
 		return dtNascimento;
 	}
+	
 	public void setDtNascimento(String dtNascimento) {
 		this.dtNascimento= dtNascimento;
 	}
@@ -54,6 +58,7 @@ public class Usuario {
 	public String getEmail() {
 		return email;
 	}
+	
 	public void setEmail(String email) {
 		this.email=email;
 	}
@@ -62,6 +67,7 @@ public class Usuario {
 	public int getCelular() {
 		return celular;
 	}
+	
 	public void setCelular(int celular) {
 		this.celular=celular;
 	}
@@ -69,6 +75,7 @@ public class Usuario {
 	public String getPerfil() {
 		return perfil;
 	}
+	
 	public void setPerfil(String perfil) {
 		this.perfil=perfil;
 	}
@@ -76,6 +83,7 @@ public class Usuario {
 	public String getLogin() {
 		return login;
 	}
+	
 	public void setLogin(String login) {
 		this.login=login;
 	}
@@ -83,6 +91,7 @@ public class Usuario {
 	public String getSenha() {
 		return senha;
 	}
+	
 	public void setSenha(String senha) {
 		this.senha=senha;
 	}

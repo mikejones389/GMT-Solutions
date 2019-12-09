@@ -2,12 +2,10 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 public class FornecedorTableModel extends AbstractTableModel{
-	
 	private List<Fornecedor> dados = new ArrayList<Fornecedor>();
 	private String[] colunas = {"ID", "Nome Fornecedor", "Telefone", "E-mail"};	
 	
@@ -30,7 +28,7 @@ public class FornecedorTableModel extends AbstractTableModel{
 	public Object getValueAt(int linha, int coluna) {
 		switch(coluna) {
 		case 0:
-			return dados.get(linha ).getCodigo();
+			return dados.get(linha).getCodigo();
 		case 1:
 			return dados.get(linha).getNmFornecedor();
 		case 2:
@@ -42,9 +40,7 @@ public class FornecedorTableModel extends AbstractTableModel{
 		case 5:
 			return dados.get(linha).getRzSocial();
 		case 6:
-			return dados.get(linha).getCnpj();
-		
-		
+			return dados.get(linha).getCnpj();	
 		case 7:
 			return dados.get(linha).getCelular();
 		}
@@ -56,12 +52,10 @@ public class FornecedorTableModel extends AbstractTableModel{
 	}
 
 	public int getSelectRow(int linha) {
-		// TODO Auto-generated method stub
 		return dados.get(linha).getCodigo();
 	}
 	
 	public void removeAll() {
 		this.dados.clear();
 	}
-	
-}
+} 

@@ -9,7 +9,6 @@ import java.awt.event.MouseEvent;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,89 +18,64 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-
 import dao.FornecedorDAO;
 import model.Fornecedor;
 import model.FornecedorTableModel;
 
 public class ListarFornecedorView extends JPanel implements ActionListener {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	FornecedorTableModel tableModel = new FornecedorTableModel();
 	FornecedorDAO fd = new FornecedorDAO();
-	String rows[][]= {};
-	String headers[]= {};
+	String rows[][] = {};
+	String headers[] = {};
 	JTable jtFornecedor = new JTable(new DefaultTableModel(rows, headers));
 	int cdFornecedor;
 	List<Fornecedor> fornecedores;
 	int n;
+	
 	public ListarFornecedorView() {
 		jtFornecedor.setModel(tableModel);
-		
 		janelaPrincipal();
 	}
-	
+
 	public void janelaPrincipal() {
 		FornecedorDAO fd = new FornecedorDAO();
-		
-		
 		fornecedores = (List<Fornecedor>) fd.Listar();
 		Fornecedor f = new Fornecedor();
-				
 		for (int i = 0; i < fornecedores.size(); i++) {
-			System.out.println(fornecedores.get(i).getNmFornecedor());
-			System.out.println(fornecedores.get(i).getTelefone());
-			
 			tableModel.addROw(fornecedores.get(i));
-			
-			
 		}
-		
+
 		JPanel panelSuperior = new JPanel();
-//		panelSuperior.setLayout(new BorderLayout());
-		
-		JLabel titulo = new JLabel ("Fornecedores Cadastrados", SwingConstants.CENTER);
+		JLabel titulo = new JLabel("Fornecedores Cadastrados", SwingConstants.CENTER);
 		titulo.setFont(new Font("Arial", Font.BOLD, 40));
 		panelSuperior.add(titulo);
-		
 		JPanel panelCentral = new JPanel();
-//		panelCentral.setLayout(new GridLayout(1,2));
-//		panelCentral.setBackground(Color.BLACK);
-		
 		JLabel cdLivro = new JLabel("Cï¿½digo", SwingConstants.CENTER);
 		cdLivro.setFont(new Font("Arial", Font.BOLD, 30));
-				
 		JLabel nmLivro = new JLabel("Tï¿½tulo", SwingConstants.HORIZONTAL);
 		nmLivro.setFont(new Font("Arial", Font.BOLD, 30));
-				
-		//JTable jtLivros = new JTable(new DefaultTableModel(rows, headers));
 		JScrollPane scrollPane = new JScrollPane(jtFornecedor);
-				
 		JButton jbDeletar = new JButton("Deletar");
 		jbDeletar.addActionListener(this);
 		jbDeletar.setActionCommand("deletar");
-	 
 		JButton jbGerarArq = new JButton("Gerar Arquivo");
 		jbGerarArq.addActionListener(this);
 		jbGerarArq.setActionCommand("gerar arquivo");
-		
 		JButton jbAtualizar = new JButton("Atualizar");
 		jbAtualizar.addActionListener(this);
 		jbAtualizar.setActionCommand("atualizar");
-		
 		JPanel panelWest = new JPanel();
-		panelWest.setLayout(new GridLayout(2,1));
+		panelWest.setLayout(new GridLayout(2, 1));
 		this.setLayout(new BorderLayout());
 		this.add(panelSuperior, BorderLayout.NORTH);
-		panelCentral.add(scrollPane,BorderLayout.NORTH);
+		panelCentral.add(scrollPane, BorderLayout.NORTH);
 		this.add(panelCentral, BorderLayout.CENTER);
 		panelWest.add(jbDeletar);
 		panelWest.add(jbAtualizar);
 		this.add(panelWest, BorderLayout.WEST);
 		this.add(jbGerarArq, BorderLayout.EAST);
-		
 	}
 	
 	public void deletar() {
@@ -111,23 +85,22 @@ public class ListarFornecedorView extends JPanel implements ActionListener {
 		FornecedorDAO fd = new FornecedorDAO();
 		fd.deletar(cd);
 	}
-	
+
 	public void gerarArq() {
 		FornecedorDAO fd = new FornecedorDAO();
 		n++;
 		Date data = new Date(System.currentTimeMillis());
-		String arq = ""+n+"RelatórioDeFornecedores-"+data+".txt";
+		String arq = "" + n + "RelatórioDeFornecedores-" + data + ".txt";
 		ArrayList texto = (ArrayList) fornecedores;
-		if(fd.gerarArq(arq, texto)) {
+		if (fd.gerarArq(arq, texto)) {
 			JOptionPane.showMessageDialog(null, "Arquivo gerado com Sucesso");
-		}
-		else {
+		} else {
 			JOptionPane.showMessageDialog(null, "Falha ao gerar Arquivo");
 		}
 	}
-	
+
 	public void atualizar() {
-		if(jtFornecedor.getSelectedRow() != -1) {
+		if (jtFornecedor.getSelectedRow() != -1) {
 			MouseEvent evt = null;
 			tableModelMouseClicked(evt);
 			int id = fornecedores.get(jtFornecedor.getSelectedRow()).getCodigo();
@@ -135,33 +108,28 @@ public class ListarFornecedorView extends JPanel implements ActionListener {
 			this.add(afv);
 			this.revalidate();
 			this.repaint();
-		}
-		else {
+		} else {
 			JOptionPane.showMessageDialog(null, "Selecione algum fornecedor da tabela");
 		}
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getActionCommand().equals("deletar")) {
+		if (e.getActionCommand().equals("deletar")) {
 			deletar();
 			ListarFornecedorView lfv = new ListarFornecedorView();
 			lfv.repaint();
 			lfv.validate();
-		}
-		else if(e.getActionCommand().equals("gerar arquivo")) {
+		} else if (e.getActionCommand().equals("gerar arquivo")) {
 			gerarArq();
-		}
-		else if(e.getActionCommand().equals("atualizar")) {
+		} else if (e.getActionCommand().equals("atualizar")) {
 			atualizar();
 		}
-		
 	}
-	
+
 	private void tableModelMouseClicked(java.awt.event.MouseEvent evt) {
 		cdFornecedor = jtFornecedor.getSelectedRow();
 		TableModelListener[] model = tableModel.getTableModelListeners();
-		System.out.println(cdFornecedor);
 	}
 }

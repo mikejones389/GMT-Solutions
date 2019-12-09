@@ -7,9 +7,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.mysql.jdbc.PreparedStatement;
-
 import bdd.BancoDeDados;
 import model.Usuario;
 
@@ -18,18 +16,13 @@ public class UsuarioDAO {
 	List<Usuario> usuarios;
 	public ArrayList<Usuario> Listar(){
 		Connection bdd = BancoDeDados.conectar();
-		System.out.println("ENTROU no InserirDAO");
 		usuarios = new ArrayList<Usuario>();
 		int linha = 0;
 		String texto = null;
-		
-		System.out.println("Entrou no UsuarioDAO.Listar");
 		try {
 			String sql = "SELECT * FROM usuario ORDER BY cd_usuario";
-			
 			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
 			ResultSet rs = smt.executeQuery();
-			
 			while(rs.next()) {
 				Usuario usuario = new Usuario();
 				usuario.setCdUsuario(rs.getInt("cd_usuario"));
@@ -45,26 +38,20 @@ public class UsuarioDAO {
 				usuarios.add(usuario);
 			}			
 		}catch(Exception e) {
-			System.out.println("ERRO: " + e.getMessage());
-			
+			System.out.println("ERRO: " + e.getMessage());	
 		}
-		
 		return (ArrayList<Usuario>) usuarios;
-		
 	}
 	
 	public void deletar(int cd) {
 		Connection bdd = BancoDeDados.conectar();
 		this.cd = cd;
 		try {
-			System.out.println("cd "+ cd);
 			String sql = "delete from usuario where cd_usuario = "+ cd + " ";
 			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
 			smt.executeUpdate();
-			
 		}catch(Exception e ) {
 			System.out.println("ERRO: "+ e.getMessage());
-			
 		}
 	}
 	
@@ -104,8 +91,5 @@ public class UsuarioDAO {
 			System.out.println("ERRO: "+ e.getMessage());
 			return false;
 		}
-		
 	}
-	
-
 }

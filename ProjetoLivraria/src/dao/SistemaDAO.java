@@ -2,11 +2,9 @@ package dao;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
-
 import javax.swing.JOptionPane;
 
 public class SistemaDAO {
-	
 	String caminho;
 	String texto;
 	
@@ -90,7 +88,6 @@ public class SistemaDAO {
 			gravarArq.println("#  ARQUIVO TEXTO, SALVO NA PRÓPRIA PASTA DO PROGRAMA, COM TODAS AS INFORMAÇÕES  #");
 			gravarArq.println("#  DE TODAS AS COMPRAS CADASTRADAS NO BANCO DE DADOS.                           #");
 			gravarArq.println("#                                                                               #");
-			
 			gravarArq.close();
 			return true;
 		}catch(Exception e) {

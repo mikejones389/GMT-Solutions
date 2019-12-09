@@ -2,11 +2,9 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.table.AbstractTableModel;
 
 public class UsuarioTableModel extends AbstractTableModel{
-	
 	private List<Usuario> dados = new  ArrayList<Usuario>();
 	private String[] colunas = {"ID","Nome", "CPF", "Celular"};
 	
@@ -14,6 +12,7 @@ public class UsuarioTableModel extends AbstractTableModel{
 	public String getColumnName(int column) {
 		return colunas[column];
 	}
+	
 	@Override
 	public int getColumnCount() {
 		return colunas.length;
@@ -50,15 +49,16 @@ public class UsuarioTableModel extends AbstractTableModel{
 		}
 		return null;
 	}
+	
 	public void addRow(Usuario u) {
 		this.dados.add(u);
 	}
+	
 	public int getSelectRow(int linha) {
 		return dados.get(linha).getCdUsuario();
 	}
+	
 	public void removeAll() {
 		this.dados.clear();
 	}
-	
-	
 }

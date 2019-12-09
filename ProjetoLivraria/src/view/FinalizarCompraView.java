@@ -1,3 +1,4 @@
+
 package view;
 
 import java.awt.BorderLayout;
@@ -11,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,132 +19,91 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
 import controller.CompraController;
 import dao.CompraDAO;
 import model.Compra;
 
 public class FinalizarCompraView extends JPanel implements ActionListener {
-	
 	private JFrame frame;
 	private JTextField quantidadeField;
 	private JTextField precoField;
 	private Compra compra;
 	int n;
+	
 	public FinalizarCompraView(Compra c) {
 		this.compra = c;
 		criarFormulario();
-
 	}
 
 	public void criarFormulario() {
 		this.setLayout(new BorderLayout());
-
 		JLabel espacoLabel = new JLabel("");
 		JLabel espacoLabel2 = new JLabel("");
 		JLabel tituloLabel = new JLabel("Compra", SwingConstants.CENTER);
 		tituloLabel.setFont(new Font("Arial", Font.BOLD, 40));
-
 		JLabel livroLabel = new JLabel("Livro Selecionado");
 		livroLabel.setFont(new Font("Arial", Font.BOLD, 16));
-
 		JTextField livroField = new JTextField(20);
 		livroField.setEditable(false);
 		String codLivro = GerarCompraView.codLivro;
 		livroField.setText(codLivro);
-
 		JLabel quantidadeLabel = new JLabel("Quantidade");
 		quantidadeLabel.setFont(new Font("Arial", Font.BOLD, 16));
-
 		quantidadeField = new JTextField(20);
-
 		JLabel precoLabel = new JLabel("Preço Unitário");
 		precoLabel.setFont(new Font("Arial", Font.BOLD, 16));
-
 		precoField = new JTextField(20);
-
 		JButton concluir = new JButton("Concluir");
 		concluir.addActionListener(this);
 		concluir.setActionCommand("concluir");
-
 		JButton cancelar = new JButton("Cancelar");
 		cancelar.addActionListener(this);
 		cancelar.setActionCommand("cancelar");
 		JPanel panelCentral = new JPanel();
 		panelCentral.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
-
 		gbc.weightx = 0.1;
 		gbc.weighty = 0.1;
 		gbc.insets = new Insets(10, 0, 0, 5);
-
 		this.add(tituloLabel, BorderLayout.NORTH);
-
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		panelCentral.add(espacoLabel, gbc);
-
 		gbc.gridx = 1;
 		panelCentral.add(livroLabel, gbc);
-
 		gbc.gridx = 2;
 		panelCentral.add(livroField, gbc);
-
 		gbc.gridy = 1;
 		gbc.gridx = 1;
 		panelCentral.add(quantidadeLabel, gbc);
-
 		gbc.gridx = 2;
 		panelCentral.add(quantidadeField, gbc);
-
 		gbc.gridy = 2;
 		gbc.gridx = 1;
 		panelCentral.add(precoLabel, gbc);
-
 		gbc.gridx = 2;
 		panelCentral.add(precoField, gbc);
-
 		gbc.gridx = 3;
 		panelCentral.add(espacoLabel2, gbc);
-
 		gbc.gridy = 3;
 		gbc.gridx = 1;
 		panelCentral.add(concluir, gbc);
-
 		gbc.gridx = 2;
 		panelCentral.add(cancelar, gbc);
-
 		this.add(panelCentral, BorderLayout.CENTER);
-
 	}
 
 	public void acaoConcluir(){
-		// TODO Auto-generated method stub
 		compra.setQuantidade(Integer.parseInt(quantidadeField.getText()));
 		compra.setPreco(Double.parseDouble(precoField.getText()));
 		int idCompra = 0;
-		
 		CompraController compraController = new CompraController();
 		try {
 			idCompra = compraController.cadastro(compra);
-			System.out.println(idCompra);
 				JOptionPane.showMessageDialog(null, "Problema ao Gerar a Compra");
-
 				JOptionPane.showMessageDialog(null, "Compra gerada com sucesso");
-				System.out.println(compra.getCdCompra());
-				System.out.println(compra.getDtCompra());
-//				GerarCompraView gcv = new GerarCompraView(frame);
-//				gcv.criarFormulario();
-//				gcv.setVisible(true);
-//				this.frame.getContentPane().removeAll();
-//				this.frame.getContentPane().add(gcv);
-//				this.frame.revalidate();
-//				this.frame.repaint();
-				
-		} catch (HeadlessException /* | SQLException */ e) {
-			// e.printStackTrace();
+		} catch (HeadlessException e) {
 		}
-		System.out.println(compra.getCdCompra());
 		gerarNota(idCompra);
 	}
 	
@@ -154,20 +113,16 @@ public class FinalizarCompraView extends JPanel implements ActionListener {
 		Date data = new Date(System.currentTimeMillis());
 		String arq = ""+n+"NotaFiscal-"+data+".txt";
 		Compra texto = compra;
-		System.out.println("Texto"+texto);
 		if(cd.gerarNota(arq, texto, idCompra)) {
-			JOptionPane.showMessageDialog(null, "Nota fiscal gerada com sucesso");
-			
+			JOptionPane.showMessageDialog(null, "Nota fiscal gerada com sucesso");	
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "Falha ao gerar nota fiscal");
 		}
 	}
 	
-	
 	public void acaoCancelar() {
-		JOptionPane.showMessageDialog(null, "Imprementar açao para voltar ao GerarCompraView");
-		
+		JOptionPane.showMessageDialog(null, "Imprementar açao para voltar ao GerarCompraView");	
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -175,8 +130,6 @@ public class FinalizarCompraView extends JPanel implements ActionListener {
 			acaoConcluir();
 		} else if (e.getActionCommand().equals("cancelar")) {
 			acaoCancelar();
-			
 		}
 	}
-
 }

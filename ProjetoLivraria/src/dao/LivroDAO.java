@@ -8,14 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.mysql.jdbc.PreparedStatement;
-
 import bdd.BancoDeDados;
 import model.Livro;
 
 public class LivroDAO {
-	
 	private static PreparedStatement statement = null;
 	private static ResultSet resultSet = null;
 	List<Livro> livros;
@@ -23,14 +20,9 @@ public class LivroDAO {
 	int cd;
 
 	public void inserir(Livro livro) throws SQLException {
-		Connection bdd = BancoDeDados.conectar();
-		
-		System.out.println("ENTROU no InserirDAO");
-		
+		Connection bdd = BancoDeDados.conectar();		
 		String sql = "INSERT INTO livro(nm_livro, autor, editora, genero, ano_livro, edicao, preco_venda, qnt_livro, cd_fornecedor, link_img) VALUES (?,?,?,?,?,?,?,?,?,?);";
-			
 		PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
-		
 		smt.setString(1, livro.getNomeLivro());
 		smt.setString(2, livro.getAutorLivro());
 		smt.setString(3, livro.getEditoraLivro());
@@ -41,23 +33,18 @@ public class LivroDAO {
 		smt.setInt(8, livro.getQntLivro());
 		smt.setInt(9, livro.getCdFornecedor());
 		smt.setString(10, livro.getLinkImg());
-		
 		smt.executeUpdate();
-		
 		bdd.close();
 	}
 	
 	public ArrayList<Livro> buscar(int cd){
 		Connection bdd = BancoDeDados.conectar();
 		livros = new ArrayList<Livro>();
-		
-		System.out.println("ENTROU NO buscarDAO livro");
 		try {
 			String sql = "SELECT * FROM livro WHERE cd_livro = "+cd+";";
 			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
 			ResultSet rs = smt.executeQuery();
 			while(rs.next()) {
-				System.out.println("ENTROU3");
 				Livro livro = new Livro();
 				livro.setCdLivro(rs.getInt("cd_Livro"));
 				livro.setNomeLivro(rs.getString("nm_Livro"));
@@ -70,40 +57,23 @@ public class LivroDAO {
 				livro.setQntLivro(rs.getInt("qnt_livro"));
 				livro.setCdFornecedor(rs.getInt("cd_fornecedor"));
 				livro.setLinkImg(rs.getString("link_img"));
-				
 				livros.add(livro);
-					
 			}
 		}catch(Exception e) {
 			System.out.println("ERRO: "+e.getMessage());
 		}
 		return (ArrayList<Livro>) livros;
 	}
-		
+	
 	public ArrayList<Livro>  Listar(){
 		Connection bdd = BancoDeDados.conectar();
-		livros = new ArrayList<Livro>();
-		
+		livros = new ArrayList<Livro>();	
 		String texto = null;
-		
-		//Livro livro = new Livro();
-		
-		System.out.println("ENTROU no ListarDAO");
 		try {
-//			String query = "SELECT * FROM livro ORDER BY nm_livro";
-//			resultSet = statement.executeQuery(query);
-//			while(resultSet.next()) {
-//				System.out.println("ENTROU3");
-//				System.out.println("ID: " + resultSet.getString("cd_livro") + " - NOME: " + resultSet.getString("nm_livro"));
-//				
-//			}
 			String sql = "SELECT * FROM livro ORDER BY cd_livro";
-			
 			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
 			ResultSet rs = smt.executeQuery();
-			
 			while(rs.next()) {
-				//System.out.println("ENTROU3");
 				Livro livro = new Livro();
 				livro.setCdLivro(rs.getInt("cd_Livro"));
 				livro.setNomeLivro(rs.getString("nm_Livro"));
@@ -116,29 +86,21 @@ public class LivroDAO {
 				livro.setQntLivro(rs.getInt("qnt_livro"));
 				livro.setCdFornecedor(rs.getInt("cd_fornecedor"));
 				livro.setLinkImg(rs.getString("link_img"));
-				
 				livros.add(livro);
-					
 			}
-		
 		}catch(Exception e) {
 			System.out.println("ERRO: " + e.getMessage());
-			
 		}
-		
 		return (ArrayList<Livro>) livros;
-		
 	}
 	
 	public void deletar(int cd) {
 		Connection bdd = BancoDeDados.conectar();
 		this.cd = cd;
 		try {
-			System.out.println("cd "+ cd);
 			String sql = "delete from livro where cd_livro = "+ cd +" ;";
 			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
 			smt.executeUpdate();
-			
 		}catch(Exception e){
 			System.out.println("ERRO: " + e.getMessage());
 		}
@@ -189,29 +151,14 @@ public class LivroDAO {
 		livros = new ArrayList<Livro>();
 		Livro livro= null;
 		String texto = null;
-		System.out.println("ENTROU NO buscarDAO livro");
 		try {
 			String sql = "SELECT * FROM livro WHERE cd_livro = "+cd+";";
 			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
 			ResultSet rs = smt.executeQuery();
 			while(rs.next()) {
 				System.out.println("ENTROU3");
-				 livro = new Livro();
-				//livro.getCdLivro();
-				livro.setNomeLivro(rs.getString("nm_Livro"));
-				//System.out.println(livro.getNomeLivro());
-//				livro.setAutorLivro(rs.getString("autor"));
-//				livro.setEditoraLivro(rs.getString("editora"));
-//				livro.setGeneroLivro(rs.getString("genero"));
-//				livro.setAnoLivro(rs.getInt("ano_livro"));
-//				livro.setEdicaoLivro(rs.getInt("edicao"));
-//				livro.setPrecoVenda(rs.getDouble("preco_venda"));
-//				livro.setQntLivro(rs.getInt("qnt_livro"));
-//				livro.setCdFornecedor(rs.getInt("cd_fornecedor"));
-//				livro.setLinkImg(rs.getString("link_img"));
-				
-				//livros.add(livro);
-					
+				livro = new Livro();
+				livro.setNomeLivro(rs.getString("nm_Livro"));					
 			}
 		}catch(Exception e) {
 			System.out.println("ERRO: "+e.getMessage());
@@ -221,17 +168,6 @@ public class LivroDAO {
 	
 	public void atualizar(Livro livro, int id) throws SQLException{
 		Connection bdd = BancoDeDados.conectar();
-		System.out.println(id);
-		System.out.println(livro.getNomeLivro());
-		System.out.println(livro.getAutorLivro());
-		System.out.println(livro.getEditoraLivro());
-		System.out.println(livro.getGeneroLivro());
-		System.out.println(livro.getAnoLivro());
-		System.out.println(livro.getEdicaoLivro());
-		System.out.println(livro.getPrecoVenda());
-		System.out.println(livro.getQntLivro());
-		System.out.println(livro.getCdFornecedor());
-		System.out.println(livro.getLinkImg());
 		try {
 			String sql = "UPDATE livro SET nm_livro = ?, autor = ?, editora = ?,genero = ? , ano_livro = ?, edicao = ?,preco_venda = ?,qnt_livro = ?,cd_fornecedor = ?,link_img  = ? WHERE cd_livro = "+id+";";
 			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
@@ -249,8 +185,6 @@ public class LivroDAO {
 		}catch(Exception e) {
 			System.out.println("ERRO: "+e.getMessage());
 		}
-		
-		bdd.close();
-		
+		bdd.close();	
 	}
 }
