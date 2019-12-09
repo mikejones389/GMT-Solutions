@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-	<title>Cadastro</title>
+	<title>Cadastro GMT Store</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -36,7 +36,6 @@
 					<span class="login100-form-title p-b-32">
 						Novo Cadastro
 					</span>
-
 					<span class="txt1 p-b-11">
 						Nome Completo
 					</span>
@@ -45,7 +44,6 @@
 						<input class="input100" type="text" name="nome" >
 						<span class="focus-input100"></span>
 					</div>
-					
 					<span class="txt1 p-b-11">
 						CPF
 					</span>
@@ -54,7 +52,6 @@
 						<input class="input100" type="text" name="nome" >
 						<span class="focus-input100"></span>
 					</div>
-
 					<span class="txt1 p-b-11">
 						Genero
 					</span>
@@ -70,7 +67,6 @@
 						</span>
 						<span class="focus-input100"></span>
 					</div>
-
 					<span class="txt1 p-b-11">
 						Data de Nascimento
 					</span>
@@ -78,7 +74,6 @@
 						<input class="input100" type="date" name="nome" >
 						<span class="focus-input100"></span>
 					</div>
-
 					<span class="txt1 p-b-11">
 						E-mail 
 					</span>
@@ -86,7 +81,6 @@
 						<input class="input100" type="text" name="nome" >
 						<span class="focus-input100"></span>
 					</div>				
-
 					<span class="txt1 p-b-11">
 						Celular
 					</span>
@@ -94,7 +88,6 @@
 						<input class="input100" type="text" name="nome" >
 						<span class="focus-input100"></span>
 					</div>	
-
 					<span class="txt1 p-b-11">
 						Login
 					</span>
@@ -102,7 +95,6 @@
 						<input class="input100" type="text" name="nome" >
 						<span class="focus-input100"></span>
 					</div>
-					
 					<span class="txt1 p-b-11">
 						Senha 
 					</span>
@@ -113,27 +105,20 @@
 						<input class="input100" type="password" name="pass" >
 						<span class="focus-input100"></span>
 					</div>
-					
 					<div class="flex-sb-m w-full p-b-48">
 						<div class="contact100-form-checkbox">
 							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
 						</div>
-
-						
 					</div>
-
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
 							Cadastrar
 						</button>
 					</div>
-
 				</form>
 			</div>
 		</div>
 	</div>
-	
-
 	<div id="dropDownSelect1"></div>
 	
 <!--===============================================================================================-->
