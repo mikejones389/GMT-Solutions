@@ -1,6 +1,6 @@
 	<?php
 		if(! isset($_SESSION)){
-		session_start();
+			session_start();
 		}
 		//echo substr(md5("369"),0,15);
 		//exit;
@@ -77,9 +77,6 @@
 						?>
 						
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							<!--EN-->
-						</a>
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							BRL
 						</a>
 					</div>
@@ -98,7 +95,26 @@
 								<a href="product.php?genero=0">Shop</a>
 							</li>
 							<li class="label1" data-label1="hot">
-								<a href="shoping-cart.php">Carrinho</a>
+
+							<?php
+								if (empty($_SESSION)){
+							?>			
+							
+								<a href="indexLogin.php"    >Carrinho</a>
+							
+							<?php
+								}else{
+							?>			
+							
+								<a href="shoping-cart.php"    >Carrinho</a>
+							
+
+
+							<?php
+								}
+							?>			
+							
+							
 							</li>
 							<li>
 								<a href="about.php">Sobre</a>

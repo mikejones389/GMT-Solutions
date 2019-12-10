@@ -57,9 +57,19 @@
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="images/<?php  echo $row['link_img']; ?>" alt="IMG-PRODUCT">
+							<?php
+								if (empty($_SESSION)){
+							?>			
+								<a href="indexLogin.php"    class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-addcart-detail">Carrinho</a>
+							<?php
+								}else{
+							?>			
 							<a href="montarCarrinho.php?livro=<?php echo $row['cd_livro'];?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 								Carrinho
 							</a>
+							<?php
+								}
+							?>			
 						</div>
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">

@@ -27,7 +27,7 @@
 				<div class="col-11 col-md-5 col-lg-4 m-lr-auto">
 					<div class="how-bor1 ">
 						<div class="hov-img0">
-							<img src="images/about-01.jpg" alt="IMG">
+							<img src="images/about01.jpg" alt="IMG">
 						</div>
 					</div>
 				</div>
@@ -57,7 +57,7 @@
 				<div class="order-md-1 col-11 col-md-5 col-lg-4 m-lr-auto p-b-30">
 					<div class="how-bor2">
 						<div class="hov-img0">
-							<img src="images/about-02.jpg" alt="IMG">
+							<img src="images/about03.jpg" alt="IMG">
 						</div>
 					</div>
 				</div>

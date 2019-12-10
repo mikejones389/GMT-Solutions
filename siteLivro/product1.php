@@ -1,16 +1,8 @@
 <?php require_once "i_topo.php"; ?>
 					
-
-
-
-
-
-	
 	<!-- Product -->
 	<div class="bg0 m-t-23 p-b-140">
-	
 		<div class="container">
-		
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
 					<a href="product.php?genero=0" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> Todos os produtos </a>
@@ -21,82 +13,70 @@
 					&nbsp;&nbsp;&nbsp;
 					<a href="product.php?genero=3" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> Documentário </a>
 					&nbsp;&nbsp;&nbsp;
-					<a href="product.php?genero=4" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> Literatura brasileira </a>
-					
+					<a href="product.php?genero=4" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> Literatura brasileira </a>	
 				</div>
-				<!--<form method="POST" action="product.php?genero=5">
-   					
-					   
-					<input type="text" name="pesquisar" class="plh3"  placeholder="Search...">
-    				<input type="submit" value="ENVIAR" <i class="zmdi zmdi-search">
-				</form>-->
 				<form method="GET"  class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-				
 					<input class="plh3" type="text" name="search" id="search" placeholder="Search..."   >
 						<button >
 							<i class="zmdi zmdi-search" ></i>
 							</a>
-						</button>
-											
+						</button>				
 				</form>
-
 			</div>
-			
 			<div class="row isotope-grid">
 			
 <?php
 
-$busca = $_GET['search'];
+	$busca = $_GET['search'];
+	if($busca == null){
+    	$query = "select * from livro ";
+	}
+	else{
+		$query = "select * from livro where nm_livro like '%".$busca."%' ";
+	}
 
+	$result = mysqli_query($db,$query);
+	$num_results = mysqli_num_rows($result);
 
-
-if($busca == null){
-    $query = "select * from livro ";
-}
-else{
-	$query = "select * from livro where nm_livro like '%".$busca."%' ";
-}
-
-$result = mysqli_query($db,$query);
-
-$num_results = mysqli_num_rows($result);
-
-if($num_results == 0){
-    $query = "select * from livro ";
-
-    $result = mysqli_query($db,$query);
-    $num_results = mysqli_num_rows($result);
-}
-
-for ($i=0; $i <$num_results; $i++)
-{
-
-
-    $row = mysqli_fetch_array($result);
+	if($num_results == 0){
+    	$query = "select * from livro ";
+	    $result = mysqli_query($db,$query);
+	    $num_results = mysqli_num_rows($result);
+	}
+	for ($i=0; $i <$num_results; $i++)
+	{
+	$row = mysqli_fetch_array($result);
+	
 ?>
             
                 <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
                     <!-- Block2 -->
                     <div class="block2">
-                        <div class="block2-pic hov-img0">
-                            <img src="images/<?php  echo $row['link_img']; ?>" alt="IMG-PRODUCT">
-
-                            <a href="montarCarrinho.php?livro=<?php echo $row['cd_livro'];?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                                Add to cart
-                            </a>
-                        </div>
-
+					<div class="block2-pic hov-img0">
+							<img src="images/<?php  echo $row['link_img']; ?>" alt="IMG-PRODUCT">
+							<?php
+								if (empty($_SESSION)){
+							?>			
+								<a href="indexLogin.php"    class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-addcart-detail">Carrinho</a>
+							<?php
+								}else{
+							?>			
+							<a href="montarCarrinho.php?livro=<?php echo $row['cd_livro'];?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+								Carrinho
+							</a>
+							<?php
+								}
+							?>			
+						</div>
                         <div class="block2-txt flex-w flex-t p-t-14">
                             <div class="block2-txt-child1 flex-col-l ">
                                 <a class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                <?php  echo $row['nm_livro']; ?>
+                                	<?php  echo $row['nm_livro']; ?>
                                 </a>
-
                                 <span class="stext-105 cl3">
-                                <?php  echo $row['preco_venda']; ?>
+                                	<?php  echo $row['preco_venda']; ?>
                                 </span>
                             </div>
-
                             <div class="block2-txt-child2 flex-r p-t-3">
                                 <form method="post" action="cadastroDesejo.php" name="frmListaDesejo" id="frmListaDesejo"> 
                                     <input type="hidden" name="cdLivro" id="cdLivro" value="<?php echo $row['cd_livro'];?>">
@@ -113,45 +93,25 @@ for ($i=0; $i <$num_results; $i++)
                                             <input type="hidden" name="acao" id="acao" value="adcionar">
                                             <button type="submit" name="enviar" > <img src="images/icons/icon-heart-01.png"></button>
                                             <?php
-                                        }
-
-                                        
+										}  
                                     ?>
-                                    
-                                
-                                
                                 </form>
-                                
                             </div>
                         </div>
                     </div>
                 </div>
 
 <?php 
-
-}
-
-mysqli_close($db);
-
+	}
+		mysqli_close($db);
 ?>
 
-
-
-
-
-
-				
-
-				
+			</div>
 		</div>
 	</div>
-		
-
-	</div>
 	<?php
-require_once "i_footer.php";
-
-?>
+		require_once "i_footer.php";
+	?>
 
 <!--===============================================================================================-->	
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -205,28 +165,11 @@ require_once "i_footer.php";
 		});
 
 		$('.js-addwish-b2').each(function(){
-			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-			
-			
-			
-			
-			
+			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();		
 			$(this).on('click', function(){
-
-				
-
 				swal(nameProduct, "is added to wishlist !", "success");
-
-
-				
-
 				$(this).addClass('js-addedwish-b2');
 				$(this).off('click');
-
-				
-
-
-
 			});
 		});
 

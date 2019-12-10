@@ -3,7 +3,8 @@
 		$lista = array();
 		if (!empty($_SESSION['listaItensCarrinhoSelecionados']) ){
 		$lista = $_SESSION['listaItensCarrinhoSelecionados'];
-	}
+}		
+
 ?>
 	<!-- breadcrumb -->
 	<div class="container">
