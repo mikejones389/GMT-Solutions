@@ -1,0 +1,33 @@
+              #NOTA FISCAL - DATA: 2019-12-09 #           
+ ESSA NOTA PODE SER USADA COMO UM COMPROVANTE DE COMPRA,
+JA QUE NELA ESTÃO PRESENTES INFORMAÇÕES SOBRE O PRODUTO 
+E SOBRE O FORNECEDOR.                                   
+                 #INFORMAÇÕES GERAIS#                   
+ID: 55
+Data de Compra: 02/12/2019
+Data de Entrega: 09/12/2019
+Título do Livro: Alice no pais das maravilhas
+Nome do Fornecedor: NuBank
+Preço Unitário: 6.99
+Quantidade: 2
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                                   VALOR TOTAL: R$13.98
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+ DESTAQUE AQUI ..... DESTAQUE AQUI ...... DESTAQUI AQUI 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+              #NOTA FISCAL - DATA: 2019-12-09 #           
+ ESSA NOTA PODE SER USADA COMO UM COMPROVANTE DE COMPRA,
+JA QUE NELA ESTÃO PRESENTES INFORMAÇÕES SOBRE O PRODUTO 
+E SOBRE O FORNECEDOR.                                   
+                 #INFORMAÇÕES GERAIS#                   
+ID: 55
+Data de Compra: 02/12/2019
+Data de Entrega: 09/12/2019
+Título do Livro: Alice no pais das maravilhas
+Nome do Fornecedor: NuBank
+Preço Unitário: 6.99
+Quantidade: 2
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                                   VALOR TOTAL: R$13.98
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - 

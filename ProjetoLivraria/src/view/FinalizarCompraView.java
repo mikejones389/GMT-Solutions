@@ -100,8 +100,6 @@ public class FinalizarCompraView extends JPanel implements ActionListener {
 		CompraController compraController = new CompraController();
 		try {
 			idCompra = compraController.cadastro(compra);
-				JOptionPane.showMessageDialog(null, "Problema ao Gerar a Compra");
-				JOptionPane.showMessageDialog(null, "Compra gerada com sucesso");
 		} catch (HeadlessException e) {
 		}
 		gerarNota(idCompra);
