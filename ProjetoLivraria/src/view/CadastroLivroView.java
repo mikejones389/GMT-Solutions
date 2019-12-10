@@ -54,6 +54,7 @@ public class CadastroLivroView extends JPanel {
 
 	public CadastroLivroView() {
 		criarFormulario();
+		setBackground(Color.getHSBColor(138, 108, 88));
 	}
 
 	private void criarFormulario() {
@@ -275,6 +276,8 @@ public class CadastroLivroView extends JPanel {
 					edicaoField.setText(" ");
 					precoVendaField.setText(" ");
 					cdFornecedorField.setText(" ");
+					qntLivroField.setText("");
+					imgLinkField.setText("");
 				} else {
 					JOptionPane.showMessageDialog(null, "Problema ao realizar cadastro de livro!");
 				}
