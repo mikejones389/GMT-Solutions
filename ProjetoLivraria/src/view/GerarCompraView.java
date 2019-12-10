@@ -34,6 +34,7 @@ import model.Fornecedor;
 import model.FornecedorTableModel;
 import model.Livro;
 import model.LivroTableModel;
+import principal.Principal;
 
 public class GerarCompraView extends JPanel implements ActionListener {
 	private JTextField dtCompraField;
@@ -154,6 +155,8 @@ public class GerarCompraView extends JPanel implements ActionListener {
 	}
 		
 	public void acaoSair() {
+		Principal p = new Principal();
+		p.main(null);
 	}
 
 	public void acaoSalvar() {

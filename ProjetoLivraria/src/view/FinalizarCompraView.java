@@ -22,6 +22,7 @@ import javax.swing.SwingConstants;
 import controller.CompraController;
 import dao.CompraDAO;
 import model.Compra;
+import principal.Principal;
 
 public class FinalizarCompraView extends JPanel implements ActionListener {
 	private JFrame frame;
@@ -100,6 +101,8 @@ public class FinalizarCompraView extends JPanel implements ActionListener {
 		CompraController compraController = new CompraController();
 		try {
 			idCompra = compraController.cadastro(compra);
+			quantidadeField.setText("");
+			precoField.setText("");
 		} catch (HeadlessException e) {
 		}
 		gerarNota(idCompra);
@@ -121,6 +124,8 @@ public class FinalizarCompraView extends JPanel implements ActionListener {
 	
 	public void acaoCancelar() {
 		JOptionPane.showMessageDialog(null, "Imprementar açao para voltar ao GerarCompraView");	
+		Principal p = new Principal();
+		p.main(null);
 	}
 
 	public void actionPerformed(ActionEvent e) {

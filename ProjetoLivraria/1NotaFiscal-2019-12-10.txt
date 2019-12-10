@@ -1,0 +1,33 @@
+              #NOTA FISCAL - DATA: 2019-12-10 #           
+ ESSA NOTA PODE SER USADA COMO UM COMPROVANTE DE COMPRA,
+JA QUE NELA ESTÃO PRESENTES INFORMAÇÕES SOBRE O PRODUTO 
+E SOBRE O FORNECEDOR.                                   
+                 #INFORMAÇÕES GERAIS#                   
+ID: 57
+Data de Compra: 02/12/2019
+Data de Entrega: 10/12/2019
+Título do Livro: Harry Potter e a Câmara
+Nome do Fornecedor: pedro
+Preço Unitário: 14.99
+Quantidade: 10
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                                   VALOR TOTAL: R$149.9
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+ DESTAQUE AQUI ..... DESTAQUE AQUI ...... DESTAQUI AQUI 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+              #NOTA FISCAL - DATA: 2019-12-10 #           
+ ESSA NOTA PODE SER USADA COMO UM COMPROVANTE DE COMPRA,
+JA QUE NELA ESTÃO PRESENTES INFORMAÇÕES SOBRE O PRODUTO 
+E SOBRE O FORNECEDOR.                                   
+                 #INFORMAÇÕES GERAIS#                   
+ID: 57
+Data de Compra: 02/12/2019
+Data de Entrega: 10/12/2019
+Título do Livro: Harry Potter e a Câmara
+Nome do Fornecedor: pedro
+Preço Unitário: 14.99
+Quantidade: 10
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                                   VALOR TOTAL: R$149.9
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
