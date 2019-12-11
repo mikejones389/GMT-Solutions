@@ -57,9 +57,8 @@ public class FinalizarCompraView extends JPanel implements ActionListener {
 		JButton concluir = new JButton("Concluir");
 		concluir.addActionListener(this);
 		concluir.setActionCommand("concluir");
-		JButton cancelar = new JButton("Cancelar");
-		cancelar.addActionListener(this);
-		cancelar.setActionCommand("cancelar");
+		JLabel cr = new JLabel("Copyright ©2019 Todos os direitos reservados | GMT Group");
+		cr.setFont(new Font("Arial", Font.BOLD, 12));
 		JPanel panelCentral = new JPanel();
 		panelCentral.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -90,7 +89,7 @@ public class FinalizarCompraView extends JPanel implements ActionListener {
 		gbc.gridx = 1;
 		panelCentral.add(concluir, gbc);
 		gbc.gridx = 2;
-		panelCentral.add(cancelar, gbc);
+		panelCentral.add(cr, gbc);
 		this.add(panelCentral, BorderLayout.CENTER);
 	}
 
@@ -122,17 +121,9 @@ public class FinalizarCompraView extends JPanel implements ActionListener {
 		}
 	}
 	
-	public void acaoCancelar() {
-		JOptionPane.showMessageDialog(null, "Imprementar açao para voltar ao GerarCompraView");	
-		Principal p = new Principal();
-		p.main(null);
-	}
-
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("concluir")) {
 			acaoConcluir();
-		} else if (e.getActionCommand().equals("cancelar")) {
-			acaoCancelar();
 		}
 	}
 }

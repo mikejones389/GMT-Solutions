@@ -53,8 +53,7 @@ public class CadastroLivroView extends JPanel {
 	FornecedorTableModel tableModel = new FornecedorTableModel();
 
 	public CadastroLivroView() {
-		criarFormulario();
-		setBackground(Color.getHSBColor(138, 108, 88));
+		criarFormulario(); 
 	}
 
 	private void criarFormulario() {
@@ -231,11 +230,10 @@ public class CadastroLivroView extends JPanel {
 		gbc.anchor = GridBagConstraints.LINE_START;
 		add(imgLinkField, gbc);
 		ActionSalvar actionSalvar = new ActionSalvar();
-		ActionSair actionSair = new ActionSair();
 		JButton botaoSalvar = new JButton("Salvar");
 		botaoSalvar.addActionListener(actionSalvar);
-		JButton botaoSair = new JButton("Sair");
-		botaoSair.addActionListener(actionSair);
+		JLabel cr = new JLabel("Copyright ©2019 Todos os direitos reservados | GMT Group");
+		cr.setFont(new Font("Arial", Font.BOLD, 12));
 		gbc.gridx = 1;
 		gbc.gridy = 12;
 		gbc.fill = GridBagConstraints.NONE;
@@ -247,7 +245,7 @@ public class CadastroLivroView extends JPanel {
 		gbc.fill = GridBagConstraints.NONE;
 		gbc.insets = new Insets(10, 135, 0, 5);
 		gbc.anchor = GridBagConstraints.LINE_START;
-		add(botaoSair, gbc);
+		add(cr, gbc);
 	}
 
 	private class ActionSalvar implements ActionListener {
@@ -284,13 +282,6 @@ public class CadastroLivroView extends JPanel {
 			} catch (HeadlessException | SQLException e) {
 				e.printStackTrace();
 			}
-		}
-	}
-
-	private class ActionSair implements ActionListener {
-
-		public void actionPerformed(ActionEvent arg0) {
-			System.exit(0);
 		}
 	}
 

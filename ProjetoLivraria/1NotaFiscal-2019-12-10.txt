@@ -3,15 +3,15 @@
 JA QUE NELA ESTÃO PRESENTES INFORMAÇÕES SOBRE O PRODUTO 
 E SOBRE O FORNECEDOR.                                   
                  #INFORMAÇÕES GERAIS#                   
-ID: 57
+ID: 58
 Data de Compra: 02/12/2019
 Data de Entrega: 10/12/2019
-Título do Livro: Harry Potter e a Câmara
+Título do Livro: Harry Potter e o Prisoneiro de Azkaban
 Nome do Fornecedor: pedro
-Preço Unitário: 14.99
+Preço Unitário: 19.99
 Quantidade: 10
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-                                   VALOR TOTAL: R$149.9
+                                   VALOR TOTAL: R$199.89999999999998
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
  DESTAQUE AQUI ..... DESTAQUE AQUI ...... DESTAQUI AQUI 
@@ -21,13 +21,13 @@ Quantidade: 10
 JA QUE NELA ESTÃO PRESENTES INFORMAÇÕES SOBRE O PRODUTO 
 E SOBRE O FORNECEDOR.                                   
                  #INFORMAÇÕES GERAIS#                   
-ID: 57
+ID: 58
 Data de Compra: 02/12/2019
 Data de Entrega: 10/12/2019
-Título do Livro: Harry Potter e a Câmara
+Título do Livro: Harry Potter e o Prisoneiro de Azkaban
 Nome do Fornecedor: pedro
-Preço Unitário: 14.99
+Preço Unitário: 19.99
 Quantidade: 10
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-                                   VALOR TOTAL: R$149.9
+                                   VALOR TOTAL: R$199.89999999999998
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - 

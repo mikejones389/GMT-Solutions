@@ -175,9 +175,8 @@ public class AtualizarFornecedorView  extends JFrame implements ActionListener{
 		JButton botaoSalvar = new JButton("Salvar");
 		botaoSalvar.addActionListener(this);
 		botaoSalvar.setActionCommand("salvar");
-		JButton botaoSair = new JButton("Sair");
-		botaoSair.addActionListener(this);
-		botaoSair.setActionCommand("sair");
+		JLabel cr = new JLabel("Copyright ©2019 Todos os direitos reservados | GMT Group");
+		cr.setFont(new Font("Arial", Font.BOLD, 12));
 		gbc.gridx=1;
 		gbc.gridy=12;
 		gbc.fill = GridBagConstraints.NONE;
@@ -189,11 +188,7 @@ public class AtualizarFornecedorView  extends JFrame implements ActionListener{
 		gbc.fill = GridBagConstraints.NONE;
 		gbc.insets=new Insets(10,135,0,5);
 		gbc.anchor = GridBagConstraints.LINE_START;
-		add(botaoSair, gbc);
-	}
-	public void sair() {
-		this.dispose();
-		this.setVisible(false);
+		add(cr, gbc);
 	}
 	
 	public void salvar() {
@@ -222,10 +217,7 @@ public class AtualizarFornecedorView  extends JFrame implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("sair")) {
-			sair();
-		}
-		else if(e.getActionCommand().equals("salvar")) {
+		if(e.getActionCommand().equals("salvar")) {
 			salvar();
 		}
 	}

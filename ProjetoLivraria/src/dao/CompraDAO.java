@@ -65,7 +65,7 @@ public class CompraDAO{
 		int linha = 0;
 		String texto = null;
 		try {
-			String sql = "SELECT * FROM compra as c JOIN item_compra as ic JOIN livro as l JOIN fornecedor as f ON f.cd_fornecedor = c.cd_fornecedor and ic.cd_compra = c.cd_compra and l.cd_livro = ic.cd_livro ORDER BY c.cd_compra;";	
+			String sql = "	";	
 			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
 			ResultSet rs = smt.executeQuery();
 			while(rs.next()) {

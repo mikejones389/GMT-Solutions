@@ -14,5 +14,4 @@ public class Principal extends JFrame{
 		menu.setResizable(false);
 		menu.setVisible(true);
 	}
-	
 }

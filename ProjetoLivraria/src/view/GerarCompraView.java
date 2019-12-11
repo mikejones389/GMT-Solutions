@@ -146,19 +146,13 @@ public class GerarCompraView extends JPanel implements ActionListener {
 		gbc.gridy = 4;
 		gbc.anchor = GridBagConstraints.LINE_END;
 		panelCentral.add(botaoSalvar, gbc);
-		JButton botaoSair = new JButton("Sair");
-		botaoSair.addActionListener(this);
-		botaoSair.setActionCommand("sair");
+		JLabel cr = new JLabel("Copyright ©2019 Todos os direitos reservados | GMT Group");
+		cr.setFont(new Font("Arial", Font.BOLD, 12));
 		gbc.gridx = 2;
 		gbc.anchor = GridBagConstraints.LINE_END;
-		panelCentral.add(botaoSair, gbc);
+		panelCentral.add(cr, gbc);
 	}
 		
-	public void acaoSair() {
-		Principal p = new Principal();
-		p.main(null);
-	}
-
 	public void acaoSalvar() {
 		codLivro = cdLivroField.getText();
 		compra = new Compra();
@@ -331,9 +325,6 @@ public class GerarCompraView extends JPanel implements ActionListener {
 		}
 		else if (e.getActionCommand().equals("listarFornecedor")) {
 			acaoListarFornecedor();
-		}
-		else if (e.getActionCommand().equals("sair")) {
-			acaoSair();
 		}
 		else if (e.getActionCommand().equals("concluir")) {
 			acaoConcluir();

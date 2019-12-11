@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.Statement;
+
 import bdd.BancoDeDados;
 import model.Fornecedor;
 
@@ -63,9 +65,15 @@ public class FornecedorDAO {
 		Connection  bdd = BancoDeDados.conectar();
 		this.cd = cd;
 		try {
-			String sql = "delete from fornecedor where cd_fornecedor = " + cd + " " ;
-			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
+			String sql = "select * from compra where cd_fornecedor = "+cd+";";
+			final PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			smt.executeUpdate();
+			final ResultSet rs1 = smt.getGeneratedKeys();
+			int idCompra = 0;
+			if (rs1.next()) {
+			   idCompra = rs1.getInt(1);
+			}		
+			System.out.println(idCompra);
 		}catch(Exception e) {
 			System.out.println("ERRO: "+ e.getMessage());
 		}
