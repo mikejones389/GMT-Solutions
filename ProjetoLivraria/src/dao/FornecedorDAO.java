@@ -13,6 +13,7 @@ import com.mysql.jdbc.Statement;
 
 import bdd.BancoDeDados;
 import model.Fornecedor;
+import model.Usuario;
 
 public class FornecedorDAO {
 	private static PreparedStatement statement = null;
@@ -53,6 +54,7 @@ public class FornecedorDAO {
 				fornecedor.setEmail(rs.getString("email"));
 				fornecedor.setTelefone(rs.getInt("telefone"));
 				fornecedor.setCelular(rs.getInt("celular"));
+				fornecedor.setStatus(rs.getInt("status"));
 				fornecedores.add(fornecedor);
 			}
 		}catch(Exception e) {
@@ -61,19 +63,25 @@ public class FornecedorDAO {
 		return (ArrayList<Fornecedor>) fornecedores;	
 	}
 	
-	public void deletar(int cd) {
+	public void desativar(int cd) {
 		Connection  bdd = BancoDeDados.conectar();
 		this.cd = cd;
 		try {
-			String sql = "select * from compra where cd_fornecedor = "+cd+";";
-			final PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			String sql = "update fornecedor set status = 0 where cd_fornecedor = "+cd+";";	
+			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
 			smt.executeUpdate();
-			final ResultSet rs1 = smt.getGeneratedKeys();
-			int idCompra = 0;
-			if (rs1.next()) {
-			   idCompra = rs1.getInt(1);
-			}		
-			System.out.println(idCompra);
+		}catch(Exception e) {
+			System.out.println("ERRO: "+ e.getMessage());
+		}
+	}
+	
+	public void ativar(int cd) {
+		Connection  bdd = BancoDeDados.conectar();
+		this.cd = cd;
+		try {
+			String sql = "update fornecedor set status = 1 where cd_fornecedor = "+cd+";";	
+			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
+			smt.executeUpdate();
 		}catch(Exception e) {
 			System.out.println("ERRO: "+ e.getMessage());
 		}
@@ -103,6 +111,13 @@ public class FornecedorDAO {
 				gravarArq.println(((Fornecedor) fornecedores.get(i)).getTelefone());
 				gravarArq.print("Celular: ");
 				gravarArq.println(((Fornecedor) fornecedores.get(i)).getCelular());
+				gravarArq.print("Status: ");
+				if(((Fornecedor) fornecedores.get(i)).getStatus() == 1) {
+					gravarArq.println("Ativo");
+				}
+				else {
+					gravarArq.println("Não ativo");
+				}
 				gravarArq.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
 			}
 			gravarArq.close();

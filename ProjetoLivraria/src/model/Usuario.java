@@ -11,6 +11,7 @@ public class Usuario {
 	private String login;
 	private String senha;
 	private int cdUsuario;
+	private int status;
 	
 	public Usuario() {
 	}
@@ -94,5 +95,11 @@ public class Usuario {
 	
 	public void setSenha(String senha) {
 		this.senha=senha;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status=status;
 	}
 }

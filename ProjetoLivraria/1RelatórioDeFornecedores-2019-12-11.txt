@@ -1,0 +1,51 @@
+# RELATÓRIO DOS FORNECEDORES CADASTRADOS GERADO EM 2019-12-11 #
+ID: 3
+Nome: Arcos Ilimitaods
+Nome Fantasia: Arcos Amarelos ltda.
+Razão Social: McDonald's
+CNPJ: 3625145
+E-mail: McDonalds@arcosamarelos.com
+Telefone: 33026591
+Celular: 996235021
+Status: Ativo
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ID: 13
+Nome: C6 Bank
+Nome Fantasia: C6 Bank cia.
+Razão Social: joao C6 Bank
+CNPJ: 652302154
+E-mail: C6Bank@gmail.com
+Telefone: 33016592
+Celular: 995326154
+Status: Não ativo
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ID: 14
+Nome: NuBank
+Nome Fantasia: NuBank ltda.
+Razão Social: NuBank
+CNPJ: 336295889
+E-mail: nubank@gmail.com
+Telefone: 35021698
+Celular: 994032695
+Status: Ativo
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ID: 16
+Nome: Mike Jones 
+Nome Fantasia: Mike&Jones
+Razão Social: MKJ
+CNPJ: 15435687
+E-mail: mkjLivros@gmail.com
+Telefone: 30084545
+Celular: 198345782
+Status: Não ativo
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ID: 17
+Nome: pedro
+Nome Fantasia: fé no pai 
+Razão Social: llllççç
+CNPJ: 1111111111
+E-mail: hhhhh@gmail.com
+Telefone: 3281936
+Celular: 4444444
+Status: Ativo
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

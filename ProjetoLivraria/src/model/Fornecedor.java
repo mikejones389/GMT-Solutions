@@ -9,6 +9,7 @@ public class Fornecedor {
 	private String email;
 	private int telefone;
 	private int celular;
+	private int status;
 	
 	public Fornecedor(){
 	}
@@ -76,4 +77,10 @@ public class Fornecedor {
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}	
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status=status;
+	}
 }

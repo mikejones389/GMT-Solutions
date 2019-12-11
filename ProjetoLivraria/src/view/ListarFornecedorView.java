@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -57,33 +58,40 @@ public class ListarFornecedorView extends JPanel implements ActionListener {
 		JLabel nmLivro = new JLabel("T�tulo", SwingConstants.HORIZONTAL);
 		nmLivro.setFont(new Font("Arial", Font.BOLD, 30));
 		JScrollPane scrollPane = new JScrollPane(jtFornecedor);
-		JButton jbDeletar = new JButton("Deletar");
-		jbDeletar.addActionListener(this);
-		jbDeletar.setActionCommand("deletar");
+		JButton jbDesativar = new JButton("Desativar");
+		jbDesativar.addActionListener(this);
+		jbDesativar.setActionCommand("deletar");
 		JButton jbGerarArq = new JButton("Gerar Arquivo");
 		jbGerarArq.addActionListener(this);
 		jbGerarArq.setActionCommand("gerar arquivo");
 		JButton jbAtualizar = new JButton("Atualizar");
 		jbAtualizar.addActionListener(this);
 		jbAtualizar.setActionCommand("atualizar");
+		JButton jbAtivar = new JButton("Ativar");
+		jbAtivar.addActionListener(this);
+		jbAtivar.setActionCommand("ativar");
 		JPanel panelWest = new JPanel();
-		panelWest.setLayout(new GridLayout(2, 1));
+		JPanel panelEast = new JPanel();
+		panelWest.setLayout(new GridLayout(2,1));
+		panelEast.setLayout(new GridLayout(2,1));
 		this.setLayout(new BorderLayout());
 		this.add(panelSuperior, BorderLayout.NORTH);
 		panelCentral.add(scrollPane, BorderLayout.NORTH);
 		this.add(panelCentral, BorderLayout.CENTER);
-		panelWest.add(jbDeletar);
+		panelWest.add(jbDesativar);
 		panelWest.add(jbAtualizar);
+		panelEast.add(jbAtivar);
+		panelEast.add(jbGerarArq);
 		this.add(panelWest, BorderLayout.WEST);
-		this.add(jbGerarArq, BorderLayout.EAST);
+		this.add(panelEast, BorderLayout.EAST);
 	}
 	
-	public void deletar() {
+	public void desativar() {
 		MouseEvent evt = null;
 		tableModelMouseClicked(evt);
 		int cd = fornecedores.get(jtFornecedor.getSelectedRow()).getCodigo();
 		FornecedorDAO fd = new FornecedorDAO();
-		fd.deletar(cd);
+		fd.desativar(cd);
 	}
 
 	public void gerarArq() {
@@ -113,18 +121,24 @@ public class ListarFornecedorView extends JPanel implements ActionListener {
 		}
 	}
 
+	public void ativar() {
+		MouseEvent evt = null;
+		tableModelMouseClicked(evt);
+		int cd = fornecedores.get(jtFornecedor.getSelectedRow()).getCodigo();
+		FornecedorDAO fd = new FornecedorDAO();
+		fd.ativar(cd);
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getActionCommand().equals("deletar")) {
-			deletar();
-			ListarFornecedorView lfv = new ListarFornecedorView();
-			lfv.repaint();
-			lfv.validate();
+			desativar();
 		} else if (e.getActionCommand().equals("gerar arquivo")) {
 			gerarArq();
 		} else if (e.getActionCommand().equals("atualizar")) {
 			atualizar();
+		} else if (e.getActionCommand().equals("ativar")) {
+			ativar();
 		}
 	}
 

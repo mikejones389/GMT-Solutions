@@ -1,0 +1,37 @@
+# RELATÓRIO DOS CLIENTES CADASTRADOS GERADO EM 2019-12-11 #
+ID: 1
+Nome: teste
+CPF: 12233
+Celular: 111
+Sexo: z
+Data de Nascimento: 2019-02-02
+E-mail: qqq
+Perfil: 1
+Login: 123
+Senha: 202cb962ac59075
+Status: Não ativo
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ID: 2
+Nome: teste2
+CPF: 123123
+Celular: 1111
+Sexo: z
+Data de Nascimento: 2019-02-02
+E-mail: wwww
+Perfil: 1
+Login: 456
+Senha: 250cf8b51c773f3
+Status: Ativo
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ID: 3
+Nome: gustavo
+CPF: 36555
+Celular: 562562
+Sexo: z
+Data de Nascimento: 2019-10-29
+E-mail: sgsfrg
+Perfil: 1
+Login: 987
+Senha: 0c74b7f78409a40
+Status: Ativo
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

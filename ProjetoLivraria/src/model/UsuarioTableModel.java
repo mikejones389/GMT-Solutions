@@ -6,7 +6,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class UsuarioTableModel extends AbstractTableModel{
 	private List<Usuario> dados = new  ArrayList<Usuario>();
-	private String[] colunas = {"ID","Nome", "CPF", "Celular"};
+	private String[] colunas = {"ID","Nome", "CPF", "Celular", "Status"};
 	
 	@Override
 	public String getColumnName(int column) {
@@ -35,7 +35,15 @@ public class UsuarioTableModel extends AbstractTableModel{
 		case 3:
 			return dados.get(linha).getCelular();
 		case 4:
-			return dados.get(linha).getSexo();
+			if(dados.get(linha).getStatus() == 1) {
+				String status = "Ativo";
+				return status;
+			}
+			else {
+				String status = "Não ativo";
+				return status;
+			}
+			//return dados.get(linha).getStatus();
 		case 5:
 			return dados.get(linha).getDtNascimento();
 		case 6:
@@ -46,6 +54,8 @@ public class UsuarioTableModel extends AbstractTableModel{
 			return dados.get(linha).getLogin();
 		case 9: 
 			return dados.get(linha).getSenha();	
+		case 10:
+			return dados.get(linha).getSexo();
 		}
 		return null;
 	}

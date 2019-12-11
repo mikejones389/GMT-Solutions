@@ -35,6 +35,7 @@ public class UsuarioDAO {
 				usuario.setPerfil(rs.getString("perfil"));
 				usuario.setLogin(rs.getString("login"));
 				usuario.setSenha(rs.getString("senha"));
+				usuario.setStatus(rs.getInt("status"));
 				usuarios.add(usuario);
 			}			
 		}catch(Exception e) {
@@ -43,11 +44,11 @@ public class UsuarioDAO {
 		return (ArrayList<Usuario>) usuarios;
 	}
 	
-	public void deletar(int cd) {
+	public void desativar(int cd) {
 		Connection bdd = BancoDeDados.conectar();
 		this.cd = cd;
 		try {
-			String sql = "delete from usuario where cd_usuario = "+ cd + " ";
+			String sql = "update usuario set status = 0 where cd_usuario = "+cd+";";
 			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
 			smt.executeUpdate();
 		}catch(Exception e ) {
@@ -55,6 +56,17 @@ public class UsuarioDAO {
 		}
 	}
 	
+	public void ativar(int cd) {
+		Connection bdd = BancoDeDados.conectar();
+		this.cd = cd;
+		try {
+			String sql = "update usuario set status = 1 where cd_usuario = "+cd+";";
+			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
+			smt.executeUpdate();
+		}catch(Exception e ) {
+			System.out.println("ERRO: "+ e.getMessage());
+		}
+	}
 	public boolean gerarArq(String caminho, List<Usuario> usuarios) {
 		this.usuarios=usuarios;
 		Date data = new Date(System.currentTimeMillis());
@@ -83,6 +95,13 @@ public class UsuarioDAO {
 				gravarArq.println(((Usuario) usuarios.get(i)).getLogin());
 				gravarArq.print("Senha: ");
 				gravarArq.println(((Usuario) usuarios.get(i)).getSenha());
+				gravarArq.print("Status: ");
+				if(((Usuario) usuarios.get(i)).getStatus() == 1) {
+					gravarArq.println("Ativo");
+				}
+				else {
+					gravarArq.println("Não ativo");
+				}
 				gravarArq.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
 			}
 			gravarArq.close();
