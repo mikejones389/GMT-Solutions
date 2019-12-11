@@ -52,9 +52,6 @@ public class ListarLivroView extends JPanel implements ActionListener{
 		cdLivro.setFont(new Font("Arial", Font.BOLD, 30));
 		JLabel nmLivro = new JLabel("T�tulo", SwingConstants.HORIZONTAL);
 		nmLivro.setFont(new Font("Arial", Font.BOLD, 30));
-		JButton btDeletar= new JButton("Deletar");
-		btDeletar.addActionListener(this);
-		btDeletar.setActionCommand("deletar");
 		JButton btGerarArq = new JButton("Gerar Arquivo");
 		btGerarArq.addActionListener(this);
 		btGerarArq.setActionCommand("gerar arquivo");
@@ -62,24 +59,12 @@ public class ListarLivroView extends JPanel implements ActionListener{
 		btAtualizar.addActionListener(this);
 		btAtualizar.setActionCommand("atualizar");
 		JScrollPane scrollPane = new JScrollPane(jtLivros);
-		JPanel panelWest = new JPanel();
-		panelWest.setLayout(new GridLayout(2,1));
 		this.setLayout(new BorderLayout());
 		this.add(panelSuperior, BorderLayout.NORTH);
 		panelCentral.add(scrollPane,BorderLayout.NORTH);
 		this.add(panelCentral, BorderLayout.CENTER);
-		panelWest.add(btDeletar);
-		panelWest.add(btAtualizar);
-		this.add(panelWest, BorderLayout.WEST);
+		this.add(btAtualizar, BorderLayout.WEST);
 		this.add(btGerarArq, BorderLayout.EAST);
-	}
-
-	public void deletar() {
-		MouseEvent evt = null;
-		tableModelMouseClicked(evt);
-		int cd = livros.get(jtLivros.getSelectedRow()).getCdLivro();
-		LivroDAO ld = new LivroDAO();
-		ld.deletar(cd);
 	}
 	
 	public void gerarArq() {
@@ -113,10 +98,7 @@ public class ListarLivroView extends JPanel implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("deletar")) {
-			deletar();
-		}
-		else if(e.getActionCommand().equals("gerar arquivo")) {
+		if(e.getActionCommand().equals("gerar arquivo")) {
 			gerarArq();
 		}
 		else if(e.getActionCommand().equals("atualizar")) {

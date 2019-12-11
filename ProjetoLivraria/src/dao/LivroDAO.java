@@ -93,19 +93,7 @@ public class LivroDAO {
 		}
 		return (ArrayList<Livro>) livros;
 	}
-	
-	public void deletar(int cd) {
-		Connection bdd = BancoDeDados.conectar();
-		this.cd = cd;
-		try {
-			String sql = "delete from livro where cd_livro = "+ cd +" ;";
-			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
-			smt.executeUpdate();
-		}catch(Exception e){
-			System.out.println("ERRO: " + e.getMessage());
-		}
-	}
-	
+		
 	public boolean gerarArq( String caminho, List<Livro> livros) {
 		this.livros = livros;
 		Date data = new Date(System.currentTimeMillis());
