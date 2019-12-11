@@ -11,8 +11,6 @@
 					&nbsp;&nbsp;&nbsp;
 					<a href="product.php?genero=2" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> Romance </a>
 					&nbsp;&nbsp;&nbsp;
-					<a href="product.php?genero=3" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> Documentário </a>
-					&nbsp;&nbsp;&nbsp;
 					<a href="product.php?genero=4" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> Literatura brasileira </a>	
 				</div>
 				<form method="GET"  class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
