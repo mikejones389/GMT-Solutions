@@ -2,7 +2,7 @@
 		if(! isset($_SESSION)){
 			session_start();
 		}
-		//echo substr(md5("369"),0,15);
+		//echo substr(md5("123"),0,15);
 		//exit;
 	?>
 

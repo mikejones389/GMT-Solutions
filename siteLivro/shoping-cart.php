@@ -109,30 +109,27 @@
 								</span>
 							</div>
 						</div>
-						<div class="p-t-15">	
-							<div class="bor8 bg0 m-b-22">
-								<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" id="cep" name="cep" placeholder="CEP">
+						
+						<div class="container">
+						<div class="row">
+							<div class="col-md-8">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Digite Seu CEP</label>
+									<input type="text" class="form-control" id="cep" placeholder="Seu cep">
+									<small class="form-text text-muted"><a href="http://www.consultaenderecos.com.br/busca-endereco" target="_blank">Não sei meu CEP</a></small>
+								</div>
+								<button onclick="calculo();" class="btn btn-success">Calcular</button>
 							</div>
-							<div class="size-208">
-								<span class="stext-110 cl2">
-									Frete: <input type="text" readonly="readonly"  id="frete" name="frete" value="0" >
-								</span>
-							</div>
-							<div class="size-208">
-								<span class="stext-110 cl2">
-								</span>
-							</div>
-							<div class="size-209">
-								<span class="mtext-110 cl2">
-									&nbsp;
-								</span>
+							<div class="col-md-8" id="retorno">
+
 							</div>
 						</div>
-						<div class="flex-w">
+						</div>
+						<!--<div class="flex-w">
 							<div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
 								<a href="#" onClick="calcularFrete();"> Calcular Frete</a>
 							</div>
-						</div>
+						</div>-->
 						<div class="size-209">
 							<span class="mtext-110 cl2">
 								&nbsp;
@@ -286,6 +283,16 @@
 	</script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+	<script>
+      function calculo(){
+        var cep = $("#cep").val();
+        $.post('calcula.php',{cep:cep},function(data){
+          $("#retorno").html(data);
+        });
+      }
+    </script>
 
 	<script>
 
