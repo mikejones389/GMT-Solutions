@@ -12,9 +12,10 @@ public class BancoDeDados {
 	private static Connection connection = null;
 	
 	public static Connection conectar(){
-		String servidor = "jdbc:mysql://35.198.9.166:3306/projeto_livraria";
+		String servidor = "jdbc:mysql://localhost:3306/projeto_livraria";
 		String usuario = "root";
-		String senha = "@gmtifsp";
+		//String senha = "@gmtifsp";
+		String senha = "";
 		String driver = "com.mysql.jdbc.Driver";
 		try {
 			Class.forName(driver);
