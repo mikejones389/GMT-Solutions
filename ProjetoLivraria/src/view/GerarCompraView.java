@@ -190,7 +190,8 @@ public class GerarCompraView extends JPanel implements ActionListener {
 		frameList.add(panelTitulo);
 		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 		FornecedorDAO fd = new FornecedorDAO();
-		fornecedores = (List<Fornecedor>) fd.Listar();
+		int cdList = 1;
+		fornecedores = (List<Fornecedor>) fd.Listar(cdList);
 		tableModelFornecedor.removeAll();
 		for (int i = 0; i < fornecedores.size(); i++) {
 			tableModelFornecedor.addROw(fornecedores.get(i));

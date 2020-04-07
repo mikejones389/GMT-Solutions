@@ -1,0 +1,9 @@
+# RELATÓRIO DO HISTÓRICO DE COMPRAS GERADO EM 2020-04-07 #
+ID: 1
+Data de Compra: 2020-04-02
+Data de Entrega: 2020-04-15
+Título do Livro: Harry Potter e as Relíquias da Morte 
+Nome do Fornecedor: Mike Jones 
+Preço Unitário: 55.99
+Quantidade: 10
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

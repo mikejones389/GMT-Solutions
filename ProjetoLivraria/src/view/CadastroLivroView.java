@@ -300,14 +300,15 @@ public class CadastroLivroView extends JPanel {
 			frameList.setLocationRelativeTo(cdFornecedorField);
 			frameList.setLayout(new GridLayout(3, 1));
 			JPanel panelTitulo = new JPanel();
-			panelTitulo.setLayout(new GridLayout(1, 1));
+		panelTitulo.setLayout(new GridLayout(1, 1));
 			JLabel titulo = new JLabel("Selecione o Fornecedor", SwingConstants.CENTER);
 			titulo.setFont(new Font("Arial", Font.BOLD, 18));
 			panelTitulo.add(titulo);
 			frameList.add(panelTitulo);
 			List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 			FornecedorDAO fd = new FornecedorDAO();
-			fornecedores = (List<Fornecedor>) fd.Listar();
+			int cdList = 1;
+			fornecedores = (List<Fornecedor>) fd.Listar(cdList);
 			tableModel.removeAll();
 			for (int i = 0; i < fornecedores.size(); i++) {
 				tableModel.addROw(fornecedores.get(i));

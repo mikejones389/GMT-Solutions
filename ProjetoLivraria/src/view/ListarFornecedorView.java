@@ -42,7 +42,8 @@ public class ListarFornecedorView extends JPanel implements ActionListener {
 
 	public void janelaPrincipal() {
 		FornecedorDAO fd = new FornecedorDAO();
-		fornecedores = (List<Fornecedor>) fd.Listar();
+		int cdList = 2;
+		fornecedores = (List<Fornecedor>) fd.Listar(cdList);
 		Fornecedor f = new Fornecedor();
 		for (int i = 0; i < fornecedores.size(); i++) {
 			tableModel.addROw(fornecedores.get(i));

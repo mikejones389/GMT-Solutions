@@ -13,10 +13,10 @@ public class FornecedorController {
 			return true;
 		}
 		
-		public void ListarFornecedor(){
-			FornecedorDAO fornecedorDAO = new FornecedorDAO();
-			fornecedorDAO.Listar();
-		}
+//		public void ListarFornecedor(){
+//			FornecedorDAO fornecedorDAO = new FornecedorDAO();
+//			fornecedorDAO.Listar();
+//		}
 		
 		public boolean atualizar(Fornecedor fornecedor, int id) throws SQLException{
 			FornecedorDAO fd = new FornecedorDAO();

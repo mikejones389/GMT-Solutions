@@ -19,6 +19,7 @@ public class FornecedorDAO {
 	private static PreparedStatement statement = null;
 	private static ResultSet resultSet = null;
 	int cd;
+	int cdList;
 	List<Fornecedor> fornecedores;
 	
 	public void inserir(Fornecedor fornecedor) throws SQLException {
@@ -35,28 +36,55 @@ public class FornecedorDAO {
 		smt.executeUpdate();
 	}
 	
-	public ArrayList<Fornecedor> Listar(){
+	public ArrayList<Fornecedor> Listar(int cdList){
 		Connection bdd = BancoDeDados.conectar();
 		fornecedores = new ArrayList<Fornecedor>();
 		int linha = 0;
 		String texto = null;
 		try {
-			String sql = "SELECT * FROM fornecedor ORDER BY cd_fornecedor";
-			PreparedStatement smt = (PreparedStatement) bdd.prepareStatement(sql);
-			ResultSet rs = smt.executeQuery();
-			while(rs.next()) {
-				Fornecedor fornecedor = new Fornecedor();
-				fornecedor.setCodigo(rs.getInt("cd_fornecedor"));
-				fornecedor.setNmFornecedor(rs.getString("nm_fornecedor"));
-				fornecedor.setNmFantasia(rs.getString("nm_fantasia"));
-				fornecedor.setRzSocial(rs.getString("rz_social"));
-				fornecedor.setCnpj(rs.getInt("cnpj"));
-				fornecedor.setEmail(rs.getString("email"));
-				fornecedor.setTelefone(rs.getInt("telefone"));
-				fornecedor.setCelular(rs.getInt("celular"));
-				fornecedor.setStatus(rs.getInt("status"));
-				fornecedores.add(fornecedor);
+			this.cdList = cdList;
+			switch (cdList) {
+			//LISTAR SOMENTE OS FORNECEDORES ATIVOS
+			case 1: 
+				String sql1 =  "SELECT * FROM fornecedor WHERE status = 1 ORDER BY cd_fornecedor;";
+				PreparedStatement smt1 = (PreparedStatement) bdd.prepareStatement(sql1);
+				ResultSet rs1 = smt1.executeQuery();
+				while(rs1.next()) {
+					Fornecedor fornecedor = new Fornecedor();
+					fornecedor.setCodigo(rs1.getInt("cd_fornecedor"));
+					fornecedor.setNmFornecedor(rs1.getString("nm_fornecedor"));
+					fornecedor.setNmFantasia(rs1.getString("nm_fantasia"));
+					fornecedor.setRzSocial(rs1.getString("rz_social"));
+					fornecedor.setCnpj(rs1.getInt("cnpj"));
+					fornecedor.setEmail(rs1.getString("email"));
+					fornecedor.setTelefone(rs1.getInt("telefone"));
+					fornecedor.setCelular(rs1.getInt("celular"));
+					fornecedor.setStatus(rs1.getInt("status"));
+					fornecedores.add(fornecedor);
+				}
+				break;
+			//LISTAR TODOS OS FORNECEDORES ATIVOS E NAO ATIVOS
+			case 2:
+				String sql2 = "SELECT * FROM fornecedor ORDER BY cd_fornecedor;";
+				PreparedStatement smt2 = (PreparedStatement) bdd.prepareStatement(sql2);
+				ResultSet rs2 = smt2.executeQuery();
+				while(rs2.next()) {
+					Fornecedor fornecedor = new Fornecedor();
+					fornecedor.setCodigo(rs2.getInt("cd_fornecedor"));
+					fornecedor.setNmFornecedor(rs2.getString("nm_fornecedor"));
+					fornecedor.setNmFantasia(rs2.getString("nm_fantasia"));
+					fornecedor.setRzSocial(rs2.getString("rz_social"));
+					fornecedor.setCnpj(rs2.getInt("cnpj"));
+					fornecedor.setEmail(rs2.getString("email"));
+					fornecedor.setTelefone(rs2.getInt("telefone"));
+					fornecedor.setCelular(rs2.getInt("celular"));
+					fornecedor.setStatus(rs2.getInt("status"));
+					fornecedores.add(fornecedor);
+				}
+				break;
 			}
+			
+			
 		}catch(Exception e) {
 			System.out.println("ERRO: " + e.getMessage());
 		}

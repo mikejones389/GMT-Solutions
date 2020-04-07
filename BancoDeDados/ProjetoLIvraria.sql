@@ -57,7 +57,7 @@ CREATE TABLE `compra` (
   PRIMARY KEY (`cd_compra`),
   KEY `cd_fornecedor` (`cd_fornecedor`),
   CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`cd_fornecedor`) REFERENCES `fornecedor` (`cd_fornecedor`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,6 +66,7 @@ CREATE TABLE `compra` (
 
 LOCK TABLES `compra` WRITE;
 /*!40000 ALTER TABLE `compra` DISABLE KEYS */;
+INSERT INTO `compra` VALUES (1,'2020-04-02','2020-04-15',4),(2,'2020-04-01','2020-04-07',4);
 /*!40000 ALTER TABLE `compra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,7 +149,7 @@ CREATE TABLE `fornecedor` (
   `email` varchar(30) NOT NULL,
   `telefone` int(11) DEFAULT NULL,
   `celular` int(12) NOT NULL,
-  `status` enum('1','0') DEFAULT '1',
+  `status` int(11) DEFAULT 1,
   PRIMARY KEY (`cd_fornecedor`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -159,7 +160,7 @@ CREATE TABLE `fornecedor` (
 
 LOCK TABLES `fornecedor` WRITE;
 /*!40000 ALTER TABLE `fornecedor` DISABLE KEYS */;
-INSERT INTO `fornecedor` VALUES (3,'Gustavo da Moita','Gudamota','MCDonalts',514524549,'gustavoMotoqueiro@gmail.com',66666669,966665698,'1'),(4,'Mike Jones ','MKJ','MKJ_teste',123456451,'mkjteste@gmail.com',54645678,1234564,'1');
+INSERT INTO `fornecedor` VALUES (3,'Gustavo da Moita','Gudamota','MCDonalts',514524549,'gustavoMotoqueiro@gmail.com',66666669,966665698,1),(4,'Mike Jones ','MKJ','MKJ_teste',123456451,'mkjteste@gmail.com',54645678,1234564,1);
 /*!40000 ALTER TABLE `fornecedor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,7 +182,7 @@ CREATE TABLE `item_compra` (
   KEY `cd_compra` (`cd_compra`),
   CONSTRAINT `item_compra_ibfk_1` FOREIGN KEY (`cd_livro`) REFERENCES `livro` (`cd_livro`),
   CONSTRAINT `item_compra_ibfk_2` FOREIGN KEY (`cd_compra`) REFERENCES `compra` (`cd_compra`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,6 +191,7 @@ CREATE TABLE `item_compra` (
 
 LOCK TABLES `item_compra` WRITE;
 /*!40000 ALTER TABLE `item_compra` DISABLE KEYS */;
+INSERT INTO `item_compra` VALUES (1,11,1,10,55.99),(2,8,2,12,1010.00);
 /*!40000 ALTER TABLE `item_compra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -333,7 +335,7 @@ CREATE TABLE `usuario` (
   `perfil` varchar(20) NOT NULL,
   `login` varchar(10) NOT NULL,
   `senha` varchar(16) NOT NULL,
-  `status` enum('1','0') DEFAULT '1',
+  `status` int(11) DEFAULT 1,
   PRIMARY KEY (`cd_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -390,4 +392,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-07 16:22:27
+-- Dump completed on 2020-04-07 18:31:07

@@ -1,0 +1,33 @@
+              #NOTA FISCAL - DATA: 2020-04-07 #           
+ ESSA NOTA PODE SER USADA COMO UM COMPROVANTE DE COMPRA,
+JA QUE NELA ESTÃO PRESENTES INFORMAÇÕES SOBRE O PRODUTO 
+E SOBRE O FORNECEDOR.                                   
+                 #INFORMAÇÕES GERAIS#                   
+ID: 2
+Data de Compra: 01/04/2020
+Data de Entrega: 07/04/2020
+Título do Livro: Harry Potter e a Ordem da Fênix
+Nome do Fornecedor: Mike Jones 
+Preço Unitário: 1010.0
+Quantidade: 12
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                                   VALOR TOTAL: R$12120.0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+ DESTAQUE AQUI ..... DESTAQUE AQUI ...... DESTAQUI AQUI 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+              #NOTA FISCAL - DATA: 2020-04-07 #           
+ ESSA NOTA PODE SER USADA COMO UM COMPROVANTE DE COMPRA,
+JA QUE NELA ESTÃO PRESENTES INFORMAÇÕES SOBRE O PRODUTO 
+E SOBRE O FORNECEDOR.                                   
+                 #INFORMAÇÕES GERAIS#                   
+ID: 2
+Data de Compra: 01/04/2020
+Data de Entrega: 07/04/2020
+Título do Livro: Harry Potter e a Ordem da Fênix
+Nome do Fornecedor: Mike Jones 
+Preço Unitário: 1010.0
+Quantidade: 12
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                                   VALOR TOTAL: R$12120.0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
