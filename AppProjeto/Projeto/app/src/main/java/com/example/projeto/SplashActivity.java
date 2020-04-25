@@ -7,6 +7,9 @@ import android.os.Handler;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.facebook.AccessToken;
+import com.facebook.login.widget.LoginButton;
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override
@@ -17,9 +20,17 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(i);
-                finish();
+                if(AccessToken.getCurrentAccessToken() == null){
+                    Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+                else{
+                    Intent i = new Intent(SplashActivity.this, MenuActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+
             }
         },5000);
     }
