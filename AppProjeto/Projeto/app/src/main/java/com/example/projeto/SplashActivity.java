@@ -8,7 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.facebook.AccessToken;
-import com.facebook.login.widget.LoginButton;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -26,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
                     finish();
                 }
                 else{
-                    Intent i = new Intent(SplashActivity.this, MenuActivity.class);
+                    Intent i = new Intent(SplashActivity.this, CadastroActivity.class);
                     startActivity(i);
                     finish();
                 }

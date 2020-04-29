@@ -8,14 +8,14 @@ import android.view.View;
 
 import com.facebook.login.LoginManager;
 
-public class MenuActivity extends AppCompatActivity {
+public class CadastroActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_cadastro);
     }
-    private void logout(View view){
+    public void logout(View view){
         LoginManager.getInstance().logOut();
         goSplashScreen();
     }
