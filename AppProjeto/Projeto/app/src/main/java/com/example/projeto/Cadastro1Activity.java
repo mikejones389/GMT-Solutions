@@ -17,12 +17,11 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CursorAdapter;
 import android.widget.ImageView;
 
 import com.facebook.login.LoginManager;
 
-public class CadastroActivity extends AppCompatActivity {
+public class Cadastro1Activity extends AppCompatActivity {
 
     private ImageView imageView;
     private Button galeria;
@@ -32,7 +31,7 @@ public class CadastroActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro);
+        setContentView(R.layout.activity_cadastro1);
 
         if(ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_EXTERNAL_STORAGE)

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
@@ -83,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void goMenuScreen(){
-        Intent intent = new Intent(this, CadastroActivity.class);
+        Intent intent = new Intent(this, Cadastro1Activity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 
@@ -92,6 +93,16 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void newConta(View view){
+        goCadastroScreen();
+    }
+
+    private void goCadastroScreen(){
+        Intent intent = new Intent(this, Cadastro1Activity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 //    AccessToken accessToken = AccessToken.getCurrentAccessToken();
 //    boolean isLoggedIn = accessToken != null && !accessToken.isExpired();

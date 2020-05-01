@@ -25,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
                     finish();
                 }
                 else{
-                    Intent i = new Intent(SplashActivity.this, CadastroActivity.class);
+                    Intent i = new Intent(SplashActivity.this, Cadastro1Activity.class);
                     startActivity(i);
                     finish();
                 }

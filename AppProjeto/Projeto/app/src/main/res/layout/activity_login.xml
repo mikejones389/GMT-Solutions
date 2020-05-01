@@ -77,9 +77,11 @@
             android:layout_marginStart="53dp"
             android:layout_marginEnd="53dp"
             android:layout_marginBottom="22dp"
+            android:onClick="newConta"
             android:background="@drawable/customise2"
             android:text="Criar uma Nova Conta"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/colorPrimary"
+            tools:ignore="OnClick" />
     </RelativeLayout>
 
 
