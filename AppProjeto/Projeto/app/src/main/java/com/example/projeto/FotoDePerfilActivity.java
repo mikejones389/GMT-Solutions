@@ -18,20 +18,26 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
 
-public class Cadastro1Activity extends AppCompatActivity {
+public class FotoDePerfilActivity extends AppCompatActivity {
 
     private ImageView imageView;
     private Button galeria;
     private final int GALERIA_MEDIA = 1;
     private final int PERMISSAO_REQUEST = 2;
+    private TextView nmUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro1);
+        setContentView(R.layout.activity_foto_de_perfil);
+
+        nmUsuario = findViewById(R.id.textView3);
+        String valor = getIntent().getStringExtra("nmUsuario");
+        nmUsuario.setText("Escolha uma foto de perfil "+valor);
 
         if(ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_EXTERNAL_STORAGE)

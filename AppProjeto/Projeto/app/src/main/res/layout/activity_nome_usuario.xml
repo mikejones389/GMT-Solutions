@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NomeUsuarioActivity">
+
+    <TextView
+        android:id="@+id/texto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="cursive"
+        android:gravity="center"
+        android:text="Como deseja ser chamado caro escritor?"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/nmUsuario"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:background="@drawable/customise3"
+        android:gravity="center"
+        android:fontFamily="cursive"
+        android:textSize="25dp"
+        android:hint="Seu Nome"
+        android:maxLength="16"
+        app:layout_constraintBottom_toTopOf="@id/btContinuar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/texto" />
+
+    <Button
+        android:id="@+id/btContinuar"
+        android:layout_width="148dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/customise1"
+        android:text="Continuar"
+        android:textSize="14dp"
+        android:fontFamily="cursive"
+        android:textColor="@color/colorSecundary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="continuar"
+        tools:ignore="MissingConstraints" />
+
+
+    <Button
+        android:id="@+id/btLogout"
+        android:layout_width="148dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/customise2"
+        android:onClick="logout"
+        android:text="Encerrar Sessão"
+        android:textStyle="bold"
+        android:textSize="14dp"
+        android:fontFamily="cursive"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-                        goMenuScreen();
+                        goCadastroScreen();
                     }
 
                     @Override
@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void goMenuScreen(){
-        Intent intent = new Intent(this, Cadastro1Activity.class);
+        Intent intent = new Intent(this, FotoDePerfilActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 
@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void goCadastroScreen(){
-        Intent intent = new Intent(this, Cadastro1Activity.class);
+        Intent intent = new Intent(this, NomeUsuarioActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
