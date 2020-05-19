@@ -28,7 +28,7 @@
         android:fontFamily="cursive"
         android:textSize="25dp"
         android:hint="Seu Nome"
-        android:maxLength="16"
+        android:maxLength="12"
         app:layout_constraintBottom_toTopOf="@id/btContinuar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -29,15 +29,15 @@ public class FotoDePerfilActivity extends AppCompatActivity {
     private final int GALERIA_MEDIA = 1;
     private final int PERMISSAO_REQUEST = 2;
     private TextView nmUsuario;
-
+    private String valor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foto_de_perfil);
 
         nmUsuario = findViewById(R.id.textView3);
-        String valor = getIntent().getStringExtra("nmUsuario");
-        nmUsuario.setText("Escolha uma foto de perfil "+valor);
+        valor = getIntent().getStringExtra("nmUsuario");
+        nmUsuario.setText(valor);
 
         if(ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -98,9 +98,19 @@ public class FotoDePerfilActivity extends AppCompatActivity {
         goSplashScreen();
     }
 
+    private void goFinalCadastro(){
+        Intent intent = new Intent(this, FinalCadastroActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("nmUsuario", valor);
+        startActivity(intent);
+    }
     private void goSplashScreen(){
         Intent intent = new Intent(this, SplashActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    public void finalCadastro(View view) {
+        goFinalCadastro();
     }
 }
