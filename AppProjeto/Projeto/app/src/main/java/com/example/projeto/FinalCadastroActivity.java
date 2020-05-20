@@ -1,9 +1,9 @@
 package com.example.projeto;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -12,36 +12,26 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+
+import com.example.projeto.services.MySingleton;
 import com.facebook.login.LoginManager;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 public class FinalCadastroActivity extends AppCompatActivity {
+
     private static final String TAG = "MainActivity";
     private TextView nmUsuario;
     private String valor;
@@ -49,9 +39,16 @@ public class FinalCadastroActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TextView idadeF;
     private int idade;
-    private int id=0;
+    private int id=0;;
+
+        private String server_url = "http://192.168.0.110/update_info.php";
+    AlertDialog.Builder builder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        int idadef = idade;
+        int idf = id;
+        String nm = valor;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final_cadastro);
         nmUsuario = findViewById(R.id.nmUsuario);
@@ -110,7 +107,7 @@ public class FinalCadastroActivity extends AppCompatActivity {
 
     public void continuar(View view){
         if(!TextUtils.isEmpty(idadeF.getText().toString())){
-            goMenuPrincipal();
+            id++;
             salvarNoBanco();
         }
         else {
@@ -135,57 +132,37 @@ public class FinalCadastroActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private boolean salvarNoBanco(){
-        boolean salvar = false;
-        URL url = null;
-        try {
-            url = new URL("");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        HttpURLConnection conn = null;
-        StringBuilder json = new StringBuilder();
-        try {
-            String jjson = "{\"id\":12,\"imagem\":[],\"titulo\":\"Mano\",\"valor\":1000.0}";
-            conn = (HttpURLConnection) url.openConnection();
-            conn.setUseCaches(false);
-            conn.setReadTimeout(10000);
-            conn.setConnectTimeout(15000);
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json");
-            conn.setFixedLengthStreamingMode(jjson.length());
-            conn.connect();
-
-            OutputStreamWriter os = new OutputStreamWriter(conn.getOutputStream());
-            os.write(jjson);
-            os.flush();
-            os.close();
-
-            InputStream it = new BufferedInputStream(conn.getInputStream());
-            BufferedReader br = new BufferedReader(new InputStreamReader(it));
-            String linha;
-            while((linha = br.readLine()) != null){
-                json.append(linha);
+    private void salvarNoBanco() {
+        final String id,name, idade;
+        id = String.valueOf(this.id);
+        name = valor;
+        idade = String.valueOf(this.idade);
+        Log.i("TAG", id+ name+ idade);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+//                builder.setTitle("Server Response");
+//                builder.setMessage("Response :"+response);
             }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(FinalCadastroActivity.this, "Error..."+error.getMessage(), Toast.LENGTH_LONG).show();
+                error.printStackTrace();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String,String> params = new HashMap<>();
+                params.put("id", id);
+                params.put("name", name);
+                params.put("idade",idade);
+                return params;
+            }
+        };
 
-            final String jaba = json.toString();
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    tela.setText(jaba);
-                }
-            });
-
-            conn.disconnect();
-        }catch (IOException e){
-            conn.disconnect();
-            e.printStackTrace();
-        }
-
-    return salvar;
+        MySingleton.getInstance(FinalCadastroActivity.this).addTorequestque(stringRequest);
     }
+
 
 }
