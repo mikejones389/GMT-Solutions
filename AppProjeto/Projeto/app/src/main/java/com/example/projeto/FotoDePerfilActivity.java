@@ -99,9 +99,10 @@ public class FotoDePerfilActivity extends AppCompatActivity {
     }
 
     private void goFinalCadastro(){
-        Intent intent = new Intent(this, FinalCadastroActivity.class);
+        Intent intent = new Intent(this, DataNascimentoActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("nmUsuario", valor);
+        intent.putExtra("imgProfile",imageView.getId());
         startActivity(intent);
     }
     private void goSplashScreen(){
