@@ -12,11 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".fragments.ConfigActivity"></activity>
+        <activity android:name=".MenuActvity"></activity>
+        <activity android:name=".fragments.ConfigActivity" />
         <activity android:name=".fragments.PerfilActivity" />
         <activity android:name=".fragments.HomeActivity" />
         <activity android:name=".FinalCadastroActivity" />
-        <activity android:name=".MenuActivity" />
         <activity android:name=".DataNascimentoActivity" />
         <activity android:name=".NomeUsuarioActivity">
             <intent-filter>

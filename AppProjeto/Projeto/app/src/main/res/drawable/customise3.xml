@@ -8,5 +8,8 @@
         android:width="1dp"
         android:color="@color/colorTema"
         />
+    <solid
+        android:color="@color/colorSecundary"
+        />
 
 </shape>

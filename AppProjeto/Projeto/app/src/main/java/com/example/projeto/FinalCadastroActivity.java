@@ -47,7 +47,7 @@ public class FinalCadastroActivity extends AppCompatActivity {
     }
 
     public void goMenuActivity(){
-        Intent intent = new Intent(this, MenuActivity.class);
+        Intent intent = new Intent(this, MenuActvity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 
