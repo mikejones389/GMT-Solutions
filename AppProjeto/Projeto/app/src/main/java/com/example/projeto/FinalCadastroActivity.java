@@ -41,10 +41,17 @@ public class FinalCadastroActivity extends AppCompatActivity {
     public void continuar(View view){
         if(!TextUtils.isEmpty(login.getText().toString()) && !TextUtils.isEmpty(senha.getText().toString())){
             salvarNoBanco();
+            goMenuActivity();
         }
 
     }
 
+    public void goMenuActivity(){
+        Intent intent = new Intent(this, MenuActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+
+    }
     public void logout(View view){
         LoginManager.getInstance().logOut();
         goSplashScreen();
