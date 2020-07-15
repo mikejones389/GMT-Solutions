@@ -2,7 +2,6 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -42,29 +41,39 @@ public class ListarLivroView extends JPanel implements ActionListener{
 		livros = (ArrayList<Livro>) ld.Listar();
 		for (int i = 0; i < livros.size(); i++) {
 			tableModel.addRow(livros.get(i));
-		}				
+		}		
+		
 		JPanel panelSuperior = new JPanel();		
 		JLabel titulo = new JLabel("Livros Cadastrados",SwingConstants.CENTER);
 		titulo.setFont(new Font("Arial", Font.BOLD, 40));
 		panelSuperior.add(titulo);
+		
 		JPanel panelCentral = new JPanel();
 		JLabel cdLivro = new JLabel("C�digo", SwingConstants.CENTER);
 		cdLivro.setFont(new Font("Arial", Font.BOLD, 30));
 		JLabel nmLivro = new JLabel("T�tulo", SwingConstants.HORIZONTAL);
 		nmLivro.setFont(new Font("Arial", Font.BOLD, 30));
+		
+		JPanel panelButton1 = new JPanel();
 		JButton btGerarArq = new JButton("Gerar Arquivo");
 		btGerarArq.addActionListener(this);
 		btGerarArq.setActionCommand("gerar arquivo");
+		//btGerarArq.setSize(100, 100);
+		panelButton1.add(btGerarArq);
+		
+		JPanel panelButton2 = new JPanel();
 		JButton btAtualizar = new JButton("Atualizar");
 		btAtualizar.addActionListener(this);
 		btAtualizar.setActionCommand("atualizar");
+		panelButton2.add(btAtualizar);
+		
 		JScrollPane scrollPane = new JScrollPane(jtLivros);
 		this.setLayout(new BorderLayout());
 		this.add(panelSuperior, BorderLayout.NORTH);
 		panelCentral.add(scrollPane,BorderLayout.NORTH);
 		this.add(panelCentral, BorderLayout.CENTER);
-		this.add(btAtualizar, BorderLayout.WEST);
-		this.add(btGerarArq, BorderLayout.EAST);
+		this.add(panelButton1, BorderLayout.WEST);
+		this.add(panelButton2, BorderLayout.EAST);
 	}
 	
 	public void gerarArq() {

@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
@@ -35,22 +36,29 @@ public class ListarCompraView extends JPanel implements ActionListener{
 		JPanel panelSuperior = new JPanel();
 		JPanel panelCentral = new JPanel();	
 		JLabel titulo = new JLabel("Histórico de Compras", SwingConstants.CENTER);
-		titulo.setFont(new Font("Arial", Font.BOLD, 40));
+		titulo.setFont(new Font("Arial", Font.BOLD, 22));
 		compras = new ArrayList<Compra>();
 		compras = (ArrayList<Compra>) cd.Listar();
 		for (int i = 0; i < compras.size(); i++) {
 			tableModel.addRow(compras.get(i));
 		}
 		JScrollPane scrollPane = new JScrollPane(jtCompras);
+		JPanel jpGerarArq = new JPanel();
 		JButton jbGerarArq = new JButton("Gerar Arquivo");
 		jbGerarArq.addActionListener(this);
 		jbGerarArq.setActionCommand("gerar arquivo");
+		jpGerarArq.add(jbGerarArq);
+		
 		this.setLayout(new BorderLayout());
+		panelSuperior.setLayout(new GridLayout(1,3));
+		JLabel vazio = new JLabel("");
+		panelSuperior.add(vazio);
 		panelSuperior.add(titulo);
+		panelSuperior.add(jpGerarArq);
 		panelCentral.add(scrollPane, BorderLayout.NORTH);
 		this.add(panelSuperior, BorderLayout.NORTH);
 		this.add(panelCentral, BorderLayout.CENTER);
-		this.add(jbGerarArq, BorderLayout.EAST);
+//		this.add(jpGerarArq, BorderLayout.EAST);
 	}
 	
 	public void gerarArq() {

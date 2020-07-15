@@ -152,7 +152,7 @@ public class CadastroFornecedorView extends JPanel{
 		ActionSalvar actionSalvar = new ActionSalvar();
 		JButton botaoSalvar = new JButton("Salvar");
 		botaoSalvar.addActionListener(actionSalvar);
-		JLabel cr = new JLabel("Copyright ©2019 Todos os direitos reservados | GMT Group");
+		JLabel cr = new JLabel("Copyright ©2020 Todos os direitos reservados | GMT Group");
 		cr.setFont(new Font("Arial", Font.BOLD, 12));
 		gbc.gridx=1;
 		gbc.gridy=12;

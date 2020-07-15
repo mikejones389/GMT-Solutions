@@ -2,7 +2,6 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -53,36 +52,52 @@ public class ListarFornecedorView extends JPanel implements ActionListener {
 		JLabel titulo = new JLabel("Fornecedores Cadastrados", SwingConstants.CENTER);
 		titulo.setFont(new Font("Arial", Font.BOLD, 40));
 		panelSuperior.add(titulo);
+		
 		JPanel panelCentral = new JPanel();
 		JLabel cdLivro = new JLabel("C�digo", SwingConstants.CENTER);
 		cdLivro.setFont(new Font("Arial", Font.BOLD, 30));
 		JLabel nmLivro = new JLabel("T�tulo", SwingConstants.HORIZONTAL);
 		nmLivro.setFont(new Font("Arial", Font.BOLD, 30));
+		
 		JScrollPane scrollPane = new JScrollPane(jtFornecedor);
+		
+		JPanel jpDesativar = new JPanel();
 		JButton jbDesativar = new JButton("Desativar");
 		jbDesativar.addActionListener(this);
 		jbDesativar.setActionCommand("deletar");
+		jpDesativar.add(jbDesativar);
+		
+		JPanel jpGerarArq = new JPanel();
 		JButton jbGerarArq = new JButton("Gerar Arquivo");
 		jbGerarArq.addActionListener(this);
 		jbGerarArq.setActionCommand("gerar arquivo");
+		jpGerarArq.add(jbGerarArq);
+		
+		JPanel jpAtualizar = new JPanel();
 		JButton jbAtualizar = new JButton("Atualizar");
 		jbAtualizar.addActionListener(this);
 		jbAtualizar.setActionCommand("atualizar");
+		jpAtualizar.add(jbAtualizar);
+		
+		JPanel jpAtivar = new JPanel();
 		JButton jbAtivar = new JButton("Ativar");
 		jbAtivar.addActionListener(this);
 		jbAtivar.setActionCommand("ativar");
+		jpAtivar.add(jbAtivar);
+		
 		JPanel panelWest = new JPanel();
 		JPanel panelEast = new JPanel();
-		panelWest.setLayout(new GridLayout(2,1));
-		panelEast.setLayout(new GridLayout(2,1));
+		panelWest.setLayout(new GridLayout(6,1));
+		panelEast.setLayout(new GridLayout(6,1));
+		
 		this.setLayout(new BorderLayout());
 		this.add(panelSuperior, BorderLayout.NORTH);
 		panelCentral.add(scrollPane, BorderLayout.NORTH);
 		this.add(panelCentral, BorderLayout.CENTER);
-		panelWest.add(jbDesativar);
-		panelWest.add(jbAtualizar);
-		panelEast.add(jbAtivar);
-		panelEast.add(jbGerarArq);
+		panelWest.add(jpDesativar);
+		panelWest.add(jpGerarArq);
+		panelEast.add(jpAtivar);
+		panelEast.add(jpAtualizar);
 		this.add(panelWest, BorderLayout.WEST);
 		this.add(panelEast, BorderLayout.EAST);
 	}
@@ -129,6 +144,7 @@ public class ListarFornecedorView extends JPanel implements ActionListener {
 		FornecedorDAO fd = new FornecedorDAO();
 		fd.ativar(cd);
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

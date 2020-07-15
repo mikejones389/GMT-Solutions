@@ -50,25 +50,34 @@ public class ListarClienteView extends JPanel implements ActionListener {
 		for (int i = 0; i < usuarios.size(); i++) {
 			tableModel.addRow(usuarios.get(i));
 		}
+		JPanel jpDesativar = new JPanel();
 		JButton jbDesativar = new JButton("Desativar");
 		jbDesativar.addActionListener(this);
 		jbDesativar.setActionCommand("deletar");
+		jpDesativar.add(jbDesativar);
+		
+		JPanel jpAtivar = new JPanel();
 		JButton jbAtivar = new JButton("Ativar");
 		jbAtivar.addActionListener(this);
 		jbAtivar.setActionCommand("ativar");
+		jpAtivar.add(jbAtivar);
+		
+		JPanel jpGerarArq = new JPanel();
 		JButton jbGerarArq = new JButton("Gerar Arquivo");
 		jbGerarArq.addActionListener(this);
 		jbGerarArq.setActionCommand("gerar arquivo");
+		jpGerarArq.add(jbGerarArq);
+		
 		panelCentral.add(scrollPane);
 		panelSuperior.add(titulo);
 		JPanel panelWest = new JPanel();
-		panelWest.setLayout(new GridLayout(2,1));
-		panelWest.add(jbAtivar);
-		panelWest.add(jbDesativar);
+		panelWest.setLayout(new GridLayout(6,1));
+		panelWest.add(jpAtivar);
+		panelWest.add(jpDesativar);
 		this.add(panelWest, BorderLayout.WEST);
 		this.add(panelSuperior, BorderLayout.NORTH);
 		this.add(panelCentral, BorderLayout.CENTER);
-		this.add(jbGerarArq, BorderLayout.EAST);
+		this.add(jpGerarArq, BorderLayout.EAST);
 	}
 
 	public void desativar() {
