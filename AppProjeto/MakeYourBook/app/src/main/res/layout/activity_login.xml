@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo"
+    tools:context=".view.LoginActivity">
+
+    <TextView
+        android:layout_width="314dp"
+        android:layout_height="231dp"
+        android:layout_marginTop="44dp"
+        android:fontFamily="cursive"
+        android:gravity="center"
+        android:text="Bem Vindo Ao Make Your Book"
+        android:textColor="@color/white"
+        android:textSize="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/rellay1"
+        android:layout_width="406dp"
+        android:layout_height="264dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <Button
+            android:id="@+id/bt_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="55dp"
+            android:layout_marginEnd="51dp"
+            android:layout_marginBottom="18dp"
+            android:background="@drawable/customise_bottons_tema"
+            android:elevation="100dp"
+            android:text="Fazer Login"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="55dp"
+            android:layout_marginRight="51dp" />
+
+        <Button
+            android:id="@+id/bt_cadastro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bt_login"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="53dp"
+            android:layout_marginEnd="53dp"
+            android:layout_marginBottom="22dp"
+            android:elevation="100dp"
+            android:background="@drawable/customise_bottons_white"
+            android:text="Criar uma Nova Conta"
+            android:textColor="@color/colorPrimary"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:onClick="newConta"/>
+
+    </RelativeLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutLogin"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/customise_box_login"
+        >
+        <EditText
+            android:id="@+id/edt_login2"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/edt_senha2"
+            android:background="@drawable/customise_caixa_txt"
+            />
+        <EditText
+            android:id="@+id/edt_senha2"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edt_login2"
+            app:layout_constraintBottom_toTopOf="@+id/bt_login2"
+            android:background="@drawable/customise_caixa_txt"
+            />
+        <TextView
+            android:id="@+id/texto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="Login Falhou"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edt_senha2"
+            />
+        <Button
+            android:id="@+id/bt_login2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bt_cancelar"
+            app:layout_constraintTop_toBottomOf="@+id/edt_senha2"
+            android:elevation="100dp"
+            android:background="@drawable/customise_bottons_black"
+            android:text="Fazer Login"
+            android:textColor="@color/white"
+            />
+        <Button
+            android:id="@+id/bt_cancelar"
+            android:layout_width="120dp"
+            android:layout_height="45dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bt_login2"
+            android:elevation="100dp"
+            android:background="@drawable/customise_bottons_white"
+            android:text="Cancelar"
+            android:textColor="@color/colorPrimary"
+            />
+        <ImageView
+            android:id="@+id/user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/edt_login2"
+            app:layout_constraintTop_toTopOf="@id/edt_login2"
+            app:layout_constraintBottom_toBottomOf="@id/edt_login2"
+            android:layout_marginEnd="8dp"
+            app:srcCompat="@drawable/ic_user"
+            android:layout_marginRight="8dp"
+            tools:ignore="VectorDrawableCompat" />
+
+        <ImageView
+            android:id="@+id/senha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/edt_senha2"
+            app:layout_constraintTop_toTopOf="@id/edt_senha2"
+            app:layout_constraintBottom_toBottomOf="@id/edt_senha2"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            tools:ignore="VectorDrawableCompat"
+            app:srcCompat="@drawable/ic_senha" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

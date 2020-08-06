@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    tools:context=".view.CadastroActivity">
+
+
+    <TextView
+        android:id="@+id/texto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Preencha os Campos abaixo :"
+        android:textSize="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
+    <EditText
+        android:id="@+id/edt_nm_usuario"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:background="@drawable/customise_caixa_txt"
+        android:gravity="center"
+        android:hint="Nome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/texto"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toTopOf="@id/edt_sexo"/>
+
+    <EditText
+        android:id="@+id/edt_sexo"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:background="@drawable/customise_caixa_txt"
+        android:gravity="center"
+        android:hint="Sexo"
+        app:layout_constraintTop_toBottomOf="@id/edt_nm_usuario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/edt_data_nascimento"/>
+
+    <EditText
+        android:id="@+id/edt_data_nascimento"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:background="@drawable/customise_caixa_txt"
+        android:gravity="center"
+        android:hint="Data de Nascimento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/edt_login"
+        app:layout_constraintTop_toBottomOf="@id/edt_sexo"
+        />
+
+    <EditText
+        android:id="@+id/edt_login"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:background="@drawable/customise_caixa_txt"
+        android:gravity="center"
+        android:hint="Login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edt_data_nascimento"
+        app:layout_constraintBottom_toTopOf="@id/edt_senha"
+        />
+
+    <EditText
+        android:id="@+id/edt_senha"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:background="@drawable/customise_caixa_txt"
+        android:gravity="center"
+        android:hint="Senha"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edt_login"
+        app:layout_constraintBottom_toTopOf="@+id/bt_continuar"
+        />
+
+    <Button
+        android:id="@+id/bt_continuar"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:text="Continuar"
+        android:textColor="@color/white"
+        android:background="@drawable/customise_bottons_tema"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edt_senha"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
