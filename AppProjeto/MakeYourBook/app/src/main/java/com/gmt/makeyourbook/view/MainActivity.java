@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private int cd_usuario;
     private TextView resultado;
     private String nm_usuario;
+    private String sexo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,15 +46,13 @@ public class MainActivity extends AppCompatActivity {
         ConsultarAsyncTask task = new ConsultarAsyncTask("consultar", cd_usuario);
         task.execute();
 
-
-        int pausa = 0;
     }
 
     public class ConsultarAsyncTask
             extends
             AsyncTask<String, String, String> {
 
-        String api_token, query, api_nm_usuario, api_login, api_senha;
+        String api_token, query;
         int api_cd_usuario;
 
         HttpURLConnection conn;
@@ -72,9 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
             this.api_token = token;
             this.api_cd_usuario = cd_usuario;
-//            this.api_nm_usuario = nm_usuario;
-//            this.api_login = login;
-//            this.api_senha = senha;
             this.builder = new Uri.Builder();
             builder.appendQueryParameter("api_token", api_token);
             builder.appendQueryParameter("api_cd_usuario",String.valueOf(cd_usuario));
@@ -216,8 +212,10 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("APIValidarLogin", "onPostExecute() --> Login bem Sucedido"+jsonObject.getString("ID"));
                     nm_usuario = jsonObject.getString("nm_usuario");
                     cd_usuario = Integer.parseInt(jsonObject.getString("ID"));
+                    sexo = jsonObject.getString("SEXO");
                     Log.i("APIValidarLogin", "onPostExecute() --> ID Login"+cd_usuario);
                     Log.i("APIValidarLogin", "onPostExecute() --> ID NOME"+nm_usuario);
+                    Log.i("APIValidarLogin", "onPostExecute() --> ID SEXO"+sexo);
                     Toast.makeText(getApplicationContext(), "Login bem Sucedido", Toast.LENGTH_LONG);
                 }
                 else{
@@ -236,10 +234,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setInformation(){
-        resultado.setText("ID: "+cd_usuario+"nome :"+ nm_usuario);
+        resultado.setText("ID: "+cd_usuario+" Nome :"+ nm_usuario+" Sexo: "+sexo);
     }
 
     public void logout (View view){
+        SharedPreferences preferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("ja_fez_login", false);
+        editor.commit();
         Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
         finish();

@@ -8,9 +8,13 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.FocusFinder;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gmt.makeyourbook.R;
@@ -27,10 +31,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class CadastroActivity extends AppCompatActivity {
+public class CadastroActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private EditText editNome;
-    private EditText editSexo;
+    private Spinner spinner_sexo;
     private EditText editDtNasc;
     private EditText editLogin;
     private EditText editSenha;
@@ -41,8 +45,10 @@ public class CadastroActivity extends AppCompatActivity {
     private String login;
     private String senha;
     private Button btContinuar;
-    private String token;
+    private TextView texto, txt_voltar;
     private int validar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +56,8 @@ public class CadastroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
         editNome = (EditText) findViewById(R.id.edt_nm_usuario);
 
-        editSexo = (EditText) findViewById(R.id.edt_sexo);
+        spinner_sexo = (Spinner) findViewById(R.id.spinner_sexo);
+        spinner_sexo.setOnItemSelectedListener(this);
 
         editDtNasc = (EditText) findViewById(R.id.edt_data_nascimento);
 
@@ -60,19 +67,74 @@ public class CadastroActivity extends AppCompatActivity {
 
         btContinuar = (Button) findViewById(R.id.bt_continuar);
 
+        texto = (TextView) findViewById(R.id.texto);
+
+        txt_voltar = (TextView) findViewById(R.id.txt_voltar);
+
+        txt_voltar.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(i);
+                finish();
+            }
+
+        });
+
+
+
         btContinuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 nm_usuario = editNome.getText().toString();
-                sexo = editSexo.getText().toString();
                 dtNasc = editDtNasc.getText().toString();
                 login = editLogin.getText().toString();
                 senha = editSenha.getText().toString();
-                CadastrarAsyncTask task = new CadastrarAsyncTask("cadastrar",nm_usuario, sexo, dtNasc, login, senha);
-                task.execute();
-                goMenuPrincipal();
+                texto.setVisibility(View.GONE);
+                if(nm_usuario.equals("")){
+                    editNome.setHint("Campo Obrigatório");
+                    editNome.requestFocus();
+                }
+                else if(sexo.equals("Selecione")){
+                    texto.setVisibility(View.VISIBLE);
+                    spinner_sexo.requestFocus();
+                }
+
+                else if(dtNasc.equals("")){
+
+                    editDtNasc.requestFocus();
+                }
+                else if(login.equals("")){
+                    editLogin.setHint("Campo Obrigatório");
+                    editLogin.requestFocus();
+                }
+                else if(senha.equals("")){
+                    editSenha.setHint("Campo Obrigatório");
+                    editSenha.requestFocus();
+                }
+                else if(senha.length() < 5){
+                    editSenha.setText("");
+                    editSenha.setHint("Mínimo 5 caractéres");
+                    editSenha.requestFocus();
+                }
+                else{
+                    CadastrarAsyncTask task = new CadastrarAsyncTask("cadastrar", nm_usuario, sexo, dtNasc, login, senha);
+                    task.execute();
+                    goMenuPrincipal();
+                }
             }
         });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        sexo = adapterView.getSelectedItem().toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 
 
@@ -115,14 +177,14 @@ public class CadastroActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute(){
 
-            Log.i("APIValidarLogin","onPreExecute()");
+            Log.i("APICadastrar","onPreExecute()");
 
         }
 
         @Override
         protected String doInBackground(String... strings) {
 
-            Log.i("APIValidarLogin","doInBackground()");
+            Log.i("APICadastrar","doInBackground()");
 
             // Gerar o conteúdo para a URL
 
@@ -132,11 +194,11 @@ public class CadastroActivity extends AppCompatActivity {
 
             }catch (MalformedURLException e){
 
-                Log.i("APIValidarLogin","doInBackground() --> "+e.getMessage());
+                Log.i("APICadastrar","doInBackground() --> "+e.getMessage());
 
             }catch (Exception e){
 
-                Log.i("APIValidarLogin","doInBackground() --> "+e.getMessage());
+                Log.i("APICadastrar","doInBackground() --> "+e.getMessage());
             }
 
             // Gerar uma requisição HTTP - POST - Result será um ArrayJson
@@ -158,7 +220,7 @@ public class CadastroActivity extends AppCompatActivity {
 
             }catch (Exception e){
 
-                Log.i("APIValidarLogin","doInBackground() --> "+e.getMessage());
+                Log.i("APICadastrar","doInBackground() --> "+e.getMessage());
 
             }
 
@@ -185,7 +247,7 @@ public class CadastroActivity extends AppCompatActivity {
 
             }catch (Exception e){
 
-                Log.i("APIValidarLogin","doInBackground() --> "+e.getMessage());
+                Log.i("APICadastrar","doInBackground() --> "+e.getMessage());
 
 
             }
@@ -221,7 +283,7 @@ public class CadastroActivity extends AppCompatActivity {
 
             }catch (Exception e){
 
-                Log.i("APIValidarLogin","doInBackground() --> "+e.getMessage());
+                Log.i("APICadastrar","doInBackground() --> "+e.getMessage());
             }
             finally {
                 conn.disconnect();
@@ -236,28 +298,28 @@ public class CadastroActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result){
 
-            Log.i("APIValidarLogin","onPostExecute()--> Result: "+result);
+            Log.i("APICadastrar","onPostExecute()--> Result: "+result);
 
             try{
 
                 JSONObject jsonObject = new JSONObject(result);
 
                 if(jsonObject.getBoolean("Login")){
-                    Log.i("APIValidarLogin", "onPostExecute() --> Login bem Sucedido"+jsonObject.getString("ID"));
+                    Log.i("APICadastrar", "onPostExecute() --> Login bem Sucedido"+jsonObject.getString("ID"));
                     id = jsonObject.getInt("ID");
-                    Log.i("APIValidarLogin", "onPostExecute() --> ID Login"+id);
+                    Log.i("APICadastrar", "onPostExecute() --> ID Login"+id);
                     Toast.makeText(getApplicationContext(), "Login bem Sucedido", Toast.LENGTH_LONG);
                     validar = 1;
                 }
                 else{
-                    Log.i("APIValidarLogin","onPostExecute()--> Login Falhou");
-                    Log.i("APIValidarLogin","onPostExecute()--> : "+jsonObject.getString("SQL"));
+                    Log.i("APICadastrar","onPostExecute()--> Login Falhou");
+                    Log.i("APICadastrar","onPostExecute()--> : "+jsonObject.getString("SQL"));
                     Toast.makeText(getApplicationContext(), "Login Falhou", Toast.LENGTH_LONG);
                     validar = 0;
                 }
 
             }catch (Exception e){
-                Log.i("APIValidarLogin","onPostExecute()--> : "+e.getMessage());
+                Log.i("APICadastrar","onPostExecute()--> : "+e.getMessage());
                 Toast.makeText(getApplicationContext(), "Login Falhou", Toast.LENGTH_LONG);
             }
             goMenuPrincipal();
@@ -277,6 +339,7 @@ public class CadastroActivity extends AppCompatActivity {
 
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
+            finish();
 
         }
     }

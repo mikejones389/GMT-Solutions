@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.Toast;
 
 import com.gmt.makeyourbook.R;
 
@@ -21,7 +22,9 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 //colocar a condição para o login
                 SharedPreferences preferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
-                if(preferences.contains("ja_fez_login")){
+                boolean validacao = preferences.getBoolean("ja_fez_login", false);
+                Toast.makeText(getApplicationContext(), "Validação: "+validacao, Toast.LENGTH_LONG).show();
+                if(validacao){
                     Intent i = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(i);
                     finish();

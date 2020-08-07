@@ -273,6 +273,7 @@ public class LoginActivity extends AppCompatActivity {
                     texto.setVisibility(View.VISIBLE);
                     edtLogin.setText("");
                     edtSenha.setText("");
+                    edtLogin.requestFocus();
                     validar = 0;
                 }
 
