@@ -1,6 +1,9 @@
 package com.gmt.makeyourbook.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,11 +11,18 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gmt.makeyourbook.R;
+import com.gmt.makeyourbook.view.fragment.MenuFragment;
+import com.gmt.makeyourbook.view.fragment.ProfileFragment;
+import com.gmt.makeyourbook.view.fragment.SettingsFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import org.json.JSONObject;
 
@@ -43,8 +53,56 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
         cd_usuario = preferences.getInt("cd_usuario", 0);
 
+        configuraBottomNavigationView();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.viewPager, new MenuFragment()).commit();
+
+
         ConsultarAsyncTask task = new ConsultarAsyncTask("consultar", cd_usuario);
         task.execute();
+
+    }
+
+    private void configuraBottomNavigationView(){
+        //faz configurações de animação do bottomNavigation
+        BottomNavigationViewEx bottomNavigationViewEx = findViewById(R.id.bottom_navigation);
+        bottomNavigationViewEx.enableAnimation(true);
+        bottomNavigationViewEx.enableShiftingMode(true);
+        bottomNavigationViewEx.enableItemShiftingMode(false);
+
+        //Habilitar Navegação
+        habilitarNavegacao(bottomNavigationViewEx);
+        Menu menu = bottomNavigationViewEx.getMenu();
+        MenuItem menuItem = menu.getItem(1);
+        menuItem.setChecked(true);
+
+    }
+
+    private void habilitarNavegacao(BottomNavigationViewEx viewEx){
+
+        viewEx.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                switch (menuItem.getItemId()){
+                    case R.id.ic_profile:
+                        fragmentTransaction.replace(R.id.viewPager, new ProfileFragment()).commit();
+                        return true;
+                    case R.id.ic_home:
+                        fragmentTransaction.replace(R.id.viewPager, new MenuFragment()).commit();
+                        return true;
+                    case R.id.ic_settings:
+                        fragmentTransaction.replace(R.id.viewPager, new SettingsFragment()).commit();
+                        return true;
+                }
+
+                return false;
+            }
+        });
 
     }
 
