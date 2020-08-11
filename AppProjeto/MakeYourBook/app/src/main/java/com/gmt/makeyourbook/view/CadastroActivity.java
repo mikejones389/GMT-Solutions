@@ -92,6 +92,7 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
                 login = editLogin.getText().toString();
                 senha = editSenha.getText().toString();
                 texto.setVisibility(View.GONE);
+
                 if(nm_usuario.equals("")){
                     editNome.setHint("Campo Obrigatório");
                     editNome.requestFocus();
@@ -100,9 +101,7 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
                     texto.setVisibility(View.VISIBLE);
                     spinner_sexo.requestFocus();
                 }
-
                 else if(dtNasc.equals("")){
-
                     editDtNasc.requestFocus();
                 }
                 else if(login.equals("")){
@@ -304,11 +303,11 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
 
                 JSONObject jsonObject = new JSONObject(result);
 
-                if(jsonObject.getBoolean("Login")){
-                    Log.i("APICadastrar", "onPostExecute() --> Login bem Sucedido"+jsonObject.getString("ID"));
+                if(jsonObject.getBoolean("Cadastro")){
+                    Log.i("APICadastrar", "onPostExecute() --> Cadastro bem Sucedido"+jsonObject.getString("ID"));
                     id = jsonObject.getInt("ID");
                     Log.i("APICadastrar", "onPostExecute() --> ID Login"+id);
-                    Toast.makeText(getApplicationContext(), "Login bem Sucedido", Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(), "Cadastro bem Sucedido", Toast.LENGTH_LONG);
                     validar = 1;
                 }
                 else{

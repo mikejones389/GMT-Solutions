@@ -1,10 +1,12 @@
 package com.gmt.makeyourbook.view;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView resultado;
     private String nm_usuario;
     private String sexo;
+    private AlertDialog alerta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,14 +142,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute(){
 
-            Log.i("APIValidarLogin","onPreExecute()");
+            Log.i("APIConsultar","onPreExecute()");
 
         }
 
         @Override
         protected String doInBackground(String... strings) {
 
-            Log.i("APIValidarLogin","doInBackground()");
+            Log.i("APIConsultar","doInBackground()");
 
             // Gerar o conteúdo para a URL
 
@@ -156,11 +159,11 @@ public class MainActivity extends AppCompatActivity {
 
             }catch (MalformedURLException e){
 
-                Log.i("APIValidarLogin","doInBackground() --> "+e.getMessage());
+                Log.i("APIConsultar","doInBackground() --> "+e.getMessage());
 
             }catch (Exception e){
 
-                Log.i("APIValidarLogin","doInBackground() --> "+e.getMessage());
+                Log.i("APIConsultar","doInBackground() --> "+e.getMessage());
             }
 
             // Gerar uma requisição HTTP - POST - Result será um ArrayJson
@@ -182,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
 
             }catch (Exception e){
 
-                Log.i("APIValidarLogin","doInBackground() --> "+e.getMessage());
+                Log.i("APIConsultar","doInBackground() --> "+e.getMessage());
 
             }
 
@@ -209,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
 
             }catch (Exception e){
 
-                Log.i("APIValidarLogin","doInBackground() --> "+e.getMessage());
+                Log.i("APIConsultar","doInBackground() --> "+e.getMessage());
 
 
             }
@@ -245,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
 
             }catch (Exception e){
 
-                Log.i("APIValidarLogin","doInBackground() --> "+e.getMessage());
+                Log.i("APIConsultar","doInBackground() --> "+e.getMessage());
             }
             finally {
                 conn.disconnect();
@@ -260,33 +263,33 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result){
 
-            Log.i("APIValidarLogin","onPostExecute()--> Result: "+result);
+            Log.i("APIConsultar","onPostExecute()--> Result: "+result);
 
             try{
 
                 JSONObject jsonObject = new JSONObject(result);
 
                 if(jsonObject.getBoolean("RESULTADO")){
-                    Log.i("APIValidarLogin", "onPostExecute() --> Login bem Sucedido"+jsonObject.getString("ID"));
+                    Log.i("APIConsultar", "onPostExecute() --> Login bem Sucedido"+jsonObject.getString("ID"));
                     nm_usuario = jsonObject.getString("nm_usuario");
                     cd_usuario = Integer.parseInt(jsonObject.getString("ID"));
                     sexo = jsonObject.getString("SEXO");
-                    Log.i("APIValidarLogin", "onPostExecute() --> ID Login"+cd_usuario);
-                    Log.i("APIValidarLogin", "onPostExecute() --> ID NOME"+nm_usuario);
-                    Log.i("APIValidarLogin", "onPostExecute() --> ID SEXO"+sexo);
+                    Log.i("APIConsultar", "onPostExecute() --> ID Login"+cd_usuario);
+                    Log.i("APIConsultar", "onPostExecute() --> ID NOME"+nm_usuario);
+                    Log.i("APIConsultar", "onPostExecute() --> ID SEXO"+sexo);
                     Toast.makeText(getApplicationContext(), "Login bem Sucedido", Toast.LENGTH_LONG);
                 }
                 else{
-                    Log.i("APIValidarLogin","onPostExecute()--> Login Falhou");
-                    Log.i("APIValidarLogin","onPostExecute()--> : "+jsonObject.getString("SQL"));
+                    Log.i("APIConsultar","onPostExecute()--> Login Falhou");
+                    Log.i("APIConsultar","onPostExecute()--> : "+jsonObject.getString("SQL"));
                     Toast.makeText(getApplicationContext(), "Login Falhou", Toast.LENGTH_LONG);
                 }
 
             }catch (Exception e){
-                Log.i("APIValidarLogin","onPostExecute()--> : "+e.getMessage());
+                Log.i("APIConsultar","onPostExecute()--> : "+e.getMessage());
                 Toast.makeText(getApplicationContext(), "Login Falhou", Toast.LENGTH_LONG);
             }
-            setInformation();
+            //setInformation();
 
         }
     }
@@ -296,13 +299,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logout (View view){
-        SharedPreferences preferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("ja_fez_login", false);
-        editor.commit();
-        Intent i = new Intent(this, LoginActivity.class);
-        startActivity(i);
-        finish();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmação de Logout");
+        builder.setMessage("Realizar Logout?");
+        builder.setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                SharedPreferences preferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("ja_fez_login", false);
+                editor.commit();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(), "Cancelado", Toast.LENGTH_LONG);
+            }
+        });
+        alerta = builder.create();
+        alerta.show();
+
 
     }
 

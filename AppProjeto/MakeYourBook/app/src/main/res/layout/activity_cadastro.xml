@@ -93,6 +93,7 @@
         android:background="@drawable/customise_caixa_txt"
         android:gravity="center"
         android:hint="Senha"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edt_login"
