@@ -1,29 +1,31 @@
 package com.gmt.makeyourbook.view.fragment;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gmt.makeyourbook.R;
-import com.gmt.makeyourbook.view.MainActivity;
-import com.gmt.makeyourbook.view.SplashActivity;
+import com.gmt.makeyourbook.adapter.AdapterProjetos;
+import com.gmt.makeyourbook.model.Projeto;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -35,6 +37,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -51,8 +55,16 @@ public class ProfileFragment extends Fragment {
     private String sexo;
     private ProgressBar progressBar;
 
+    private RecyclerView recyclerView;
+    private List<Projeto> listaProjetos = new ArrayList<>();
+
     public ProfileFragment() {
         // Required empty public constructor
+        ConsultarAsyncTask task = new ConsultarAsyncTask("consultar", cd_usuario);
+        task.execute();
+        ListarProjetosAsyncTask task2 = new ListarProjetosAsyncTask("listarProjetos", cd_usuario);
+        task2.execute();
+
     }
 
     @Override
@@ -64,8 +76,6 @@ public class ProfileFragment extends Fragment {
         nmUsuario = (TextView) view.findViewById(R.id.nmUsuario);
         cdUsuario = (TextView) view.findViewById(R.id.cdUsuario);
         progressBar = (ProgressBar) view.findViewById(R.id.progress);
-
-
         imgPerfil = (ImageView) view.findViewById(R.id.imagePerfil);
         trocarAvatar = new Dialog(getActivity());
 
@@ -103,9 +113,216 @@ public class ProfileFragment extends Fragment {
         ConsultarAsyncTask task = new ConsultarAsyncTask("consultar", cd_usuario);
         task.execute();
 
+        recyclerView = view.findViewById(R.id.listaProjetos);
 
+        //Listagem de Usuario
+
+
+        //Configurar adapter
+        AdapterProjetos adapterProjetos = new AdapterProjetos( listaProjetos );
+
+        //Configurar RecyclerView
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.addItemDecoration( new DividerItemDecoration(getActivity(), LinearLayout.VERTICAL));
+        recyclerView.setAdapter(adapterProjetos);
+
+        progressBar.setVisibility(View.VISIBLE);
+        ListarProjetosAsyncTask task2 = new ListarProjetosAsyncTask("listarProjetos", cd_usuario);
+        task2.execute();
         return view;
     }
+
+    public class ListarProjetosAsyncTask extends AsyncTask<String, String, String>{
+
+        String api_token, query;
+        int api_cd_usuario;
+
+        HttpURLConnection conn;
+        URL url = null;
+        Uri.Builder builder;
+
+        final String URL_WEB_SERVICES = "http://gmtmarketplace.com.br/api/api.php";
+
+        final int READ_TIMEOUT = 10000; // MILISSEGUNDOS
+        final int CONNECTION_TIMEOUT = 30000;
+
+        int response_code;
+
+        public ListarProjetosAsyncTask(String token, int cd_usuario){
+
+            this.api_token = token;
+            this.api_cd_usuario = cd_usuario;
+            this.builder = new Uri.Builder();
+            builder.appendQueryParameter("api_token", api_token);
+            builder.appendQueryParameter("api_cd_usuario",String.valueOf(cd_usuario));
+
+        }
+
+        @Override
+        protected void onPreExecute(){
+
+            Log.i("APIListarProjetos","onPreExecute()");
+
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            Log.i("APIListarProjetos","doInBackground()");
+
+            // Gerar o conteúdo para a URL
+
+            try {
+
+                url = new URL(URL_WEB_SERVICES);
+
+            }catch (MalformedURLException e){
+
+                Log.i("APIListarProjetos","doInBackground() --> "+e.getMessage());
+
+            }catch (Exception e){
+
+                Log.i("APIListarProjetos","doInBackground() --> "+e.getMessage());
+            }
+
+            // Gerar uma requisição HTTP - POST - Result será um ArrayJson
+
+            // conn
+
+            try {
+
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setReadTimeout(READ_TIMEOUT);
+                conn.setConnectTimeout(CONNECTION_TIMEOUT);
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("charset","utf-8");
+
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                conn.connect();
+
+            }catch (Exception e){
+
+                Log.i("APIListarProjetos","doInBackground() --> "+e.getMessage());
+
+            }
+
+            // Adicionar o TOKEN e/ou outros parâmetros como por exemplo
+            // um objeto a ser incluido, deletado ou alterado.
+            // CRUD completo
+
+            try {
+
+                query = builder.build().getEncodedQuery();
+
+                OutputStream stream = conn.getOutputStream();
+
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(stream,"utf-8"));
+
+                writer.write(query);
+                writer.flush();
+                writer.close();
+                stream.close();
+
+                conn.connect();
+
+
+            }catch (Exception e){
+
+                Log.i("APIListarProjetos","doInBackground() --> "+e.getMessage());
+
+
+            }
+
+            // receber o response - arrayJson
+            // http - código do response | 200 | 404 | 503
+
+            try {
+
+                response_code = conn.getResponseCode();
+
+                if(response_code == HttpURLConnection.HTTP_OK){
+
+                    InputStream input = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(
+                            new InputStreamReader(input)
+                    );
+
+                    StringBuilder result = new StringBuilder();
+
+                    String linha = null;
+
+                    while((linha = reader.readLine()) != null){
+                        result.append(linha);
+                    }
+
+                    return result.toString();
+
+                }
+                else{
+                    return "HTTP ERRO:"+response_code;
+                }
+
+            }catch (Exception e){
+
+                Log.i("APIListarProjetos","doInBackground() --> "+e.getMessage());
+            }
+            finally {
+                conn.disconnect();
+            }
+
+
+            return "Processamento concluído...";
+        }
+
+        @Override
+        protected void onPostExecute(String result){
+
+            Log.i("APIListarProjetos","onPostExecute()--> Result: "+result);
+
+            try{
+
+                JSONObject jsonObject = new JSONObject(result);
+
+                if(jsonObject.getBoolean("RESULTADO")){
+
+                    int length = jsonObject.getInt("length");
+                    Projeto projeto;
+                    for(int i=1; i<=length; i++){
+//                        if(i==0){
+//                            projeto = new Projeto(jsonObject.getString("nm_usuario"), jsonObject.getInt("cd_usuario"), jsonObject.getString("titulo"),
+//                                    jsonObject.getString("genero"),jsonObject.getString("historia"));
+//                        }
+//                        else {
+                            projeto = new Projeto(jsonObject.getString("nm_usuario" + i), jsonObject.getInt("cd_usuario" + i), jsonObject.getString("titulo" + i),
+                                    jsonObject.getString("genero" + i), jsonObject.getString("historia" + i));
+                            listaProjetos.add(projeto);
+
+                        //}
+
+                    }
+
+
+                }
+                else{
+                    Log.i("APIListar","onPostExecute()--> Consulta Falhou");
+                    Log.i("APIConsultar","onPostExecute()--> : "+jsonObject.getString("SQL"));
+                    //Toast.makeText(getApplicationContext(), "Login Falhou", Toast.LENGTH_LONG);
+                }
+
+            }catch (Exception e){
+                Log.i("APIListarMeusProjetos","onPostExecute()--> : "+e.getMessage());
+                //Toast.makeText(getApplicationContext(), "Login Falhou", Toast.LENGTH_LONG);
+            }
+            setInformation();
+
+        }
+    }
+
 
     public class ConsultarAsyncTask
             extends
@@ -291,6 +508,7 @@ public class ProfileFragment extends Fragment {
 
         }
     }
+
     public void setInformation(){
         nmUsuario.setText(nm_usuario);
         cdUsuario.setText("ID: "+cd_usuario);

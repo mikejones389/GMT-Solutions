@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragment.ProfileFragment">
 
     <ImageView
         android:id="@+id/imagePerfil"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/avatar1"
+        app:layout_constraintEnd_toEndOf="@+id/guideline1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -19,14 +21,13 @@
         android:id="@+id/nmUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:text=""
         android:textSize="30dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imagePerfil"
-        android:layout_marginStart="10dp"
-        app:layout_constraintTop_toTopOf="@+id/imagePerfil"
         app:layout_constraintBottom_toBottomOf="@+id/imagePerfil"
-        />
+        app:layout_constraintStart_toEndOf="@+id/imagePerfil"
+        app:layout_constraintTop_toTopOf="@+id/imagePerfil" />
 
     <TextView
         android:id="@+id/cdUsuario"
@@ -41,9 +42,10 @@
         android:id="@+id/ic_sair"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/ic_sair"
         android:onClick="logout"
+        android:src="@drawable/ic_sair"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="OnClick" />
 
@@ -52,10 +54,56 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cdUsuario"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cdUsuario" />
+
+    <ImageView
+        android:id="@+id/bt_plus"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:elevation="100dp"
+        android:onClick="newProjeto"
+        android:src="@drawable/ic_bt_plus"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="OnClick" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Meus Projetos"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagePerfil" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listaProjetos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/titulo"
+        app:layout_constraintTop_toBottomOf="@+id/titulo"
+        tools:listitem="@layout/item_recyclerview" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

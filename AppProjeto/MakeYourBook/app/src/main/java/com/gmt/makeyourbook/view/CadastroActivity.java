@@ -47,6 +47,8 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
     private Button btContinuar;
     private TextView texto, txt_voltar;
     private int validar;
+    private String error;
+    private TextView erroLogin;
 
 
 
@@ -83,15 +85,18 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
         });
 
 
+        erroLogin = (TextView) findViewById(R.id.txtErroLogin);
 
         btContinuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                texto.setVisibility(View.GONE);
                 nm_usuario = editNome.getText().toString();
                 dtNasc = editDtNasc.getText().toString();
                 login = editLogin.getText().toString();
                 senha = editSenha.getText().toString();
                 texto.setVisibility(View.GONE);
+                erroLogin.setVisibility(View.GONE);
 
                 if(nm_usuario.equals("")){
                     editNome.setHint("Campo Obrigatório");
@@ -313,6 +318,16 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
                 else{
                     Log.i("APICadastrar","onPostExecute()--> Login Falhou");
                     Log.i("APICadastrar","onPostExecute()--> : "+jsonObject.getString("SQL"));
+                    Log.i("APICadastrar","onPostExecute()--> : "+jsonObject.getString("ERRO"));
+                    error = jsonObject.getString("ERRO");
+
+                    if(error.equals("Duplicate entry '"+login+"' for key 'unicoLogin'")){
+                        erroLogin.setVisibility(View.VISIBLE);
+                        editLogin.requestFocus();
+                    }
+                    else{
+
+                    }
                     Toast.makeText(getApplicationContext(), "Login Falhou", Toast.LENGTH_LONG);
                     validar = 0;
                 }
@@ -321,8 +336,8 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
                 Log.i("APICadastrar","onPostExecute()--> : "+e.getMessage());
                 Toast.makeText(getApplicationContext(), "Login Falhou", Toast.LENGTH_LONG);
             }
-            goMenuPrincipal();
-            Log.i("VALIDAÇÂO", "Validar --> "+validar);
+//            goMenuPrincipal();
+//            Log.i("VALIDAÇÂO", "Validar --> "+validar);
         }
     }
 

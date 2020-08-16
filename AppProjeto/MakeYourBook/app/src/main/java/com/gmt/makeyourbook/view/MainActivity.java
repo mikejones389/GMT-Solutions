@@ -326,4 +326,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void newProjeto(View view){
+        Intent intent = new Intent(getApplicationContext(), NovoProjetoActivity.class);
+        startActivity(intent);
+    }
 }

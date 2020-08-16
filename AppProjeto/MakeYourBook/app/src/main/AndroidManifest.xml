@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gmt.makeyourbook">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,12 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        >
-        <activity android:name="com.gmt.makeyourbook.view.CadastroActivity"></activity>
-        <activity android:name="com.gmt.makeyourbook.view.LoginActivity" />
+        android:usesCleartextTraffic="true">
+        <activity android:name=".view.NovoProjetoActivity"></activity>
+        <activity android:name=".view.CadastroActivity" />
+        <activity android:name=".view.LoginActivity" />
         <activity
-            android:name="com.gmt.makeyourbook.view.SplashActivity"
+            android:name=".view.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.gmt.makeyourbook.view.MainActivity">
+        <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

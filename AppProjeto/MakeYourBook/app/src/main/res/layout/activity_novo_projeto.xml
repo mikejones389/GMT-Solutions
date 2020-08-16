@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    tools:context=".view.NovoProjetoActivity">
+
+    <EditText
+        android:id="@+id/tituloProjeto"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/customise_caixa_txt"
+        android:hint="Título do Projeto"
+        android:paddingStart="20dp"
+        android:textSize="28dp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_genero"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <Spinner
+        android:id="@+id/spinner_genero"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/customise_caixa_txt"
+        android:entries="@array/genero_list"
+        android:paddingStart="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtHistoria"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tituloProjeto" />
+
+    <EditText
+        android:id="@+id/txtHistoria"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/customise_caixa_txt"
+        android:hint="Escreva sua História aqui"
+        android:inputType="textMultiLine"
+        android:padding="30dp"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btSalvar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_genero" />
+
+    <Spinner
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:entries="@array/valorTotal_list"
+        android:background="@drawable/customise_caixa_txt"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtHistoria"
+        />
+
+    <Button
+        android:id="@+id/btSalvar"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/customise_bottons_tema"
+        android:text="Salvar"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:onClick="salvarProjeto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btCancelar"
+        app:layout_constraintTop_toBottomOf="@id/txtHistoria"
+        />
+
+    <Button
+        android:id="@+id/btCancelar"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/customise_bottons_white"
+        android:text="Cancelar"
+        android:textSize="16dp"
+        android:onClick="cancelar"
+        app:layout_constraintTop_toBottomOf="@+id/txtHistoria"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btSalvar"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

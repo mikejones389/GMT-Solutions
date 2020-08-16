@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragment.MenuFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -15,4 +17,24 @@
         android:gravity="center"
         />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/bt_plus"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:elevation="100dp"
+        android:onClick="newProjeto"
+        android:src="@drawable/ic_bt_plus"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="OnClick" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
