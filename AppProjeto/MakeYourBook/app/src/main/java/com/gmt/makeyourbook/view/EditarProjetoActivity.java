@@ -2,8 +2,7 @@ package com.gmt.makeyourbook.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,12 +11,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.gmt.makeyourbook.R;
-import com.gmt.makeyourbook.view.fragment.ProfileFragment;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -28,30 +27,38 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.xml.parsers.SAXParser;
+public class EditarProjetoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-public class NovoProjetoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    private int cd_projeto;
+    private String titulo, historia, genero;
 
-    private EditText edtTitulo;
-    private Spinner spinner_genero;
-    private EditText txtHistoria;
-
-    private String genero, titulo, historia;
-    private int cd_usuario, cd_projeto;
+    private EditText edtTitulo, edtHistoria;
+    private Spinner spinnerGenero;
+    String[] generos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_novo_projeto);
+        setContentView(R.layout.activity_editar_projeto);
+
+        Bundle extras = getIntent().getExtras();
+        cd_projeto = Integer.parseInt(extras.getString("cd_projeto"));
+        Log.d("ID", "cd_projeto = "+ cd_projeto);
 
         edtTitulo = (EditText) findViewById(R.id.tituloProjeto);
-        txtHistoria = (EditText) findViewById(R.id.txtHistoria);
-        spinner_genero = (Spinner) findViewById(R.id.spinner_genero);
-        spinner_genero.setOnItemSelectedListener(this);
 
-        SharedPreferences preferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
-        cd_usuario = preferences.getInt("cd_usuario", 0);
+        edtHistoria = (EditText) findViewById(R.id.txtHistoria);
+
+        spinnerGenero = (Spinner) findViewById(R.id.spinner_genero);
+        spinnerGenero.setOnItemSelectedListener(this);
+
+        generos = getResources().getStringArray(R.array.genero_list);
+
+        ConsultarAsyncTask task = new ConsultarAsyncTask("consultarProjeto", cd_projeto);
+        task.execute();
 
     }
 
@@ -65,49 +72,12 @@ public class NovoProjetoActivity extends AppCompatActivity implements AdapterVie
 
     }
 
-    public void salvarProjeto(View view){
-        titulo = edtTitulo.getText().toString();
-        historia = txtHistoria.getText().toString();
-
-        if(titulo.equals("")){
-            edtTitulo.requestFocus();
-        }
-        else if(genero.equals("Selecione")){
-            spinner_genero.requestFocus();
-        }
-        else if(historia.equals("")){
-            txtHistoria.requestFocus();
-        }
-        else{
-            SalvarAsyncTask task = new SalvarAsyncTask("salvarProjeto", cd_usuario, titulo, genero, historia);
-            task.execute();
-            this.finish();
-            goMenuScreen();
-
-
-        }
-
-    }
-
-    private void goMenuScreen() {
-        Intent i = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(i);
-        finish();
-    }
-
-    public void cancelar(View view){
-        txtHistoria.setText("");
-        edtTitulo.setText("");
-        edtTitulo.requestFocus();
-        this.finish();
-    }
-
-    public class SalvarAsyncTask
+    public class ConsultarAsyncTask
             extends
             AsyncTask<String, String, String> {
 
-        String api_token, query, api_titulo, api_genero, api_historia;
-        int api_cd_usuario;
+        String api_token, query;
+        int api_cd_projeto;
 
         HttpURLConnection conn;
         URL url = null;
@@ -121,33 +91,28 @@ public class NovoProjetoActivity extends AppCompatActivity implements AdapterVie
         int response_code;
 
 
-        public SalvarAsyncTask(String token, int cd_usuario, String titulo, String genero, String historia){
+        public ConsultarAsyncTask(String token, int cd_projeto){
 
             this.api_token = token;
-            this.api_cd_usuario = cd_usuario;
-            this.api_titulo= titulo;
-            this.api_genero = genero;
-            this.api_historia= historia;
+            this.api_cd_projeto = cd_projeto;
             this.builder = new Uri.Builder();
             builder.appendQueryParameter("api_token", api_token);
-            builder.appendQueryParameter("api_cd_usuario", String.valueOf(cd_usuario));
-            builder.appendQueryParameter("api_titulo", String.valueOf(titulo));
-            builder.appendQueryParameter("api_genero", String.valueOf(genero));
-            builder.appendQueryParameter("api_historia", String.valueOf(historia));
+            builder.appendQueryParameter("api_cd_projeto",String.valueOf(cd_projeto));
+//            builder.appendQueryParameter("api_senha", String.valueOf(senha));
 
         }
 
         @Override
         protected void onPreExecute(){
 
-            Log.i("APICadastrar","onPreExecute()");
+            Log.i("APIConsultar","onPreExecute()");
 
         }
 
         @Override
         protected String doInBackground(String... strings) {
 
-            Log.i("APICadastrar","doInBackground()");
+            Log.i("APIConsultar","doInBackground()");
 
             // Gerar o conteúdo para a URL
 
@@ -157,11 +122,11 @@ public class NovoProjetoActivity extends AppCompatActivity implements AdapterVie
 
             }catch (MalformedURLException e){
 
-                Log.i("APICadastrar","doInBackground() --> "+e.getMessage());
+                Log.i("APIConsultar","doInBackground() --> "+e.getMessage());
 
             }catch (Exception e){
 
-                Log.i("APICadastrar","doInBackground() --> "+e.getMessage());
+                Log.i("APIConsultar","doInBackground() --> "+e.getMessage());
             }
 
             // Gerar uma requisição HTTP - POST - Result será um ArrayJson
@@ -183,7 +148,7 @@ public class NovoProjetoActivity extends AppCompatActivity implements AdapterVie
 
             }catch (Exception e){
 
-                Log.i("APICadastrar","doInBackground() --> "+e.getMessage());
+                Log.i("APIConsultar","doInBackground() --> "+e.getMessage());
 
             }
 
@@ -210,7 +175,7 @@ public class NovoProjetoActivity extends AppCompatActivity implements AdapterVie
 
             }catch (Exception e){
 
-                Log.i("APICadastrar","doInBackground() --> "+e.getMessage());
+                Log.i("APIConsultar","doInBackground() --> "+e.getMessage());
 
 
             }
@@ -246,7 +211,7 @@ public class NovoProjetoActivity extends AppCompatActivity implements AdapterVie
 
             }catch (Exception e){
 
-                Log.i("APICadastrar","doInBackground() --> "+e.getMessage());
+                Log.i("APIConsultar","doInBackground() --> "+e.getMessage());
             }
             finally {
                 conn.disconnect();
@@ -261,33 +226,62 @@ public class NovoProjetoActivity extends AppCompatActivity implements AdapterVie
         @Override
         protected void onPostExecute(String result){
 
-            Log.i("APICadastrar","onPostExecute()--> Result: "+result);
+            Log.i("APIConsultar","onPostExecute()--> Result: "+result);
 
             try{
 
                 JSONObject jsonObject = new JSONObject(result);
 
-                if(jsonObject.getBoolean("Cadastro")){
-                    Log.i("APICadastrar", "onPostExecute() --> Cadastro bem Sucedido"+jsonObject.getString("CD_PROJETO"));
-                    cd_projeto = jsonObject.getInt("CD_PROJETO");
-                    Log.i("APICadastrar", "onPostExecute() --> ID Projeto"+cd_projeto);
-                    Toast.makeText(getApplicationContext(), "Cadastro bem Sucedido", Toast.LENGTH_LONG);
-//                    validar = 1;
+                if(jsonObject.getBoolean("RESULTADO")){
+                    //Log.i("APIConsultar", "onPostExecute() --> Consulta bem Sucedido"+jsonObject.getString("ID"));
+                    titulo = jsonObject.getString("titulo");
+                    historia = jsonObject.getString("historia");
+                    genero = jsonObject.getString("genero");
+                    //Toast.makeText(getApplicationContext(), "Login bem Sucedido", Toast.LENGTH_LONG);
                 }
                 else{
-                    Log.i("APICadastrar","onPostExecute()--> Cadastro Falhou");
-                    Log.i("APICadastrar","onPostExecute()--> : "+jsonObject.getString("SQL"));
-                    Toast.makeText(getApplicationContext(), "Login Falhou", Toast.LENGTH_LONG);
-//                    validar = 0;
+                    Log.i("APIConsultar","onPostExecute()--> Consulta Falhou");
+                    Log.i("APIConsultar","onPostExecute()--> : "+jsonObject.getString("SQL"));
+                    //Toast.makeText(getApplicationContext(), "Login Falhou", Toast.LENGTH_LONG);
                 }
 
             }catch (Exception e){
-                Log.i("APICadastrar","onPostExecute()--> : "+e.getMessage());
-                Toast.makeText(getApplicationContext(), "Cadastro Falhou", Toast.LENGTH_LONG);
+                Log.i("APIConsultar","onPostExecute()--> : "+e.getMessage());
+                //Toast.makeText(getApplicationContext(), "Login Falhou", Toast.LENGTH_LONG);
             }
-//            goMenuPrincipal();
-//            Log.i("VALIDAÇÂO", "Validar --> "+validar);
+            setInformation();
+
         }
+
+    }
+
+    private void setInformation() {
+        edtTitulo.setText(titulo);
+        edtHistoria.setText(historia);
+
+        int posiçãoArray = 0;
+
+        for(int i = 0; i<=generos.length -1; i++){
+
+            Log.d("array", String.valueOf(generos[i]));
+
+            if(generos[i].equals(genero)){
+
+                posiçãoArray = i;
+                break;
+
+            }
+
+            else{
+
+                posiçãoArray = 0;
+
+            }
+        }
+
+        spinnerGenero.setSelection(posiçãoArray);
+
+
     }
 
 }

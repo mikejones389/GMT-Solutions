@@ -12,10 +12,12 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/avatar1"
+        android:src="@drawable/ic_profile"
         app:layout_constraintEnd_toEndOf="@+id/guideline1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="alterarAvatar"
+        tools:ignore="OnClick" />
 
     <TextView
         android:id="@+id/nmUsuario"
@@ -103,6 +105,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/titulo"
         app:layout_constraintTop_toBottomOf="@+id/titulo"
+        app:layout_constraintVertical_bias="1.0"
         tools:listitem="@layout/item_recyclerview" />
 
 

@@ -1,16 +1,20 @@
 package com.gmt.makeyourbook.view.fragment;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +28,8 @@ import android.widget.Toast;
 import com.gmt.makeyourbook.R;
 import com.gmt.makeyourbook.adapter.AdapterProjetos;
 import com.gmt.makeyourbook.model.Projeto;
+import com.gmt.makeyourbook.view.EditarProjetoActivity;
+import com.gmt.makeyourbook.view.MainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -41,15 +47,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.gmt.makeyourbook.R.layout.item_recyclerview;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements AdapterProjetos.OnProjectListener{
 
     private ImageView imgPerfil;
-    private Dialog trocarAvatar;
-    private int cd_usuario;
+    private int cd_usuario, avatar;
     private TextView nmUsuario, cdUsuario;
     private String nm_usuario;
     private String sexo;
@@ -60,16 +66,12 @@ public class ProfileFragment extends Fragment {
 
     public ProfileFragment() {
         // Required empty public constructor
-        ConsultarAsyncTask task = new ConsultarAsyncTask("consultar", cd_usuario);
-        task.execute();
-        ListarProjetosAsyncTask task2 = new ListarProjetosAsyncTask("listarProjetos", cd_usuario);
-        task2.execute();
-
     }
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
+
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
@@ -77,49 +79,18 @@ public class ProfileFragment extends Fragment {
         cdUsuario = (TextView) view.findViewById(R.id.cdUsuario);
         progressBar = (ProgressBar) view.findViewById(R.id.progress);
         imgPerfil = (ImageView) view.findViewById(R.id.imagePerfil);
-        trocarAvatar = new Dialog(getActivity());
-
-        imgPerfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ImageView close;
-                ImageView avatar1;
-                trocarAvatar.setContentView(R.layout.popup_seletor_img_perfil);
-                View dialogView = inflater.inflate(R.layout.popup_seletor_img_perfil, container, false);
-                close = (ImageView) dialogView.findViewById(R.id.close);
-                avatar1 = (ImageView) dialogView.findViewById(R.id.avatar1);
-                avatar1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(getActivity(), "Avatar1 Selecionado", Toast.LENGTH_LONG).show();
-                    }
-                });
-                close.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        trocarAvatar.dismiss();
-                        trocarAvatar.cancel();
-                    }
-                });
-
-                trocarAvatar.show();
-            }
-        });
 
         SharedPreferences preferences = getActivity().getSharedPreferences("user_preferences", MODE_PRIVATE);
         cd_usuario = preferences.getInt("cd_usuario", 0);
 
         progressBar.setVisibility(View.VISIBLE);
-        ConsultarAsyncTask task = new ConsultarAsyncTask("consultar", cd_usuario);
+        ConsultarAsyncTask task = new ConsultarAsyncTask("consultarUsuario", cd_usuario);
         task.execute();
 
         recyclerView = view.findViewById(R.id.listaProjetos);
 
-        //Listagem de Usuario
-
-
         //Configurar adapter
-        AdapterProjetos adapterProjetos = new AdapterProjetos( listaProjetos );
+        AdapterProjetos adapterProjetos = new AdapterProjetos( listaProjetos, "perfil", avatar, this );
 
         //Configurar RecyclerView
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -129,12 +100,16 @@ public class ProfileFragment extends Fragment {
         recyclerView.setAdapter(adapterProjetos);
 
         progressBar.setVisibility(View.VISIBLE);
+
+        //Listagem de Usuario no listarProjetosAsyncTask
         ListarProjetosAsyncTask task2 = new ListarProjetosAsyncTask("listarProjetos", cd_usuario);
         task2.execute();
         return view;
     }
 
+
     public class ListarProjetosAsyncTask extends AsyncTask<String, String, String>{
+
 
         String api_token, query;
         int api_cd_usuario;
@@ -289,24 +264,13 @@ public class ProfileFragment extends Fragment {
                 JSONObject jsonObject = new JSONObject(result);
 
                 if(jsonObject.getBoolean("RESULTADO")){
-
                     int length = jsonObject.getInt("length");
                     Projeto projeto;
                     for(int i=1; i<=length; i++){
-//                        if(i==0){
-//                            projeto = new Projeto(jsonObject.getString("nm_usuario"), jsonObject.getInt("cd_usuario"), jsonObject.getString("titulo"),
-//                                    jsonObject.getString("genero"),jsonObject.getString("historia"));
-//                        }
-//                        else {
-                            projeto = new Projeto(jsonObject.getString("nm_usuario" + i), jsonObject.getInt("cd_usuario" + i), jsonObject.getString("titulo" + i),
-                                    jsonObject.getString("genero" + i), jsonObject.getString("historia" + i));
-                            listaProjetos.add(projeto);
-
-                        //}
-
+                        projeto = new Projeto(jsonObject.getInt("cd_projeto" + i),jsonObject.getString("nm_usuario" + i), jsonObject.getInt("cd_usuario" + i), jsonObject.getString("titulo" + i),
+                                jsonObject.getString("genero" + i), jsonObject.getString("historia" + i), jsonObject.getInt("avatar" +i));
+                        listaProjetos.add(projeto);
                     }
-
-
                 }
                 else{
                     Log.i("APIListar","onPostExecute()--> Consulta Falhou");
@@ -489,6 +453,7 @@ public class ProfileFragment extends Fragment {
                     nm_usuario = jsonObject.getString("nm_usuario");
                     cd_usuario = Integer.parseInt(jsonObject.getString("ID"));
                     sexo = jsonObject.getString("SEXO");
+                    avatar = jsonObject.getInt("avatar");
                     Log.i("APIConsultar", "onPostExecute() --> ID Login"+cd_usuario);
                     Log.i("APIConsultar", "onPostExecute() --> ID NOME"+nm_usuario);
                     Log.i("APIConsultar", "onPostExecute() --> ID SEXO"+sexo);
@@ -512,8 +477,35 @@ public class ProfileFragment extends Fragment {
     public void setInformation(){
         nmUsuario.setText(nm_usuario);
         cdUsuario.setText("ID: "+cd_usuario);
+        if (avatar == 1) {
+            imgPerfil.setImageResource(R.drawable.avatar1);
+        }
+        else if(avatar == 2){
+            imgPerfil.setImageResource(R.drawable.avatar2);
+        }
+        else if(avatar == 3){
+            imgPerfil.setImageResource(R.drawable.avatar3);
+        }
+        else if(avatar == 4){
+            imgPerfil.setImageResource(R.drawable.avatar4);
+        }
+        else if(avatar == 5){
+            imgPerfil.setImageResource(R.drawable.avatar5);
+        }
+        else if(avatar == 6){
+            imgPerfil.setImageResource(R.drawable.avatar6);
+        }
+
         progressBar.setVisibility(View.GONE);
     }
 
-
+    @Override
+    public void onProjectClick(int position) {
+        Log.d("teste","click"+ position );
+        Log.d("id_projeto", "ajsklgdjsa" + listaProjetos.get(position).getCd_projeto());
+        int cd_projeto = listaProjetos.get(position).getCd_projeto();
+        Intent intent = new Intent(getActivity(), EditarProjetoActivity.class);
+        intent.putExtra("cd_projeto", String.valueOf(cd_projeto));
+        startActivity(intent);
+    }
 }

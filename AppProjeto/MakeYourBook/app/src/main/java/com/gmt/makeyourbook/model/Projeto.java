@@ -3,17 +3,22 @@ package com.gmt.makeyourbook.model;
 public class Projeto {
 
     private String nmUsuario;
-    private int id;
+    private int cd_usuario, cd_projeto;
     private String titulo;
     private String genero;
     private String historia;
+    private int avatar;
 
-    public Projeto(String nmUsuario, int id, String titulo, String genero, String historia) {
+
+
+    public Projeto(int cd_projeto, String nmUsuario, int cd_usuario, String titulo, String genero, String historia, int avatar) {
         this.nmUsuario = nmUsuario;
-        this.id = id;
+        this.cd_usuario= cd_usuario;
+        this.cd_projeto= cd_projeto;
         this.titulo = titulo;
         this.genero = genero;
         this.historia = historia;
+        this.avatar = avatar;
     }
 
     public String getNmUsuario() {
@@ -24,12 +29,20 @@ public class Projeto {
         this.nmUsuario = nmUsuario;
     }
 
-    public int getId() {
-        return id;
+    public int getCd_usuario() {
+        return cd_usuario;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCd_usuario(int cd_usuario) {
+        this.cd_usuario = cd_usuario;
+    }
+
+    public int getCd_projeto() {
+        return cd_projeto;
+    }
+
+    public void setCd_projeto(int cd_projeto) {
+        this.cd_projeto = cd_projeto;
     }
 
     public String getTitulo() {
@@ -54,5 +67,13 @@ public class Projeto {
 
     public void setHistoria(String historia) {
         this.historia = historia;
+    }
+
+    public int getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(int avatar) {
+        this.avatar = avatar;
     }
 }

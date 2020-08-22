@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +17,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,11 +48,15 @@ public class MainActivity extends AppCompatActivity {
     private String nm_usuario;
     private String sexo;
     private AlertDialog alerta;
+    private Dialog dialogAvatar, dialogValorProjeto;
+    private int avatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        atualizar();
 
         resultado = findViewById(R.id.texto_resultado);
 
@@ -61,9 +68,8 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.viewPager, new MenuFragment()).commit();
 
-
-        ConsultarAsyncTask task = new ConsultarAsyncTask("consultar", cd_usuario);
-        task.execute();
+        dialogAvatar = new Dialog(this);
+        dialogValorProjeto = new Dialog(this);
 
     }
 
@@ -109,12 +115,168 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public class ConsultarAsyncTask
-            extends
-            AsyncTask<String, String, String> {
+    public void logout (View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmação de Logout");
+        builder.setMessage("Realizar Logout?");
+        builder.setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                SharedPreferences preferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("ja_fez_login", false);
+                editor.commit();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(), "Cancelado", Toast.LENGTH_LONG);
+            }
+        });
+        alerta = builder.create();
+        alerta.show();
+
+
+    }
+
+    public void newProjeto(View view){
+        Intent intent = new Intent(getApplicationContext(), NovoProjetoActivity.class);
+        startActivity(intent);
+    }
+
+    public void alterarAvatar(View view){
+        ImageView  avatar1, avatar2, avatar3, avatar4, avatar5, avatar6;
+        Button btCancelar;
+
+        dialogAvatar.setContentView(R.layout.popup_seletor_img_perfil);
+
+        avatar1 = dialogAvatar.findViewById(R.id.avatar1);
+        avatar2 = dialogAvatar.findViewById(R.id.avatar2);
+        avatar3 = dialogAvatar.findViewById(R.id.avatar3);
+        avatar4 = dialogAvatar.findViewById(R.id.avatar4);
+        avatar5 = dialogAvatar.findViewById(R.id.avatar5);
+        avatar6 = dialogAvatar.findViewById(R.id.avatar6);
+        btCancelar = dialogAvatar.findViewById(R.id.btCancelar);
+
+        final SharedPreferences preferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = preferences.edit();
+
+        avatar1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editor.putInt("avatar", 1);
+                editor.commit();
+                int avatar = preferences.getInt("avatar", 0);
+
+                SalvarAvatarAsynkTask salvarAvatarAsynkTask = new SalvarAvatarAsynkTask("salvarAvatar", avatar, cd_usuario);
+                salvarAvatarAsynkTask.execute();
+
+                atualizar();
+                dialogAvatar.dismiss();
+            }
+        });
+
+        avatar2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editor.putInt("avatar", 2);
+                editor.commit();
+                int avatar = preferences.getInt("avatar", 0);
+
+                SalvarAvatarAsynkTask salvarAvatarAsynkTask = new SalvarAvatarAsynkTask("salvarAvatar", avatar, cd_usuario);
+                salvarAvatarAsynkTask.execute();
+
+                atualizar();
+                dialogAvatar.dismiss();
+            }
+        });
+
+        avatar3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editor.putInt("avatar", 3);
+                editor.commit();
+                int avatar = preferences.getInt("avatar", 0);
+
+                SalvarAvatarAsynkTask salvarAvatarAsynkTask = new SalvarAvatarAsynkTask("salvarAvatar", avatar, cd_usuario);
+                salvarAvatarAsynkTask.execute();
+
+                atualizar();
+                dialogAvatar.dismiss();
+            }
+        });
+
+        avatar4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editor.putInt("avatar", 4);
+                editor.commit();
+                int avatar = preferences.getInt("avatar", 0);
+
+                SalvarAvatarAsynkTask salvarAvatarAsynkTask = new SalvarAvatarAsynkTask("salvarAvatar", avatar, cd_usuario);
+                salvarAvatarAsynkTask.execute();
+
+                atualizar();
+                dialogAvatar.dismiss();
+            }
+        });
+
+        avatar5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editor.putInt("avatar", 5);
+                editor.commit();
+                int avatar = preferences.getInt("avatar", 0);
+
+                SalvarAvatarAsynkTask salvarAvatarAsynkTask = new SalvarAvatarAsynkTask("salvarAvatar", avatar, cd_usuario);
+                salvarAvatarAsynkTask.execute();
+
+                atualizar();
+                dialogAvatar.dismiss();
+            }
+        });
+
+        avatar6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editor.putInt("avatar", 6);
+                editor.commit();
+                int avatar = preferences.getInt("avatar", 0);
+
+                SalvarAvatarAsynkTask salvarAvatarAsynkTask = new SalvarAvatarAsynkTask("salvarAvatar", avatar, cd_usuario);
+                salvarAvatarAsynkTask.execute();
+
+                atualizar();
+                dialogAvatar.dismiss();
+            }
+        });
+
+        btCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogAvatar.dismiss();
+            }
+        });
+
+
+//        int avatar = preferences.getInt("avatar", 0);
+//
+//        SalvarAvatarAsynkTask salvarAvatarAsynkTask = new SalvarAvatarAsynkTask("salvarAvatar", avatar, cd_usuario);
+//        salvarAvatarAsynkTask.execute();
+
+        dialogAvatar.show();
+
+
+    }
+
+    public class SalvarAvatarAsynkTask extends AsyncTask<String, String, String>{
 
         String api_token, query;
-        int api_cd_usuario;
+        int api_avatar, api_cd_usuario;
 
         HttpURLConnection conn;
         URL url = null;
@@ -128,28 +290,29 @@ public class MainActivity extends AppCompatActivity {
         int response_code;
 
 
-        public ConsultarAsyncTask(String token, int cd_usuario){
+        public SalvarAvatarAsynkTask(String token, int avatar, int cd_usuario){
 
             this.api_token = token;
+            this.api_avatar = avatar;
             this.api_cd_usuario = cd_usuario;
             this.builder = new Uri.Builder();
             builder.appendQueryParameter("api_token", api_token);
-            builder.appendQueryParameter("api_cd_usuario",String.valueOf(cd_usuario));
-//            builder.appendQueryParameter("api_senha", String.valueOf(senha));
+            builder.appendQueryParameter("api_avatar", String.valueOf(avatar));
+            builder.appendQueryParameter("api_cd_usuario", String.valueOf(cd_usuario));
 
         }
 
         @Override
         protected void onPreExecute(){
 
-            Log.i("APIConsultar","onPreExecute()");
+            Log.i("APISalvarAvatar","onPreExecute()");
 
         }
 
         @Override
         protected String doInBackground(String... strings) {
 
-            Log.i("APIConsultar","doInBackground()");
+            Log.i("APISalvarAvatar","doInBackground()");
 
             // Gerar o conteúdo para a URL
 
@@ -159,11 +322,11 @@ public class MainActivity extends AppCompatActivity {
 
             }catch (MalformedURLException e){
 
-                Log.i("APIConsultar","doInBackground() --> "+e.getMessage());
+                Log.i("APISalvarAvatar","doInBackground() --> "+e.getMessage());
 
             }catch (Exception e){
 
-                Log.i("APIConsultar","doInBackground() --> "+e.getMessage());
+                Log.i("APISalvarAvatar","doInBackground() --> "+e.getMessage());
             }
 
             // Gerar uma requisição HTTP - POST - Result será um ArrayJson
@@ -185,7 +348,7 @@ public class MainActivity extends AppCompatActivity {
 
             }catch (Exception e){
 
-                Log.i("APIConsultar","doInBackground() --> "+e.getMessage());
+                Log.i("APISalvarAvatar","doInBackground() --> "+e.getMessage());
 
             }
 
@@ -212,7 +375,7 @@ public class MainActivity extends AppCompatActivity {
 
             }catch (Exception e){
 
-                Log.i("APIConsultar","doInBackground() --> "+e.getMessage());
+                Log.i("APISalvarAvatar","doInBackground() --> "+e.getMessage());
 
 
             }
@@ -248,7 +411,7 @@ public class MainActivity extends AppCompatActivity {
 
             }catch (Exception e){
 
-                Log.i("APIConsultar","doInBackground() --> "+e.getMessage());
+                Log.i("APISalvarAvatar","doInBackground() --> "+e.getMessage());
             }
             finally {
                 conn.disconnect();
@@ -263,71 +426,34 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result){
 
-            Log.i("APIConsultar","onPostExecute()--> Result: "+result);
+            Log.i("APISalvarAvatar","onPostExecute()--> Result: "+result);
 
             try{
 
                 JSONObject jsonObject = new JSONObject(result);
 
                 if(jsonObject.getBoolean("RESULTADO")){
-                    Log.i("APIConsultar", "onPostExecute() --> Login bem Sucedido"+jsonObject.getString("ID"));
-                    nm_usuario = jsonObject.getString("nm_usuario");
-                    cd_usuario = Integer.parseInt(jsonObject.getString("ID"));
-                    sexo = jsonObject.getString("SEXO");
-                    Log.i("APIConsultar", "onPostExecute() --> ID Login"+cd_usuario);
-                    Log.i("APIConsultar", "onPostExecute() --> ID NOME"+nm_usuario);
-                    Log.i("APIConsultar", "onPostExecute() --> ID SEXO"+sexo);
-                    Toast.makeText(getApplicationContext(), "Login bem Sucedido", Toast.LENGTH_LONG);
+                    Log.i("APISalvarAvatar", "onPostExecute() --> Avatar Salvo com sucesso"+jsonObject.getString("ID"));
                 }
                 else{
-                    Log.i("APIConsultar","onPostExecute()--> Login Falhou");
-                    Log.i("APIConsultar","onPostExecute()--> : "+jsonObject.getString("SQL"));
+                    Log.i("APISalvarAvatar","onPostExecute()--> Falha ao salvar avatar");
+                    Log.i("APISalvarAvatar","onPostExecute()--> : "+jsonObject.getString("SQL"));
                     Toast.makeText(getApplicationContext(), "Login Falhou", Toast.LENGTH_LONG);
                 }
 
             }catch (Exception e){
-                Log.i("APIConsultar","onPostExecute()--> : "+e.getMessage());
-                Toast.makeText(getApplicationContext(), "Login Falhou", Toast.LENGTH_LONG);
+                Log.i("APISalvarAvatar","onPostExecute()--> : "+e.getMessage());
+                Toast.makeText(getApplicationContext(), "Falha ao salvar avatar", Toast.LENGTH_LONG);
             }
             //setInformation();
+
 
         }
     }
 
-    public void setInformation(){
-        resultado.setText("ID: "+cd_usuario+" Nome :"+ nm_usuario+" Sexo: "+sexo);
-    }
-
-    public void logout (View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Confirmação de Logout");
-        builder.setMessage("Realizar Logout?");
-        builder.setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                SharedPreferences preferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putBoolean("ja_fez_login", false);
-                editor.commit();
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(getApplicationContext(), "Cancelado", Toast.LENGTH_LONG);
-            }
-        });
-        alerta = builder.create();
-        alerta.show();
-
-
-    }
-
-    public void newProjeto(View view){
-        Intent intent = new Intent(getApplicationContext(), NovoProjetoActivity.class);
-        startActivity(intent);
+    public void atualizar(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.viewPager, new ProfileFragment()).commit();
     }
 }
