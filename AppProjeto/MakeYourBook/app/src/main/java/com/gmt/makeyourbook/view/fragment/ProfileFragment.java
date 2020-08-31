@@ -29,9 +29,7 @@ import com.gmt.makeyourbook.R;
 import com.gmt.makeyourbook.adapter.AdapterProjetos;
 import com.gmt.makeyourbook.model.Projeto;
 import com.gmt.makeyourbook.view.EditarProjetoActivity;
-import com.gmt.makeyourbook.view.MainActivity;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -90,7 +88,7 @@ public class ProfileFragment extends Fragment implements AdapterProjetos.OnProje
         recyclerView = view.findViewById(R.id.listaProjetos);
 
         //Configurar adapter
-        AdapterProjetos adapterProjetos = new AdapterProjetos( listaProjetos, "perfil", avatar, this );
+        AdapterProjetos adapterProjetos = new AdapterProjetos(listaProjetos, this);
 
         //Configurar RecyclerView
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -102,8 +100,9 @@ public class ProfileFragment extends Fragment implements AdapterProjetos.OnProje
         progressBar.setVisibility(View.VISIBLE);
 
         //Listagem de Usuario no listarProjetosAsyncTask
-        ListarProjetosAsyncTask task2 = new ListarProjetosAsyncTask("listarProjetos", cd_usuario);
+        ListarProjetosAsyncTask task2 = new ListarProjetosAsyncTask("listarMeusProjetos", cd_usuario);
         task2.execute();
+
         return view;
     }
 
@@ -267,8 +266,15 @@ public class ProfileFragment extends Fragment implements AdapterProjetos.OnProje
                     int length = jsonObject.getInt("length");
                     Projeto projeto;
                     for(int i=1; i<=length; i++){
-                        projeto = new Projeto(jsonObject.getInt("cd_projeto" + i),jsonObject.getString("nm_usuario" + i), jsonObject.getInt("cd_usuario" + i), jsonObject.getString("titulo" + i),
-                                jsonObject.getString("genero" + i), jsonObject.getString("historia" + i), jsonObject.getInt("avatar" +i));
+                        projeto = new Projeto(jsonObject.getInt("cd_projeto" + i),
+                                jsonObject.getString("nm_usuario" + i),
+                                jsonObject.getInt("cd_usuario" + i),
+                                jsonObject.getString("titulo" + i),
+                                jsonObject.getString("genero" + i),
+                                jsonObject.getString("historia" + i),
+                                jsonObject.getInt("avatar" +i),
+                                jsonObject.getDouble("valor_total" +i),
+                                jsonObject.getDouble("valor_arrecadado" +i));
                         listaProjetos.add(projeto);
                     }
                 }

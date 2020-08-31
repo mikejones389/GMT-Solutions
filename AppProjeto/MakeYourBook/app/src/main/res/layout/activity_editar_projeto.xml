@@ -62,11 +62,12 @@ tools:context=".view.EditarProjetoActivity">
         android:layout_height="50dp"
         android:src="@drawable/ic_salvar_24"
         android:background="@drawable/customise_caixa_txt"
+        android:onClick="atualizarProjeto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="10dp"
-    />
+        />
 
     <ImageView
         android:id="@+id/ic_cancelar"
@@ -74,6 +75,7 @@ tools:context=".view.EditarProjetoActivity">
         android:layout_height="50dp"
         android:src="@drawable/ic_close_black"
         android:background="@drawable/customise_caixa_txt"
+        android:onClick="cancelar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="10dp"
@@ -86,6 +88,7 @@ tools:context=".view.EditarProjetoActivity">
         android:layout_height="50dp"
         android:src="@drawable/ic_deletar"
         android:background="@drawable/customise_caixa_txt"
+        android:onClick="deletar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/ic_cancelar"
         app:layout_constraintEnd_toStartOf="@+id/ic_salvar"

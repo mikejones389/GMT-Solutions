@@ -17,15 +17,10 @@ import java.util.List;
 public class AdapterProjetos extends RecyclerView.Adapter<AdapterProjetos.MyViewHolder> {
 
     private List<Projeto> listaProjeto;
-    private String token;
-    private ImageView ic_deletar;
-    private int avatar;
     private OnProjectListener mOnProjectListener;
 
-    public AdapterProjetos(List<Projeto> projeto, String token, int avatar, OnProjectListener onProjectListener) {
+    public AdapterProjetos(List<Projeto> projeto, OnProjectListener onProjectListener){
         this.listaProjeto = projeto;
-        this.avatar = avatar;
-        this.token = token;
         this.mOnProjectListener = onProjectListener;
     }
 
@@ -35,13 +30,8 @@ public class AdapterProjetos extends RecyclerView.Adapter<AdapterProjetos.MyView
 
         View itemLista = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_recyclerview, parent,false);
-        ic_deletar = itemLista.findViewById(R.id.ic_deletar);
 
         //VALIDAÇÃO PARA APRESENTAR OS BOTOES DO ITEMLIST
-        if(token.equals("perfil")){
-            ic_deletar.setVisibility(View.VISIBLE);
-        }
-
 
         return new MyViewHolder(itemLista, mOnProjectListener);
     }
@@ -73,7 +63,8 @@ public class AdapterProjetos extends RecyclerView.Adapter<AdapterProjetos.MyView
         else if(projeto.getAvatar() == 6) {
             holder.img_perfil.setImageResource(R.drawable.avatar6);
         }
-
+        holder.valorTotal.setText(String.valueOf(projeto.getValorTotal()));
+        holder.valorArrecadado.setText(String.valueOf(projeto.getValorArrecadado()));
 
     }
 
@@ -90,6 +81,8 @@ public class AdapterProjetos extends RecyclerView.Adapter<AdapterProjetos.MyView
         TextView titulo;
         TextView genero;
         TextView historia;
+        TextView valorTotal;
+        TextView valorArrecadado;
         OnProjectListener onProjectListener;
 
         public MyViewHolder(@NonNull View itemView, OnProjectListener onProjectListener) {
@@ -100,7 +93,8 @@ public class AdapterProjetos extends RecyclerView.Adapter<AdapterProjetos.MyView
             titulo = itemView.findViewById(R.id.titulo);
             genero = itemView.findViewById(R.id.genero);
             historia = itemView.findViewById(R.id.resumoHistoria);
-
+            valorTotal = itemView.findViewById(R.id.valorTotal);
+            valorArrecadado = itemView.findViewById(R.id.valorArrecadado);
             this.onProjectListener = onProjectListener;
             itemView.setOnClickListener(this);
 

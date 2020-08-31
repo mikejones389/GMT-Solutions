@@ -297,6 +297,7 @@ public class LoginActivity extends AppCompatActivity {
             editor.commit();
 
             Intent i = new Intent(this, MainActivity.class);
+            i.putExtra("position", "Menu");
             startActivity(i);
 
         }

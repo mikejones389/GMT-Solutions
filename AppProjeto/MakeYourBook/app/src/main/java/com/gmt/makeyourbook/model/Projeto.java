@@ -8,10 +8,10 @@ public class Projeto {
     private String genero;
     private String historia;
     private int avatar;
+    private Double valorTotal;
+    private Double valorArrecadado;
 
-
-
-    public Projeto(int cd_projeto, String nmUsuario, int cd_usuario, String titulo, String genero, String historia, int avatar) {
+    public Projeto(int cd_projeto, String nmUsuario, int cd_usuario, String titulo, String genero, String historia, int avatar, Double valorTotal, Double valorArrecadado) {
         this.nmUsuario = nmUsuario;
         this.cd_usuario= cd_usuario;
         this.cd_projeto= cd_projeto;
@@ -19,6 +19,8 @@ public class Projeto {
         this.genero = genero;
         this.historia = historia;
         this.avatar = avatar;
+        this.valorTotal = valorTotal;
+        this.valorArrecadado = valorArrecadado;
     }
 
     public String getNmUsuario() {
@@ -75,5 +77,21 @@ public class Projeto {
 
     public void setAvatar(int avatar) {
         this.avatar = avatar;
+    }
+
+    public Double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(Double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public Double getValorArrecadado() {
+        return valorArrecadado;
+    }
+
+    public void setValorArrecadado(Double valorArrecadado) {
+        this.valorArrecadado = valorArrecadado;
     }
 }

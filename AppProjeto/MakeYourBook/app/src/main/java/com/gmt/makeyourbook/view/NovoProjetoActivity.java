@@ -2,6 +2,7 @@ package com.gmt.makeyourbook.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -39,6 +41,8 @@ public class NovoProjetoActivity extends AppCompatActivity implements AdapterVie
 
     private String genero, titulo, historia;
     private int cd_usuario, cd_projeto;
+    private Double valorProjeto;
+    private Dialog dialogValorProjeto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +57,18 @@ public class NovoProjetoActivity extends AppCompatActivity implements AdapterVie
         SharedPreferences preferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
         cd_usuario = preferences.getInt("cd_usuario", 0);
 
+        dialogValorProjeto = new Dialog(this);
+
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        genero = adapterView.getSelectedItem().toString();
+        if(adapterView.getId() == R.id.spinner_genero){
+            genero = adapterView.getSelectedItem().toString();
+        }
+        else if(adapterView.getId() == R.id.spinner_valor){
+            valorProjeto = Double.parseDouble(adapterView.getSelectedItem().toString());
+        }
     }
 
     @Override
@@ -79,18 +90,14 @@ public class NovoProjetoActivity extends AppCompatActivity implements AdapterVie
             txtHistoria.requestFocus();
         }
         else{
-            SalvarAsyncTask task = new SalvarAsyncTask("salvarProjeto", cd_usuario, titulo, genero, historia);
-            task.execute();
-            this.finish();
-            goMenuScreen();
-
-
+            valorProjeto();
         }
 
     }
 
     private void goMenuScreen() {
         Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        i.putExtra("position", "Perfil");
         startActivity(i);
         finish();
     }
@@ -108,6 +115,7 @@ public class NovoProjetoActivity extends AppCompatActivity implements AdapterVie
 
         String api_token, query, api_titulo, api_genero, api_historia;
         int api_cd_usuario;
+        double api_valor;
 
         HttpURLConnection conn;
         URL url = null;
@@ -121,16 +129,18 @@ public class NovoProjetoActivity extends AppCompatActivity implements AdapterVie
         int response_code;
 
 
-        public SalvarAsyncTask(String token, int cd_usuario, String titulo, String genero, String historia){
+        public SalvarAsyncTask(String token, int cd_usuario, String titulo, String genero, String historia, Double valor){
 
             this.api_token = token;
             this.api_cd_usuario = cd_usuario;
             this.api_titulo= titulo;
             this.api_genero = genero;
             this.api_historia= historia;
+            this.api_valor = valor;
             this.builder = new Uri.Builder();
             builder.appendQueryParameter("api_token", api_token);
             builder.appendQueryParameter("api_cd_usuario", String.valueOf(cd_usuario));
+            builder.appendQueryParameter("api_valor_total", String.valueOf(valor));
             builder.appendQueryParameter("api_titulo", String.valueOf(titulo));
             builder.appendQueryParameter("api_genero", String.valueOf(genero));
             builder.appendQueryParameter("api_historia", String.valueOf(historia));
@@ -285,9 +295,39 @@ public class NovoProjetoActivity extends AppCompatActivity implements AdapterVie
                 Log.i("APICadastrar","onPostExecute()--> : "+e.getMessage());
                 Toast.makeText(getApplicationContext(), "Cadastro Falhou", Toast.LENGTH_LONG);
             }
-//            goMenuPrincipal();
-//            Log.i("VALIDAÇÂO", "Validar --> "+validar);
+
         }
+    }
+
+    public void valorProjeto() {
+        ImageView icSalvar, icCancelar;
+        Spinner spinnerValor;
+
+        dialogValorProjeto.setContentView(R.layout.popup_valor_projeto);
+        icSalvar = dialogValorProjeto.findViewById(R.id.ic_salvar);
+        icCancelar = dialogValorProjeto.findViewById(R.id.ic_cancelar);
+        spinnerValor = dialogValorProjeto.findViewById(R.id.spinner_valor);
+        spinnerValor.setOnItemSelectedListener(this);
+
+        icSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SalvarAsyncTask task = new SalvarAsyncTask("salvarProjeto", cd_usuario, titulo, genero, historia, valorProjeto);
+                task.execute();
+                finish();
+                dialogValorProjeto.dismiss();
+                goMenuScreen();
+            }
+        });
+
+        icCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogValorProjeto.dismiss();
+            }
+        });
+
+        dialogValorProjeto.show();
     }
 
 }

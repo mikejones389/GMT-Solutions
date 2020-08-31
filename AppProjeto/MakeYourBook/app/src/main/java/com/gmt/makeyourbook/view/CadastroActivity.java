@@ -352,6 +352,7 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
             editor.commit();
 
             Intent i = new Intent(this, MainActivity.class);
+            i.putExtra("position", "Menu");
             startActivity(i);
             finish();
 

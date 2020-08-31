@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.accessibilityservice.FingerprintGestureController;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -44,13 +45,10 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
 
     private int cd_usuario;
-    private TextView resultado;
-    private String nm_usuario;
-    private String sexo;
     private AlertDialog alerta;
-    private Dialog dialogAvatar, dialogValorProjeto;
-    private int avatar;
-
+    private Dialog dialogAvatar;
+    private String positionFragment = "Menu";
+    private int positionIcon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,22 +56,44 @@ public class MainActivity extends AppCompatActivity {
 
         atualizar();
 
-        resultado = findViewById(R.id.texto_resultado);
-
         SharedPreferences preferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
         cd_usuario = preferences.getInt("cd_usuario", 0);
 
-        configuraBottomNavigationView();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.viewPager, new MenuFragment()).commit();
+        Bundle extras = getIntent().getExtras();
+        if (extras != null)
+        {
+            positionFragment = extras.getString("position");
+        }
+
+        if(positionFragment.equals("Perfil")){
+            positionIcon = 0;
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.viewPager, new ProfileFragment()).commit();
+        }
+        else if(positionFragment.equals("Menu")){
+            positionIcon = 1;
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.viewPager, new MenuFragment()).commit();
+        }
+        else{
+            positionIcon = 3;
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.viewPager, new SettingsFragment()).commit();
+        }
+
+        configuraBottomNavigationView(positionIcon);
 
         dialogAvatar = new Dialog(this);
-        dialogValorProjeto = new Dialog(this);
+
 
     }
 
-    private void configuraBottomNavigationView(){
+    private void configuraBottomNavigationView(int positionIcon){
+
+        int iconPosition = positionIcon;
         //faz configurações de animação do bottomNavigation
         BottomNavigationViewEx bottomNavigationViewEx = findViewById(R.id.bottom_navigation);
         bottomNavigationViewEx.enableAnimation(true);
@@ -83,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         //Habilitar Navegação
         habilitarNavegacao(bottomNavigationViewEx);
         Menu menu = bottomNavigationViewEx.getMenu();
-        MenuItem menuItem = menu.getItem(1);
+        MenuItem menuItem = menu.getItem(iconPosition);
         menuItem.setChecked(true);
 
     }
@@ -119,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmação de Logout");
         builder.setMessage("Realizar Logout?");
+
         builder.setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -131,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -139,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
         });
         alerta = builder.create();
         alerta.show();
-
 
     }
 

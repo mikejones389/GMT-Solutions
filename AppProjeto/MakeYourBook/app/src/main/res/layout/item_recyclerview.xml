@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="195dp"
     android:layout_marginTop="15dp"
     android:background="@drawable/customise_caixa_txt"
     android:elevation="100dp"
@@ -12,7 +12,7 @@
     <ImageView
         android:id="@+id/imagePerfil"
         android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_height="65dp"
         android:src="@drawable/ic_profile"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,13 +38,54 @@
         app:layout_constraintTop_toBottomOf="@id/nmUsuario" />
 
     <TextView
+        android:id="@+id/texto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total: R$ "
+        android:textSize="15dp"
+        app:layout_constraintTop_toBottomOf="@id/imagePerfil"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/valorTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0000,00"
+        android:textSize="15dp"
+        app:layout_constraintStart_toEndOf="@+id/texto"
+        app:layout_constraintTop_toBottomOf="@+id/imagePerfil"
+        />
+
+    <TextView
+        android:id="@+id/texto2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Arrecadado: R$ "
+        android:textSize="15dp"
+        app:layout_constraintTop_toBottomOf="@id/imagePerfil"
+        app:layout_constraintStart_toEndOf="@id/valorTotal"
+        android:layout_marginStart="16dp"
+        />
+
+    <TextView
+        android:id="@+id/valorArrecadado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0000,00"
+        android:textSize="15dp"
+        app:layout_constraintStart_toEndOf="@+id/texto2"
+        app:layout_constraintTop_toBottomOf="@+id/imagePerfil"
+        />
+
+    <TextView
         android:id="@+id/titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Título"
         android:textSize="22dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imagePerfil" />
+        app:layout_constraintTop_toBottomOf="@id/texto" />
 
     <TextView
         android:id="@+id/genero"
@@ -66,16 +107,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/genero" />
-
-    <ImageView
-        android:id="@+id/ic_deletar"
-        android:visibility="gone"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:src="@drawable/ic_deletar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-         />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

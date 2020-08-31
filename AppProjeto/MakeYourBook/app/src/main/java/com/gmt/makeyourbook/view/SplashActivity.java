@@ -23,9 +23,9 @@ public class SplashActivity extends AppCompatActivity {
                 //colocar a condição para o login
                 SharedPreferences preferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
                 boolean validacao = preferences.getBoolean("ja_fez_login", false);
-                Toast.makeText(getApplicationContext(), "Validação: "+validacao, Toast.LENGTH_LONG).show();
                 if(validacao){
                     Intent i = new Intent(SplashActivity.this, MainActivity.class);
+                    i.putExtra("position", "Menu");
                     startActivity(i);
                     finish();
                 }else{
