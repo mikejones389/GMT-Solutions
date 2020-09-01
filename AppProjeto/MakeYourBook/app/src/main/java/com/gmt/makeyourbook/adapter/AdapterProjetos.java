@@ -45,7 +45,10 @@ public class AdapterProjetos extends RecyclerView.Adapter<AdapterProjetos.MyView
         holder.titulo.setText(projeto.getTitulo());
         holder.genero.setText(projeto.getGenero());
         holder.historia.setText(projeto.getHistoria());
-        if(projeto.getAvatar() == 1) {
+        if(projeto.getAvatar() == 0){
+            holder.img_perfil.setImageResource(R.drawable.ic_profile);
+        }
+        else if(projeto.getAvatar() == 1) {
             holder.img_perfil.setImageResource(R.drawable.avatar1);
         }
         else if(projeto.getAvatar() == 2) {

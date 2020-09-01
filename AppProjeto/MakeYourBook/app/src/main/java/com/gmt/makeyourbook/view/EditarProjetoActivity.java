@@ -71,7 +71,7 @@ public class EditarProjetoActivity extends AppCompatActivity implements AdapterV
 
         ic_salvar = (ImageView) findViewById(R.id.ic_salvar);
 
-        ConsultarAsyncTask task = new ConsultarAsyncTask("consultarProjeto", cd_projeto);
+        ConsultarAsyncTask task = new ConsultarAsyncTask("consultarMeuProjeto", cd_projeto);
         task.execute();
 
     }
