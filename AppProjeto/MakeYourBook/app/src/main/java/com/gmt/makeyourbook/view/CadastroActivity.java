@@ -35,13 +35,11 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
 
     private EditText editNome;
     private Spinner spinner_sexo;
-    private EditText editDtNasc;
     private EditText editLogin;
     private EditText editSenha;
     private int id;
     private String nm_usuario;
     private String sexo;
-    private String dtNasc;
     private String login;
     private String senha;
     private Button btContinuar;
@@ -60,8 +58,6 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
 
         spinner_sexo = (Spinner) findViewById(R.id.spinner_sexo);
         spinner_sexo.setOnItemSelectedListener(this);
-
-        editDtNasc = (EditText) findViewById(R.id.edt_data_nascimento);
 
         editLogin = (EditText) findViewById(R.id.edt_login);
 
@@ -90,13 +86,14 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
         btContinuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                texto.setVisibility(View.GONE);
                 nm_usuario = editNome.getText().toString();
-                dtNasc = editDtNasc.getText().toString();
                 login = editLogin.getText().toString();
                 senha = editSenha.getText().toString();
                 texto.setVisibility(View.GONE);
                 erroLogin.setVisibility(View.GONE);
+                editNome.setHint("Nome");
+                editLogin.setHint("Login");
+                editSenha.setHint("Senha");
 
                 if(nm_usuario.equals("")){
                     editNome.setHint("Campo Obrigatório");
@@ -105,9 +102,6 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
                 else if(sexo.equals("Selecione")){
                     texto.setVisibility(View.VISIBLE);
                     spinner_sexo.requestFocus();
-                }
-                else if(dtNasc.equals("")){
-                    editDtNasc.requestFocus();
                 }
                 else if(login.equals("")){
                     editLogin.setHint("Campo Obrigatório");
@@ -123,7 +117,7 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
                     editSenha.requestFocus();
                 }
                 else{
-                    CadastrarAsyncTask task = new CadastrarAsyncTask("cadastrar", nm_usuario, sexo, dtNasc, login, senha);
+                    CadastrarAsyncTask task = new CadastrarAsyncTask("cadastrar", nm_usuario, sexo, login, senha);
                     task.execute();
                     goMenuPrincipal();
                 }
@@ -146,7 +140,7 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
             extends
             AsyncTask<String, String, String> {
 
-        String api_token, query, api_nm_usuario, api_sexo, api_data_nascimento, api_login, api_senha;
+        String api_token, query, api_nm_usuario, api_sexo, api_login, api_senha;
 
         HttpURLConnection conn;
         URL url = null;
@@ -160,19 +154,17 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
         int response_code;
 
 
-        public CadastrarAsyncTask(String token, String nm_usuario, String sexo, String dtNasc, String login, String senha){
+        public CadastrarAsyncTask(String token, String nm_usuario, String sexo, String login, String senha){
 
             this.api_token = token;
             this.api_nm_usuario = nm_usuario;
             this.api_sexo = sexo;
-            this.api_data_nascimento = dtNasc;
             this.api_login = login;
             this.api_senha = senha;
             this.builder = new Uri.Builder();
             builder.appendQueryParameter("api_token", api_token);
             builder.appendQueryParameter("api_nm_usuario", String.valueOf(nm_usuario));
             builder.appendQueryParameter("api_sexo", String.valueOf(sexo));
-            builder.appendQueryParameter("api_dt_nasc", String.valueOf(dtNasc));
             builder.appendQueryParameter("api_login", String.valueOf(login));
             builder.appendQueryParameter("api_senha", String.valueOf(senha));
 

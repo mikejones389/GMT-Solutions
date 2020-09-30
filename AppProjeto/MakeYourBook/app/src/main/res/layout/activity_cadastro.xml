@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@id/edt_nm_usuario"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/edt_data_nascimento"
+        app:layout_constraintBottom_toTopOf="@id/edt_login"
         />
 
     <TextView
@@ -61,19 +61,6 @@
         />
 
     <EditText
-        android:id="@+id/edt_data_nascimento"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:background="@drawable/customise_caixa_txt"
-        android:gravity="center"
-        android:hint="Data de Nascimento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/edt_login"
-        app:layout_constraintTop_toBottomOf="@id/spinner_sexo"
-        />
-
-    <EditText
         android:id="@+id/edt_login"
         android:layout_width="300dp"
         android:layout_height="40dp"
@@ -82,7 +69,7 @@
         android:hint="Login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edt_data_nascimento"
+        app:layout_constraintTop_toBottomOf="@id/spinner_sexo"
         app:layout_constraintBottom_toTopOf="@id/edt_senha"
         />
 

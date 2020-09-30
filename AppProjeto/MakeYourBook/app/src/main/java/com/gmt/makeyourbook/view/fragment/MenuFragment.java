@@ -16,6 +16,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
@@ -46,13 +48,15 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MenuFragment extends Fragment implements AdapterProjetos.OnProjectListener {
+public class MenuFragment extends Fragment implements AdapterProjetos.OnProjectListener, View.OnClickListener {
 
 
     private RecyclerView recyclerView;
     private List<Projeto> listaProjetos = new ArrayList<>();
     private ProgressBar progressBar;
-
+    private EditText edtBuscar;
+    private ImageView icBuscar;
+    AdapterProjetos adapterProjetos;
 
     //Construtor
     public MenuFragment(){
@@ -70,7 +74,7 @@ public class MenuFragment extends Fragment implements AdapterProjetos.OnProjectL
         recyclerView = view.findViewById(R.id.listaProjetos);
 
         //Configurar Adapter
-        AdapterProjetos adapterProjetos = new AdapterProjetos(listaProjetos, this);
+        adapterProjetos = new AdapterProjetos(listaProjetos, this);
 
         //Configurar RecyclerView
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -79,11 +83,34 @@ public class MenuFragment extends Fragment implements AdapterProjetos.OnProjectL
         recyclerView.addItemDecoration( new DividerItemDecoration(getActivity(), LinearLayout.VERTICAL));
         recyclerView.setAdapter(adapterProjetos);
 
+        icBuscar = view.findViewById(R.id.ic_buscar);
+        icBuscar.setOnClickListener(this);
+
+        edtBuscar = view.findViewById(R.id.edt_pesquisa);
 
         ListarProjetosAsyncTask task = new ListarProjetosAsyncTask("listarTodosProjetos");
         task.execute();
 
         return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.ic_buscar:
+                if(edtBuscar.getText().toString().equals("")){
+                    edtBuscar.setHint("Digite uma palavra chave");
+                    ListarProjetosAsyncTask task = new ListarProjetosAsyncTask("listarTodosProjetos");
+                    task.execute();
+                    adapterProjetos.atualizarAdapter(listaProjetos);
+                }
+                else{
+                     BuscarAsyncTask task = new BuscarAsyncTask("buscarPalavraChave", edtBuscar.getText().toString());
+                     task.execute();
+                     adapterProjetos.atualizarAdapter(listaProjetos);
+                }
+                break;
+        }
     }
 
     public class ListarProjetosAsyncTask extends AsyncTask<String, String, String>{
@@ -235,6 +262,160 @@ public class MenuFragment extends Fragment implements AdapterProjetos.OnProjectL
             progressBar.setVisibility(View.GONE);
         }
     }
+
+    public class BuscarAsyncTask extends AsyncTask<String, String, String>{
+
+        String api_token, api_palavra_chave, query;
+
+        HttpURLConnection conn;
+        URL url = null;
+        Uri.Builder builder;
+
+        final String URL_WEB_SERVICES = "http://gmtmarketplace.com.br/api/api.php";
+
+        final int READ_TIMEOUT = 10000; //MILISEGUNDOS
+        final int CONNECTION_TIMEOUT = 30000;
+
+        int response_code;
+
+        public BuscarAsyncTask(String token, String palavraChave){
+            this.api_token = token;
+            this.api_palavra_chave = palavraChave;
+            this.builder = new Uri.Builder();
+            builder.appendQueryParameter("api_token", api_token);
+            builder.appendQueryParameter("api_palavra_chave", api_palavra_chave);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            progressBar.setVisibility(View.VISIBLE);
+            Log.i("APIListarProjetos", "onPreExecute()");
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            Log.i("APIListarProjetos", "doInBackground()");
+
+            //GERAR O CONTEÚDO PARA A URL
+
+            try {
+                url= new URL(URL_WEB_SERVICES);
+            } catch (MalformedURLException e) {
+                Log.i("APIListarProjetos", "doInBackground() --> "+e.getMessage());
+            } catch (Exception e){
+                Log.i("APIListarProjetos", "doInBackground() --> "+e.getMessage());
+            }
+
+            //GERAR UMA REQUISIÇÃO HTTP - POST - RESULT SERÁ UM ARRAYJSON
+
+            try {
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setReadTimeout(READ_TIMEOUT);
+                conn.setConnectTimeout(CONNECTION_TIMEOUT);
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("charset", "utf-8");
+
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                conn.connect();
+            } catch (ProtocolException e) {
+                Log.i("APIListarProjetos", "doInBackground() --> "+e.getMessage());
+            } catch (IOException e) {
+                Log.i("APIListarProjetos", "doInBackground() --> "+e.getMessage());
+            }
+
+            //ADICIONAR O TOKEN E/ OU OUTROS PARAMETROS COMO POR EXEMPLO
+            //O OBJETO A SER INCLUIDO, DELETADO OU ALTERADO.
+            //CRUD COMPLETO
+
+            try{
+                query = builder.build().getEncodedQuery();
+
+                OutputStream stream = conn.getOutputStream();
+
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(stream, "utf-8"));
+                writer.write(query);
+                writer.flush();
+                writer.close();
+                stream.close();
+
+                conn.connect();
+            } catch (UnsupportedEncodingException e) {
+                Log.i("APIListarProjetos", "doInBackground() --> "+e.getMessage());
+            } catch (IOException e) {
+                Log.i("APIListarProjetos", "doInBackground() --> "+e.getMessage());
+            }
+
+            //RECEBER O RESPONSE - ARRAYJSON
+            //HTTP - CODIGO DO RESPONSE | 200 | 404 | 503
+
+            try{
+                response_code = conn.getResponseCode();
+                if(response_code == HttpURLConnection.HTTP_OK){
+                    InputStream inputStream = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(
+                            new InputStreamReader(inputStream)
+                    );
+
+                    StringBuilder result = new StringBuilder();
+                    String linha = null;
+                    while((linha = reader.readLine()) != null){
+                        result.append(linha);
+                    }
+                    return result.toString();
+                }
+                else{
+                    return "HTTP ERRO:"+response_code;
+                }
+
+            } catch (IOException e) {
+                Log.i("APIListarProjetos", "doInBackground() --> "+e.getMessage());
+            }
+            finally {
+                conn.disconnect();
+            }
+            return "Processamento concluido";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Log.i("APIListarProjetos", "onPostExecute() --> Result: "+result);
+
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+
+                if (jsonObject.getBoolean("RESULTADO")){
+                    int length = jsonObject.getInt("length");
+                    Projeto projeto;
+                    for(int i = 1; i<=length; i++){
+                        projeto = new Projeto(jsonObject.getInt("cd_projeto"+i),
+                                jsonObject.getString("nm_usuario"+i),
+                                jsonObject.getInt("cd_usuario"+i),
+                                jsonObject.getString("titulo"+i),
+                                jsonObject.getString("genero"+i),
+                                jsonObject.getString("historia"+i),
+                                jsonObject.getInt("avatar"+i),
+                                jsonObject.getDouble("valor_total"+i),
+                                jsonObject.getDouble("valor_arrecadado"+i));
+                        listaProjetos.add(projeto);
+
+                    }
+                }
+                else{
+                    Log.i("APIListarProjetos", "onPostExecute() --> Consulta Falhou");
+                    Log.i("APIListarProjetos", "onPostExecute() --> "+jsonObject.getString("SQL"));
+                }
+            } catch (JSONException e) {
+                Log.i("APIListarProjetos", "onPostExecute() --> "+e.getMessage());
+            }
+
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
 
     @Override
     public void onProjectClick(int position) {

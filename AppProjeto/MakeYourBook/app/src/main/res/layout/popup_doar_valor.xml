@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="300dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/darker_gray"
+    android:layout_margin="10dp"
+    android:padding="5dp"
+    android:elevation="100dp">
+
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecione o valor com que deseja contribuir: "
+        android:textSize="24dp"
+        android:textColor="@color/colorBlackLight"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_valor"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <Spinner
+        android:id="@+id/spinner_valor"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:entries="@array/valorDoar_list"
+        android:textAlignment="center"
+        android:background="@drawable/customise_caixa_txt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ic_salvar"
+        app:layout_constraintTop_toBottomOf="@+id/titulo"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Essa doação será totalmente de forma anonima! O autor e nós estamos felizes por sua contribuição"
+        android:textSize="15dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_valor"
+        app:layout_constraintBottom_toTopOf="@id/ic_cancelar"
+        android:layout_marginTop="5dp"
+        />
+
+    <ImageView
+        android:id="@+id/ic_salvar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_salvar_24"
+        android:background="@drawable/customise_caixa_txt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
+        />
+
+    <ImageView
+        android:id="@+id/ic_cancelar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_close_black"
+        android:background="@drawable/customise_caixa_txt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

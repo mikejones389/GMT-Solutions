@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gmt.makeyourbook.R;
 import com.gmt.makeyourbook.model.Projeto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterProjetos extends RecyclerView.Adapter<AdapterProjetos.MyViewHolder> {
@@ -22,6 +23,8 @@ public class AdapterProjetos extends RecyclerView.Adapter<AdapterProjetos.MyView
     public AdapterProjetos(List<Projeto> projeto, OnProjectListener onProjectListener){
         this.listaProjeto = projeto;
         this.mOnProjectListener = onProjectListener;
+
+
     }
 
     @NonNull
@@ -66,14 +69,15 @@ public class AdapterProjetos extends RecyclerView.Adapter<AdapterProjetos.MyView
         else if(projeto.getAvatar() == 6) {
             holder.img_perfil.setImageResource(R.drawable.avatar6);
         }
-        holder.valorTotal.setText(String.valueOf(projeto.getValorTotal()));
-        holder.valorArrecadado.setText(String.valueOf(projeto.getValorArrecadado()));
+        holder.valorTotal.setText("R$ "+ String.format("%.2f", projeto.getValorTotal()));
+        holder.valorArrecadado.setText("R$ "+ String.format("%.2f", projeto.getValorArrecadado()));
 
     }
 
     @Override
     public int getItemCount() {
         return listaProjeto.size();
+
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -111,6 +115,13 @@ public class AdapterProjetos extends RecyclerView.Adapter<AdapterProjetos.MyView
 
     public interface OnProjectListener{
         void onProjectClick(int position);
+    }
+
+    public void atualizarAdapter(List<Projeto> projetos){
+        this.listaProjeto.clear();
+        this.listaProjeto.addAll(projetos);
+        notifyDataSetChanged();
+
     }
 
 }

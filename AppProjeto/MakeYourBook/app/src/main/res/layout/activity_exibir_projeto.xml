@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -27,6 +28,9 @@
         android:src="@drawable/ic_profile"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/txtValorArrecadado"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintVertical_chainStyle="spread_inside"
         />
 
     <TextView
@@ -42,15 +46,65 @@
         />
 
     <TextView
+        android:id="@+id/cd_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID"
+        android:textSize="12dp"
+        app:layout_constraintStart_toStartOf="@+id/nm_usuario"
+        app:layout_constraintTop_toBottomOf="@+id/nm_usuario"
+        />
+
+    <TextView
+        android:id="@+id/txtValorArrecadado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valor Arrecadado "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/avatarPerfil"
+        app:layout_constraintBottom_toTopOf="@id/txtValorTotal"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        android:layout_marginBottom="10dp"
+        />
+
+    <TextView
+        android:id="@+id/valorArrecadado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R$00,00"
+        app:layout_constraintStart_toEndOf="@id/txtValorArrecadado"
+        app:layout_constraintTop_toTopOf="@id/txtValorArrecadado" />
+
+    <TextView
+        android:id="@+id/txtValorTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valor Arrecadado "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtValorArrecadado"
+        app:layout_constraintBottom_toTopOf="@id/titulo"
+        android:layout_marginBottom="10dp"
+        />
+
+    <TextView
+        android:id="@+id/valorTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R$00,00"
+        app:layout_constraintStart_toEndOf="@id/txtValorTotal"
+        app:layout_constraintTop_toTopOf="@id/txtValorTotal"
+        />
+
+    <TextView
         android:id="@+id/titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TITULO"
         android:textSize="24dp"
         android:textColor="@color/colorPrimary"
-        app:layout_constraintTop_toBottomOf="@+id/nm_usuario"
-        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/txtValorTotal"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
         />
 
     <TextView
@@ -58,7 +112,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ID"
-        android:textSize="16dp"
+        android:textSize="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titulo"
         />
@@ -75,15 +129,46 @@
 
     <TextView
         android:id="@+id/historia"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:inputType="textMultiLine"
-        android:text="HIDSGshsdçhkfsçJLKSDJLKJLKSJGLKSJDLGJSLGJLDJGLDJSLGJDLJSLGJDLKSJGLJSDLGJDLKSJGLSJGLKDSJGLKSJGLSGJsLKGJk"
+        android:text="sadjgkljasgksjalasgasgashadhdfhadhfad"
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/genero"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/genero" />
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/avatarPerfil"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="10dp"
+        android:layout_margin="5dp"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/ColorTema"
+            >
+
+            <Button
+                android:id="@+id/btContribuir"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:text="Contribuir"
+                android:textColor="@color/white"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
